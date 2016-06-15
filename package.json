@@ -1,0 +1,12 @@
+{
+	"name": "gecko-tracker",
+	"version": "0.0.1",
+	"main": "index.js",
+	"private": true,
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": ">1.0"
+	}
+}
