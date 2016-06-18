@@ -1,28 +1,31 @@
 {
-	"name": "gecko-tracker",
-	"version": "0.0.1",
-	"main": "index.js",
-	"private": true,
-	"watch": {
-		"less": {
-			"patterns": ["public/css"],
-			"extensions": "less"
-		}
-	},
-	"scripts": {
-		"start": "node index.js",
-		"less": "lessc ./public/css/*.less ./public/css/styles.css",
-		"watch": "npm-watch",
-		"test": "mocha",
-		"jslint": "jslint *.js"
-	},
-	"files": [
-		"geckos.js"
-	],
-	"dependencies": {
-		"express": ">1.0",
-		"npm-watch": ">=0.0",
-		"chai": ">=3.5",
-		"jslint": "*"
-	}
+  "name": "gecko-tracker",
+  "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "watch": {
+    "less": {
+      "patterns": [
+        "public/css"
+      ],
+      "extensions": "less"
+    }
+  },
+  "scripts": {
+    "start": "node index.js",
+    "less": "lessc ./public/css/*.less ./public/css/styles.css",
+    "watch": "npm-watch",
+    "test": "mocha",
+    "jslint": "jslint *.js"
+  },
+  "files": [
+    "geckos.js"
+  ],
+  "dependencies": {
+    "chai": ">=3.5",
+    "express": ">1.0",
+    "jslint": "*",
+    "mongoose": "^4.5.0",
+    "npm-watch": ">=0.0"
+  }
 }
