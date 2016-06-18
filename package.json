@@ -11,11 +11,18 @@
 	},
 	"scripts": {
 		"start": "node index.js",
-		"less": "lessc ./public/css/styles.less ./public/css/styles.css",
-		"watch": "npm-watch"
+		"less": "lessc ./public/css/*.less ./public/css/styles.css",
+		"watch": "npm-watch",
+		"test": "mocha",
+		"jslint": "jslint *.js"
 	},
+	"files": [
+		"geckos.js"
+	],
 	"dependencies": {
 		"express": ">1.0",
-		"npm-watch": ">1.0"
+		"npm-watch": ">=0.0",
+		"chai": ">=3.5",
+		"jslint": "*"
 	}
 }
