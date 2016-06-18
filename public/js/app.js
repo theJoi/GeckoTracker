@@ -9,7 +9,7 @@ angular.module('geckoTracker', [])
 			status: 'normal',
 			morph: 'Lavender Jungle Bandit',
 			birthdate: new Date('5/1/2015'),
-			weight: 59
+			weight: 58
 		},
 		{
 			name: "Sabetha",
