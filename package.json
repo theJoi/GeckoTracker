@@ -3,10 +3,19 @@
 	"version": "0.0.1",
 	"main": "index.js",
 	"private": true,
+	"watch": {
+		"less": {
+			"patterns": ["public/css"],
+			"extensions": "less"
+		}
+	},
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.js",
+		"less": "lessc ./public/css/styles.less ./public/css/styles.css",
+		"watch": "npm-watch"
 	},
 	"dependencies": {
-		"express": ">1.0"
+		"express": ">1.0",
+		"npm-watch": ">1.0"
 	}
 }
