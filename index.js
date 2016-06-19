@@ -1,3 +1,4 @@
+/*jshint browser: false, node: true*/
 /*
 |--------------------------------------------------------------------------
 | index.js
@@ -9,9 +10,10 @@
 */
 
 // MODULES  ===============================================================
-var express = require('express');
-var app = express();
-var geckos = require('./geckos.js');
+var express     = require('express');
+var geckos      = require('./geckos.js');
+var bodyParser  = require("body-parser");
+var app         = express();
 
 
 // CONFIGURATION  =========================================================
@@ -106,6 +108,6 @@ app.get('/timeline', function(request, response) {
 
 //  REGISTER ROUTES AND START SERVER  =====================================
 app.listen(app.get('port'), '0.0.0.0', function() {
-	console.log("Node app is running at:" + app.get('port'))
+	console.log("Node app is running at:" + app.get('port'));
 });
 
