@@ -57,7 +57,7 @@ Gecko.create({
         console.log(err);
     } else {
         console.log("Successfully added the following gecko to DB:");
-        console.log(cat);
+        console.log(newGecko);
     }
 });
 
