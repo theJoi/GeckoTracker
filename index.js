@@ -1,28 +1,35 @@
-var express = require('express')
-var app = express()
-
-var geckos = require('./geckos.js')
-
-app.set('port', 5000);
-app.use(express.static(__dirname + '/public'));
-
-
+/*jshint browser: false, node: true*/
 /*
 |--------------------------------------------------------------------------
-| ROUTES FOR GECKO TRACKER API
+| index.js
 |--------------------------------------------------------------------------
-| This includes root, CRUD functions for geckos and dated events, and
-| views for timeline and other data visualations.
+| Main file, setup, node routes for node application Gecko Tracker.
+|
+| Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
 
+// MODULES  ===============================================================
+var express     = require('express');
+var geckos      = require('./geckos.js');
+var bodyParser  = require("body-parser");
+var app         = express();
+
+
+// CONFIGURATION  =========================================================
+app.set('port', 5000);
+app.use(express.static(__dirname + '/public'));
+// parse application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 // ROOT ROUTE =============================================================
 app.get('/', function(request, response) {
-	//response.send('Hello Worl!');
-	response.sendFile('./public/index.htm');
+	response.sendFile(__dirname + '/public/index.htm');
 });
 
-// GECKOS ROUTES ==========================================================
+/*// GECKOS ROUTES ==========================================================
 
 // INDEX - list all geckos
 app.get('/geckos', function(request, response) {
@@ -99,16 +106,11 @@ app.delete('/events/:id/edit', function(request, response) {
 // TIMELINE
 app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
-});
+});*/
 
 
-/*
-|--------------------------------------------------------------------------
-| REGISTER ROUTES AND START SERVER
-|--------------------------------------------------------------------------
-*/
-
+//  REGISTER ROUTES AND START SERVER  =====================================
 app.listen(app.get('port'), '0.0.0.0', function() {
-	console.log("Node app is running at:" + app.get('port'))
+	console.log("Node app is running at:" + app.get('port'));
 });
 

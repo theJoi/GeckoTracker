@@ -1,4 +1,17 @@
-// CONNECTION EVENTS
+/*jshint browser: false, node: true*/
+/*
+|--------------------------------------------------------------------------
+| app/gecko.js
+|--------------------------------------------------------------------------
+| Define Mongoose model and handles creating, reading, updating,
+| and deleteing geckos from the database.
+|
+| Created June 2016 by Joi W.
+|__________________________________________________________________________
+*/
+
+
+// CONNECTION EVENTS  =====================================================
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/geckotracker", function(err){
     if(err){
@@ -10,6 +23,13 @@ mongoose.connect("mongodb://localhost/geckotracker", function(err){
 });
 
 
+// JSON PARSE APPLICATION  ================================================
+var bodyParser  = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+// GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
     name		: String,         // Name of gecko
     uniqueID 	: Number,         // External ID number
@@ -52,53 +72,29 @@ var geckoSchema = new mongoose.Schema({
     }*/
 });
 
+// MONGOOSE GECKO MODEL  ========================================================
 var Gecko = mongoose.model("Gecko", geckoSchema);
 
-//add new gecko to DB for testing purposes
-/*Gecko.create({
-    name		: "Test Gecko #1",
-    uniqueID 	: 2,
-    status		: "normal",
-    sex         : "male"
-}, function(err, newGecko){
-    if(err){
-        console.log("Error occured. Unable to add new gecko to DB:");
-        console.log(err);
-    } else {
-        console.log("Successfully added the following gecko to DB:");
-        console.log(newGecko);
-    }
-});*/
-/*Gecko.create({
-    name		: "Test Gecko #2",
-    uniqueID 	: 3,
-    status		: "normal",
-    sex         : "female"
-}, function(err, newGecko){
-    if(err){
-        console.log("Error occured. Unable to add new gecko to DB:");
-        console.log(err);
-    } else {
-        console.log("Successfully added the following gecko to DB:");
-        console.log(newGecko);
-    }
-});*/
 
-// Returns all geckos in DB
-exports.getGeckos = function() {
-    Gecko.find({}, function(err, geckos){
+// GetGecko FUNCTION  ===========================================================
+// Returns all geckos from database
+exports.getGeckos = function(callback) {
+    Gecko.find({}, function(err, unparsedData){
         if(err){
             console.log("Unable to retrieve list of geckos from database:");
             console.log(err);
         } else {
+            var geckos = JSON.parse(unparsedData);
+            console.log(geckos);
             console.log("Successfully retrieved list of geckos");
-            console.log(geckos.name);
-            return geckos.name;
+            return geckos;
         }
     });
-}
+};
 
 
+// addGecko FUNCTION  ===========================================================
+// Add new gecko to database
 exports.addGecko = function(gData) {
      gData.save(function(err, gecko){
          if(err){
@@ -109,14 +105,31 @@ exports.addGecko = function(gData) {
              console.log(gecko);
          }
      });
-}
+};
 
-// For testing purposes
-/* var newGecko = new Gecko({
+
+// ADD EXAMPLE GECKOS TO DATABSE  ==================================================
+// To populate database for testing purposes
+
+ var newGecko1 = new Gecko({
+    name		: "Test Gecko #1",
+    uniqueID 	: 2,
+    status		: "normal",
+    sex         : "male"
+});
+var newGecko2 = new Gecko({
+    name		: "Test Gecko #2",
+    uniqueID 	: 3,
+    status		: "normal",
+    sex         : "female"
+});
+var newGecko3 = new Gecko({
     name		: "Wee Baby",
     uniqueID 	: 4,
     status		: "egg",
     sex         : "unknown"
  });
-exports.addGecko(newGecko)*/;
+exports.addGecko(newGecko1);
+exports.addGecko(newGecko2);
+exports.addGecko(newGecko3);
 console.log(exports.getGeckos());
