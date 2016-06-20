@@ -23,6 +23,12 @@ mongoose.connect("mongodb://localhost/geckotracker", function(err){
 });
 
 
+// JSON PARSE APPLICATION  ================================================
+var bodyParser  = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 // GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
     name		: String,         // Name of gecko
@@ -79,9 +85,9 @@ exports.getGeckos = function(callback) {
             console.log(err);
         } else {
             var geckos = JSON.parse(unparsedData);
-            console.log(geckos._id);
+            console.log(geckos);
             console.log("Successfully retrieved list of geckos");
-            return geckos._id;
+            return geckos;
         }
     });
 };
@@ -96,7 +102,6 @@ exports.addGecko = function(gData) {
              console.log(err);
          } else {
              console.log("Gecko successfully added to DB:");
-
              console.log(gecko);
          }
      });
