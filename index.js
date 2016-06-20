@@ -18,7 +18,8 @@ app.use(express.static(__dirname + '/public'));
 
 // ROOT ROUTE =============================================================
 app.get('/', function(request, response) {
-	response.send('Hello Worl!');
+	//response.send('Hello Worl!');
+	response.sendFile('./public/index.htm');
 });
 
 // GECKOS ROUTES ==========================================================
