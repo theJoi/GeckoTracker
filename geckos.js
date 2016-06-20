@@ -73,14 +73,15 @@ var Gecko = mongoose.model("Gecko", geckoSchema);
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
 exports.getGeckos = function(callback) {
-    Gecko.find({}, function(err, geckos){
+    Gecko.find({}, function(err, unparsedData){
         if(err){
             console.log("Unable to retrieve list of geckos from database:");
             console.log(err);
         } else {
+            var geckos = JSON.parse(unparsedData);
+            console.log(geckos._id);
             console.log("Successfully retrieved list of geckos");
-            console.log(geckos.name);
-            return geckos.name;
+            return geckos._id;
         }
     });
 };

@@ -19,7 +19,10 @@ var app         = express();
 // CONFIGURATION  =========================================================
 app.set('port', 5000);
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json()); // parse application/json
+// parse application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 // ROOT ROUTE =============================================================
 app.get('/', function(request, response) {
