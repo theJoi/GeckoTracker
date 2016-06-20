@@ -24,9 +24,11 @@ mongoose.connect("mongodb://localhost/geckotracker", function(err){
 
 
 // JSON PARSE APPLICATION  ================================================
-var bodyParser  = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+//var express     = require('express');
+//var app         = express();
+//var parser  = require("body-parser");
+//app.use(parser.json());
+//app.use(parser.urlencoded({extended: true}));
 
 
 // GECKO SCHEMA  ===========================================================
@@ -79,15 +81,15 @@ var Gecko = mongoose.model("Gecko", geckoSchema);
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
 exports.getGeckos = function(callback) {
-    Gecko.find({}, function(err, unparsedData){
+    Gecko.find({}, function(err, geckos){
         if(err){
             console.log("Unable to retrieve list of geckos from database:");
             console.log(err);
         } else {
-            var geckos = JSON.parse(unparsedData);
+           // var geckos = JSON.parser(unparsedData);
             console.log(geckos);
             console.log("Successfully retrieved list of geckos");
-            return geckos;
+            return callback(geckos);
         }
     });
 };
