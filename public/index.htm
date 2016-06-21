@@ -18,7 +18,7 @@
     </div>
 
     <div class='content' ng-controller='GeckoListController'>
-        <div ng-repeat='gecko in geckos'>
+        <div ng-repeat='gecko in geckos' class="gecko-card" ng-class=gecko.sex>
             <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
             <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
             {{gecko.name}}

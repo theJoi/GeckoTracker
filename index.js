@@ -11,7 +11,7 @@
 
 // MODULES  ===============================================================
 var express     = require("express");
-var geckos      = require("app/gecko.js");
+var geckos      = require("./app/gecko.js");
 var bodyParser  = require("body-parser");
 var app         = express();
 
