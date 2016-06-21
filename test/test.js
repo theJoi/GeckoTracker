@@ -1,52 +1,87 @@
 var assert = require('chai').assert;
-
 var geckos = require('../geckos.js');
+var mongoose = require('mongoose');
 
-describe('geckos', function() {
-	describe('getGeckos()', function() {
-		it('should exist', function() {
-			assert.isDefined(geckos.getGeckos);
+// Change the database
+//geckos.init('mongodb://localhost/geckotracker_test', function(err) {
+geckos.init(null, function(err) {
+
+	describe('geckos', function() {
+		describe('getGeckos()', function() {
+			before(function() {
+				mongoose.connection.db.dropDatabase();
+			});
+			after(function() {
+				mongoose.connection.db.dropDatabase();
+			});
+	
+			it('should exist', function() {
+				assert.isDefined(geckos.getGeckos);
+			});
+			it('should return an empty array initially', function(done) {
+				geckos.getGeckos(function(err, result) {
+					assert.isArray(result);
+					assert.equal(result.length, 0);
+					done(err);
+				});
+			});
 		});
-		it('should return an empty array initially', function() {
-			var result = geckos.getGeckos();
-			assert.isArray(result);
-			assert.equal(result.length, 0);
+	
+		describe('addGecko()', function() {
+			before(function() {
+				mongoose.connection.db.dropDatabase();
+			});
+			after(function() {
+				mongoose.connection.db.dropDatabase();
+			});
+
+			it('should exist', function() {
+				assert.isDefined(geckos.addGecko);
+			});
+			it('should give no error when successfully adding a gecko', function(done) {
+				var gecko = {
+					'id': '16M0001',
+					'name': 'Roger',
+					'sex': 'Male',
+					'birthday': Date('6/22/2016'),
+					'status': 'normal'
+				};
+				geckos.addGecko(gecko, function(err) {
+					assert.isNotOk(err);
+					done();
+				});
+			});
+			it('should give an error when the argument isn\'t an object', function(done) {
+				geckos.addGecko(42, function(err) {
+					assert.isOk(err);
+					done();
+				})
+			});
+			it('should give an error when required properties are missing', function(done) {
+				var gecko = {
+					'foo': 'bar'
+				};
+				geckos.addGecko(gecko, function(err) {
+					assert.isOk(err);
+					done();
+				});
+			});
+			it('should make added geckos persistent', function(done) {
+				geckos.getGeckos(function(err, result) {
+					assert.isArray(result);
+					assert.equal(result.length, 1);
+					assert.isObject(result[0]);
+					assert.equal(result[0].name, 'Roger');
+					done();
+				});
+			});
+		});
+
+		describe('removeGecko()', function() {
+			it('should exist', function() {
+				assert.isDefined(geckos.removeGecko);
+			});
 		});
 	});
-	describe('addGecko()', function() {
-		it('should exist', function() {
-			assert.isDefined(geckos.addGecko);
-		});
-		it('should return true when successfully adding a gecko', function() {
-			var gecko = {
-				'id': '16M0001',
-				'name': 'Roger',
-				'sex': 'Male',
-				'birthday': Date('6/22/2016')
-			};
-			assert.equal(geckos.addGecko(gecko), true);
-			assert.equal(geckos.getGeckos().length, 1);
-		});
-		it('should return false when the argument isn\'t an object', function() {
-			assert.equal(geckos.addGecko(42), false);
-		});
-		it('should return false when the required fields are missing', function() {
-			var gecko = {
-				'foo': 'bar'
-			};
-			assert.equal(geckos.addGecko(gecko), false);
-		});
-		it('should add a gecko (persistently)', function() {
-			var result = geckos.getGeckos();
-			assert.isArray(result);
-			assert.equal(result.length, 0);
-			assert.isObject(result[0]);
-			assert.equal(result[0].id, '16M0001');
-		});
-	});
-	describe('removeGecko()', function() {
-		it('should exist', function() {
-			assert.isDefined(geckos.removeGecko);
-		});
-	});
+
 });

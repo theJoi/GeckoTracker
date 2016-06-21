@@ -13,15 +13,6 @@
 
 // CONNECTION EVENTS  =====================================================
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/geckotracker", function(err){
-    if(err){
-        console.log("Error occured. Unable to connect to databse:");
-        console.log(err);
-    } else {
-        console.log("Successfully connected to geckotracker database.");
-    }
-});
-
 
 // JSON PARSE APPLICATION  ================================================
 //var express     = require('express');
@@ -35,7 +26,7 @@ mongoose.connect("mongodb://localhost/geckotracker", function(err){
 var geckoSchema = new mongoose.Schema({
     name		: String,         // Name of gecko
     uniqueID 	: Number,         // External ID number
-    status		: String,          // options are {normal/gravid/egg/sold/dead}
+    status		: { type: String, required: true},          // options are {normal/gravid/egg/sold/dead}
     sex         : String         // Female/ Male/ Unknown
     /*,morph		: String,         // Gecko's morph type
     purchaseDate: Date,           // Date gecko was purchased, n/a if not purchased
@@ -77,19 +68,40 @@ var geckoSchema = new mongoose.Schema({
 // MONGOOSE GECKO MODEL  ========================================================
 var Gecko = mongoose.model("Gecko", geckoSchema);
 
+exports.init = function(db, callback) {
+    if (!db) {
+        db = "mongodb://localhost/geckotracker";
+    }
+    mongoose.connect(db);
+    callback(null);
+    /*
+    mongoose.connect(db, function(err){
+        console.log("FOOOOOOOOOOOOOOOOOOoo2");
+        if(err) {
+            console.log("Error occured. Unable to connect to databse:");
+            console.log(err);
+            callback(err);
+        } else {
+            console.log("Successfully connected to geckotracker database.");
+            callback(null);
+        }
+    });
+    */
+}
 
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
 exports.getGeckos = function(callback) {
     Gecko.find({}, function(err, geckos){
         if(err){
-            console.log("Unable to retrieve list of geckos from database:");
-            console.log(err);
+            //console.log("Unable to retrieve list of geckos from database:");
+            //console.log(err);
+            return callback(err);
         } else {
            // var geckos = JSON.parser(unparsedData);
-            console.log(geckos);
-            console.log("Successfully retrieved list of geckos");
-            return callback(geckos);
+            //console.log(geckos);
+            //console.log("Successfully retrieved list of geckos");
+            return callback(null, geckos);
         }
     });
 };
@@ -97,18 +109,42 @@ exports.getGeckos = function(callback) {
 
 // addGecko FUNCTION  ===========================================================
 // Add new gecko to database
+/*
 exports.addGecko = function(gData) {
      gData.save(function(err, gecko){
          if(err){
-             console.log("Error occured. Unable to add new gecko to DB:");
-             console.log(err);
+             //console.log("Error occured. Unable to add new gecko to DB:");
+             //console.log(err);
          } else {
-             console.log("Gecko successfully added to DB:");
-             console.log(gecko);
+             //console.log("Gecko successfully added to DB:");
+             //console.log(gecko);
          }
      });
 };
+*/
+exports.addGecko = function(gData, callback) {
+    try {
+        var gecko = new Gecko(gData);
+    } catch(e) {
+        callback("Invalid gecko properties");
+        return;
+    }
+    gecko.save(function(err, gecko){
+        if(err){
+            //console.log("Error occured. Unable to add new gecko to DB:");
+            //console.log(err);
+            callback(err);
+        } else {
+            //console.log("Gecko successfully added to DB:");
+            //console.log(gecko);
+            callback(err);
+        }
+    });
+};
 
+exports.removeGecko = function(id, callback) {
+    
+}
 
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
 // To populate database for testing purposes
@@ -131,7 +167,9 @@ var newGecko3 = new Gecko({
     status		: "egg",
     sex         : "unknown"
  });
+/*
 exports.addGecko(newGecko1);
 exports.addGecko(newGecko2);
 exports.addGecko(newGecko3);
 console.log(exports.getGeckos());
+*/
