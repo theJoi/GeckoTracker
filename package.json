@@ -19,7 +19,7 @@
     "jslint": "jslint *.js"
   },
   "files": [
-    "geckos.js"
+    "gecko.js"
   ],
   "dependencies": {
     "body-parser": "^1.15.1",

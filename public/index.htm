@@ -2,21 +2,21 @@
 
 <head>
     <title>Gecko Tracker</title>
-    <link href="css/styles.css" rel="stylesheet" type="text/css"/>
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <script src="js/angular.min.js"></script>
-    <script src="js/app.js"></script>
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <script src="assets/libs/angular.min.js"></script>
+    <script src="app.js"></script>
 </head>
 
 <body>
     <div class='header'>
         <div class='title'>Gecko<span class='bold'>Tracker</span></div>
     </div>
-    
+
     <div class='navigation'>
         <div class='location'>Dashboard</div>
     </div>
-    
+
     <div class='content' ng-controller='GeckoListController'>
         <div ng-repeat='gecko in geckos'>
             <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>

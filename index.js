@@ -10,8 +10,8 @@
 */
 
 // MODULES  ===============================================================
-var express     = require('express');
-var geckos      = require('./geckos.js');
+var express     = require("express");
+var geckos      = require("app/gecko.js");
 var bodyParser  = require("body-parser");
 var app         = express();
 

@@ -143,7 +143,7 @@ exports.addGecko = function(gData, callback) {
 };
 
 exports.removeGecko = function(id, callback) {
-    
+
 }
 
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
