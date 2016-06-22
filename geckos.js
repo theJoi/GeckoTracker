@@ -87,7 +87,7 @@ exports.init = function(db, callback) {
         }
     });
     */
-}
+};
 
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
@@ -122,9 +122,11 @@ exports.addGecko = function(gData) {
      });
 };
 */
+
 exports.addGecko = function(gData, callback) {
+    var gecko;
     try {
-        var gecko = new Gecko(gData);
+        gecko = new Gecko(gData);
     } catch(e) {
         callback("Invalid gecko properties");
         return;
@@ -143,8 +145,7 @@ exports.addGecko = function(gData, callback) {
 };
 
 exports.removeGecko = function(id, callback) {
-    
-}
+};
 
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
 // To populate database for testing purposes

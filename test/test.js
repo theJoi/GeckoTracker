@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 // Change the database
 //geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 geckos.init(null, function(err) {
-
 	describe('geckos', function() {
 		describe('getGeckos()', function() {
 			before(function() {
@@ -14,7 +13,7 @@ geckos.init(null, function(err) {
 			after(function() {
 				mongoose.connection.db.dropDatabase();
 			});
-	
+
 			it('should exist', function() {
 				assert.isDefined(geckos.getGeckos);
 			});
