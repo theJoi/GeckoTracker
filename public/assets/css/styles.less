@@ -1,0 +1,54 @@
+/* Colors */
+@pink: rgba(220, 200, 200, 0.9);  /* light rose color for female geckos */
+@blue: rgba(190, 210, 220, 0.9);   /* light blue color for male geckos */
+
+body {
+   // background: white;
+    background: url("../img/subtle_dots.png");
+    background-repeat: repeat;
+    font-family: Arial;
+    margin: 0;
+}
+
+.header {
+    background: #222;
+    color: white;
+    padding: 5px 10px;
+
+    .title {
+        .bold { font-weight: bold; }
+        font-size: 2.5em;
+    }
+}
+
+.navigation {
+    background: #ccc;
+    border-bottom: solid 1px #bbb;
+    color: #444;
+    padding: 5px 20px;
+    .location {
+
+    }
+}
+
+.content {
+    background: white;
+    border-radius: 2px;
+    width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.gecko-card {
+    border: solid 1px grey;
+    margin: 5px;
+    padding: 5px;
+    background: rgba(255,255,255,0.9);
+
+}
+.female {
+    background: @pink;
+}
+.male {
+    background: @blue;
+}
