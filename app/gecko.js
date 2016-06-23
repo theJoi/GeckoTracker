@@ -145,12 +145,7 @@ exports.addGecko = function(gData, callback) {
 };
 
 exports.removeGecko = function(id, callback) {
-<<<<<<< HEAD:geckos.js
-};
-=======
-
 }
->>>>>>> f0eed731c6bf7d15742b6668f6e0b862a80cb74b:app/gecko.js
 
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
 // To populate database for testing purposes
