@@ -74,6 +74,7 @@ exports.init = function(db, callback) {
     }
     mongoose.connect(db);
     callback(null);
+};
     /*
     mongoose.connect(db, function(err){
         console.log("FOOOOOOOOOOOOOOOOOOoo2");
@@ -86,8 +87,8 @@ exports.init = function(db, callback) {
             callback(null);
         }
     });
-    */
-};
+}
+  */
 
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
@@ -144,13 +145,14 @@ exports.addGecko = function(gData, callback) {
     });
 };
 
-exports.removeGecko = function(id, callback) {
-}
+exports.removeGecko = function(id, callback){
+    // remove gecko method will be here
+};
 
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
 // To populate database for testing purposes
 
- var newGecko1 = new Gecko({
+ /*var newGecko1 = new Gecko({
     name		: "Test Gecko #1",
     uniqueID 	: 2,
     status		: "normal",
@@ -168,9 +170,8 @@ var newGecko3 = new Gecko({
     status		: "egg",
     sex         : "unknown"
  });
-/*
+
 exports.addGecko(newGecko1);
 exports.addGecko(newGecko2);
 exports.addGecko(newGecko3);
-console.log(exports.getGeckos());
-*/
+console.log(exports.getGeckos()); */

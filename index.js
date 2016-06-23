@@ -29,13 +29,20 @@ app.get('/', function(request, response) {
 	response.sendFile(__dirname + '/public/index.htm');
 });
 
-/*// GECKOS ROUTES ==========================================================
+// GECKOS ROUTES ==========================================================
 
 // INDEX - list all geckos
 app.get('/geckos', function(request, response) {
-	// TODO complete gecko index route
+    geckos.getGeckos(function(err, result) {
+		if(err) {
+			response.json({'error': 'Problem retrieving geckos'});
+			return;
+		}
+		response.json(result);
+	});
 });
 
+/*
 // NEW - Form to add new gecko
 app.get('/geckos/new', function(request, response) {
 	// TODO complete gecko new route
