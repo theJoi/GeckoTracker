@@ -72,11 +72,9 @@ exports.init = function(db, callback) {
     if (!db) {
         db = "mongodb://localhost/geckotracker";
     }
-    console.log('here');
+
     mongoose.connect(db);
-    console.log('here2');
     callback(null);
-    console.log('here3');
 };
     /*
     mongoose.connect(db, function(err){
@@ -186,5 +184,3 @@ exports.init(null, function(err) {
 });
 console.log('done');
 */
-
-//console.log(exports.getGeckos());
