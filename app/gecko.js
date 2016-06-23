@@ -72,8 +72,11 @@ exports.init = function(db, callback) {
     if (!db) {
         db = "mongodb://localhost/geckotracker";
     }
+    console.log('here');
     mongoose.connect(db);
+    console.log('here2');
     callback(null);
+    console.log('here3');
 };
     /*
     mongoose.connect(db, function(err){
@@ -152,7 +155,7 @@ exports.removeGecko = function(id, callback){
 // ADD EXAMPLE GECKOS TO DATABSE  ==================================================
 // To populate database for testing purposes
 
- /*var newGecko1 = new Gecko({
+var newGecko1 = new Gecko({
     name		: "Test Gecko #1",
     uniqueID 	: 2,
     status		: "normal",
@@ -171,7 +174,17 @@ var newGecko3 = new Gecko({
     sex         : "unknown"
  });
 
-exports.addGecko(newGecko1);
-exports.addGecko(newGecko2);
-exports.addGecko(newGecko3);
-console.log(exports.getGeckos()); */
+/*
+exports.init(null, function(err) {
+    exports.addGecko(newGecko1, function() {
+        exports.addGecko(newGecko2, function() {
+            exports.addGecko(newGecko3, function() {
+                mongoose.disconnect();
+            });
+        });
+    });
+});
+console.log('done');
+*/
+
+//console.log(exports.getGeckos());
