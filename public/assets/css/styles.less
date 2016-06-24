@@ -1,12 +1,21 @@
+@import "grid.less";
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,700i,800';
+
 /* Colors */
-@pink: rgba(220, 200, 200, 0.9);  /* light rose color for female geckos */
-@blue: rgba(190, 210, 220, 0.9);   /* light blue color for male geckos */
+
+@pink: rgba(220, 200, 200, 0.9);
+
+/* light rose color for female geckos */
+
+@blue: rgba(190, 210, 220, 0.9);
+
+/* light blue color for male geckos */
 
 body {
-   // background: white;
+    // background: white;
     background: url("../img/subtle_dots.png");
     background-repeat: repeat;
-    font-family: Arial;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
 }
 
@@ -14,9 +23,10 @@ body {
     background: #222;
     color: white;
     padding: 5px 10px;
-
     .title {
-        .bold { font-weight: bold; }
+        .bold {
+            font-weight: bold;
+        }
         font-size: 2.5em;
     }
 }
@@ -26,9 +36,7 @@ body {
     border-bottom: solid 1px #bbb;
     color: #444;
     padding: 5px 20px;
-    .location {
-
-    }
+    .location {}
 }
 
 .content {
@@ -43,12 +51,40 @@ body {
     border: solid 1px grey;
     margin: 5px;
     padding: 5px;
-    background: rgba(255,255,255,0.9);
-
+    background: rgba(255, 255, 255, 0.9);
 }
+
 .female {
     background: @pink;
 }
+
 .male {
     background: @blue;
+}
+
+#form {
+    width: 1200px;
+    margin: auto;
+    border: dotted 1px grey;
+    padding: 10px;
+}
+
+input {
+    padding: 5px;
+    border: solid 1px LightGrey;
+}
+
+label {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    width: auto;
+    text-transform: uppercase;
+}
+
+.form-element {
+    .col-1-4;
+    padding: 5px;
+    margin: 5px;
+    float: left;
 }

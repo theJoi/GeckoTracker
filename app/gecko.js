@@ -72,24 +72,10 @@ exports.init = function(db, callback) {
     if (!db) {
         db = "mongodb://localhost/geckotracker";
     }
-
     mongoose.connect(db);
     callback(null);
 };
-    /*
-    mongoose.connect(db, function(err){
-        console.log("FOOOOOOOOOOOOOOOOOOoo2");
-        if(err) {
-            console.log("Error occured. Unable to connect to databse:");
-            console.log(err);
-            callback(err);
-        } else {
-            console.log("Successfully connected to geckotracker database.");
-            callback(null);
-        }
-    });
-}
-  */
+
 
 // GetGecko FUNCTION  ===========================================================
 // Returns all geckos from database
@@ -149,38 +135,3 @@ exports.addGecko = function(gData, callback) {
 exports.removeGecko = function(id, callback){
     // remove gecko method will be here
 };
-
-// ADD EXAMPLE GECKOS TO DATABSE  ==================================================
-// To populate database for testing purposes
-
-var newGecko1 = new Gecko({
-    name		: "Test Gecko #1",
-    uniqueID 	: 2,
-    status		: "normal",
-    sex         : "male"
-});
-var newGecko2 = new Gecko({
-    name		: "Test Gecko #2",
-    uniqueID 	: 3,
-    status		: "normal",
-    sex         : "female"
-});
-var newGecko3 = new Gecko({
-    name		: "Wee Baby",
-    uniqueID 	: 4,
-    status		: "egg",
-    sex         : "unknown"
- });
-
-/*
-exports.init(null, function(err) {
-    exports.addGecko(newGecko1, function() {
-        exports.addGecko(newGecko2, function() {
-            exports.addGecko(newGecko3, function() {
-                mongoose.disconnect();
-            });
-        });
-    });
-});
-console.log('done');
-*/
