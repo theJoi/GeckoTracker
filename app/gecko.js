@@ -72,6 +72,7 @@ exports.init = function(db, callback) {
     if (!db) {
         db = "mongodb://localhost/geckotracker";
     }
+
     mongoose.connect(db);
     callback(null);
 };
@@ -162,15 +163,14 @@ var newGecko2 = new Gecko({
     name		: "Test Gecko #2",
     uniqueID 	: 3,
     status		: "normal",
-    sex         : "female",
-    foo         : "bar"
+    sex         : "female"
 });
 var newGecko3 = new Gecko({
     name		: "Wee Baby",
     uniqueID 	: 4,
     status		: "egg",
     sex         : "unknown"
-});
+ });
 
 /*
 exports.init(null, function(err) {
@@ -184,5 +184,3 @@ exports.init(null, function(err) {
 });
 console.log('done');
 */
-
-//console.log(exports.getGeckos());
