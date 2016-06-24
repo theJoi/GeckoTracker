@@ -8,77 +8,69 @@
 | Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
-var g = require("./app/gecko.js");
+var g = require("../gecko.js");
 
-exports.popDat = function (callback) {
+exports.propDat = function (callback) {
 
-    var newGeckos[] = [
-        new g.Gecko({
-            name:   "Britney",
-            status: "normal",
-            sex:    "male",
-            morph:  "rainbow bright",
-            weight: 69
-        }),
-        new g.Gecko({
-            name:   "Test subject #211",
-            status: "normal",
-            sex:    "unknown",
-            morph:  "mystery morph",
-            weight: 50
-        }),
-        new g.Gecko({
-            name:   "Wee Baby",
-            status: "egg",
-            sex:    "unknown",
-            morph:  "unknown",
-            weight: 10
-        }),
-        new g.Gecko({
-            name: "Locke",
-            sex: 'male',
-            status: 'normal',
-            morph: 'Lavender Jungle Bandit',
-            birthdate: new Date('5/1/2015'),
-            weight: 57
-        }),
-        new g.Gecko({
-            name: "Sabetha",
-            sex: 'female',
-            status: 'gravid',
-            morph: 'Lavender Jungle Bandit',
-            birthdate: new Date('5/1/2015'),
-            weight: 63
-        }),
-        new g.Gecko({
-            name:   "Eggbert",
-            sex:    'unknown',
-            status: 'egg',
-            morph:  'unknown',
-            weight:  20
-        }),
-        new g.Gecko({
-            name: "Locke Jr.",
-            sex: 'male',
-            status: 'egg',
-            morph: 'Lavender Jungle Bandit',
-            birthdate: 'unknown',
-            weight: 21
-        }),
-        new g.Gecko({
-            name: "Mystery Girl",
-            sex: 'female',
-            status: 'normal',
-            morph: 'unknown',
-            birthdate: new Date('6/21/2016'),
-            weight: 29
-        })
-    ];
+    var newGeckos = [{
+        name: "Britney",
+        status: "normal",
+        sex: "female",
+        morph: "rainbow bright",
+        location: "bin #1"
+        }, {
+        name: "Test subject #211",
+        status: "normal",
+        sex: "unknown",
+        morph: "mystery morph",
+        location: "bin #2"
+  }, {
+        name: "Wee Baby",
+        status: "egg",
+        sex: "unknown",
+        morph: "unknown",
+        location: "bin #3"
+  }, {
+        name: "Locke",
+        sex: 'male',
+        status: 'normal',
+        morph: 'Lavender Jungle Bandit',
+        birthdate: new Date('5/1/2015'),
+        location: "bin #A-1"
+  }, {
+        name: "Sabetha",
+        sex: 'female',
+        status: 'gravid',
+        morph: 'Lavender Jungle Bandit',
+        birthdate: new Date('5/1/2015'),
+        location: "bin #A-2"
+  }, {
+        name: "Eggbert",
+        sex: 'unknown',
+        status: 'egg',
+        morph: 'unknown',
+        location: "incubator #1"
+  }, {
+        name: "Locke Jr.",
+        sex: 'male',
+        status: 'egg',
+        morph: 'Lavender Jungle Bandit',
+        birthdate: 'unknown',
+        location: "incubator #1"
+  }, {
+        name: "Mystery Girl",
+        sex: 'female',
+        status: 'normal',
+        morph: 'unknown',
+        birthdate: new Date('6/21/2016'),
+        location: "incubator #2"
+}];
 
-    newGeckos.forEach(function(gecko) {
-        exports.addGecko(gecko, function () {});
+    newGeckos.forEach(function (gecko) {
+        // console.log(gecko);
+        g.addGecko(gecko, function () {});
     });
     console.log('Databse population done.');
 };
 
-//g.init(null, exports.popDat);
+g.init(null, exports.propDat);
