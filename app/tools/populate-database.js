@@ -73,4 +73,4 @@ exports.propDat = function (callback) {
     console.log('Databse population done.');
 };
 
-g.init(null, exports.propDat);
+//g.init(null, exports.propDat);

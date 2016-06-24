@@ -42,17 +42,19 @@ app.get('/geckos', function(request, response) {
 	});
 });
 
-/*
-// NEW - Form to add new gecko
-app.get('/geckos/new', function(request, response) {
-	// TODO complete gecko new route
-});
 
 // CREATE - Add new gecko to DB
 app.post('/geckos', function(request, response) {
-	// TODO complete gecko create route
+    var gData = request.body;
+    geckos.addGecko(gData, function(err, result) {
+		if(err){
+			console.log("addGecko method failed.");
+            return;
+        }
+        response.json(gData);
+     });
 });
-
+/*
 // SHOW - detailed gecko information
 app.get('/geckos/:id', function(request, response) {
 	// TODO complete gecko show route

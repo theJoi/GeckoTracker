@@ -30,7 +30,7 @@
                 Morph: {{gecko.morph}}
             </div>
             <div class="col-1-4">
-                Weight: {{gecko.weight}}
+                Location: {{gecko.location}}
             </div>
             <div class="col-1-4">
                 Status: {{gecko.status}}
@@ -45,43 +45,48 @@
     <!-- ADD GECKO FORM -->
     <div ng-controller='AddGeckoController'>
 
-        <form method="POST" action="/geckos" id="form">
+        <form name="addGeckoForm" id="form">
             <h1>Add Gecko Form</h1>
+            <p style="color: red;">{{validationMsg}}</p>
             <div class="grid">
                 <div class="form-element">
                     <label>Gecko's Name</label>
-                    <input type="text" placeholder="name of gecko" name="name">
+                    <input type="text" placeholder="name of gecko" ngmodel="form.name">
                 </div>
                 <div class="form-element">
                     <label>MORPH tYPE</label>
-                    <input type="text" placeholder="morph" name="morph">
+                    <input type="text" placeholder="morph" ngmodel="form.morph">
                 </div>
                 <div class="form-element">
                     <label>Weight</label>
-                    <input type="number" placeholder="weight in grams" name="weight">
+                    <input type="number" placeholder="weight in grams" ngmodel="form.weight">
                 </div>
                 <div class="form-element">
                     <label>Date of Birth</label>
-                    <input type="date" placeholder="birthdate" name="birthDate">
+                    <input type="date" placeholder="birthdate" ngmodel="form.birthDate">
                 </div>
                 <div class="form-element">
                     <label>date of Purchase</label>
-                    <input type="date" placeholder="date of purchase" name="purchaseDate">
+                    <input type="date" placeholder="date of purchase" ngmodel="form.purchaseDate">
                 </div>
                 <div class="form-element">
                     <label>ID Number</label>
-                    <input type="text" placeholder="unique ID number" name="uniqueID">
+                    <input type="text" placeholder="unique ID number" ngmodel="form.uniqueID">
+                </div>
+                <div class="form-element">
+                    <label>Location</label>
+                    <input type="text" placeholder="ex. Bin 2A" ngmodel="form.location">
                 </div>
                 <div class="form-element">
                     <label>Sex</label>
-                    <select name="sex">
+                    <select ngmodel="form.sex">
                         <option value=male>Male</option>
                         <option value="female" selected>Female</option>
                         <option value="unknown">Unknown</option>
                     </select>
                 </div>
             </div>
-            <button>Add Gecko</button>
+            <button ng-click="submitForm()">Add Gecko</button>
         </form>
     </div>
 </body>
