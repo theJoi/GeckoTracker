@@ -9,7 +9,7 @@
     <script src="app.js"></script>
 </head>
 
-<body>
+<body ng-controller='GeckoListController'>
     <div class='header'>
         <div class='title'>Gecko<span class='bold'>Tracker</span></div>
     </div>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- CONTAINER FOR LIST OF GECKOS -->
-    <div class='content' ng-controller='GeckoListController'>
+    <div class='content'>
         <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
             <div class="col-1-4">
                 <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
@@ -51,35 +51,35 @@
             <div class="grid">
                 <div class="form-element">
                     <label>Gecko's Name</label>
-                    <input type="text" placeholder="name of gecko" ngmodel="form.name">
+                    <input type="text" placeholder="name of gecko" ng-model="form.name">
                 </div>
                 <div class="form-element">
                     <label>MORPH tYPE</label>
-                    <input type="text" placeholder="morph" ngmodel="form.morph">
+                    <input type="text" placeholder="morph" ng-model="form.morph">
                 </div>
                 <div class="form-element">
                     <label>Weight</label>
-                    <input type="number" placeholder="weight in grams" ngmodel="form.weight">
+                    <input type="number" placeholder="weight in grams" ng-model="form.weight">
                 </div>
                 <div class="form-element">
                     <label>Date of Birth</label>
-                    <input type="date" placeholder="birthdate" ngmodel="form.birthDate">
+                    <input type="date" placeholder="birthdate" ng-model="form.birthDate">
                 </div>
                 <div class="form-element">
                     <label>date of Purchase</label>
-                    <input type="date" placeholder="date of purchase" ngmodel="form.purchaseDate">
+                    <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
                 </div>
                 <div class="form-element">
                     <label>ID Number</label>
-                    <input type="text" placeholder="unique ID number" ngmodel="form.uniqueID">
+                    <input type="text" placeholder="unique ID number" ng-model="form.uniqueID">
                 </div>
                 <div class="form-element">
                     <label>Location</label>
-                    <input type="text" placeholder="ex. Bin 2A" ngmodel="form.location">
+                    <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
                 </div>
                 <div class="form-element">
                     <label>Sex</label>
-                    <select ngmodel="form.sex">
+                    <select ng-model="form.sex">
                         <option value=male>Male</option>
                         <option value="female" selected>Female</option>
                         <option value="unknown">Unknown</option>

@@ -27,8 +27,7 @@ var geckoSchema = new mongoose.Schema({
     name: String,       // Name of gecko
     uniqueID: Number,   // External ID number
     status: {
-        type: String,
-        required: true
+        type: String
     },                  // options are {normal/gravid/egg/sold/dead}
     sex: String,        // Female/ Male/ Unknown
     morph: String,      // Gecko's morph type
