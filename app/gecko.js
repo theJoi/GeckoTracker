@@ -35,7 +35,7 @@ var geckoSchema = new mongoose.Schema({
     parents     :         // Reference to parents
     [{
         parent  : String, // Options mother or father
-        ref     : mongoose.Schema.Type.objectId
+        ref     : mongoose.Schema.Types.ObjectId
     }],
     weights     :         // Weight and date weighed
     [{
@@ -60,7 +60,7 @@ var geckoSchema = new mongoose.Schema({
     copulated   :         // Date gecko copulated and with whom
     [{
         date    : Date,
-        partner : mongoose.Schema.Type.objectId
+        partner : mongoose.Schema.Types.ObjectId
 
     }],
     incubated   :        // Date egg was incubated and temp
@@ -127,4 +127,10 @@ exports.addGecko = function (gData, callback) {
 
 exports.removeGecko = function (id, callback) {
     // remove gecko method will be here
+};
+
+exports.dropCollection = function(callback){
+    Gecko.remove({}, function(err) {
+        console.log('collection removed');
+    });
 };
