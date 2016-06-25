@@ -22,20 +22,24 @@ angular.module('geckoTracker', []).controller('GeckoListController', function ($
     };
     $scope.refreshGeckos();
 }).controller('AddGeckoController', function ($scope, $http) {
-    $scope.validationMsg = "Status message will be here";
+    $scope.validationMsg = "";
     $scope.form = {
         name: "",
         uniqueID: "",
         status: "unknown",
-        sex: "unknwon",
+        sex: "unknown",
         morph: "",
         purchaseDate: "",
         birthDate: "",
         location: ""
     };
 
+
     $scope.submitForm = function () {
         console.log("submit form called");
+         if(($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === ""){
+            $scope.form = "not applicable";
+       }
         $http({
             method: 'POST',
             url: '/geckos',
@@ -44,9 +48,9 @@ angular.module('geckoTracker', []).controller('GeckoListController', function ($
             $scope.geckos.push(response.data);
             $scope.validationMsg = "The gecko named " + $scope.form.name + " has successfully been added.";
             $scope.refreshGeckos();
+            $scope.addGeckoForm.$setPristine();
         }, function error(response) {
-             $scope.validationMsg = "Uh oh.";
-            alert("Error occured. Gecko not added.");
+             $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
         });
     };
 });

@@ -70,7 +70,7 @@
                     <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
                 </div>
                 <div class="form-element">
-                    <label>ID Number</label>
+                    <label>ID</label>
                     <input type="text" placeholder="unique ID number" ng-model="form.uniqueID">
                 </div>
                 <div class="form-element">
@@ -81,8 +81,19 @@
                     <label>Sex</label>
                     <select ng-model="form.sex">
                         <option value=male>Male</option>
-                        <option value="female" selected>Female</option>
-                        <option value="unknown">Unknown</option>
+                        <option value="female">Female</option>
+                        <option value="unknown" selected>Unknown</option>
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label>Status</label>
+                    <select ng-model="form.status">
+                        <option value="unknown" selected>Unknown</option>
+                        <option value="normal">Normal</option>
+                        <option value="gravid">Gravid</option>
+                        <option value="egg">Egg</option>
+                        <option value="sold">Sold</option>
+                        <option value="dead">Dead</option>
                     </select>
                 </div>
             </div>

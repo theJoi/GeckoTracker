@@ -25,7 +25,7 @@ var mongoose = require("mongoose");
 // GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
     name: String,       // Name of gecko
-    uniqueID: Number,   // External ID number
+    uniqueID: String,   // External ID number
     status: {
         type: String
     },                  // options are {normal/gravid/egg/sold/dead}
