@@ -24,48 +24,51 @@ var mongoose = require("mongoose");
 
 // GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
-    name: String,       // Name of gecko
-    uniqueID: String,   // External ID number
-    status: {
-        type: String
-    },                  // options are {normal/gravid/egg/sold/dead}
-    sex: String,        // Female/ Male/ Unknown
-    morph: String,      // Gecko's morph type
-    purchaseDate: Date, // Date gecko was purchased, n/a if not purchased
-    birthDate: Date,    // Birthdate of gecko
-    location: String    // Current location of gecko
-        /*parents 	: [               // Reference to parents
-            type    : mongoose.Schema.Type.objectId,
-            ref     : gecko
-        ],
-        weights		: {               // Weight and date weighed
-            date    : Date,
-            weight	: Number
-        },
-        shedded : {                   // Date shedded
-             date   : Date
-        },
-        laid        : {               // Date gecko laid eggs and number of viable eggs and slugs
-            date	: Date,
-            viable	: Number,
-            slugs	: Number
-        },
-        gravid      : {               // Date gecko became gravid or not gravid
-            isGravid: Boolean,
-            date	: Date
-        },
-        copulated	: {               // Date gecko copulated and with whom
-            date    : Date,
-            partner : {
-                type: mongoose.Schema.Type.objectId,
-                ref : gecko
-            }
-        },
-        incubated	: {               // Date egg was incubated and temp
-            startDate: Date,
-            endDate	: Date,
-            temp    : Number
-        }*/
+    name        : String, // Name of gecko
+    uniqueID    : String, // External ID number
+    status      : String, // Options are {normal/gravid/egg/sold/dead}
+    sex         : String, // Female/ Male/ Unknown
+    morph       : String, // Gecko's morph type
+    purchaseDate: Date,   // Date gecko was purchased, n/a if not purchased
+    birthDate   : Date,   // Birthdate of gecko
+    location    : String, // Current location of gecko
+    parents     :         // Reference to parents
+    [{
+        parent  : String, // Options mother or father
+        ref     : mongoose.Schema.Type.objectId
+    }],
+    weights     :         // Weight and date weighed
+    [{
+        date    : Date,
+        weight  : Number
+    }],
+    shedded     :         // Date shedded
+    [{
+        date    : Date
+    }],
+    laid        :         // Date gecko laid eggs and number of viable eggs and slugs
+    [{
+        date    : Date,
+        viable  : Number,
+        slugs   : Number
+    }],
+    gravid      :         // Date gecko became gravid or not gravid
+    [{
+        isGravid: Boolean,
+        date    : Date
+    }],
+    copulated   :         // Date gecko copulated and with whom
+    [{
+        date    : Date,
+        partner : mongoose.Schema.Type.objectId
+
+    }],
+    incubated   :        // Date egg was incubated and temp
+    [{
+        startDate: Date,
+        endDate : Date,
+        temp    : Number
+    }]
 });
 
 // MONGOOSE GECKO MODEL  ========================================================
