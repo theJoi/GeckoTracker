@@ -1,0 +1,41 @@
+  <!-- CONTAINER FOR GECKO INFORMATION -->
+    <div class='content' ng-controller='GeckoDetailController'>
+        <div class="gecko-card grid">
+            <div class="col-1-4">
+                <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
+                <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
+                <strong>{{gecko.name}}</strong>
+            </div>
+            <div class="col-1-4">
+                Morph: {{gecko.morph}}
+            </div>
+            <div class="col-1-4">
+                Location: {{gecko.location}}
+            </div>
+            <div class="col-1-6">
+                Status: {{gecko.status}}
+            </div>
+            <div class="col-1-12 right">
+                <i class='fa fa-compress' ng-click="compress(gecko._id)"></i>
+                <i class='fa fa-trash' ng-click="deleteGecko(gecko._id,gecko.name)"></i>
+            </div>
+                        <div class="col-1-4">
+                ID: {{gecko.id}}
+            </div>
+            <div class="col-1-4">
+                Current Weight: {{gecko.weight}}
+            </div>
+                        <div class="col-1-4">
+                Birthdate: {{gecko.birthDate}}
+            </div>
+                        </div>
+                        <div class="col-1-4">
+                Purchase Date: {{gecko.purchaseDate}}
+            </div>
+        <div>Parents:
+
+        </div>
+              <div>Events:
+
+        </div>
+    </div>
