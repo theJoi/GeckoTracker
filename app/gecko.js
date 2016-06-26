@@ -91,12 +91,8 @@ exports.getGeckos = function (callback) {
             //console.log("Unable to retrieve list of geckos from database:");
             //console.log(err);
             return callback(err);
-        } else {
-            // var geckos = JSON.parser(unparsedData);
-            //console.log(geckos);
-            //console.log("Successfully retrieved list of geckos");
-            return callback(null, geckos);
         }
+        return callback(null, geckos);
     });
 };
 
@@ -114,19 +110,27 @@ exports.addGecko = function (gData, callback) {
     }
     gecko.save(function (err, gecko) {
         if (err) {
-            //console.log("Error occured. Unable to add new gecko to DB:");
-            //console.log(err);
-            callback(err);
-        } else {
-            //console.log("Gecko successfully added to DB:");
-            //console.log(gecko);
+            console.log("Error occured. Unable to add new gecko to DB:");
+            console.log(err);
             callback(err);
         }
+        callback(err);
     });
 };
 
 exports.removeGecko = function (id, callback) {
-    // remove gecko method will be here
+    Gecko.findByIdAndRemove(id, function(err) {
+        var gName;
+        if (err){
+            console.log("Error occured. Unable to delete gecko:");
+            console.log(err);
+            callback(err);
+        }
+        Gecko.findById(id, function(err, gecko) {
+            gName = gecko.name;
+        });
+        callback("Gecko named '" + gName + "' was successfully removed.");
+    });
 };
 
 exports.dropCollection = function(callback){
