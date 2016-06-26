@@ -54,7 +54,7 @@ app.post('/geckos', function(request, response) {
         response.json(gData);
      });
 });
-/*
+
 // SHOW - detailed gecko information
 app.get('/geckos/:id', function(request, response) {
 	// TODO complete gecko show route
@@ -71,8 +71,16 @@ app.put('/geckos', function(request, response) {
 });
 
 // DESTROY - delete gecko record
-app.delete('/geckos/:id/edit', function(request, response) {
-	// TODO complete gecko destroy route
+app.delete('/geckos/:id', function(request, response) {
+    var id = request.params.id;
+    console.log("id = " + id);
+    geckos.removeGecko(id, function(err, result) {
+		if(err){
+			console.log("deleteGecko method failed.");
+            return(err);
+        }
+        return(result);
+     });
 });
 
 // ROUTES FOR DATED EVENTS ============================================
@@ -115,7 +123,7 @@ app.delete('/events/:id/edit', function(request, response) {
 // TIMELINE
 app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
-});*/
+});
 
 
 //  REGISTER ROUTES AND START SERVER  =====================================

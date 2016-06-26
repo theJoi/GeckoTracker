@@ -15,7 +15,7 @@
     </div>
 
     <div class='navigation'>
-        <div class='location'>Dashboard</div>
+        <div class='location'>{{statusMsg}}</div>
     </div>
 
     <!-- CONTAINER FOR LIST OF GECKOS -->
@@ -32,8 +32,12 @@
             <div class="col-1-4">
                 Location: {{gecko.location}}
             </div>
-            <div class="col-1-4">
+            <div class="col-1-6">
                 Status: {{gecko.status}}
+            </div>
+            <div class="col-1-12 right">
+                <i class='fa fa-expand' ng-click="expand(gecko._id)"></i>
+                <i class='fa fa-trash' ng-click="deleteGecko(gecko._id,gecko.name)"></i>
             </div>
         </div>
     </div>

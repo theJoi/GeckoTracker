@@ -79,6 +79,7 @@ exports.init = function (db, callback) {
         db = "mongodb://localhost/geckotracker";
     }
     mongoose.connect(db);
+    console.log("Database initilized.");
     callback(null);
 };
 
@@ -119,22 +120,19 @@ exports.addGecko = function (gData, callback) {
 };
 
 exports.removeGecko = function (id, callback) {
-    Gecko.findByIdAndRemove(id, function(err) {
-        var gName;
+    Gecko.findByIdAndRemove(id, function(err, removedGecko) {
         if (err){
             console.log("Error occured. Unable to delete gecko:");
             console.log(err);
             callback(err);
         }
-        Gecko.findById(id, function(err, gecko) {
-            gName = gecko.name;
-        });
-        callback("Gecko named '" + gName + "' was successfully removed.");
+         console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
+        callback(removedGecko._id);
     });
 };
 
 exports.dropCollection = function(callback){
     Gecko.remove({}, function(err) {
-        console.log('collection removed');
+        console.log('Collection removed.');
     });
 };

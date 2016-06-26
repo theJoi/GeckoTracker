@@ -74,5 +74,9 @@ exports.propDat = function (callback) {
 };
 
 
-g.dropCollection(function () {});   // Empty collection first
-g.init(null, exports.propDat);
+// Empty collection first then run function to add geckos
+g.init(null, function () {
+     g.dropCollection(function () {
+         exports.propDat(function () {});
+     });
+});
