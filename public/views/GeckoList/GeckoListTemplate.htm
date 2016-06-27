@@ -21,7 +21,9 @@
                 Status: {{gecko.status}}
             </div>
             <div class="col-1-12 right">
-                <i class='fa fa-expand' ng-click="expand(gecko._id)"></i>
+                <a href="/geckos/{{gecko._id}}">
+                    <i class='fa fa-expand'></i>
+                </a>
                 <i class='fa fa-trash' ng-click="deleteGecko(gecko._id,gecko.name)"></i>
             </div>
         </div>
