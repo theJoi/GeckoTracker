@@ -44,8 +44,17 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
             method: 'DELETE',
             url: "/geckos/" + id
         }).then(function success(response) {
-
-            $scope.geckos.pop(response.data);
+            if(response.data.error){
+			     console.log("Server side error");
+			     return;
+            }
+		   // Find index of gecko to delete
+            for(var i = 0; i < $scope.geckos.length; i++){
+                if($scope.geckos[i]._id === id){
+                    $scope.geckos.splice(i, 1);
+                    break;
+                }
+            }
             $scope.statusMsg = "The gecko named '" + $scope.form.name + "' has successfully been deleted.";
             $scope.refreshGeckos();
         }, function error(response) {
