@@ -1,7 +1,8 @@
 <!-- HEADER STATUS BAR -->
-<div class='navigation'>
-        <div class='location'>{{statusMsg}}</div>
-    </div>
+<div class='navigation grid'>
+        <div class="col-1-2">{{statusMsg}}</div>
+        <div class="col-1-2 right"><a href="/new">Add New Gecko</a></div>
+</div>
 <!-- CONTAINER FOR LIST OF GECKOS -->
     <div class='content'>
         <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
