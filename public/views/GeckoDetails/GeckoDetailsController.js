@@ -2,8 +2,8 @@
 /* globals angular */
 
 function GeckoDetail($scope, $http){
-    $scope.details = {
-        // how do i get the _id from the GeckoListController?
+    var id = $routeParams.id;
+    $scope.geckoDetail =
     };
 }
 

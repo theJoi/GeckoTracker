@@ -84,7 +84,7 @@ exports.init = function (db, callback) {
 };
 
 
-// GetGecko FUNCTION  ===========================================================
+// GetGeckos FUNCTION  ===========================================================
 // Returns all geckos from database
 exports.getGeckos = function (callback) {
     Gecko.find({}, function (err, geckos) {
@@ -94,6 +94,19 @@ exports.getGeckos = function (callback) {
             return callback(err);
         }
         return callback(null, geckos);
+    });
+};
+
+// GetGecko FUNCTION  ===========================================================
+// Returns gecko by ID
+exports.getGeckos = function (id ,callback) {
+    Gecko.find({_id: id}, function (err, gecko) {
+        if (err) {
+            console.log("Unable to retrieve gecko from database:");
+            console.log(err);
+            return callback(err);
+        }
+        return callback(null, gecko);
     });
 };
 
@@ -134,6 +147,6 @@ exports.removeGecko = function (id, callback) {
 exports.dropCollection = function(callback){
     Gecko.remove({}, function(err) {
         console.log('Collection removed.');
-        callback();
+        callback(err);
     });
 };
