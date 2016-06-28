@@ -49,16 +49,21 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
 			     return;
             }
 		   // Find index of gecko to delete
+             console.log("looking for gecko with id " + id);
             for(var i = 0; i < $scope.geckos.length; i++){
+               console.log("index = " + i + " id = " + id);
+
                 if($scope.geckos[i]._id === id){
+                    console.log("found gecko to delete in array.");
                     $scope.geckos.splice(i, 1);
                     break;
                 }
             }
-            $scope.statusMsg = "The gecko named '" + $scope.form.name + "' has successfully been deleted.";
+            $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
             $scope.refreshGeckos();
         }, function error(response) {
             $scope.statusMsg = "Uh oh. Error occured, gecko not added. Please try again.";
+            console.log("boo boo happened.");
         });
     };
 });

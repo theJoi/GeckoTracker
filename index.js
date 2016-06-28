@@ -81,9 +81,11 @@ app.delete('/api/geckos/:id', function(request, response) {
     geckos.removeGecko(id, function(err, result) {
 		if(err){
 			console.log("deleteGecko method failed.");
-            return(err);
+            console.log(err);
+            response.json({error: err});
+            return;
         }
-        return(result);
+        response.json({_id: result});
      });
 });
 
