@@ -134,5 +134,6 @@ exports.removeGecko = function (id, callback) {
 exports.dropCollection = function(callback){
     Gecko.remove({}, function(err) {
         console.log('Collection removed.');
+        callback();
     });
 };
