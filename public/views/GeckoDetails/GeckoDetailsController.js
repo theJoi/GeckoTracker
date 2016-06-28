@@ -7,7 +7,7 @@ function GeckoDetail($scope, $http){
 
     $http({
         method: 'GET',
-        url: '/geckos/' +id
+        url: '/api/geckos/' +id
     }).then(function success(response) {
         if (response.data.error) {
             console.log("Server side error! " + response.data.error);
