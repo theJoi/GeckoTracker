@@ -18,7 +18,7 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
     $scope.refreshGeckos = function () {
         $http({
             method: 'GET',
-            url: '/geckos'
+            url: '/api/geckos'
         }).then(function success(response) {
             if (response.data.error) {
                 console.log("Server side error! " + response.data.error);
@@ -42,7 +42,7 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
         console.log("delete gecko button clicked");
         $http({
             method: 'DELETE',
-            url: "/geckos/" + id
+            url: "/api/geckos/" + id
         }).then(function success(response) {
             if(response.data.error){
 			     console.log("Server side error");

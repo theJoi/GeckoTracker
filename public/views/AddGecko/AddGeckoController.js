@@ -31,7 +31,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         }
         $http({
             method: 'POST',
-            url: '/geckos',
+            url: '/api/geckos',
             data: $scope.form
         }).then(function success(response) {
             $scope.geckos.push(response.data);
