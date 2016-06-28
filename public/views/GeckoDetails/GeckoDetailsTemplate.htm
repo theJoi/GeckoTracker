@@ -1,41 +1,46 @@
-  <!-- CONTAINER FOR GECKO INFORMATION -->
-    <div class='content' ng-controller='GeckoDetailController'>
+<!-- CONTAINER FOR GECKO INFORMATION -->
+<div ng-controller='GeckoDetailController'>
+    <div class='navigation grid'>
+        <div class="col-1-2">{{statusMsg}}</div>
+    </div>
+    <div class='content'>
         <div class="gecko-card grid">
             <div class="col-1-4">
-                <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
-                <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
-                <strong>{{gecko.name}}</strong>
+                <i class='fa fa-mars' ng-if="geckoDetail.sex == 'male'"></i>
+                <i class='fa fa-venus' ng-if="geckoDetail.sex == 'female'"></i>
+                <strong>{{geckoDetail.name}}</strong>
             </div>
             <div class="col-1-4">
-                Morph: {{gecko.morph}}
+                Morph: {{geckoDetail.morph}}
             </div>
             <div class="col-1-4">
-                Location: {{gecko.location}}
+                Location: {{geckoDetail.location}}
             </div>
             <div class="col-1-6">
-                Status: {{gecko.status}}
+                Status: {{geckoDetail.status}}
             </div>
             <div class="col-1-12 right">
-                <i class='fa fa-compress' ng-click="compress(gecko._id)"></i>
-                <i class='fa fa-trash' ng-click="deleteGecko(gecko._id,gecko.name)"></i>
-            </div>
-                        <div class="col-1-4">
-                ID: {{gecko.id}}
+                <a href="/"><i class='fa fa-compress'></i></a>
+                <i class='fa fa-trash' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)"></i>
             </div>
             <div class="col-1-4">
-                Current Weight: {{gecko.weight}}
+                ID: {{geckoDetail.id}}
             </div>
-                        <div class="col-1-4">
-                Birthdate: {{gecko.birthDate}}
+            <div class="col-1-4">
+                Current Weight: {{geckoDetail.weight}}
             </div>
-                        </div>
-                        <div class="col-1-4">
-                Purchase Date: {{gecko.purchaseDate}}
+            <div class="col-1-4">
+                Birthdate: {{geckoDetail.birthDate}}
             </div>
-        <div>Parents:
+            <div class="col-1-4">
+                Purchase Date: {{geckoDetail.purchaseDate}}
+            </div>
+            <div>Parents:
 
-        </div>
-              <div>Events:
+            </div>
+            <div>Events:
 
+            </div>
         </div>
     </div>
+</div>
