@@ -1,13 +1,12 @@
-
 <div ng-controller='GeckoListController'>
     <!-- HEADER STATUS BAR -->
     <div class='navigation grid'>
-            <div class="col-1-2">{{statusMsg}}</div>
-            <div class="col-1-2 right">
-                <a href="" ng-click="showForm = !showForm">
-                    <span ng-if=!showForm>Add New Gecko</span>
-                    <span ng-if=showForm>Go back</span>
-                </a>
+        <div class="col-1-2">{{statusMsg}}</div>
+        <div class="col-1-2 right">
+            <a href="" ng-click="showForm = !showForm">
+                <span ng-if=!showForm>Add New Gecko</span>
+                <span ng-if=showForm>Go back</span>
+            </a>
         </div>
     </div>
     <!-- ADD GECKO FORM -->
@@ -69,8 +68,8 @@
         </form>
     </div>
 
-<!-- CONTAINER FOR LIST OF GECKOS -->
-    <div class='content' >
+    <!-- CONTAINER FOR LIST OF GECKOS -->
+    <div class='content'>
         <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
             <div class="col-1-4">
                 <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
@@ -90,7 +89,7 @@
                 <a href="/geckos/{{gecko._id}}">
                     <i class='fa fa-expand'></i>
                 </a>
-                <i class='fa fa-trash' ng-click="deleteGecko(gecko._id,gecko.name)"></i>
+                <i class='fa fa-trash' ng-click="confirmDelete(gecko._id, gecko.name)"></i>
             </div>
         </div>
     </div>
