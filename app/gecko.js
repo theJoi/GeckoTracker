@@ -24,48 +24,51 @@ var mongoose = require("mongoose");
 
 // GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
-    name: String,       // Name of gecko
-    uniqueID: String,   // External ID number
-    status: {
-        type: String
-    },                  // options are {normal/gravid/egg/sold/dead}
-    sex: String,        // Female/ Male/ Unknown
-    morph: String,      // Gecko's morph type
-    purchaseDate: Date, // Date gecko was purchased, n/a if not purchased
-    birthDate: Date,    // Birthdate of gecko
-    location: String    // Current location of gecko
-        /*parents 	: [               // Reference to parents
-            type    : mongoose.Schema.Type.objectId,
-            ref     : gecko
-        ],
-        weights		: {               // Weight and date weighed
-            date    : Date,
-            weight	: Number
-        },
-        shedded : {                   // Date shedded
-             date   : Date
-        },
-        laid        : {               // Date gecko laid eggs and number of viable eggs and slugs
-            date	: Date,
-            viable	: Number,
-            slugs	: Number
-        },
-        gravid      : {               // Date gecko became gravid or not gravid
-            isGravid: Boolean,
-            date	: Date
-        },
-        copulated	: {               // Date gecko copulated and with whom
-            date    : Date,
-            partner : {
-                type: mongoose.Schema.Type.objectId,
-                ref : gecko
-            }
-        },
-        incubated	: {               // Date egg was incubated and temp
-            startDate: Date,
-            endDate	: Date,
-            temp    : Number
-        }*/
+    name        : String, // Name of gecko
+    uniqueID    : String, // External ID number
+    status      : String, // Options are {normal/gravid/egg/sold/dead}
+    sex         : String, // Female/ Male/ Unknown
+    morph       : String, // Gecko's morph type
+    purchaseDate: Date,   // Date gecko was purchased, n/a if not purchased
+    birthDate   : Date,   // Birthdate of gecko
+    location    : String, // Current location of gecko
+    parents     :         // Reference to parents
+    [{
+        parent  : String, // Options mother or father
+        ref     : mongoose.Schema.Types.ObjectId
+    }],
+    weights     :         // Weight and date weighed
+    [{
+        date    : Date,
+        weight  : Number
+    }],
+    shedded     :         // Date shedded
+    [{
+        date    : Date
+    }],
+    laid        :         // Date gecko laid eggs and number of viable eggs and slugs
+    [{
+        date    : Date,
+        viable  : Number,
+        slugs   : Number
+    }],
+    gravid      :         // Date gecko became gravid or not gravid
+    [{
+        isGravid: Boolean,
+        date    : Date
+    }],
+    copulated   :         // Date gecko copulated and with whom
+    [{
+        date    : Date,
+        partner : mongoose.Schema.Types.ObjectId
+
+    }],
+    incubated   :        // Date egg was incubated and temp
+    [{
+        startDate: Date,
+        endDate : Date,
+        temp    : Number
+    }]
 });
 
 // MONGOOSE GECKO MODEL  ========================================================
@@ -76,11 +79,12 @@ exports.init = function (db, callback) {
         db = "mongodb://localhost/geckotracker";
     }
     mongoose.connect(db);
+    console.log("Database initilized.");
     callback(null);
 };
 
 
-// GetGecko FUNCTION  ===========================================================
+// GetGeckos FUNCTION  ===========================================================
 // Returns all geckos from database
 exports.getGeckos = function (callback) {
     Gecko.find({}, function (err, geckos) {
@@ -88,12 +92,21 @@ exports.getGeckos = function (callback) {
             //console.log("Unable to retrieve list of geckos from database:");
             //console.log(err);
             return callback(err);
-        } else {
-            // var geckos = JSON.parser(unparsedData);
-            //console.log(geckos);
-            //console.log("Successfully retrieved list of geckos");
-            return callback(null, geckos);
         }
+        return callback(null, geckos);
+    });
+};
+
+// GetGecko FUNCTION  ===========================================================
+// Returns gecko by ID
+exports.getGecko = function (id ,callback) {
+    Gecko.find({_id: id}, function (err, gecko) {
+        if (err) {
+            //console.log("Unable to retrieve gecko from database:");
+            //console.log(err);
+            return callback(err);
+        }
+        return callback(null, gecko);
     });
 };
 
@@ -114,14 +127,28 @@ exports.addGecko = function (gData, callback) {
             //console.log("Error occured. Unable to add new gecko to DB:");
             //console.log(err);
             callback(err);
-        } else {
-            //console.log("Gecko successfully added to DB:");
-            //console.log(gecko);
-            callback(err);
+            return;
         }
+        callback(err, gecko);
     });
 };
 
 exports.removeGecko = function (id, callback) {
-    // remove gecko method will be here
+    Gecko.findByIdAndRemove(id, function(err, removedGecko) {
+        if (err){
+            //console.log("Error occured. Unable to delete gecko:");
+            //console.log(err);
+            callback(err);
+            return;
+        }
+        //console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
+        callback(null, removedGecko._id);
+    });
+};
+
+exports.dropCollection = function(callback){
+    Gecko.remove({}, function(err) {
+        console.log('Collection removed.');
+        callback(err);
+    });
 };

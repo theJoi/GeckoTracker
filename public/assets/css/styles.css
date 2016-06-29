@@ -28,7 +28,7 @@
 /* Float all column classes */
 [class*="col-"] {
   float: left;
-  padding-right: 20px;
+  padding-right: 10px;
 }
 /* column 1/4 width of parent */
 .col-1-2 {
@@ -46,6 +46,22 @@
 .col-1-4 {
   width: 25%;
 }
+/* column 1/5 width of parent */
+.col-1-5 {
+  width: 20%;
+}
+/* column 1/6 width of parent */
+.col-1-6 {
+  width: 16%;
+}
+/* column 1/12 width of parent */
+.col-1-12 {
+  width: 9%;
+}
+/* align right */
+.right {
+  text-align: right;
+}
 /* Colors */
 /* light rose color for female geckos */
 /* light blue color for male geckos */
@@ -54,6 +70,12 @@ body {
   background-repeat: repeat;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
+}
+i {
+  padding: 5px;
+}
+a {
+  text-decoration: none;
 }
 .header {
   background: #222;
@@ -81,8 +103,8 @@ body {
 }
 .gecko-card {
   border: solid 1px grey;
-  margin: 5px;
   padding: 5px;
+  margin: 5px;
   background: rgba(255, 255, 255, 0.9);
 }
 .female {

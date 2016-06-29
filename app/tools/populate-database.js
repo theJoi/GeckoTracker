@@ -66,11 +66,17 @@ exports.propDat = function (callback) {
         location: "incubator #2"
 }];
 
-    newGeckos.forEach(function (gecko) {
-        // console.log(gecko);
+     // Add geckos to database
+     newGeckos.forEach(function (gecko) {
         g.addGecko(gecko, function () {});
     });
     console.log('Databse population done.');
 };
 
-//g.init(null, exports.propDat);
+
+// Empty collection first then run function to add geckos
+g.init(null, function () {
+     g.dropCollection(function () {
+         exports.propDat(function () {});
+     });
+});

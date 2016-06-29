@@ -1,105 +1,44 @@
+
+<!-------------------------------------------------------------------------
+| public/index.html
+|--------------------------------------------------------------------------
+| Base html file handles loading in all the libraries and Angular elements.
+|
+| Created June 2016 by Joi W.
+|------------------------------------------------------------------------->
+
 <html ng-app='geckoTracker'>
 
 <head>
+    <base href="/">
     <title>Gecko Tracker</title>
+
+    <!-- CSS -->
     <link href="assets/css/styles.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/grid.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/ngDialog.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- JS -->
     <script src="assets/libs/angular.min.js"></script>
+    <script src="assets/libs/angular-route.min.js"></script>
+    <script src="assets/libs/ngDialog.min.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
     <script src="app.js"></script>
+    <script src="route.js"></script>
+    <script src="views/GeckoList/GeckoListController.js"></script>
+    <script src="views/AddGecko/AddGeckoController.js"></script>
+    <script src="views/GeckoDetails/GeckoDetailsController.js"></script>
 </head>
 
-<body ng-controller='GeckoListController'>
+<body >
     <div class='header'>
         <div class='title'>Gecko<span class='bold'>Tracker</span></div>
     </div>
 
-    <div class='navigation'>
-        <div class='location'>Dashboard</div>
-    </div>
 
-    <!-- CONTAINER FOR LIST OF GECKOS -->
-    <div class='content'>
-        <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
-            <div class="col-1-4">
-                <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
-                <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
-                <strong>{{gecko.name}}</strong>
-            </div>
-            <div class="col-1-4">
-                Morph: {{gecko.morph}}
-            </div>
-            <div class="col-1-4">
-                Location: {{gecko.location}}
-            </div>
-            <div class="col-1-4">
-                Status: {{gecko.status}}
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <hr>
-    <br>
-
-    <!-- ADD GECKO FORM -->
-    <div ng-controller='AddGeckoController'>
-
-        <form name="addGeckoForm" id="form">
-            <h1>Add Gecko Form</h1>
-            <p style="color: red;">{{validationMsg}}</p>
-            <div class="grid">
-                <div class="form-element">
-                    <label>Gecko's Name</label>
-                    <input type="text" placeholder="name of gecko" ng-model="form.name">
-                </div>
-                <div class="form-element">
-                    <label>MORPH tYPE</label>
-                    <input type="text" placeholder="morph" ng-model="form.morph">
-                </div>
-                <div class="form-element">
-                    <label>Weight</label>
-                    <input type="number" placeholder="weight in grams" ng-model="form.weight">
-                </div>
-                <div class="form-element">
-                    <label>Date of Birth</label>
-                    <input type="date" placeholder="birthdate" ng-model="form.birthDate">
-                </div>
-                <div class="form-element">
-                    <label>date of Purchase</label>
-                    <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
-                </div>
-                <div class="form-element">
-                    <label>ID</label>
-                    <input type="text" placeholder="unique ID number" ng-model="form.uniqueID">
-                </div>
-                <div class="form-element">
-                    <label>Location</label>
-                    <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
-                </div>
-                <div class="form-element">
-                    <label>Sex</label>
-                    <select ng-model="form.sex">
-                        <option value=male>Male</option>
-                        <option value="female">Female</option>
-                        <option value="unknown" selected>Unknown</option>
-                    </select>
-                </div>
-                <div class="form-element">
-                    <label>Status</label>
-                    <select ng-model="form.status">
-                        <option value="unknown" selected>Unknown</option>
-                        <option value="normal">Normal</option>
-                        <option value="gravid">Gravid</option>
-                        <option value="egg">Egg</option>
-                        <option value="sold">Sold</option>
-                        <option value="dead">Dead</option>
-                    </select>
-                </div>
-            </div>
-            <button ng-click="submitForm()">Add Gecko</button>
-        </form>
-    </div>
-</body>
-
+<!-- DYNAMIC ANGULAR CONTENT -->
+    <div ng-view></div>
+  </body>
 </html>
