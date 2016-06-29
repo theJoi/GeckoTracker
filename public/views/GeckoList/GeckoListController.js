@@ -9,7 +9,7 @@
 | Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
-angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http) {
+angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http, toastr) {
     $scope.geckos = [];
     $scope.isLoaded = false;  // use to trigger loading spinner
     $scope.statusMsg = "Welcome to Gecko Tracker";
@@ -66,4 +66,6 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
             console.log("boo boo happened.");
         });
     };
+    
+//    toastr.success("Gecko successfully added.", { timeOut: 1000 });
 });

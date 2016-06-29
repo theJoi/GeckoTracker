@@ -79,8 +79,11 @@ exports.init = function (db, callback) {
         db = "mongodb://localhost/geckotracker";
     }
     mongoose.connect(db);
-    console.log("Database initilized.");
-    callback(null);
+    db.on('error', function(err) { callback(err); });
+    db.once('open', function() {
+        console.log("Database initilized.");
+        callback(null);
+    });
 };
 
 

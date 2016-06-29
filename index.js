@@ -131,6 +131,11 @@ app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
 });
 
+app.get('/node_modules/*', function(request, response) {
+    console.log(request.path);
+    response.sendFile(__dirname + request.path);
+});
+
 // ROOT ROUTE & CATCH-ALL ==================================================
 app.get('*', function(request, response) {
 	response.sendFile(__dirname + '/public/index.htm');
