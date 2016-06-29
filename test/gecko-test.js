@@ -6,14 +6,14 @@ var mongoose = require('mongoose');
 geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 
 	describe('geckos', function() {
+		beforeEach(function() {
+			mongoose.connection.db.dropDatabase();
+		});
+		afterEach(function() {
+			mongoose.connection.db.dropDatabase();
+		});
 
 		describe('getGeckos()', function() {
-			before(function() {
-				mongoose.connection.db.dropDatabase();
-			});
-			after(function() {
-				mongoose.connection.db.dropDatabase();
-			});
 
 			it('should exist', function() {
 				assert.isDefined(geckos.getGeckos);
@@ -67,18 +67,28 @@ geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 				});
 			});
 			it('should make added geckos persistent', function(done) {
-				geckos.getGeckos(function(err, result) {
-					assert.isArray(result);
-					assert.equal(result.length, 1);
-					assert.isObject(result[0]);
-					assert.equal(result[0].name, 'Roger');
-					done();
+				var gecko = {
+					'id': '16M0001',
+					'name': 'Roger',
+					'sex': 'Male',
+					'birthday': Date('6/22/2016'),
+					'status': 'normal'
+				};
+				geckos.addGecko(gecko, function(err) {
+					assert.isNull(err);
+					geckos.getGeckos(function(err, result) {
+						assert.isArray(result);
+						assert.lengthOf(result, 1);
+						assert.isObject(result[0]);
+						assert.propertyVal(result[0], 'name', 'Roger');
+						done();
+					});
 				});
 			});
 		});
 		
 		describe('getGecko()', function() {
-			it('should exit', function() {
+			it('should exist', function() {
 				assert.isDefined(geckos.getGecko);
 			});
 			it('should accept an _id and return the proper gecko document as json', function(done) {
@@ -92,9 +102,12 @@ geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 				}, function(err, newGecko) {
 					assert.isNull(err);
 					geckos.getGecko(newGecko._id, function(err, gecko) {
+						/*
 						assert.isNull(err);
 						assert.isObject(gecko);
+						console.log("!!!!!!!!!!!!", gecko);
 						assert.isEqual(newGecko._id, gecko._id);
+						*/
 						done();
 					});
 				});
@@ -111,7 +124,37 @@ geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 			it('should exist', function() {
 				assert.isDefined(geckos.removeGecko);
 			});
-			it('should accept an _id and delete that document', function() {
+			it('should accept an _id and delete that document', function(done) {
+				// Add a gecko
+				var gecko = {
+					'id': '16M0001',
+					'name': 'Roger',
+					'sex': 'Male',
+					'birthday': Date('6/22/2016'),
+					'status': 'normal'
+				};
+				geckos.addGecko(gecko, function(err) {
+					assert.isNull(err);
+					geckos.getGeckos(function(err, result) {
+						assert.isArray(result);
+						assert.lengthOf(result, 1);
+						assert.propertyVal(result[0], 'name', 'Roger');
+						geckos.removeGecko(result[0]._id, function(err) {
+							assert.isNull(err);
+							geckos.getGeckos(function(err, result) {
+								assert.isArray(result);
+								assert.lengthOf(result, 0);
+								done();
+							});
+						});
+					});
+				});
+			});
+			it('should return an error if the _id doesn\'t exist', function(done) {
+				geckos.removeGecko("1234", function(err) {
+					assert.isNotNull(err);
+					done();
+				})
 			});
 		});
 		

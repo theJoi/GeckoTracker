@@ -102,8 +102,8 @@ exports.getGeckos = function (callback) {
 exports.getGecko = function (id ,callback) {
     Gecko.find({_id: id}, function (err, gecko) {
         if (err) {
-            console.log("Unable to retrieve gecko from database:");
-            console.log(err);
+            //console.log("Unable to retrieve gecko from database:");
+            //console.log(err);
             return callback(err);
         }
         return callback(null, gecko);
@@ -124,24 +124,24 @@ exports.addGecko = function (gData, callback) {
     }
     gecko.save(function (err, gecko) {
         if (err) {
-            console.log("Error occured. Unable to add new gecko to DB:");
-            console.log(err);
+            //console.log("Error occured. Unable to add new gecko to DB:");
+            //console.log(err);
             callback(err);
             return;
         }
-        callback(err);
+        callback(err, gecko);
     });
 };
 
 exports.removeGecko = function (id, callback) {
     Gecko.findByIdAndRemove(id, function(err, removedGecko) {
         if (err){
-            console.log("Error occured. Unable to delete gecko:");
-            console.log(err);
+            //console.log("Error occured. Unable to delete gecko:");
+            //console.log(err);
             callback(err);
             return;
         }
-         console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
+        //console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
         callback(null, removedGecko._id);
     });
 };
