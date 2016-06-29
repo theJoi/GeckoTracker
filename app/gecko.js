@@ -99,7 +99,7 @@ exports.getGeckos = function (callback) {
 
 // GetGecko FUNCTION  ===========================================================
 // Returns gecko by ID
-exports.getGeckos = function (id ,callback) {
+exports.getGecko = function (id ,callback) {
     Gecko.find({_id: id}, function (err, gecko) {
         if (err) {
             console.log("Unable to retrieve gecko from database:");
@@ -127,6 +127,7 @@ exports.addGecko = function (gData, callback) {
             console.log("Error occured. Unable to add new gecko to DB:");
             console.log(err);
             callback(err);
+            return;
         }
         callback(err);
     });
@@ -138,9 +139,10 @@ exports.removeGecko = function (id, callback) {
             console.log("Error occured. Unable to delete gecko:");
             console.log(err);
             callback(err);
+            return;
         }
          console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
-        callback(removedGecko._id);
+        callback(null, removedGecko._id);
     });
 };
 

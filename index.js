@@ -24,15 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-// ROOT ROUTE =============================================================
-app.get('/', function(request, response) {
-	response.sendFile(__dirname + '/public/index.htm');
-});
+
 
 // GECKOS ROUTES ==========================================================
 
 // INDEX - list all geckos
-app.get('/geckos', function(request, response) {
+app.get('/api/geckos', function(request, response) {
     geckos.getGeckos(function(err, result) {
 		if(err) {
 			response.json({'error': 'Problem retrieving geckos'});
@@ -44,7 +41,7 @@ app.get('/geckos', function(request, response) {
 
 
 // CREATE - Add new gecko to DB
-app.post('/geckos', function(request, response) {
+app.post('/api/geckos', function(request, response) {
     var gData = request.body;
     geckos.addGecko(gData, function(err, result) {
 		if(err){
@@ -56,67 +53,76 @@ app.post('/geckos', function(request, response) {
 });
 
 // SHOW - detailed gecko information
-app.get('/geckos/:id', function(request, response) {
-	// TODO complete gecko show route
+app.get('/api/geckos/:id', function(request, response) {
+    var id = request.params.id;
+    geckos.getGecko(id, function(err, result) {
+    if(err) {
+        response.json({'error': 'Problem retrieving gecko'});
+        return;
+    }
+    response.json({'geckoDetail':result});
+	});
 });
 
 // EDIT - Form edit information for a gecko
-app.get('/geckos/:id/edit', function(request, response) {
+app.get('/api/geckos/:id/edit', function(request, response) {
 	// TODO complete gecko edit route
 });
 
 // UPDATE - Update gecko information
-app.put('/geckos', function(request, response) {
+app.put('/api/geckos', function(request, response) {
 	// TODO complete gecko update route
 });
 
 // DESTROY - delete gecko record
-app.delete('/geckos/:id', function(request, response) {
+app.delete('/api/geckos/:id', function(request, response) {
     var id = request.params.id;
     console.log("id = " + id);
     geckos.removeGecko(id, function(err, result) {
 		if(err){
 			console.log("deleteGecko method failed.");
-            return(err);
+            console.log(err);
+            response.json({error: err});
+            return;
         }
-        return(result);
+        response.json({_id: result});
      });
 });
 
 // ROUTES FOR DATED EVENTS ============================================
 
 // INDEX - list all events
-app.get('/events', function(request, response) {
+app.get('/api/events', function(request, response) {
 	// TODO complete event index route
 });
 
 // NEW - Form to add new event
-app.get('/events/new', function(request, response) {
+app.get('/api/events/new', function(request, response) {
 	// TODO complete event new route
 });
 
 // CREATE - Add new event to DB
-app.post('/events', function(request, response) {
+app.post('/api/events', function(request, response) {
 	// TODO complete event create route
 });
 
 // SHOW - detailed event information - MIGHT NOT BE NECESSARY
-app.get('/events/:id', function(request, response) {
+app.get('/api/events/:id', function(request, response) {
 	// TODO complete event show route
 });
 
 // EDIT - Form edit information for a event
-app.get('/events/:id/edit', function(request, response) {
+app.get('/api/events/:id/edit', function(request, response) {
 	// TODO complete event edit route
 });
 
 // UPDATE - Update event information
-app.put('/events', function(request, response) {
+app.put('/api/events', function(request, response) {
 	// TODO complete event update route
 });
 
 // DESTROY - delete event record
-app.delete('/events/:id/edit', function(request, response) {
+app.delete('/api/events/:id/edit', function(request, response) {
     // TODO complete event destroy route
 });
 
@@ -125,6 +131,10 @@ app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
 });
 
+// ROOT ROUTE & CATCH-ALL ==================================================
+app.get('*', function(request, response) {
+	response.sendFile(__dirname + '/public/index.htm');
+});
 
 //  REGISTER ROUTES AND START SERVER  =====================================
 geckos.init(null, function() {

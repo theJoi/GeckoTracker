@@ -18,7 +18,7 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
     $scope.refreshGeckos = function () {
         $http({
             method: 'GET',
-            url: '/geckos'
+            url: '/api/geckos'
         }).then(function success(response) {
             if (response.data.error) {
                 console.log("Server side error! " + response.data.error);
@@ -42,23 +42,28 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
         console.log("delete gecko button clicked");
         $http({
             method: 'DELETE',
-            url: "/geckos/" + id
+            url: "/api/geckos/" + id
         }).then(function success(response) {
             if(response.data.error){
 			     console.log("Server side error");
 			     return;
             }
 		   // Find index of gecko to delete
+             console.log("looking for gecko with id " + id);
             for(var i = 0; i < $scope.geckos.length; i++){
+               console.log("index = " + i + " id = " + id);
+
                 if($scope.geckos[i]._id === id){
+                    console.log("found gecko to delete in array.");
                     $scope.geckos.splice(i, 1);
                     break;
                 }
             }
-            $scope.statusMsg = "The gecko named '" + $scope.form.name + "' has successfully been deleted.";
+            $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
             $scope.refreshGeckos();
         }, function error(response) {
             $scope.statusMsg = "Uh oh. Error occured, gecko not added. Please try again.";
+            console.log("boo boo happened.");
         });
     };
 });
