@@ -9,30 +9,47 @@
 | Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
-angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http, toastr) {
+angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http, toastr, geckoService) {
     $scope.geckos = [];
     $scope.isLoaded = false;  // use to trigger loading spinner
     $scope.statusMsg = "Welcome to Gecko Tracker";
 
+	//
+	// I replaced this...
+	//
     // Function to populate list of geckos
-    $scope.refreshGeckos = function () {
-        $http({
-            method: 'GET',
-            url: '/api/geckos'
-        }).then(function success(response) {
-            if (response.data.error) {
-                console.log("Server side error! " + response.data.error);
-                return;
-            }
-            $scope.geckos = response.data;
-            $scope.isLoaded = true;
-        }, function error(response) {
-            var msg = "Error occurred: unable to get list of geckos " + response;
-            console.log(msg);
-            $scope.statusMsg(msg);
-        });
-    };
-    $scope.refreshGeckos();
+    //$scope.refreshGeckos = function () {
+    //    $http({
+    //        method: 'GET',
+    //        url: '/api/geckos'
+    //    }).then(function success(response) {
+    //        if (response.data.error) {
+    //            console.log("Server side error! " + response.data.error);
+    //            return;
+    //        }
+    //        $scope.geckos = response.data;
+    //        $scope.isLoaded = true;
+    //    }, function error(response) {
+    //        var msg = "Error occurred: unable to get list of geckos " + response;
+    //        console.log(msg);
+    //        $scope.statusMsg(msg);
+    //    });
+    //};
+    //$scope.refreshGeckos();
+	
+	//
+	// ...with this
+	//
+	// Fetch our geckos
+	geckoService.getGeckos().then(function(geckos) {
+		// Update our controller's scope with the new gecko list
+		$scope.geckos = geckos;
+		// Throw up a toast to show we got geckos (just for demonstration purposes)
+		toastr.success("Retrieved gecko list!", "Success");
+		// $apply forces the famous "two-way binding" to update immediately - sometimes I've noticed
+		// that changing $scope properties through async methods can cause a delay between updates.
+		$scope.$apply();
+	});
 
     $scope.confirmDelete = function (id, name) {
         // well dialog box invocation will be
