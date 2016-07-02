@@ -1,41 +1,44 @@
+
+<!-------------------------------------------------------------------------
+| public/index.html
+|--------------------------------------------------------------------------
+| Base html file handles loading in all the libraries and Angular elements.
+|
+| Created June 2016 by Joi W.
+|------------------------------------------------------------------------->
+
 <html ng-app='geckoTracker'>
 
 <head>
+    <base href="/">
     <title>Gecko Tracker</title>
-    <link href="assets/css/styles.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/grid.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- CSS -->
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/grid.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/ngDialog.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- JS -->
     <script src="assets/libs/angular.min.js"></script>
+    <script src="assets/libs/angular-route.min.js"></script>
+    <script src="assets/libs/ngDialog.min.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
     <script src="app.js"></script>
+    <script src="route.js"></script>
+    <script src="views/GeckoList/GeckoListController.js"></script>
+    <script src="views/AddGecko/AddGeckoController.js"></script>
+    <script src="views/GeckoDetails/GeckoDetailsController.js"></script>
 </head>
 
-<body>
-    <div class='header' style='overflow: hidden; height: 56px;'>
-        <img src='assets/img/gecko_logo_small.png' style='float: left; width: 90px; margin-right: 10px;'></img>
+<body >
+    <div class='header'>
         <div class='title'>Gecko<span class='bold'>Tracker</span></div>
     </div>
 
-    <div class='navigation'>
-        <div class='location'>Dashboard</div>
-    </div>
 
-    <div class='content' ng-controller='GeckoListController'>
-        <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
-            <div class="col-1-4">
-                <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
-                <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
-                <strong>{{gecko.name}}</strong>
-            </div>
-            <div class="col-1-4">
-                Morph: {{gecko.morph}}
-            </div>
-            <div class="col-1-4">
-                Weight: {{gecko.weight}}
-            </div>
-            <div class="col-1-4">
-                Status: {{gecko.status}}
-            </div>
-        </div>
-    </div>
-</body>
+<!-- DYNAMIC ANGULAR CONTENT -->
+    <div ng-view></div>
+  </body>
 </html>
