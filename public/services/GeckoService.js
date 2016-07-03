@@ -1,3 +1,6 @@
+/*jshint globals: true, undef: true, browser: true, node: true*/
+/* globals angular, Promise, response */
+
 angular.module('geckoTracker')
 .factory('geckoService', function($http) {
 	// We store our list of geckos here so that we can refer to it from the functions
@@ -21,7 +24,7 @@ angular.module('geckoTracker')
 				if (response.data.error) {
 					console.log("Server side error! " + response.data.error);
 					// If there was an error, we want to reject() the promise
-					reject(reponse.data.error);
+					reject(response.data.error);
 				} else {
 					// Tricky way to empty an array. We want to empty the array without replacing it,
 					// since controllers will have a reference to the array OBJECT. If we replace it,
@@ -79,11 +82,11 @@ angular.module('geckoTracker')
 			});
 		},
 
-		removeGecko: function(_id) {
+		removeGecko: function(id) {
 			return new Promise(function(fulfill, reject) {
 				$http({
 					method: 'DELETE',
-					url: "/api/geckos/" + _id
+					url: "/api/geckos/" + id
 				}).then(function success(response) {
 					if(response.data.error){
 						reject(response.data.error);
