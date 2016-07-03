@@ -9,9 +9,9 @@
 | Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
-angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http, toastr, geckoService) {
+angular.module('geckoTracker').controller('GeckoListController', function ($scope, $http, ngDialog, toastr, geckoService) {
     $scope.geckos = [];
-    $scope.isLoaded = false;  // use to trigger loading spinner
+    $scope.isLoaded = false; // use to trigger loading spinner
     $scope.statusMsg = "Welcome to Gecko Tracker";
 
 	//
@@ -52,7 +52,9 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
 	});
 
     $scope.confirmDelete = function (id, name) {
-        // well dialog box invocation will be
+        if(window.confirm("Are you sure you want to delete the gecko named " + name + "?")){
+           $scope.deleteGecko(id, name);
+        }
     };
 
     $scope.deleteGecko = function (id, name) {
@@ -61,17 +63,13 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
             method: 'DELETE',
             url: "/api/geckos/" + id
         }).then(function success(response) {
-            if(response.data.error){
-			     console.log("Server side error");
-			     return;
+            if (response.data.error) {
+                console.log("Server side error");
+                return;
             }
-		   // Find index of gecko to delete
-             console.log("looking for gecko with id " + id);
-            for(var i = 0; i < $scope.geckos.length; i++){
-               console.log("index = " + i + " id = " + id);
-
-                if($scope.geckos[i]._id === id){
-                    console.log("found gecko to delete in array.");
+            // Find index of gecko to delete
+            for (var i = 0; i < $scope.geckos.length; i++) {
+                if ($scope.geckos[i]._id === id) {
                     $scope.geckos.splice(i, 1);
                     break;
                 }

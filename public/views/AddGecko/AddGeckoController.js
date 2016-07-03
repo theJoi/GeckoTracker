@@ -27,7 +27,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
     $scope.submitForm = function () {
         console.log("submit form called");
         if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
-            $scope.form = "not applicable";
+            $scope.form.location = "not applicable";
         }
         $http({
             method: 'POST',
@@ -37,7 +37,6 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
             $scope.geckos.push(response.data);
             $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
             $scope.refreshGeckos();
-            $scope.addGeckoForm.$setPristine();
         }, function error(response) {
             $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
         });
