@@ -5,6 +5,14 @@ var mongoose = require('mongoose');
 // Change the database
 geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 
+	var testGeckoProperties = {
+		'id': '16M0001',
+		'name': 'Roger',
+		'sex': 'Male',
+		'birthday': Date('6/22/2016'),
+		'status': 'normal'
+	};
+
 	describe('geckos', function() {
 		beforeEach(function() {
 			mongoose.connection.db.dropDatabase();
@@ -14,7 +22,6 @@ geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 		});
 
 		describe('getGeckos()', function() {
-
 			it('should exist', function() {
 				assert.isDefined(geckos.getGeckos);
 			});
@@ -162,11 +169,89 @@ geckos.init('mongodb://localhost/geckotracker_test', function(err) {
 			it('should exist', function() {
 				assert.isDefined(geckos.updateGecko);
 			});
+			it("should properly update a gecko\'s properties", function(done) {
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, updatedGecko) {
+						assert.isNull(err);
+						assert.propertyVal(updatedGecko, '_id', gecko._id)
+						assert.property(updatedGecko, 'status');
+						assert.propertyVal(updatedGecko, 'status', 'dead');
+						done();
+					});
+				});
+			});
+			it("should give an error if the gecko can't be found (and the return gecko should be null)", function(done) {
+				geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, gecko) {
+					assert.isNotNull(err);
+					assert.isNull(gecko);
+				});
+			});
+			it("should give an error if trying to update a property not defined the gecko data model", function(done) {
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.updateGecko(gecko._id, {foo: 'bar'}, function(err, updatedGecko) {
+						assert.isNotNull(err);
+						assert.isNull(updatedGecko);
+						done();
+					});
+				});
+			});
+		});
+
+		describe('getGeckoEvents()', function() {
+			it('should exist', function() {
+				assert.isDefined(geckos.addGeckoEvent);
+			});
+			it("should return an empty array if no events have been added", function(done) {
+				// Add Roger
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.getGeckoEvents(gecko._id, function(err, events) {
+						assert.isArray(events);
+						assert.lengthOf(events, 0);
+						done();
+					});
+				});
+			});
+			it("should return all events for the given gecko", function(done) {
+				// Add Roger
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.addGeckoEvent({type: 'weighed', value: 42}, function(err) {
+						geckos.getGeckoEvents(gecko._id, function(err, events) {
+							assert.isArray(events);
+							assert.lengthOf(events, 1);
+							assert.isObject(events[0]);
+							assert.propertyVal(events[0], 'type', 'weighed');
+							assert.propertyVal(events[0], 'value', 64);
+							done();
+						});
+					});
+				});
+			});
 		});
 
 		describe('addGeckoEvent()', function() {
 			it('should exist', function() {
 				assert.isDefined(geckos.addGeckoEvent);
+			});
+			it('should set the event date property to the current date if none is given', function(done) {
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.addGeckoEvent({type: 'weighed', value: 42}, function(err, event) {
+						assert.isObject(event);
+						assert.property(events, 'date');
+						done();
+					});
+				});
+			});
+			it("shouldn't set the event date property to the current date if one is given", function(done) {
+				geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+					geckos.addGeckoEvent({date: new Date('3/5/2014'), type: 'weighed', value: 42}, function(err, event) {
+						assert.isObject(event);
+						assert.property(events, 'date');
+						assert.equal(events.date.month, 3);
+						assert.equal(events.date.year, 2014);
+						assert.equal(events.date.day, 5);
+						done();
+					});
+				});
 			});
 		});
 

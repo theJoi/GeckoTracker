@@ -45,7 +45,7 @@ angular.module('geckoTracker').controller('GeckoListController', function ($scop
 		// Update our controller's scope with the new gecko list
 		$scope.geckos = geckos;
 		// Throw up a toast to show we got geckos (just for demonstration purposes)
-		toastr.success("Retrieved gecko list!", "Success");
+		//toastr.success("Retrieved gecko list!", "Success");
 		// $apply forces the famous "two-way binding" to update immediately - sometimes I've noticed
 		// that changing $scope properties through async methods can cause a delay between updates.
 		$scope.$apply();
