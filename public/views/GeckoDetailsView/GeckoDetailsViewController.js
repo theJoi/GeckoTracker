@@ -1,7 +1,7 @@
 /*jshint globals: true, undef: true, browser: true, node: true*/
 /* globals angular */
 
-function GeckoDetail($scope, $http, $routeParams){
+angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams) {
     $scope.geckoDetail = {};
     $scope.statusMsg = "Say hi to...";
     var id = $routeParams.id;
@@ -22,9 +22,5 @@ function GeckoDetail($scope, $http, $routeParams){
         console.log(msg);
         $scope.statusMsg(msg);
     });
-    }
+});
 
-
-
-
-angular.module('geckoTracker').controller('GeckoDetailController', GeckoDetail);

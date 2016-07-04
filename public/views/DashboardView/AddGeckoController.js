@@ -36,7 +36,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         }).then(function success(response) {
             $scope.geckos.push(response.data);
             $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
-            $scope.refreshGeckos();
+            //$scope.refreshGeckos();
         }, function error(response) {
             $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
         });

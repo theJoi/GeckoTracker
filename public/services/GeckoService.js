@@ -2,7 +2,7 @@
 /* globals angular, Promise, response */
 
 angular.module('geckoTracker')
-.factory('geckoService', function($http) {
+.factory('geckoService', function($http, $log) {
 	// We store our list of geckos here so that we can refer to it from the functions
 	// in the object we return. Because of function scope, those functions can always
 	// reference it.
@@ -22,7 +22,7 @@ angular.module('geckoTracker')
 				// We've got a response
 				// Check it for an error
 				if (response.data.error) {
-					console.log("Server side error! " + response.data.error);
+					$log.error("Server side error! " + response.data.error);
 					// If there was an error, we want to reject() the promise
 					reject(response.data.error);
 				} else {
