@@ -26,6 +26,7 @@
     "body-parser": "^1.15.1",
     "chai": ">=3.5",
     "express": ">1.0",
+    "moment": "^2.14.1",
     "mongoose": "^4.5.0",
     "ng-dialog": "^0.6.2",
     "npm-watch": ">=0.0"

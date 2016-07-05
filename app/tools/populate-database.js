@@ -23,47 +23,54 @@ exports.propDat = function (callback) {
         status: "normal",
         sex: "unknown",
         morph: "mystery morph",
-        location: "bin #2"
+        location: "bin #2",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Wee Baby",
         status: "egg",
         sex: "unknown",
         morph: "unknown",
-        location: "bin #3"
+        location: "bin #3",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Locke",
         sex: 'male',
         status: 'normal',
         morph: 'Lavender Jungle Bandit',
         birthdate: new Date('5/1/2015'),
-        location: "bin #A-1"
+        location: "bin #A-1",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Sabetha",
         sex: 'female',
         status: 'gravid',
         morph: 'Lavender Jungle Bandit',
         birthdate: new Date('5/1/2015'),
-        location: "bin #A-2"
+        location: "bin #A-2",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Eggbert",
         sex: 'unknown',
         status: 'egg',
         morph: 'unknown',
-        location: "incubator #1"
+        location: "incubator #1",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Locke Jr.",
         sex: 'male',
         status: 'egg',
         morph: 'Lavender Jungle Bandit',
         birthdate: 'unknown',
-        location: "incubator #1"
+        location: "incubator #1",
+        dateLaid: new Date("12/15/2015")
   }, {
         name: "Mystery Girl",
         sex: 'female',
         status: 'normal',
         morph: 'unknown',
         birthdate: new Date('6/21/2016'),
-        location: "incubator #2"
+        location: "incubator #2",
+        dateLaid: new Date("12/15/2015")
 }];
 
      // Add geckos to database

@@ -1,0 +1,24 @@
+<div class='egg-table '>
+    <table class='material-table'>
+        <tr>
+            <th>ID</th>
+            <th>Date Laid</th>
+            <th>Mother</th>
+            <th>Father</th>
+            <th>Morph</th>
+            <th>Location</th>
+            <th>Expected to Hatch</th>
+            <th>Sex (Incubated)</th>
+        </tr>
+        <tr ng-repeat='gecko in geckos'>
+            <td>{{gecko.userId}}AA</td>
+            <td>{{gecko.dateLaid}}</td>
+            <td>{{gecko.motherName}}</td>
+            <td>{{gecko.fatherName}}</td>
+            <td>{{gecko.morph}}</td>
+            <td>{{gecko.location}}</td>
+            <td>{{estimateExpectedHatchDate(gecko)}}</td>
+            <td>{{gecko.sex}}</td>
+        </tr>
+    </table>
+</div>

@@ -139,6 +139,17 @@ angular.module('geckoTracker')
 		},
 		
 		getGeckoEvents: function(_id) {
+			// STUB: This is just for testing
+			return new Promise(function(fulfill, reject) {
+				fulfill([
+					{
+						date: new Date("6/15/2015"),
+						type: "hatched",
+						info: "Hatched",
+						hatchedInfo: {}
+					}
+				]);
+			});
 		},
 		
 		createGeckoEvent: function(_id, event) {
