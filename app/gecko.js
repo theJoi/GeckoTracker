@@ -25,7 +25,8 @@ var mongoose = require("mongoose");
 // GECKO SCHEMA  ===========================================================
 var geckoSchema = new mongoose.Schema({
     name        : String, // Name of gecko
-    uniqueID    : String, // External ID number
+    userId      : String, // External ID number
+    stage       : String, // {egg, hatchling, or adult}
     status      : String, // Options are {normal/gravid/egg/sold/dead}
     sex         : String, // Female/ Male/ Unknown
     morph       : String, // Gecko's morph type
