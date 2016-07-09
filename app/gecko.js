@@ -136,3 +136,40 @@ exports.dropCollection = function(callback){
 };
 
 // EVENT FUNCTIONS  =============================================================
+
+// getAllEvents FUNCTION: Returns all events from database
+exports.getAllEvents = function (callback) {
+    Event.find({}, function (err, events) {
+        if (err) {
+            console.log("Unable to retrieve list of events from database:");
+            console.log(err);
+            return callback(err);
+        }
+        return callback(null, events);
+    });
+};
+
+// getEvents function: Return events for particular gecko by ID
+exports.getEvents = function (id ,callback) {
+    Event.find({_id: id}, function (err, events) {
+        if (err) {
+            console.log("Unable to retrieve events from database:");
+            console.log(err);
+            return callback(err);
+        }
+        return callback(null, events);
+    });
+};
+
+// removeEvent function: Delete event by its id
+exports.removeEvent = function (id, callback) {
+    Event.findByIdAndRemove(id, function(err, removedEvent) {
+        if (err){
+            console.log("Error occured. Unable to delete event:");
+            console.log(err);
+            callback(err);
+            return;
+        }
+        callback(null, removedEvent._id);
+    });
+};
