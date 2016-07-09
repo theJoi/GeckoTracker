@@ -14,7 +14,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
     $scope.validationMsg = "";
     $scope.form = {
         name: "",
-        uniqueID: "",
+        userID: "",
         status: "unknown",
         sex: "unknown",
         morph: "",
