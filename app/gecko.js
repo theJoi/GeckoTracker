@@ -54,7 +54,7 @@ var geckoSchema = new Schema({
     });
 
 var eventSchema = new Schema({
-    gecko_id    :
+    geckoId    :
     {
         type    :Schema.Types.ObjectId,
         required: true
@@ -137,6 +137,10 @@ exports.removeGecko = function (id, callback) {
     });
 };
 
+exports.updateGecko = function(id, props, callback) {
+    
+};
+
 // dropCollection function: Removes all geckos from collection
 exports.dropCollection = function(callback){
     Gecko.remove({}, function(err) {
@@ -160,7 +164,7 @@ exports.getAllEvents = function (callback) {
 };
 
 // getEvents function: Return events for particular gecko by ID
-exports.getEvents = function (id ,callback) {
+exports.getEvents = function(id ,callback) {
     Event.find({_id: id}, function (err, events) {
         if (err) {
             console.log("Unable to retrieve events from database:");
