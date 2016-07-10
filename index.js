@@ -51,7 +51,7 @@ app.post('/api/geckos', function(request, response) {
 });
 
 // SHOW - detailed gecko information
-app.get('/api/geckos/:id', function(request, response) {
+app.get('/api/geckos/:id/events', function(request, response) {
     var id = request.params.id;
     geckos.getGecko(id, function(err, result) {
     if(err) {

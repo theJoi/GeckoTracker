@@ -1,3 +1,15 @@
+/*jshint globals: true, undef: true, browser: true, node: true*/
+/* globals angular */
+/*
+|--------------------------------------------------------------------------
+| public/components/EventsTable/EventsTableDirective.js
+|--------------------------------------------------------------------------
+| Angular controller for form to add new gecko.
+|
+| Created June 2016 by Joi W.
+|__________________________________________________________________________
+*/
+
 angular.module('geckoTracker')
 .directive('eventsTable', function() {
 	return {
