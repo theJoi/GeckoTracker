@@ -155,8 +155,7 @@ angular.module('geckoTracker')
                 });
             },
 
-            getGeckoEvents: function (id) {
-
+            getGeckoEvents: function (geckoId) {
                 return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'GET',
@@ -173,11 +172,57 @@ angular.module('geckoTracker')
                 });
             },
 
+            createGeckoEvent: function (geckoId, properties) {
+                return new Promise(function(fulfill, reject) {
+                    $http({
+                        method: 'POST',
+                        url: "/api/geckos/" + geckoId + "/events",
+                        data: properties
+                    }).then(function success(response) {
+                        if (response.data.error) {
+                            reject(response.data.error);
+                        } else {
+                            fulfill(response.data);
+                        }
+                    }, function error(response) {
+                        reject("Failed to contact server");
+                    });
+                });
+            },
 
-            createGeckoEvent: function (_id, event) {},
+            deleteGeckoEvent: function (eventId) {
+                return new Promise(function(fulfill, reject) {
+                    $http({
+                        method: 'DELETE',
+                        url: "/api/events/" + eventId
+                    }).then(function success(response) {
+                        if (response.data.error) {
+                            reject(response.data.error);
+                        } else {
+                            fulfill(response.data);
+                        }
+                    }, function error(response) {
+                        reject("Failed to contact server");
+                    });
+                });
+            },
 
-            deleteGeckoEvent: function (_id, event) {},
-
-            updateGeckoEvent: function (_id, event) {}
+            updateGeckoEvent: function (eventId, properties) {
+                return new Promise(function(fulfill, reject) {
+                    $http({
+                        method: 'PUT',
+                        url: "/api/events/" + eventId,
+                        data: properties
+                    }).then(function success(response) {
+                        if (response.data.error) {
+                            reject(response.data.error);
+                        } else {
+                            fulfill(response.data);
+                        }
+                    }, function error(response) {
+                        reject("Failed to contact server");
+                    });
+                });
+            }
         };
     });
