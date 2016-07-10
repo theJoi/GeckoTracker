@@ -24,8 +24,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-
-
 // GECKOS ROUTES ==========================================================
 
 // INDEX - list all geckos
@@ -93,22 +91,38 @@ app.delete('/api/geckos/:id', function(request, response) {
 
 // INDEX - list all events
 app.get('/api/events', function(request, response) {
-	// TODO complete event index route
+    geckos.getAllEvents(function(err, result) {
+		if(err) {
+			response.json({'error': 'Problem retrieving events.'});
+			return;
+		}
+		response.json(result);
+	});
 });
 
-// NEW - Form to add new event
-app.get('/api/events/new', function(request, response) {
-	// TODO complete event new route
-});
-
-// CREATE - Add new event to DB
+// NEW - Add new event
 app.post('/api/events', function(request, response) {
-	// TODO complete event create route
+    var gData = request.body;
+    geckos.addEvent(gData, function(err, result) {
+		if(err){
+			console.log("addGecko method failed.");
+            return;
+        }
+        response.json(gData);
+     });
 });
 
-// SHOW - detailed event information - MIGHT NOT BE NECESSARY
-app.get('/api/events/:id', function(request, response) {
-	// TODO complete event show route
+
+// SHOW - all events for particular gecko
+app.get('/api/geckos/:id/events', function(request, response) {
+    var id = request.params.id;
+    geckos.getEvent(id, function(err, result) {
+    if(err) {
+        response.json({'error': 'Problem retrieving events'});
+        return;
+    }
+    response.json({'geckoDetail':result});
+	});
 });
 
 // EDIT - Form edit information for a event
@@ -130,7 +144,9 @@ app.delete('/api/events/:id/edit', function(request, response) {
 app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
 });
+// ROOT ROUTE & CATCH-AL
 
+// ROUTE TO NODE MODULES
 app.get('/node_modules/*', function(request, response) {
     console.log(request.path);
     response.sendFile(__dirname + request.path);

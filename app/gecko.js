@@ -54,9 +54,21 @@ var geckoSchema = new Schema({
     });
 
 var eventSchema = new Schema({
-    gecko_id    : Schema.Types.ObjectId,
-    type        : String,
-    date        : Date,
+    gecko_id    :
+    {
+        type    :Schema.Types.ObjectId,
+        required: true
+    },
+    type        :
+    {
+        type    :String,
+        required: true
+    },
+    date        :
+    {
+        type    :Date,
+        required: true
+    },
     info        : Schema.Types.Mixed,
     warning     : Date,
     notes       : String
@@ -171,5 +183,25 @@ exports.removeEvent = function (id, callback) {
             return;
         }
         callback(null, removedEvent._id);
+    });
+};
+
+// addEvent function: Add new event to database
+exports.addEvent = function (eventData, callback) {
+    var event;
+    try {
+        event = new Event(eventData);
+    } catch (e) {
+        callback("Invalid event properties");
+        return;
+    }
+    event.save(function (err, newEvent) {
+        if (err) {
+            console.log("Error occured. Unable to add event o to DB:");
+            console.log(err);
+            callback(err);
+            return;
+        }
+        callback(err, newEvent);
     });
 };
