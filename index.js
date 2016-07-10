@@ -58,7 +58,7 @@ app.get('/api/geckos/:id', function(request, response) {
         response.json({'error': 'Problem retrieving gecko'});
         return;
     }
-    response.json({'geckoDetail':result});
+    response.json(result);
 	});
 });
 
