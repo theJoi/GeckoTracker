@@ -151,6 +151,16 @@ exports.dropCollection = function(callback){
 
 // EVENT FUNCTIONS  =============================================================
 
+// TODO: You can combine the next two functions as one, and I think it would be
+// good to do so. You can change the prototype to
+//   function(options, callback)
+// with options optionally containing a 'geckoId' property. If the options argument
+// is defined and the 'geckoId' property is provided, then only return events for
+// that gecko. Otherwise, return all events for all geckos.
+//
+// We can expand this in the future to support filtering by adding more supported
+// properties to the options argument.
+
 // getAllEvents FUNCTION: Returns all events from database
 exports.getAllEvents = function (callback) {
     Event.find({}, function (err, events) {
