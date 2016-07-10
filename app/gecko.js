@@ -95,13 +95,11 @@ exports.getGeckos = function (callback) {
 
 // GetGecko function: Returns gecko by ID
 exports.getGecko = function (id ,callback) {
-    Gecko.find({_id: id}, function (err, gecko) {
+    Gecko.findById(id, function (err, gecko) {
         if (err) {
-            //console.log("Unable to retrieve gecko from database:");
-            //console.log(err);
-            return callback(err);
+            callback(err);
         }
-        return callback(null, gecko);
+        callback(null, gecko);
     });
 };
 

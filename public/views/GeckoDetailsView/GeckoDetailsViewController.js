@@ -8,7 +8,8 @@ angular.module('geckoTracker').controller('GeckoDetailsViewController', function
     console.log("id: " + id);
 
     geckoService.getGeckoDetails(id).then(function(details) {
-        $scope.details = details;
+        $scope.geckoDetail = details;
+        $scope.$apply();
     });
 /*
     $http({

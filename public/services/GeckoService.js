@@ -63,6 +63,23 @@ angular.module('geckoTracker')
             // NOTE: Only the service itself (this thing) probably needs to call this directly (through getGeckos).
             fetchGeckos: fetchGeckos,
 
+            getGeckoDetails: function(id) {
+                return new Promise(function (fulfill, reject) {
+                    $http({
+                        method: 'GET',
+                        url: '/api/geckos/' + id
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            reject(response.data.error);
+                        else {
+                            fulfill(response.data);
+                        }
+                    }, function error(response) {
+                        reject("Failed to contact server");
+                    });
+                });
+            },
+            
             addGecko: function (properties) {
                 return new Promise(function (fulfill, reject) {
                     $http({
