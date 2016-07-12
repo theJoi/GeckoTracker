@@ -116,7 +116,7 @@ app.post('/api/events', function(request, response) {
 // SHOW - all events for particular gecko
 app.get('/api/geckos/:id/events', function(request, response) {
     var id = request.params.id;
-    geckos.getEvent(id, function(err, result) {
+    geckos.getEvents(id, function(err, result) {
     if(err) {
         response.json({'error': 'Problem retrieving events'});
         return;
