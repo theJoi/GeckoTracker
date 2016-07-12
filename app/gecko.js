@@ -141,8 +141,15 @@ exports.removeGecko = function (id, callback) {
 };
 
 exports.updateGecko = function(id, props, callback) {
+    // FIXME
+    // http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
+    // You want to set some options for this call:
+    //   new: true              so we receive the updated gecko document back, instead of the original
+    //   runValidators: true    so it checks the validity of the new properties against the schema
     Gecko.findByIdAndUpdate(id, props, function(err, updatedGecko){
         if(err){
+            // FIXME
+            // Please comment these console logs out, it's muddying up the test output
             console.log("Error occured. Unable to update gecko:");
             console.log(err);
             callback(err, null);
@@ -186,6 +193,11 @@ exports.getAllEvents = function (callback) {
 
 // getEvents function: Return events for particular gecko by ID
 exports.getEvents = function(id ,callback) {
+    // FIXME
+    // Not sure what's going on here, it looks like it's just returning an empty array
+    // - maybe addEvent is broken?
+    // PS: Actually, we're looking up events by 'geckoId', not '_id'... we don't want
+    // to find one single event, but all the events for the gecko
     Event.find({_id: id}, function (err, events) {
         if (err) {
             console.log("Unable to retrieve events from database:");
@@ -211,6 +223,10 @@ exports.removeEvent = function (id, callback) {
 
 // addEvent function: Add new event to database
 exports.addEvent = function (eventData, callback) {
+    // FIXME
+    // If no 'date' property is defined in eventData, you should create one
+    // set to the current date ( new Date() ) and set it.
+    // FIXME
     var event;
     try {
         event = new Event(eventData);
@@ -228,3 +244,6 @@ exports.addEvent = function (eventData, callback) {
         callback(err, newEvent);
     });
 };
+
+// FIXME
+// updateEvent doesn't exist

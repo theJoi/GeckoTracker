@@ -186,13 +186,13 @@ describe('geckos', function() {
 			});
 		});
 		it("should give an error if the gecko can't be found (and the return gecko should be null)", function(done) {
-			geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, gecko) {
+			geckos.updateGecko("asdf", {status: 'dead'}, function(err, gecko) {
 				assert.isNotNull(err);
 				assert.isNull(gecko);
                 done();
 			});
 		});
-		it("should give an error if trying to update a property not defined the gecko data model", function(done) {
+		it("should give an error if trying to update a property not defined in the gecko data model", function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.updateGecko(gecko._id, {foo: 'bar'}, function(err, updatedGecko) {
 					assert.isNotNull(err);
@@ -219,7 +219,9 @@ describe('geckos', function() {
 		it("should return all events for the given gecko", function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', value: 42}, function(err) {
+					assert.isNull(err);
 					geckos.getEvents(gecko._id, function(err, events) {
+						assert.isNull(err);
 						assert.isArray(events);
 						assert.lengthOf(events, 1);
 						assert.isObject(events[0]);
@@ -238,7 +240,9 @@ describe('geckos', function() {
 		});
 		it('should set the event date property to the current date if none is given', function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
+				assert.isNull(err);
 				geckos.addEvent({geckoId: gecko._id, type: 'weighed', value: 42}, function(err, event) {
+					assert.isNull(err);
 					assert.isObject(event);
 					assert.property(events, 'date');
 					done();
@@ -248,11 +252,10 @@ describe('geckos', function() {
 		it("shouldn't set the event date property to the current date if one is given", function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.addEvent({geckoId: gecko._id, date: new Date('3/5/2014'), type: 'weighed', value: 42}, function(err, event) {
+					assert.isNull(err);
 					assert.isObject(event);
-					assert.property(events, 'date');
-					assert.equal(events.date.month, 3);
-					assert.equal(events.date.year, 2014);
-					assert.equal(events.date.day, 5);
+					assert.property(event, 'date');
+					assert.equal(event.date.toJSON().substring(0, 10), "2014-03-05");
 					done();
 				});
 			});
@@ -287,11 +290,12 @@ describe('geckos', function() {
 		});
 		it('should properly remove an event', function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
+				assert.isNull(err);
 				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', value: 42}, function(err, event) {
 					assert.isNull(err);
 					geckos.removeEvent(event._id, function(err) {
 						assert.isNull(err);
-						geckos.getGeckoEvents(gecko._id, function(err, events) {
+						geckos.getEvents(gecko._id, function(err, events) {
 							assert.isNull(err);
 							assert.isArray(events);
 							assert.lengthOf(events, 0);
@@ -299,6 +303,12 @@ describe('geckos', function() {
 						});
 					});
 				});
+			});
+		});
+		it('should return an error if the event does not exist', function(done) {
+			geckos.removeEvent("fdsa", function(err) {
+				assert.isNotNull(err);
+				done();
 			});
 		});
 	});
