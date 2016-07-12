@@ -30,7 +30,10 @@ exports.init = function (db, callback) {
 
 // SCHEMAS  ============++++===============================================
 var geckoSchema = new Schema({
-    name        : String, // Name of gecko
+    name        : {
+        type    :String,  // Name of gecko
+        required: true
+    },
     userId      : String, // External ID number
     stage       : String, // {egg, hatchling, or adult}
     status      : String, // Options are {normal/gravid/egg/sold/dead}
