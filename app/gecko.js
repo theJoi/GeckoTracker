@@ -141,7 +141,15 @@ exports.removeGecko = function (id, callback) {
 };
 
 exports.updateGecko = function(id, props, callback) {
-    
+    Gecko.findByIdAndUpdate(id, props, function(err, updatedGecko){
+        if(err){
+            console.log("Error occured. Unable to update gecko:");
+            console.log(err);
+            callback(err, null);
+            return;
+        }
+        callback(null, updatedGecko);
+    });
 };
 
 // dropCollection function: Removes all geckos from collection
