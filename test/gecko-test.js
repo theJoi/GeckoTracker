@@ -1,3 +1,5 @@
+/*jshint browser: false, node: true, mocha: true*/
+
 var assert = require('chai').assert;
 var geckos = require('../app/gecko.js');
 var mongoose = require('mongoose');
@@ -65,7 +67,7 @@ describe('geckos', function() {
 			geckos.addGecko(42, function(err) {
 				assert.isOk(err);
 				done();
-			})
+			});
 		});
 		it('should give an error when required properties are missing', function(done) {
 			var gecko = {
@@ -164,7 +166,7 @@ describe('geckos', function() {
 			geckos.removeGecko("1234", function(err) {
 				assert.isNotNull(err);
 				done();
-			})
+			});
 		});
 	});
 	
@@ -173,10 +175,10 @@ describe('geckos', function() {
 			assert.isDefined(geckos.updateGecko);
 		});
 		it("should properly update a gecko\'s properties", function(done) {
-			geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, updatedGecko) {
 					assert.isNull(err);
-					assert.propertyVal(updatedGecko, '_id', gecko._id)
+					assert.propertyVal(updatedGecko, '_id', gecko._id);
 					assert.property(updatedGecko, 'status');
 					assert.propertyVal(updatedGecko, 'status', 'dead');
 					done();
@@ -187,10 +189,11 @@ describe('geckos', function() {
 			geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, gecko) {
 				assert.isNotNull(err);
 				assert.isNull(gecko);
+                done();
 			});
 		});
 		it("should give an error if trying to update a property not defined the gecko data model", function(done) {
-			geckos.addGecko(jQuery.extend({}, roger), function(err, gecko) {
+			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.updateGecko(gecko._id, {foo: 'bar'}, function(err, updatedGecko) {
 					assert.isNotNull(err);
 					assert.isNull(updatedGecko);
