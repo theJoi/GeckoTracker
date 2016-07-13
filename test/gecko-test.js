@@ -114,12 +114,9 @@ describe('geckos', function() {
 			}, function(err, newGecko) {
 				assert.isNull(err);
 				geckos.getGecko(newGecko._id, function(err, gecko) {
-					/*
 					assert.isNull(err);
 					assert.isObject(gecko);
-					console.log("!!!!!!!!!!!!", gecko);
-					assert.isEqual(newGecko._id, gecko._id);
-					*/
+					assert.equal(newGecko._id.toString(), gecko._id.toString());
 					done();
 				});
 			});
@@ -217,7 +214,7 @@ describe('geckos', function() {
 						assert.lengthOf(events, 1);
 						assert.isObject(events[0]);
 						assert.propertyVal(events[0], 'type', 'weighed');
-					/*	assert.propertyVal(events[0], 'info.value', 42); */
+						//assert.propertyVal(events[0], 'info.value', 42);
 						done();
 					});
 				});
@@ -266,7 +263,8 @@ describe('geckos', function() {
 					assert.propertyVal(event, 'type', 'weighed');
 					geckos.updateEvent(event._id, {type: 'shed'}, function(err, updatedEvent) {
 						assert.isObject(updatedEvent);
-						assert.propertyVal(updatedEvent, '_id', event._id);
+						assert.property(updatedEvent, "_id");
+						assert.equal(updatedEvent._id.toString(), event._id.toString());
 						assert.property(updatedEvent, 'type');
 						assert.propertyVal(updatedEvent, 'type', 'shed');
 						done();

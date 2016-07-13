@@ -205,6 +205,8 @@ exports.getEvents = function(id ,callback) {
 exports.removeEvent = function (id, callback) {
     Event.findByIdAndRemove(id, function(err, removedEvent) {
         if (err){
+            // FIXME
+            // Please remove/comment these out
             console.log("Error occured. Unable to delete event:");
             console.log(err);
             callback(err);
