@@ -1,14 +1,47 @@
-<div class='events-table'>
+<div class='events-table material-card'>
+	<div class='title'>Events</div>
     <table>
         <tr>
             <th>Date</th>
             <th>Event</th>
             <th>Info</th>
         </tr>
+			<!--
         <tr ng-repeat='event in events'>
             <td>{{event.date}}</td>
             <td>{{event.type}}</td>
             <td>{{event.info}}</td>
         </tr>
+			-->
+        <tr>
+            <td>Friday, June 13 2016</td>
+            <td>Weighed</td>
+            <td>67g</td>
+        </tr>
     </table>
+	<button ng-click='addEvent()'>Add Event</button>
+	<div class='add-gecko-event-form'>
+		<div class='field'>
+			<label>Date</label>
+			<input type='date' ng-model='options.date'></input>
+		</div>
+		<div class='field'>
+			<label>Type</label>
+			<select ng-model='options.type'>
+				<option value="Hatched">Hatched</option>
+				<option>Laid Clutch</option>
+				<option>Weighed</option>
+				<option>Shed</option>
+				<option>Info</option>
+			</select>
+		</div>
+		<div class='field'>
+			<label>Info</label>
+			<input type='text' ng-model='options.info'></input>
+		</div>
+		<div class='field'>
+			<button ng-click='addEvent()'>Add Event</button>
+		</div>
+		{{options}}
+	</div>
 </div>

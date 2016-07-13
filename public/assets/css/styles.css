@@ -149,3 +149,47 @@ label {
     animation: slideOutLeft 0.1s both ease-in; z-index: 9999;
 }
 */
+.events-table {
+  width: 1200px;
+  margin: auto;
+  background: white;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  padding: 0;
+}
+.events-table .title {
+  padding: 16px;
+  font-size: 20px;
+}
+.events-table table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+.events-table table th {
+  text-align: left;
+  color: #909090;
+  font-size: 14px;
+  border-bottom: solid 1px #e7e7e7;
+  height: 36px;
+  padding-left: 16px;
+}
+.events-table table td {
+  height: 36px;
+  border-bottom: solid 1px #e7e7e7;
+  font-size: 14px;
+  padding-left: 16px;
+}
+.events-table .add-gecko-event-form {
+  padding: 16px;
+  display: flex;
+}
+.events-table .add-gecko-event-form select {
+  height: 26px;
+}
+.events-table .add-gecko-event-form button {
+  padding: 10px;
+}
+.events-table .add-gecko-event-form .field {
+  margin: 10px;
+  display: flex;
+}

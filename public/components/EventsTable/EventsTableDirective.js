@@ -11,15 +11,16 @@
 */
 
 angular.module('geckoTracker')
-.directive('eventsTable', function() {
+.directive('eventsTable', function(ngDialog) {
 	return {
 		restrict: 'E',
         scope: {
-            'id': '@geckoId'
+            'id': '@geckoId',
         },
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function($scope, $http, $log, geckoService) {
 			$scope.events = [];
+			$scope.options = {};
 			$scope.isLoaded = false; // use to trigger loading spinner
 
 			$log.debug("EventsTable directive's controller instantiated");
@@ -27,6 +28,12 @@ angular.module('geckoTracker')
 			geckoService.getGeckoEvents($scope.id).then(function(events) {
 				$scope.events = events;
 			});
+			
+			$scope.addEvent = function() {
+				ngDialog.open({
+					template: '/components/AddEventForm/AddEventFormTemplate.htm'
+				});
+			}
 		}
 	};
 });
