@@ -175,7 +175,7 @@ describe('geckos', function() {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, updatedGecko) {
 					assert.isNull(err);
-					/*assert.propertyVal(updatedGecko, '_id', gecko._id);*/
+					assert.equal(updatedGecko._id.toString(), gecko._id.toString());
 					assert.property(updatedGecko, 'status');
 					assert.propertyVal(updatedGecko, 'status', 'dead');
 					done();
@@ -214,7 +214,7 @@ describe('geckos', function() {
 						assert.lengthOf(events, 1);
 						assert.isObject(events[0]);
 						assert.propertyVal(events[0], 'type', 'weighed');
-						//assert.propertyVal(events[0], 'info.value', 42);
+						assert.deepPropertyVal(events[0], 'info.value', 42);
 						done();
 					});
 				});
