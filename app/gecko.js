@@ -70,7 +70,8 @@ var eventSchema = new Schema({
     date        :
     {
         type    :Date,
-        required: true
+        required: true,
+        default: Date.now
     },
     info        : Schema.Types.Mixed,
     warning     : Date,
@@ -119,7 +120,7 @@ exports.addGecko = function (gData, callback) {
         if (err) {
             //console.log("Error occured. Unable to add new gecko to DB:");
             //console.log(err);
-            callback(err);
+            callback(err, null);
             return;
         }
         callback(err, gecko);
