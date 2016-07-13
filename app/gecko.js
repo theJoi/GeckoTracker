@@ -70,7 +70,8 @@ var eventSchema = new Schema({
     date        :
     {
         type    :Date,
-        required: true
+        required: true,
+        default: Date.now
     },
     info        : Schema.Types.Mixed,
     warning     : Date,
@@ -119,7 +120,7 @@ exports.addGecko = function (gData, callback) {
         if (err) {
             //console.log("Error occured. Unable to add new gecko to DB:");
             //console.log(err);
-            callback(err);
+            callback(err, null);
             return;
         }
         callback(err, gecko);
@@ -141,17 +142,13 @@ exports.removeGecko = function (id, callback) {
 };
 
 exports.updateGecko = function(id, props, callback) {
-    // FIXME
-    // http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
-    // You want to set some options for this call:
-    //   new: true              so we receive the updated gecko document back, instead of the original
-    //   runValidators: true    so it checks the validity of the new properties against the schema
-    Gecko.findByIdAndUpdate(id, props, function(err, updatedGecko){
+    // FIXME [x]: set options for findByIdAndUpdate
+    var options = {new: true, runValidators: true};
+    Gecko.findByIdAndUpdate(id, props, options, function(err, updatedGecko){
         if(err){
-            // FIXME
-            // Please comment these console logs out, it's muddying up the test output
-            console.log("Error occured. Unable to update gecko:");
-            console.log(err);
+            // FIXME [x] commented console logs, it's muddying up the test outpu
+            //console.log("Error occured. Unable to update gecko:");
+            //console.log(err);
             callback(err, null);
             return;
         }
@@ -193,12 +190,8 @@ exports.getAllEvents = function (callback) {
 
 // getEvents function: Return events for particular gecko by ID
 exports.getEvents = function(id ,callback) {
-    // FIXME
-    // Not sure what's going on here, it looks like it's just returning an empty array
-    // - maybe addEvent is broken?
-    // PS: Actually, we're looking up events by 'geckoId', not '_id'... we don't want
-    // to find one single event, but all the events for the gecko
-    Event.find({_id: id}, function (err, events) {
+    // FIXME [x] Changed to geckoId indead of event _id
+    Event.find({geckoId: id}, function (err, events) {
         if (err) {
             console.log("Unable to retrieve events from database:");
             console.log(err);
@@ -223,11 +216,11 @@ exports.removeEvent = function (id, callback) {
 
 // addEvent function: Add new event to database
 exports.addEvent = function (eventData, callback) {
-    // FIXME
-    // If no 'date' property is defined in eventData, you should create one
-    // set to the current date ( new Date() ) and set it.
-    // FIXME
+    // FIXME [x] If no 'date' property is defined in eventData, you should create one set to the current date ( new Date() ) and set it.
     var event;
+    if(eventData.date === ""){
+        eventData.date = new Date();
+    }
     try {
         event = new Event(eventData);
     } catch (e) {
@@ -245,5 +238,15 @@ exports.addEvent = function (eventData, callback) {
     });
 };
 
-// FIXME
-// updateEvent doesn't exist
+// FIXME [x] created updateEvent
+exports.updateEvent = function(id, props, callback) {
+    // FIXME [x]: set options for findByIdAndUpdate
+    var options = {new: true, runValidators: true};
+    Event.findByIdAndUpdate(id, props, options, function(err, updatedEvent){
+        if(err){
+            callback(err, null);
+            return;
+        }
+        callback(null, updatedEvent);
+    });
+};
