@@ -114,12 +114,9 @@ describe('geckos', function() {
 			}, function(err, newGecko) {
 				assert.isNull(err);
 				geckos.getGecko(newGecko._id, function(err, gecko) {
-					/*
 					assert.isNull(err);
 					assert.isObject(gecko);
-					console.log("!!!!!!!!!!!!", gecko);
-					assert.isEqual(newGecko._id, gecko._id);
-					*/
+					assert.equal(newGecko._id.toString(), gecko._id.toString());
 					done();
 				});
 			});
@@ -178,7 +175,7 @@ describe('geckos', function() {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				geckos.updateGecko(gecko._id, {status: 'dead'}, function(err, updatedGecko) {
 					assert.isNull(err);
-					/*assert.propertyVal(updatedGecko, '_id', gecko._id);*/
+					assert.equal(updatedGecko._id.toString(), gecko._id.toString());
 					assert.property(updatedGecko, 'status');
 					assert.propertyVal(updatedGecko, 'status', 'dead');
 					done();
@@ -190,15 +187,6 @@ describe('geckos', function() {
 				assert.isNotNull(err);
 				assert.isNull(gecko);
                 done();
-			});
-		});
-		it("should give an error if trying to update a property not defined in the gecko data model", function(done) {
-			geckos.addGecko(cloneRoger(), function(err, gecko) {
-				geckos.updateGecko(gecko._id, {foo: 'bar'}, function(err, updatedGecko) {
-					assert.isNotNull(err);
-					assert.isNull(updatedGecko);
-					done();
-				});
 			});
 		});
 	});
@@ -218,7 +206,7 @@ describe('geckos', function() {
 		});
 		it("should return all events for the given gecko", function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
-				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', value: 42}, function(err) {
+				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', info: {'value': 42}}, function(err) {
 					assert.isNull(err);
 					geckos.getEvents(gecko._id, function(err, events) {
 						assert.isNull(err);
@@ -226,7 +214,7 @@ describe('geckos', function() {
 						assert.lengthOf(events, 1);
 						assert.isObject(events[0]);
 						assert.propertyVal(events[0], 'type', 'weighed');
-						assert.propertyVal(events[0], 'value', 64);
+						assert.deepPropertyVal(events[0], 'info.value', 42);
 						done();
 					});
 				});
@@ -244,7 +232,7 @@ describe('geckos', function() {
 				geckos.addEvent({geckoId: gecko._id, type: 'weighed', value: 42}, function(err, event) {
 					assert.isNull(err);
 					assert.isObject(event);
-					assert.property(events, 'date');
+					assert.property(event, 'date');
 					done();
 				});
 			});
@@ -263,18 +251,20 @@ describe('geckos', function() {
 	});
 
 	describe('updateEvent()', function() {
-		it('should exist', function() {
+		it('should exist', function(done) {
 			assert.isDefined(geckos.updateEvent);
+            done();
 		});
 		it('should properly update the properties of an event', function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
-				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', value: 42}, function(err, event) {
+				geckos.addEvent({geckoId: gecko._id, date: new Date('3/5/2014'), type: 'weighed', value: 42}, function(err, event) {
 					assert.isObject(event);
-					assert.property(events, 'type');
-					assert.propertyVal(events, 'type', 'weighed');
+					assert.property(event, 'type');
+					assert.propertyVal(event, 'type', 'weighed');
 					geckos.updateEvent(event._id, {type: 'shed'}, function(err, updatedEvent) {
 						assert.isObject(updatedEvent);
-						assert.propertyVal(updatedEvent, '_id', event._id);
+						assert.property(updatedEvent, "_id");
+						assert.equal(updatedEvent._id.toString(), event._id.toString());
 						assert.property(updatedEvent, 'type');
 						assert.propertyVal(updatedEvent, 'type', 'shed');
 						done();
@@ -285,13 +275,14 @@ describe('geckos', function() {
 	});
 
 	describe('removeEvent()', function() {
-		it('should exist', function() {
+		it('should exist', function(done) {
 			assert.isDefined(geckos.removeEvent);
+            done();
 		});
 		it('should properly remove an event', function(done) {
 			geckos.addGecko(cloneRoger(), function(err, gecko) {
 				assert.isNull(err);
-				geckos.addEvent({geckoId: gecko._id, date: new Date(), type: 'weighed', value: 42}, function(err, event) {
+				geckos.addEvent({geckoId: gecko._id, date: new Date('3/5/2014'), type: 'weighed', value: 42}, function(err, event) {
 					assert.isNull(err);
 					geckos.removeEvent(event._id, function(err) {
 						assert.isNull(err);
