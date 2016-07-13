@@ -116,12 +116,27 @@ app.post('/api/events', function(request, response) {
 // SHOW - all events for particular gecko
 app.get('/api/geckos/:id/events', function(request, response) {
     var id = request.params.id;
-    geckos.getEvent(id, function(err, result) {
+    geckos.getEvents(id, function(err, result) {
     if(err) {
         response.json({'error': 'Problem retrieving events'});
         return;
     }
-    response.json({'geckoDetail':result});
+    response.json(result);
+	});
+});
+
+// CREATE - new event for particular gecko
+app.post('/api/geckos/:id/events', function(request, response) {
+    var id = request.params.id;
+    var data = request.body;
+    data.geckoId = id;
+    geckos.addEvent(data, function(err, result) {
+        if(err) {
+            console.log(err);
+            response.json({'error': 'Problem creating event'});
+            return;
+        }
+        response.json({'geckoDetail':result});
 	});
 });
 

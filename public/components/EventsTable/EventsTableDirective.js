@@ -20,19 +20,27 @@ angular.module('geckoTracker')
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function($scope, $http, $log, geckoService) {
 			$scope.events = [];
-			$scope.options = {};
+			$scope.options = {
+				date: new Date(),
+				type: 'note',
+				info: {},
+				notes: ''
+			};
 			$scope.isLoaded = false; // use to trigger loading spinner
 
 			$log.debug("EventsTable directive's controller instantiated");
-			
-			geckoService.getGeckoEvents($scope.id).then(function(events) {
-				$scope.events = events;
-			});
+
+			function reloadEvents() {
+				geckoService.getGeckoEvents($scope.id).then(function(events) {
+					$scope.events = events;
+					$scope.$apply();
+				});
+			}
 			
 			$scope.addEvent = function() {
-				ngDialog.open({
-					template: '/components/AddEventForm/AddEventFormTemplate.htm'
-				});
+				geckoService.createGeckoEvent($scope.id, $scope.options).then(function() {
+					reloadEvents();
+				})
 			}
 		}
 	};

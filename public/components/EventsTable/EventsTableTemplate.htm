@@ -6,20 +6,18 @@
             <th>Event</th>
             <th>Info</th>
         </tr>
-			<!--
         <tr ng-repeat='event in events'>
             <td>{{event.date}}</td>
             <td>{{event.type}}</td>
             <td>{{event.info}}</td>
         </tr>
-			-->
         <tr>
             <td>Friday, June 13 2016</td>
             <td>Weighed</td>
             <td>67g</td>
         </tr>
     </table>
-	<button ng-click='addEvent()'>Add Event</button>
+
 	<div class='add-gecko-event-form'>
 		<div class='field'>
 			<label>Date</label>
@@ -28,20 +26,27 @@
 		<div class='field'>
 			<label>Type</label>
 			<select ng-model='options.type'>
-				<option value="Hatched">Hatched</option>
-				<option>Laid Clutch</option>
-				<option>Weighed</option>
-				<option>Shed</option>
-				<option>Info</option>
+				<option value='hatched'>Hatched</option>
+				<option value='laidClutch'>Laid Clutch</option>
+				<option value='weighed'>Weighed</option>
+				<option value='shed'>Shed</option>
+				<option value='note'>Note</option>
 			</select>
 		</div>
-		<div class='field'>
-			<label>Info</label>
-			<input type='text' ng-model='options.info'></input>
+		<div class='field' ng-if='options.type == "weighed"'>
+			<label>Weight</label>
+			<input type='number' ng-model='options.info.weight'></input>
+		</div>
+		<div class='field' ng-if='options.type == "laidClutch"'>
+			<label>Eggs</label>
+			<input type='number' ng-model='options.info.eggs'></input>
+		</div>
+		<div class='field' style='flex-shrink: 0; flex-grow: 1;'>
+			<label>Note</label>
+			<input type='text' class='note' ng-model='options.notes'/>
 		</div>
 		<div class='field'>
 			<button ng-click='addEvent()'>Add Event</button>
 		</div>
-		{{options}}
 	</div>
 </div>
