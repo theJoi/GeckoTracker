@@ -1,3 +1,6 @@
+/*jshint globals: true, undef: true, browser: true, node: true*/
+/* globals angular */
+
 angular.module('geckoTracker')
 .directive('geckoTable', function() {
 	return {
@@ -19,17 +22,9 @@ angular.module('geckoTracker')
 				   $scope.deleteGecko(id, name);
 				}
 			};
-		
+		// TODO[X] Modify deleteGecko to utilize service
 			$scope.deleteGecko = function (id, name) {
-				$log.debug("delete gecko button clicked");
-				$http({
-					method: 'DELETE',
-					url: "/api/geckos/" + id
-				}).then(function success(response) {
-					if (response.data.error) {
-						$log.error("Server side error");
-						return;
-					}
+				geckoService.removeGecko(id).then(function(){
 					// Find index of gecko to delete
 					for (var i = 0; i < $scope.geckos.length; i++) {
 						if ($scope.geckos[i]._id === id) {
@@ -38,9 +33,6 @@ angular.module('geckoTracker')
 						}
 					}
 					$scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
-				}, function error(response) {
-					$scope.statusMsg = "Uh oh. Error occured, gecko not added. Please try again.";
-					$log.error("boo boo happened.");
 				});
 			};
 		}
