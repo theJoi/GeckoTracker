@@ -56,7 +56,7 @@ angular.module('geckoTracker')
 					$scope.options.date = new Date();
 					reloadEvents();
 				});
-			}
+			};
 		}
 	};
 });
