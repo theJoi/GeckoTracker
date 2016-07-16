@@ -172,6 +172,7 @@ label {
   border-bottom: solid 1px #e7e7e7;
   height: 36px;
   padding-left: 16px;
+  background: transparent;
 }
 .events-table table td {
   height: 36px;
@@ -179,22 +180,82 @@ label {
   font-size: 14px;
   padding-left: 16px;
 }
+.events-table table tr:hover td {
+  background: #f0f0f0;
+}
+.events-table table th:nth-child(1) {
+  width: 180px;
+}
+.events-table table th:nth-child(2) {
+  width: 100px;
+}
+.events-table table th:nth-child(3) {
+  width: 200px;
+}
 .events-table .add-gecko-event-form {
   padding: 16px;
   display: flex;
 }
 .events-table .add-gecko-event-form select {
   height: 26px;
+  border: 0;
+  outline: none;
+  padding-bottom: 1px;
+}
+.events-table .add-gecko-event-form select:hover {
+  padding-bottom: 0;
+  border-bottom: solid 2px #c0ffc0;
+}
+.events-table .add-gecko-event-form select:focus {
+  padding-bottom: 0;
+  border-bottom: solid 2px #00c000;
 }
 .events-table .add-gecko-event-form button {
   padding: 8px 10px;
   margin-top: 12px;
+  background: #00c000;
+  font-weight: bold;
+  color: white;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+.events-table .add-gecko-event-form button:hover {
+  background: #00d000;
 }
 .events-table .add-gecko-event-form input[type=number] {
   width: 50px;
+  border: 0;
+  outline: none;
+}
+.events-table .add-gecko-event-form input[type=number]:hover {
+  border-bottom: solid 2px #c0ffc0;
+}
+.events-table .add-gecko-event-form input[type=number]:focus {
+  border-bottom: solid 2px #00c000;
 }
 .events-table .add-gecko-event-form input[type=date] {
   padding: 2px;
+  font-family: Arial;
+  border: 0;
+  outline: none;
+}
+.events-table .add-gecko-event-form input[type=date]:hover {
+  border-bottom: solid 2px #c0ffc0;
+}
+.events-table .add-gecko-event-form input[type=date]:focus {
+  border-bottom: solid 2px #00c000;
+}
+.events-table .add-gecko-event-form input[type=text] {
+  border: 0;
+  outline: none;
+}
+.events-table .add-gecko-event-form input[type=text]:hover {
+  border-bottom: solid 2px #c0ffc0;
+}
+.events-table .add-gecko-event-form input[type=text]:focus {
+  border-bottom: solid 2px #00c000;
 }
 .events-table .add-gecko-event-form .note {
   width: 100%;

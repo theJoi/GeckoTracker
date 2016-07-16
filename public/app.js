@@ -6,4 +6,9 @@ angular.module('geckoTracker', ['ngRoute','ngDialog','toastr','ngAnimate'])
     angular.extend(toastrConfig, {
         positionClass: 'toast-bottom-right'
     });
+})
+
+.filter('prettyDate', function() {
+	
 });
+

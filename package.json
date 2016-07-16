@@ -6,7 +6,7 @@
   "watch": {
     "less": {
       "patterns": [
-        "public/css"
+        "public/assets/css"
       ],
       "extensions": "less"
     }

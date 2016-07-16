@@ -5,16 +5,13 @@
             <th>Date</th>
             <th>Event</th>
             <th>Info</th>
+			<th>Notes</th>
         </tr>
         <tr ng-repeat='event in events'>
-            <td>{{event.date}}</td>
+            <td>{{event.date | date: 'fullDate'}}</td>
             <td>{{event.type}}</td>
             <td>{{event.info}}</td>
-        </tr>
-        <tr>
-            <td>Friday, June 13 2016</td>
-            <td>Weighed</td>
-            <td>67g</td>
+            <td>{{event.notes}}</td>
         </tr>
     </table>
 
@@ -35,15 +32,15 @@
 		</div>
 		<div class='field' ng-if='options.type == "weighed"'>
 			<label>Weight</label>
-			<input type='number' ng-model='options.info.weight'></input>
+			<input type='number' ng-model='options.info.weight' min=1 placeholder=50></input>
 		</div>
 		<div class='field' ng-if='options.type == "laidClutch"'>
 			<label>Eggs</label>
-			<input type='number' ng-model='options.info.eggs'></input>
+			<input type='number' ng-model='options.info.eggs' placeholder=2></input>
 		</div>
 		<div class='field' style='flex-shrink: 0; flex-grow: 1;'>
 			<label>Note</label>
-			<input type='text' class='note' ng-model='options.notes'/>
+			<input type='text' class='note' ng-model='options.notes' placeholder="Enter a note..."/>
 		</div>
 		<div class='field'>
 			<button ng-click='addEvent()'>Add Event</button>
