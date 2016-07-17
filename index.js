@@ -37,7 +37,6 @@ app.get('/api/geckos', function(request, response) {
 	});
 });
 
-
 // CREATE - Add new gecko to DB
 app.post('/api/geckos', function(request, response) {
     var gData = request.body;
@@ -62,7 +61,7 @@ app.get('/api/geckos/:id', function(request, response) {
 	});
 });
 
-// EDIT - Form edit information for a gecko
+// UPDATE - Update gecko information
 app.put('/api/geckos/:id/edit', function(request, response) {
 	// TODO complete gecko edit route
     var id = request.params.id;
@@ -75,11 +74,6 @@ app.put('/api/geckos/:id/edit', function(request, response) {
         }
         response.json(result);
     });
-});
-
-// UPDATE - Update gecko information
-app.put('/api/geckos', function(request, response) {
-	// TODO complete gecko update route
 });
 
 // DESTROY - delete gecko record
@@ -96,6 +90,7 @@ app.delete('/api/geckos/:id', function(request, response) {
         response.json({_id: result});
      });
 });
+
 
 // ROUTES FOR DATED EVENTS ============================================
 
@@ -121,7 +116,6 @@ app.post('/api/events', function(request, response) {
         response.json(gData);
      });
 });
-
 
 // SHOW - all events for particular gecko
 app.get('/api/geckos/:id/events', function(request, response) {
@@ -150,26 +144,43 @@ app.post('/api/geckos/:id/events', function(request, response) {
 	});
 });
 
-// EDIT - Form edit information for a event
-app.get('/api/events/:id/edit', function(request, response) {
-	// TODO complete event edit route
-});
-
 // UPDATE - Update event information
-app.put('/api/events', function(request, response) {
-	// TODO complete event update route
+app.put('/api/events/:id/edit', function(request, response) {
+	// TODO complete gecko edit route
+    var id = request.params.id;
+    var data = request.body;
+    console.log(request.body);
+    geckos.updateEvent(id, data, function(err, result){
+        if(err){
+             response.json({'error': 'Problem updating gecko'});
+            return;
+        }
+        response.json(result);
+    });
 });
 
 // DESTROY - delete event record
-app.delete('/api/events/:id/edit', function(request, response) {
-    // TODO complete event destroy route
+app.delete('/api/events/:id', function(request, response) {
+    var id = request.params.id;
+    console.log("id = " + id);
+    geckos.removeEvent(id, function(err, result) {
+		if(err){
+			console.log("deleteEvent method failed.");
+            console.log(err);
+            response.json({error: err});
+            return;
+        }
+        response.json({_id: result});
+     });
 });
+
+
+// OTHER ROUTES =================================================
 
 // TIMELINE
 app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
 });
-// ROOT ROUTE & CATCH-AL
 
 // ROUTE TO NODE MODULES
 app.get('/node_modules/*', function(request, response) {
@@ -177,10 +188,12 @@ app.get('/node_modules/*', function(request, response) {
     response.sendFile(__dirname + request.path);
 });
 
+
 // ROOT ROUTE & CATCH-ALL ==================================================
 app.get('*', function(request, response) {
 	response.sendFile(__dirname + '/public/index.htm');
 });
+
 
 //  REGISTER ROUTES AND START SERVER  =====================================
 geckos.init(null, function() {

@@ -147,8 +147,8 @@ exports.updateGecko = function(id, props, callback) {
     Gecko.findByIdAndUpdate(id, props, options, function(err, updatedGecko){
         if(err){
             // FIXME [x] commented console logs, it's muddying up the test outpu
-            //console.log("Error occured. Unable to update gecko:");
-            //console.log(err);
+            console.log("Error occured. Unable to update gecko:");
+            console.log(err);
             callback(err, null);
             return;
         }
