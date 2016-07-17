@@ -63,8 +63,18 @@ app.get('/api/geckos/:id', function(request, response) {
 });
 
 // EDIT - Form edit information for a gecko
-app.get('/api/geckos/:id/edit', function(request, response) {
+app.put('/api/geckos/:id/edit', function(request, response) {
 	// TODO complete gecko edit route
+    var id = request.params.id;
+    var data = request.body;
+    console.log(request.body);
+    geckos.updateGecko(id, data, function(err, result){
+        if(err){
+             response.json({'error': 'Problem updating gecko'});
+            return;
+        }
+        response.json(result);
+    });
 });
 
 // UPDATE - Update gecko information
@@ -121,7 +131,22 @@ app.get('/api/geckos/:id/events', function(request, response) {
         response.json({'error': 'Problem retrieving events'});
         return;
     }
-    response.json({'geckoDetail':result});
+    response.json(result);
+	});
+});
+
+// CREATE - new event for particular gecko
+app.post('/api/geckos/:id/events', function(request, response) {
+    var id = request.params.id;
+    var data = request.body;
+    data.geckoId = id;
+    geckos.addEvent(data, function(err, result) {
+        if(err) {
+            console.log(err);
+            response.json({'error': 'Problem creating event'});
+            return;
+        }
+        response.json({'geckoDetail':result});
 	});
 });
 

@@ -11,22 +11,53 @@
 */
 
 angular.module('geckoTracker')
-.directive('eventsTable', function() {
+.directive('eventsTable', function(ngDialog, toastr) {
 	return {
 		restrict: 'E',
         scope: {
-            'id': '@geckoId'
+            'geckoId': '=',
         },
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function($scope, $http, $log, geckoService) {
+			console.log("id", $scope, $scope.geckoId);
+			
 			$scope.events = [];
+			$scope.options = {
+				date: new Date(),
+				type: 'note',
+				info: {},
+				notes: ''
+			};
 			$scope.isLoaded = false; // use to trigger loading spinner
 
 			$log.debug("EventsTable directive's controller instantiated");
-			
-			geckoService.getGeckoEvents($scope.id).then(function(events) {
-				$scope.events = events;
+
+			function reloadEvents() {
+				geckoService.getGeckoEvents($scope.geckoId).then(function(events) {
+					$scope.events = events;
+					console.log("EVENTS", events);
+					$scope.$apply();
+				});
+			}
+			$scope.$watch("geckoId", function() {
+				console.log("geckoID changed", $scope.geckoId);
+				if($scope.geckoId)
+					reloadEvents();
 			});
+
+			
+			$scope.addEvent = function() {
+				console.log("id", $scope, $scope.geckoId);
+				
+				geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function() {
+					toastr.success("Event added");
+					$scope.options.notes = '';
+					$scope.options.info = {};
+					$scope.options.date = new Date();
+					reloadEvents();
+				});
+			};
 		}
 	};
 });
+
