@@ -148,7 +148,7 @@ app.get('/timeline', function(request, response) {
 
 // ROUTE TO NODE MODULES
 app.get('/node_modules/*', function(request, response) {
-    console.log(request.path);
+    //console.log(request.path);
     response.sendFile(__dirname + request.path);
 });
 
