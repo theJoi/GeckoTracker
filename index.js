@@ -63,8 +63,18 @@ app.get('/api/geckos/:id', function(request, response) {
 });
 
 // EDIT - Form edit information for a gecko
-app.get('/api/geckos/:id/edit', function(request, response) {
+app.put('/api/geckos/:id/edit', function(request, response) {
 	// TODO complete gecko edit route
+    var id = request.params.id;
+    var data = request.body;
+    console.log(request.body);
+    geckos.updateGecko(id, data, function(err, result){
+        if(err){
+             response.json({'error': 'Problem updating gecko'});
+            return;
+        }
+        response.json(result);
+    });
 });
 
 // UPDATE - Update gecko information
