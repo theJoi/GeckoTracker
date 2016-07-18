@@ -101,7 +101,7 @@ exports.getGeckos = function (callback) {
 exports.getGecko = function (id ,callback) {
     Gecko.findById(id, function (err, gecko) {
         if (err) {
-            callback(err);
+            callback(err, null);
         }
         callback(null, gecko);
     });

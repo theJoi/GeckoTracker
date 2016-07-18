@@ -2,15 +2,16 @@
 /* globals angular */
 
 angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, geckoService) {
-    $scope.geckoDetail = {};
+
     $scope.statusMsg = "Say hi to...";
+   /*  $scope.geckoDetail = {};
     var id = $routeParams.id;
     console.log("id: " + id);
 
     geckoService.getGeckoDetails(id).then(function(details) {
         $scope.geckoDetail = details;
         $scope.$apply();
-    });
+    }); */
 /*
     $http({
         method: 'GET',

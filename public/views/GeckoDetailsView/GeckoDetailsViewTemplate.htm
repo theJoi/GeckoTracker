@@ -3,46 +3,7 @@
     <div class='navigation grid'>
         <div class="col-1-2">{{statusMsg}}</div>
     </div>
-    <div class='content'>
-        <div class="gecko-card grid">
-            <div class="col-1-4">
-                <i class='fa fa-mars' ng-if="geckoDetail.sex == 'male'"></i>
-                <i class='fa fa-venus' ng-if="geckoDetail.sex == 'female'"></i>
-                <strong>{{geckoDetail.name}}</strong>
-            </div>
-            <div class="col-1-4">
-                Morph: {{geckoDetail.morph}}
-            </div>
-            <div class="col-1-4">
-                Location: {{geckoDetail.location}}
-            </div>
-            <div class="col-1-6">
-                Status: {{geckoDetail.status}}
-            </div>
-            <div class="col-1-12 right">
-                <a href="/"><i class='fa fa-compress'></i></a>
-                <i class='fa fa-trash' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)"></i>
-            </div>
-            <div class="col-1-4">
-                ID: {{geckoDetail.id}}
-            </div>
-            <div class="col-1-4">
-                Current Weight: {{geckoDetail.weight}}
-            </div>
-            <div class="col-1-4">
-                Birthdate: {{geckoDetail.birthDate}}
-            </div>
-            <div class="col-1-4">
-                Purchase Date: {{geckoDetail.purchaseDate}}
-            </div>
-            <div>Parents:
-
-            </div>
-            <div>Events:
-
-            </div>
-        </div>
-    </div>
+<gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
     
     <events-table gecko-id="geckoDetail._id"></events-table>
 </div>
