@@ -45,7 +45,7 @@ app.post('/api/geckos', function(request, response) {
 			console.log("addGecko method failed.");
             return;
         }
-        response.json(gData);
+        response.json(result);
      });
 });
 

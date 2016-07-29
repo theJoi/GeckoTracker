@@ -10,7 +10,7 @@
 |__________________________________________________________________________
 */
 
-angular.module('geckoTracker').controller('AddGeckoController', function ($scope, $http) {
+angular.module('geckoTracker').controller('AddGeckoController', function ($scope, geckoService) {
     $scope.validationMsg = "";
     $scope.form = {
         name: "",
@@ -23,20 +23,13 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         location: ""
     };
 
-
     $scope.submitForm = function () {
         console.log("submit form called");
         if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
             $scope.form.location = "not applicable";
         }
-        $http({
-            method: 'POST',
-            url: '/api/geckos',
-            data: $scope.form
-        }).then(function success(response) {
-            $scope.geckos.push(response.data);
+        geckoService.addGecko($scope.form).then(function success(response) {
             $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
-            //$scope.refreshGeckos();
         }, function error(response) {
             $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
         });

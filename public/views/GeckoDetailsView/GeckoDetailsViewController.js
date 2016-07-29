@@ -4,14 +4,15 @@
 angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, geckoService) {
 
     $scope.statusMsg = "Say hi to...";
-   /*  $scope.geckoDetail = {};
-    var id = $routeParams.id;
-    console.log("id: " + id);
+    $scope.geckoDetail = {};
+    $scope.geckoId = $routeParams.id;
+    console.log("id: " + $scope.geckoId);
 
-    geckoService.getGeckoDetails(id).then(function(details) {
+
+    geckoService.getGeckoDetails($scope.geckoId).then(function(details) {
         $scope.geckoDetail = details;
         $scope.$apply();
-    }); */
+    });
 /*
     $http({
         method: 'GET',

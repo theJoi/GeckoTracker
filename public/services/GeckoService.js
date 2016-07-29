@@ -173,7 +173,7 @@ angular.module('geckoTracker')
             },
 
             createGeckoEvent: function (geckoId, properties) {
-                console.log("createGeckoEvent", geckoId, properties)
+                console.log("createGeckoEvent", geckoId, properties);
                 return new Promise(function(fulfill, reject) {
                     $http({
                         method: 'POST',
