@@ -1,7 +1,7 @@
 <div>
     <!-- HEADER STATUS BAR -->
-    <div class='navigation grid'>
-        <div class="col-1-2">{{statusMsg}}</div>
+    <div class="status-bar grid">
+        <div class="col-1-2 left">{{statusMsg}}</div>
         <div class="col-1-2 right">
             <a href="" ng-click="showForm = !showForm">
                 <span ng-if=!showForm>Add New Gecko</span>
@@ -69,7 +69,7 @@
             <button ng-click="submitForm()">Add Gecko</button>
         </form>
     </div>
-    
+
     <gecko-table></gecko-table>
     <!--<egg-table></egg-table> -->
 </div>

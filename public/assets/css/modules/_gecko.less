@@ -1,0 +1,41 @@
+.female {
+    color: @pink;
+}
+
+.male {
+    color: @blue;
+}
+
+.unknown {
+    color: @textColorGray;
+}
+
+.gecko-card {
+     .card;
+    border: solid 1px @dividerColor;
+    padding: 5px;
+    margin: 5px auto;
+    background: @textColorLight;
+}
+
+.gecko-card table {
+    width: 100%;
+}
+
+.gecko-card tr:nth-of-type(even){
+    background: @evenRowColor;
+}
+
+.gecko-card td:hover {
+    background: @accentColor;
+}
+
+.gecko-detail-card {
+    .card;
+    padding: 10px;
+    line-height: 1.5em;
+}
+
+.gecko-detail-card .table-header {
+    width: 75px;
+}

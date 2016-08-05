@@ -1,25 +1,29 @@
 <!-- CONTAINER FOR LIST OF GECKOS -->
-<div class='content'>
-    <div ng-repeat='gecko in geckos' class="gecko-card grid" ng-class=gecko.sex>
-        <div class="col-1-4">
-            <i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
-            <i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
-            <strong>{{gecko.name}}</strong>
-        </div>
-        <div class="col-1-4">
-            Morph: {{gecko.morph}}
-        </div>
-        <div class="col-1-4">
-            Location: {{gecko.location}}
-        </div>
-        <div class="col-1-6">
-            Status: {{gecko.status}}
-        </div>
-        <div class="col-1-12 right">
-            <a href="/geckos/{{gecko._id}}">
-                <i class='fa fa-expand'></i>
-            </a>
-            <i class='fa fa-trash' ng-click="confirmDelete(gecko._id, gecko.name)"></i>
-        </div>
-    </div>
+<div class="gecko-card">
+    <table>
+        <tr ng-repeat='gecko in geckos' class="gecko-card-table">
+            <td>
+                <a href="/geckos/{{gecko._id}}" class="link--card">
+                    <div class="col-1-4">
+                        <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
+                        <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
+                        <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
+                        <strong>{{gecko.name}}</strong>
+                    </div>
+                    <div class="col-1-4">
+                        Morph: {{gecko.morph}}
+                    </div>
+                    <div class="col-1-4">
+                        Location: {{gecko.location}}
+                    </div>
+                    <div class="col-1-6">
+                        Status: {{gecko.status}}
+                    </div>
+                    <div class="col-1-12 right">
+                        <i class='fa fa-trash' ng-click="confirmDelete(gecko._id, gecko.name)"></i>
+                    </div>
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>

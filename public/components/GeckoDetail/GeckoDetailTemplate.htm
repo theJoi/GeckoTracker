@@ -1,43 +1,78 @@
 <!-- CONTAINER FOR GECKO DETAIL INFORMATION -->
 <div class='gecko-detail'>
-<div class='content'>
-        <div class="gecko-card grid">
-            <div class="col-1-4">
-                <i class='fa fa-mars' ng-if="geckoDetail.sex == 'male'"></i>
-                <i class='fa fa-venus' ng-if="geckoDetail.sex == 'female'"></i>
-                <strong>{{geckoDetail.name}}</strong>
-            </div>
-            <div class="col-1-4">
-                Morph: {{geckoDetail.morph}}
-            </div>
-            <div class="col-1-4">
-                Location: {{geckoDetail.location}}
-            </div>
-            <div class="col-1-6">
-                Status: {{geckoDetail.status}}
-            </div>
-            <div class="col-1-12 right">
+    <div class='content'>
+        <div class="gecko-detail-card grid">
+            <div class="title">
+                <img class="thumbnail" src="http://natgeo.petsmart.com/content/img/leopard-gecko/leopard-gecko-fun-facts.jpg">
+                <span class="super-size">{{geckoDetail.name}}</span>
+                <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
+                <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
+                <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
                 <a href="/"><i class='fa fa-compress'></i></a>
-                <i class='fa fa-trash' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)"></i>
+                <i class='fa fa-trash link' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)"></i>
             </div>
-            <div class="col-1-4">
-                ID: {{geckoDetail.id}}
-            </div>
-            <div class="col-1-4">
-                Current Weight: {{geckoDetail.weight}}
-            </div>
-            <div class="col-1-4">
-                Birthdate: {{geckoDetail.birthDate}}
-            </div>
-            <div class="col-1-4">
-                Purchase Date: {{geckoDetail.purchaseDate}}
-            </div>
-            <div>Parents:
+            <table>
+                <tr>
+                    </td>
+                    <td class="table-header">
+                        ID:
+                    </td>
+                    <td>
+                        {{geckoDetail.id}}
+                    </td>
+                    <td class="table-header">
+                        Morph:
+                    </td>
+                    <td>
+                        {{geckoDetail.morph}}
+                    </td>
+                    <td class="table-header">
+                        Location:
+                    </td>
+                    <td>
+                        {{geckoDetail.location}}
+                    </td>
+                    <td class="table-header">
+                        Status:
+                    </td>
+                    <td>
+                        {{geckoDetail.status}}
 
-            </div>
-            <div>Events:
-
-            </div>
+                </tr>
+                <tr>
+                    <td class="table-header">
+                        Current Weight:
+                    </td>
+                    <td>
+                        {{geckoDetail.currWeight}}
+                    </td>
+                    <td class="table-header">
+                        Birthdate:
+                    </td>
+                    <td>
+                        {{geckoDetail.birthDate | date:'mediumDate'}}
+                    </td>
+                    <td class="table-header">
+                        Purchase Date:
+                    </td>
+                    <td>
+                        {{geckoDetail.purchaseDate | date:'mediumDate'}}
+                    </td>
+                    <td class="table-header">
+                        Mother:
+                    </td>
+                    <td>
+                        {{geckoDetail.id}}
+                    </td>
+                    </td>
+                    <td class="table-header">
+                        Father:
+                    </td>
+                    <td>
+                        {{geckoDetail.id}}
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
