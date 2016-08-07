@@ -2526,7 +2526,7 @@ th {
 .gecko-card tr {
   border-bottom: solid 1px #f0f0f0;
 }
-.gecko-card tr:not(.link-nohover):hover {
+.gecko-card tr:not(.link--nohover):hover {
   background: #dcedc8;
 }
 /* Gecko Detail */

@@ -1,22 +1,43 @@
 <!-- CONTAINER FOR LIST OF GECKOS -->
 <div class="gecko-card">
     <table>
-        <div class="table-top">Filter stuff will be here</div>
+        <div class="table-top">
+            <label>Search</label>
+            <input type="text">
+        </div>
         <thead>
             <tr class="link--nohover">
-                <th>Sex</th>
-                <th>Name</th>
-                <th>ID</th>
-                <th>Stage</th>
-                <th>Morph</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Weight</th>
+                <th>
+                    <a href="#" ng-click="sortType = 'sex'; sortReverse = !sortReverse">
+                    Sex
+                    <span ng-show="sortType == 'sex' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'sex' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        Name
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>                 </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'userId'; sortReverse = !sortReverse">
+                        ID
+                        <span ng-show="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'stage'; sortReverse = !sortReverse">
+                        Stage <span ng-show="sortType == 'stage' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'stage' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                <th> <a href="#" ng-click="sortType = 'morph'; sortReverse = !sortReverse">Morph <span ng-show="sortType == 'morph' && !sortReverse" class="fa fa-caret-down"></span>                     <span ng-show="sortType == 'morph' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                <th> <a href="#" ng-click="sortType = 'location'; sortReverse = !sortReverse">Location <span ng-show="sortType == 'location' && !sortReverse" class="fa fa-caret-down"></span>                     <span ng-show="sortType == 'location' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                <th> <a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse">Status <span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>                     <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                <th> <a href="#" ng-click="sortType = 'currWeight'; sortReverse = !sortReverse">Weight <span ng-show="sortType == 'currWeight' && !sortReverse" class="fa fa-caret-down"></span>                     <span ng-show="sortType == 'currWeight' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
                 <th></th>
             </tr>
         </thead>
         <!-- <a href="/geckos/{{gecko._id}}" class="link--card"> -->
-        <tr ng-repeat='gecko in geckos' class="gecko-card-table">
+        <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse" class="gecko-card-table">
 
             <td>
                 <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>

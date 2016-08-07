@@ -34,12 +34,17 @@ var geckoSchema = new Schema({
         type    :String,  // Name of gecko
         required: true
     },
-    userId      : String, // External ID number
+    userId      : {
+        type    : String, // External ID number
+        required: true
+    },
     stage       : String, // {egg, hatchling, or adult}
     status      : String, // Options are {normal/gravid/egg/sold/dead}
     sex         : String, // Female/ Male/ Unknown
     morph       : String, // Gecko's morph type
     location    : String, // Current location of gecko
+    purchaseDate: Number,
+    birthdate   : Number,
     mother      :
     {
         _id     : Schema.Types.ObjectId,

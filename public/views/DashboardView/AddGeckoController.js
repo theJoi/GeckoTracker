@@ -12,22 +12,31 @@
 
 angular.module('geckoTracker').controller('AddGeckoController', function ($scope, geckoService) {
     $scope.validationMsg = "";
+    /* Initial form values */
     $scope.form = {
         name: "",
-        userID: "",
+        userId: "",
+        stage: "unknown",
         status: "unknown",
         sex: "unknown",
         morph: "",
         purchaseDate: "",
-        birthDate: "",
-        location: ""
+        birthdate: "",
+        location: "",
+        currWeight: "",
+        mother: "",
+        father: ""
     };
+
+
 
     $scope.submitForm = function () {
         console.log("submit form called");
         if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
             $scope.form.location = "not applicable";
         }
+        // If no ID entered make name the ID
+        // If no name entered make ID the name
         geckoService.addGecko($scope.form).then(function success(response) {
             $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
         }, function error(response) {
