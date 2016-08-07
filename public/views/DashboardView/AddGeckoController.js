@@ -28,6 +28,8 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         father: ""
     };
 
+
+
     $scope.submitForm = function () {
         console.log("submit form called");
         if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
@@ -37,6 +39,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         // If no name entered make ID the name
         geckoService.addGecko($scope.form).then(function success(response) {
             $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
+            $scope.showForm = false;
         }, function error(response) {
             $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
         });

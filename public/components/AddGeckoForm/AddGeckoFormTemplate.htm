@@ -1,0 +1,87 @@
+  <!-- ADD GECKO FORM -->
+    <!-- KENNY: This should be moved into a directive. -->
+    <div ng-show='showForm' class="add-gecko-form">
+
+        <form name="addGeckoForm" id="form">
+            <div class="table-top">Add Gecko Form</div>
+            <p style="color: red;">{{validationMsg}}</p>
+            <div class="grid">
+                <div class="row">
+                    <div class="col-1-4">
+                        <label>Name of Gecko*</label>
+                        <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
+                    </div>
+                    <div class="col-1-4">
+                        <label>ID*</label>
+                        <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Morph Type</label>
+                        <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Sex</label>
+                        <select ng-model="form.sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="unknown" selected>Unknown</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-4">
+                        <label>Location</label>
+                        <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Date of Birth</label>
+                        <input type="date" placeholder="birthdate" ng-model="form.birthdate">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Date of Purchase</label>
+                        <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Stage</label>
+                        <select ng-model="form.stage">
+                            <option value="unknown" selected>Unknown</option>
+                            <option value="adult">Adult</option>
+                            <option value="hatchling">Hatchling</option>
+                            <option value="egg">Egg</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-4">
+                        <label>Mother</label>
+                        <input type="text" placeholder="search by name of id" ng-model="form.mother">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Father</label>
+                        <input type="text" placeholder="search by name of id" ng-model="form.father">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Current Weight</label>
+                        <input type="number" placeholder="birthdate" ng-model="form.currWeight">
+                    </div>
+                    <div class="col-1-4">
+                        <label>Status</label>
+                        <select ng-model="form.status">
+                            <option value="unknown" selected>Unknown</option>
+                            <option value="normal">Normal</option>
+                            <option value="gravid">Gravid</option>
+                            <option value="sold">Sold</option>
+                            <option value="dead">Dead</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label>Notes</label>
+                    <input type="textarea" rows="1" cols="50" ng-model="form.notes">
+                </div>
+
+                <button ng-click="submitForm()">Add Gecko</button>
+            </div>
+    </div>
+    </form>
+</div>
