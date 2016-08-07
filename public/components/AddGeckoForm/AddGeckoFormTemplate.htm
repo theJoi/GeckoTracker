@@ -1,87 +1,149 @@
-  <!-- ADD GECKO FORM -->
-    <!-- KENNY: This should be moved into a directive. -->
-    <div ng-show='showForm' class="add-gecko-form">
+<!-- ADD GECKO FORM -->
+<!-- KENNY: This should be moved into a directive. -->
+<div ng-show='showForm' class="add-gecko-form">
 
-        <form name="addGeckoForm" id="form">
-            <div class="table-top">Add Gecko Form</div>
-            <p style="color: red;">{{validationMsg}}</p>
-            <div class="grid">
-                <div class="row">
-                    <div class="col-1-4">
-                        <label>Name of Gecko*</label>
-                        <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
-                    </div>
-                    <div class="col-1-4">
-                        <label>ID*</label>
-                        <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Morph Type</label>
-                        <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Sex</label>
-                        <select ng-model="form.sex">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="unknown" selected>Unknown</option>
-                        </select>
-                    </div>
+    <form name="addGeckoForm" id="form">
+        <div class="table-top">Add Gecko Form
+            <p class="highlight small">* required</p>
+        </div>
+        <div class="grid">
+            <div class="row">
+                <div class="col-1-4">
+                    <label>Name of Gecko<span class="highlight">*</span></label>
+                    <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
                 </div>
-                <div class="row">
-                    <div class="col-1-4">
-                        <label>Location</label>
-                        <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Date of Birth</label>
-                        <input type="date" placeholder="birthdate" ng-model="form.birthdate">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Date of Purchase</label>
-                        <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Stage</label>
-                        <select ng-model="form.stage">
-                            <option value="unknown" selected>Unknown</option>
-                            <option value="adult">Adult</option>
-                            <option value="hatchling">Hatchling</option>
-                            <option value="egg">Egg</option>
-                        </select>
-                    </div>
+                <div class="col-1-4">
+                    <label>ID<span class="highlight">*</span></label>
+                    <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
                 </div>
-                <div class="row">
-                    <div class="col-1-4">
-                        <label>Mother</label>
-                        <input type="text" placeholder="search by name of id" ng-model="form.mother">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Father</label>
-                        <input type="text" placeholder="search by name of id" ng-model="form.father">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Current Weight</label>
-                        <input type="number" placeholder="birthdate" ng-model="form.currWeight">
-                    </div>
-                    <div class="col-1-4">
-                        <label>Status</label>
-                        <select ng-model="form.status">
-                            <option value="unknown" selected>Unknown</option>
-                            <option value="normal">Normal</option>
-                            <option value="gravid">Gravid</option>
-                            <option value="sold">Sold</option>
-                            <option value="dead">Dead</option>
-                        </select>
-                    </div>
+                <div class="col-1-4">
+                    <label>Morph Type</label>
+                    <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
                 </div>
-                <div class="row">
+                <div class="col-1-4">
+                    <label>Sex</label>
+                    <select ng-model="form.sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="unknown" selected>Unknown</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1-4">
+                    <label>Location</label>
+                    <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
+                </div>
+                <div class="col-1-4">
+                    <label>Date of Birth</label>
+                    <input type="date" placeholder="birthdate" ng-model="form.birthdate">
+                </div>
+                <div class="col-1-4">
+                    <label>Date of Purchase</label>
+                    <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
+                </div>
+                <div class="col-1-4">
+                    <label>Stage</label>
+                    <select ng-model="form.stage">
+                        <option value="unknown" selected>Unknown</option>
+                        <option value="adult">Adult</option>
+                        <option value="hatchling">Hatchling</option>
+                        <option value="egg">Egg</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1-2">
                     <label>Notes</label>
                     <input type="textarea" rows="1" cols="50" ng-model="form.notes">
                 </div>
-
-                <button ng-click="submitForm()">Add Gecko</button>
+                <div class="col-1-4">
+                    <label>Current Weight</label>
+                    <input type="number" placeholder="Weight in grams" ng-model="form.currWeight">
+                </div>
+                <div class="col-1-4">
+                    <label>Status</label>
+                    <select ng-model="form.status">
+                        <option value="unknown" selected>Unknown</option>
+                        <option value="normal">Normal</option>
+                        <option value="gravid">Gravid</option>
+                        <option value="sold">Sold</option>
+                        <option value="dead">Dead</option>
+                    </select>
+                </div>
             </div>
-    </div>
+            <div class="row">
+                <div class="col-1-4">
+                    <label>Mother</label>
+                    <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
+                </div>
+                <div class="col-1-4">
+                    <button ng-click="showParentModal('female')" class="button--secondary">Pick mother</button>
+                </div>
+                <div class="col-1-4">
+                    <label>Father</label>
+                    <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
+                </div>
+                <div class="col-1-4">
+                    <button ng-click="showParentModal('!female')" class="button--secondary">Pick father</button>
+                </div>
+            </div>
+            <div class="row center">
+            <button ng-click="submitForm()">Add Gecko</button>
+            </div>
+            <div class="form-feedback"><p>{{validationMsg}}</p>
+            </div>
+        </div>
     </form>
+    <!-- PARENT PICKER MODAL -->
+    <div ng-show='parentModal.shown' class="black-out">
+        <div ng-show='parentModal.shown' class='modal'>
+            <table>
+                <div class="table-top">
+                    <input type="text" class="search-box" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
+                    <button ng-click="parentModal.shown=false">Close</button>
+                </div>
+                <thead>
+                    <tr class="link--nohover">
+                        <th>
+                            <a href="#" ng-click="sortType = 'sex'; sortReverse = !sortReverse">
+                    Sex
+                    <span ng-show="sortType == 'sex' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'sex' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        Name
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>                 </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'userId'; sortReverse = !sortReverse">
+                        ID
+                        <span ng-show="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'stage'; sortReverse = !sortReverse">
+                        Stage <span ng-show="sortType == 'stage' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'stage' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
+
+                    </tr>
+                </thead>
+                <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:genderFilter | filter:parentSearchTerm" class="gecko-card-table">
+
+                    <td>
+                        <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
+                        <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
+                        <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
+                    </td>
+                    <td><a href="#" ng-click="setParent(genderFilter,gecko)"><strong>{{gecko.name}}</strong></td>
+            <td>{{gecko.userId}}</a></td>
+                    <td>{{gecko.stage}}</td>
+                    </a>
+                </tr>
+            </table>
+
+        </div>
+    </div>
 </div>
