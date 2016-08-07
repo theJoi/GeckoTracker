@@ -30,6 +30,23 @@ a:hover:not(.link--nohover),
 .link:hover {
   color: #536dfe;
 }
+button {
+  padding: 8px 10px;
+  margin-top: 12px;
+  background: #536dfe;
+  font-weight: bold;
+  color: #ffffff;
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.5s;
+  border-radius: 2px;
+}
+button:hover {
+  background: #8698fe;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
 body {
   background: url("../img/subtle_dots.png"), white;
   background-repeat: repeat;
@@ -88,12 +105,24 @@ th {
 @dividerColor:       #bdbdbd;
 */
 /* Elements related to material design and cards */
+/* Used for cards and buttons */
 .material-shadow {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+/* Used on hoverover of buttons */
+.material-shadow--hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+/* used for chips */
+.material-shadow--light {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+.round-corner {
+  border-radius: 2px;
+}
 .card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
+  background: #ffffff;
   border-radius: 2px;
 }
 .card .title {
@@ -2394,7 +2423,7 @@ th {
 }
 .events-table {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
+  background: #ffffff;
   border-radius: 2px;
   padding: 0;
 }
@@ -2510,7 +2539,6 @@ th {
 /* Gecko Card (List) */
 .gecko-card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
   border-radius: 2px;
   margin: 20px auto;
   background: #ffffff;
@@ -2529,6 +2557,7 @@ th {
 /* Search box on Gecko List */
 .search-box {
   width: 25%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   margin: 10px;
   border: solid 1px #bdbdbd;
   padding: 5px;
@@ -2536,7 +2565,7 @@ th {
 /* Gecko Detail */
 .gecko-detail-card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
+  background: #ffffff;
   border-radius: 2px;
   padding: 10px;
   line-height: 50px;
@@ -2546,6 +2575,7 @@ th {
 }
 .gecko-detail-card .table-header {
   width: 75px;
+  color: #757575;
 }
 .thumbnail {
   width: 50px;
@@ -2570,7 +2600,7 @@ th {
 }
 .add-gecko-form {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
+  background: #ffffff;
   border-radius: 2px;
   padding: 10px;
 }

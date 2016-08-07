@@ -4,8 +4,8 @@
         <div class="col-1-2 left">{{statusMsg}}</div>
         <div class="col-1-2 right">
             <a href="" ng-click="showForm = !showForm">
-                <span ng-if=!showForm>Add New Gecko</span>
-                <span ng-if=showForm>Go back</span>
+                <span ng-if=!showForm>ADD NEW GECKO</span>
+                <span ng-if=showForm>GO BACK</span>
             </a>
         </div>
     </div>
@@ -66,13 +66,13 @@
                 <div class="row">
                     <div class="col-1-4">
                         <label>Mother</label>
-                        <input type="date" placeholder="search by name of id" ng-model="form.mother">
+                        <input type="text" placeholder="search by name of id" ng-model="form.mother">
                     </div>
                     <div class="col-1-4">
                         <label>Father</label>
-                        <input type="date" placeholder="search by name of id" ng-model="form.father">
+                        <input type="text" placeholder="search by name of id" ng-model="form.father">
                     </div>
-                                        <div class="col-1-4">
+                    <div class="col-1-4">
                         <label>Current Weight</label>
                         <input type="number" placeholder="birthdate" ng-model="form.currWeight">
                     </div>
@@ -86,16 +86,17 @@
                             <option value="dead">Dead</option>
                         </select>
                     </div>
-                    <div class="col-3-4">
-                        <label>Notes</label>
-                        <input type="textarea" rows="1" cols="50" ng-model="form.notes">
-                    </div>
-
-                    <button ng-click="submitForm()">Add Gecko</button>
                 </div>
+                <div class="row">
+                    <label>Notes</label>
+                    <input type="textarea" rows="1" cols="50" ng-model="form.notes">
+                </div>
+
+                <button ng-click="submitForm()">Add Gecko</button>
             </div>
-        </form>
     </div>
-    <gecko-table></gecko-table>
-    <!--<egg-table></egg-table> -->
+    </form>
+</div>
+<gecko-table></gecko-table>
+<!--<egg-table></egg-table> -->
 </div>

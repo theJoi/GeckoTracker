@@ -8,7 +8,7 @@
                 <i class='fa fa-mars male' ng-if="gecko.sex == 'male'" title="male"></i>
                 <i class='fa fa-venus female' ng-if="gecko.sex == 'female'" title="female"></i>
                 <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'" title="gender unknown"></i>
-                <span class="table-header"> ID:</span> {{geckoDetail.id}}
+                <span class="table-header"> ID:</span> {{geckoDetail.userId}}
                  </div>
                 <div class="right col-1-3">
                     <a href="/"><i class='fa fa-compress'></i></a>
@@ -52,7 +52,7 @@
                         {{geckoDetail.birthdate | date:'mediumDate'}}
                     </td>
                     <td class="table-header">
-                        Purchase Date:
+                        Purchased:
                     </td>
                     <td>
                         {{geckoDetail.purchaseDate | date:'mediumDate'}}
@@ -61,14 +61,14 @@
                         Mother:
                     </td>
                     <td>
-                        {{geckoDetail.id}}
+                        {{geckoDetail.mother.name}} : {{geckoDetail.mother.userId}}
                     </td>
                     </td>
                     <td class="table-header">
                         Father:
                     </td>
                     <td>
-                        {{geckoDetail.id}}
+                        {{geckoDetail.father.name}} : {{geckoDetail.father.userId}}
                     </td>
                 </tr>
             </table>

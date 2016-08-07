@@ -28,8 +28,6 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         father: ""
     };
 
-
-
     $scope.submitForm = function () {
         console.log("submit form called");
         if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
