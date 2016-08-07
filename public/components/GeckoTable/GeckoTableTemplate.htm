@@ -1,29 +1,39 @@
 <!-- CONTAINER FOR LIST OF GECKOS -->
 <div class="gecko-card">
     <table>
+        <div class="table-top">Filter stuff will be here</div>
+        <thead>
+            <tr class="link--nohover">
+                <th>Sex</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Stage</th>
+                <th>Morph</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Weight</th>
+                <th></th>
+            </tr>
+        </thead>
+        <!-- <a href="/geckos/{{gecko._id}}" class="link--card"> -->
         <tr ng-repeat='gecko in geckos' class="gecko-card-table">
+
             <td>
-                <a href="/geckos/{{gecko._id}}" class="link--card">
-                    <div class="col-1-4">
-                        <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
-                        <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
-                        <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
-                        <strong>{{gecko.name}}</strong>
-                    </div>
-                    <div class="col-1-4">
-                        Morph: {{gecko.morph}}
-                    </div>
-                    <div class="col-1-4">
-                        Location: {{gecko.location}}
-                    </div>
-                    <div class="col-1-6">
-                        Status: {{gecko.status}}
-                    </div>
-                    <div class="col-1-12 right">
-                        <i class='fa fa-trash' ng-click="confirmDelete(gecko._id, gecko.name)"></i>
-                    </div>
-                </a>
+                <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
+                <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
+                <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
             </td>
+            <td><a href="/geckos/{{gecko._id}}"><strong>{{gecko.name}}</strong></td>
+            <td>{{gecko.userId}}</a></td>
+            <td>{{gecko.stage}}</td>
+            <td>{{gecko.morph}}</td>
+            <td>{{gecko.location}}</td>
+            <td>{{gecko.status}}</td>
+            <td>{{gecko.currWeight}}</td>
+            </a>
+            <td class="right"><i class='fa fa-trash link' ng-click="confirmDelete(gecko._id, gecko.name)"></i></td>
+
         </tr>
+
     </table>
 </div>

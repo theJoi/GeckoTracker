@@ -1,3 +1,5 @@
+/* For gender symbols, used on gecko list and gecko detail */
+
 .female {
     color: @pink;
 }
@@ -10,32 +12,67 @@
     color: @textColorGray;
 }
 
+
+/* Gecko Card (List) */
+
 .gecko-card {
      .card;
-    border: solid 1px @dividerColor;
-    padding: 5px;
-    margin: 5px auto;
+    margin: 20px auto;
     background: @textColorLight;
+
+    line-height: 14px;
+    padding: 0;
 }
 
-.gecko-card table {
-    width: 100%;
-}
-
-.gecko-card tr:nth-of-type(even){
+/*.gecko-card tr:nth-of-type(even){
     background: @evenRowColor;
+}*/
+.gecko-card tr {
+     border-bottom: solid 1px @evenRowColor;
 }
 
-.gecko-card td:hover {
-    background: @accentColor;
+.gecko-card tr:not(.link-nohover):hover {
+    background: @lightPrimaryColor;
 }
+
+
+/* Gecko Detail */
 
 .gecko-detail-card {
     .card;
     padding: 10px;
-    line-height: 1.5em;
+    line-height: 50px;
 }
 
 .gecko-detail-card .table-header {
     width: 75px;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 5px;
+    &:hover {
+        border: solid 3px @accentColor;
+    }
+}
+
+/* Add New Gecko Form */
+
+#form label {
+    color: @textColorGray;
+    .bold;
+    font-size: 14px;
+}
+
+#form input, #form select {
+    border-bottom: dotted 1px @evenRowColor;
+    line-height: 20px;
+}
+
+.add-gecko-form {
+    .card;
+    padding: 10px;
 }

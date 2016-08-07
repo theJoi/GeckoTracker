@@ -15,7 +15,7 @@
             text-align: left;
             color: #909090;
             font-size: 14px;
-            border-bottom: solid 1px #e7e7e7;
+            border-bottom: solid 1px @dividerColor;
             height: 36px;
             padding-left: 16px;
             background: transparent;
@@ -41,25 +41,12 @@
         padding: 16px;
         display: flex;
 
-        select {
-            height: 26px;
-            border: 0;
-            outline: none;
-            padding-bottom: 1px;
-            &:hover {
-                padding-bottom: 0;
-                border-bottom: solid 2px lighten(#00c000, 50%);
-            }
-            &:focus {
-                padding-bottom: 0;
-                border-bottom: solid 2px #00c000;
-            }
-        }
+
 
         button {
             padding: 8px 10px;
             margin-top: 12px;
-            background: #00c000;
+            background: @accentColor;
             font-weight: bold;
             color: white;
             border: 0;
@@ -67,7 +54,7 @@
             box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
             cursor: pointer;
             &:hover {
-                background: #00d000;
+                background: @accentColor;
             }
         }
 

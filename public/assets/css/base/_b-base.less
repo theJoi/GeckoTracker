@@ -1,18 +1,69 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover:not(.link--nohover),
+.link:hover {
+    color: @accentColor;
+}
 
 body {
     background: url("../img/subtle_dots.png"), white;
     background-repeat: repeat;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
 }
 
-a, a:visited {
-    text-decoration: none;
-    color:inherit;
+i {
+    padding: 5px;
 }
 
-a:hover:not(.link--card), .link:hover{
-    color: @accentColor;
+label,
+select,
+input {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+select,
+input {
+    border: 0;
+    outline: none;
+    &:hover {
+        border-bottom: solid 2px @lightPrimaryColor !important;
+    }
+    &:focus {
+        border-bottom: solid 2px @accentColor !important;
+    }
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    padding: 10px;
+    font-size: 14px;
+}
+
+td,
+th {
+    padding: 5px 10px;
+    text-align: left;
+}
+
+th {
+    color: @textColorGray;
+    .font-size-default;
+    .bold;
 }
