@@ -16,7 +16,7 @@ angular.module('geckoTracker')
                 $scope.sortType = 'name';   // set the default sort type
                 $scope.sortReverse = false; // set the default sort order
                 $scope.searchTerm = '';     // set the default search/filter term
-
+console.log($scope.searchTerm);
                 geckoService.getGeckos().then(function (geckos) {
                     $scope.geckos = geckos;
                     $scope.$apply();

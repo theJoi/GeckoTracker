@@ -2,8 +2,7 @@
 <div class="gecko-card">
     <table>
         <div class="table-top">
-            <label>Search</label>
-            <input type="text">
+             <input type="text" class="search-box" placeholder="Search List of Geckos" ng-model="searchTerm">
         </div>
         <thead>
             <tr class="link--nohover">
@@ -37,7 +36,7 @@
             </tr>
         </thead>
         <!-- <a href="/geckos/{{gecko._id}}" class="link--card"> -->
-        <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse" class="gecko-card-table">
+        <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:searchTerm" class="gecko-card-table">
 
             <td>
                 <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>

@@ -2520,14 +2520,18 @@ th {
 .gecko-card .title {
   font-size: 20px;
 }
-/*.gecko-card tr:nth-of-type(even){
-    background: @evenRowColor;
-}*/
 .gecko-card tr {
   border-bottom: solid 1px #f0f0f0;
 }
 .gecko-card tr:not(.link--nohover):hover {
   background: #dcedc8;
+}
+/* Search box on Gecko List */
+.search-box {
+  width: 25%;
+  margin: 10px;
+  border: solid 1px #bdbdbd;
+  padding: 5px;
 }
 /* Gecko Detail */
 .gecko-detail-card {

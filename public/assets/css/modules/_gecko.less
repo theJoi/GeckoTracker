@@ -24,9 +24,6 @@
     padding: 0;
 }
 
-/*.gecko-card tr:nth-of-type(even){
-    background: @evenRowColor;
-}*/
 .gecko-card tr {
      border-bottom: solid 1px @evenRowColor;
 }
@@ -34,7 +31,13 @@
 .gecko-card tr:not(.link--nohover):hover {
     background: @lightPrimaryColor;
 }
-
+/* Search box on Gecko List */
+.search-box {
+    .col-1-4;
+    margin: 10px;
+    border: solid 1px @dividerColor;
+    padding: 5px;
+}
 
 /* Gecko Detail */
 
