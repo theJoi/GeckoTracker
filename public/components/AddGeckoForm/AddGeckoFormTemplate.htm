@@ -72,6 +72,7 @@
                     </select>
                 </div>
             </div>
+            <!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
             <div class="row">
                 <div class="col-1-4">
                     <label>Mother</label>
@@ -89,13 +90,16 @@
                 </div>
             </div>
             <div class="row center">
-            <button ng-click="submitForm()">Add Gecko</button>
+                <button ng-click="submitForm()">Add Gecko</button>
             </div>
-            <div class="form-feedback"><p>{{validationMsg}}</p>
-            </div>
-        </div>
     </form>
+    <div class="form-feedback">
+        <p>{{validationMsg}}</p>
+    </div>
+    </div>
+
     <!-- PARENT PICKER MODAL -->
+     <!-- TODO: add ability to close modal by clicking outside of it -->
     <div ng-show='parentModal.shown' class="black-out">
         <div ng-show='parentModal.shown' class='modal'>
             <table>
@@ -130,7 +134,7 @@
 
                     </tr>
                 </thead>
-                <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:genderFilter | filter:parentSearchTerm" class="gecko-card-table">
+                <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:'adult' | filter:'!unknown' | filter:genderFilter | filter:parentSearchTerm" class="gecko-card-table">
 
                     <td>
                         <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
@@ -138,7 +142,7 @@
                         <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
                     </td>
                     <td><a href="#" ng-click="setParent(genderFilter,gecko)"><strong>{{gecko.name}}</strong></td>
-            <td>{{gecko.userId}}</a></td>
+                    <td>{{gecko.userId}}</a></td>
                     <td>{{gecko.stage}}</td>
                     </a>
                 </tr>

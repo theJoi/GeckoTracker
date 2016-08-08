@@ -33,16 +33,16 @@ angular.module('geckoTracker')
 
                 $scope.submitForm = function () {
                     console.log("submit form called");
-                    if (($scope.form.status === "dead" || $scope.form.status === "sold") && $scope.form.location === "") {
-                        $scope.form.location = "not applicable";
-                    }
-
+                    console.log($scope.form);
                     geckoService.addGecko($scope.form).then(function success(response) {
                         $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
                         console.log("The gecko named '" + $scope.form.name + "' has successfully been added.");
                         $scope.showForm = false;
+                        $scope.$apply();
                     }, function error(response) {
                         $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
+                        console.log("Uh oh. Error occured, gecko not added. Please try again.");
+                        console.log(response);
                     });
                 };
 
@@ -60,15 +60,13 @@ angular.module('geckoTracker')
                             name: gecko.name,
                             userId: gecko.userID
                         };
-                    } else if (gender === "male") {
+                    } else {
                         console.log("Father => " + gecko._id);
                         $scope.form.father = {
                             _id: gecko._id,
                             name: gecko.name,
                             userId: gecko.userID
                         };
-                    } else {
-                        console.log("gender problem occured.");
                     }
                     $scope.parentModal.shown = false;
                 };
