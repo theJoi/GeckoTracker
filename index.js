@@ -42,7 +42,8 @@ app.post('/api/geckos', function(request, response) {
     var gData = request.body;
     geckos.addGecko(gData, function(err, result) {
 		if(err){
-			console.log("addGecko method failed.");
+			console.log("addGecko method failed:");
+            console.log(err);
             return;
         }
         response.json(result);
