@@ -43,8 +43,8 @@ var geckoSchema = new Schema({
     sex         : String, // Female/ Male/ Unknown
     morph       : String, // Gecko's morph type
     location    : String, // Current location of gecko
-    purchaseDate: Number,
-    birthdate   : Number,
+    purchaseDate: Date,
+    birthdate   : Date,
     mother      :
     {
         _id     : Schema.Types.ObjectId,
