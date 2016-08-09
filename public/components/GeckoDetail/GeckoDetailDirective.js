@@ -15,6 +15,25 @@ angular.module('geckoTracker')
 				$scope.gecko = gecko;
 				$scope.$apply();
 			});
+
+            $scope.editGeckoTop = function () {
+                $scope.editGeckoTop = true;
+            };
+
+             $scope.submitTopForm = function () {
+                    console.log("submit form called");
+                    console.log($scope.topform);
+                    geckoService.addGecko($scope.form).then(function success(response) {
+                        $scope.validationMsg = "The gecko named '" + $scope.form.name + "' has successfully been added.";
+                        console.log("The gecko named '" + $scope.form.name + "' has successfully been added.");
+                        $scope.showForm = false;
+                        $scope.$apply();
+                    }, function error(response) {
+                        $scope.validationMsg = "Uh oh. Error occured, gecko not added. Please try again.";
+                        console.log("Uh oh. Error occured, gecko not added. Please try again.");
+                        console.log(response);
+                    });
+                };
 		}
 	};
 });

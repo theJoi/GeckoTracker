@@ -131,7 +131,7 @@ th {
 /* Elements related to tables */
 .table-top {
   font-size: 20px;
-  height: 50px;
+  min-height: 50px;
   border-bottom: 1px solid #bdbdbd;
 }
 /* Input Stuff */
@@ -2621,13 +2621,14 @@ th {
   height: 50px;
   border-radius: 50%;
   vertical-align: middle;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 .thumbnail:hover {
-  border: solid 3px #536dfe;
+  border: solid 3px #8bc34a;
 }
 /* Add New Gecko Form */
-#form label {
+.add-gecko-form label,
+.gecko-detail-card label {
   color: #757575;
   font-weight: 700;
   font-size: 14px;
