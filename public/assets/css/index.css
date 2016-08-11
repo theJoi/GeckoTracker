@@ -30,7 +30,8 @@ a:hover:not(.link--nohover),
 .link:hover {
   color: #536dfe;
 }
-button {
+button,
+.button-primary {
   padding: 8px 10px;
   margin-top: 12px;
   background: #536dfe;
@@ -43,7 +44,8 @@ button {
   transition: all 0.5s;
   border-radius: 2px;
 }
-button:hover {
+button:hover,
+.button-primary:hover {
   background: #8698fe;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
@@ -56,9 +58,9 @@ body {
 i {
   padding: 5px;
 }
-label,
-select,
-input {
+label:not(.inline),
+select:not(.inline),
+input:not(.inline) {
   display: block;
   float: left;
   width: 100%;
@@ -67,14 +69,23 @@ select,
 input {
   border: 0;
   outline: none;
+  border-bottom: dotted 1px #f0f0f0;
+  font-family: "Roboto", sans-serif;
+  background: #fdfdfd;
+  line-height: 20px;
 }
-select:hover,
-input:hover {
+select:not(.input--readonly):hover,
+input:not(.input--readonly):hover {
   border-bottom: solid 2px #dcedc8 !important;
 }
 select:focus,
 input:focus {
   border-bottom: solid 2px #536dfe !important;
+  background: #ffffff;
+}
+.input--readonly:hover,
+.input--readonly:focus {
+  border-bottom: dotted 1px #f0f0f0;
 }
 table {
   width: 100%;
@@ -140,6 +151,15 @@ th {
   background: #8bc34a;
   font-weight: normal;
 }
+.link:hover {
+  cursor: pointer;
+}
+.link:hover:hover {
+  color: #536dfe;
+}
+input .inline {
+  background: pink;
+}
 .modal {
   background: white;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -197,6 +217,10 @@ th {
 }
 .small {
   font-size: 10px;
+}
+.placeholder {
+  color: #bdbdbd;
+  font-weight: 300;
 }
 /*
 |--------------------------------------------------------------------------
@@ -2600,6 +2624,7 @@ th {
   background: white;
   margin: 10px;
   padding: 5px;
+  width: unset;
 }
 /* Gecko Detail */
 .gecko-detail-card {
@@ -2607,7 +2632,6 @@ th {
   background: #fdfdfd;
   border-radius: 2px;
   padding: 10px;
-  line-height: 50px;
 }
 .gecko-detail-card .title {
   font-size: 20px;
@@ -2635,7 +2659,6 @@ th {
 }
 #form input,
 #form select {
-  border-bottom: dotted 1px #f0f0f0;
   line-height: 20px;
 }
 .add-gecko-form {
@@ -2650,6 +2673,9 @@ th {
 .form-feedback {
   color: #536dfe;
   border-top: solid 1px #bdbdbd;
+}
+.green {
+  color: #8bc34a;
 }
 .header {
   background: #689f38;

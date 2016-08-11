@@ -13,6 +13,7 @@ angular.module('geckoTracker')
 
 			geckoService.getGeckoDetails($scope.geckoId).then(function(gecko) {
 				$scope.gecko = gecko;
+                $scope.editform = gecko;
 				$scope.$apply();
 			});
 
@@ -20,7 +21,7 @@ angular.module('geckoTracker')
                 $scope.editGeckoTop = true;
             };
 
-             $scope.submitTopForm = function () {
+             $scope.submitEditForm = function () {
                     console.log("submit form called");
                     console.log($scope.topform);
                     geckoService.addGecko($scope.form).then(function success(response) {
