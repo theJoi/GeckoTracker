@@ -63,23 +63,28 @@ angular.module('geckoTracker')
             // NOTE: Only the service itself (this thing) probably needs to call this directly (through getGeckos).
             fetchGeckos: fetchGeckos,
 
-            getGeckoDetails: function(id) {
+            getGeckoDetails: function (id) {
                 return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'GET',
                         url: '/api/geckos/' + id
                     }).then(function success(response) {
-                        if (response.data.error)
-                            reject(response.data.error);
-                        else {
-                            fulfill(response.data);
-                        }
-                    }, function error(response) {
-                        reject("Failed to contact server");
-                    });
+                            if (response.data.error)
+                                reject(response.data.error);
+                            else {
+                                if (response.data.birthdate)
+                                    response.data.birthdate = new Date(response.data.birthdate);
+                                if (response.data.purchaseDate)
+                                    response.data.purchaseDate = new Date(response.data.purchaseDate);
+                                fulfill(response.data);
+                            }
+                        },
+                        function error(response) {
+                            reject("Failed to contact server");
+                        });
                 });
             },
-            
+
             addGecko: function (properties) {
                 return new Promise(function (fulfill, reject) {
                     $http({
@@ -174,7 +179,7 @@ angular.module('geckoTracker')
 
             createGeckoEvent: function (geckoId, properties) {
                 console.log("createGeckoEvent", geckoId, properties);
-                return new Promise(function(fulfill, reject) {
+                return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'POST',
                         url: "/api/geckos/" + geckoId + "/events",
@@ -192,7 +197,7 @@ angular.module('geckoTracker')
             },
 
             deleteGeckoEvent: function (eventId) {
-                return new Promise(function(fulfill, reject) {
+                return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'DELETE',
                         url: "/api/events/" + eventId
@@ -209,7 +214,7 @@ angular.module('geckoTracker')
             },
 
             updateGeckoEvent: function (eventId, properties) {
-                return new Promise(function(fulfill, reject) {
+                return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'PUT',
                         url: "/api/events/" + eventId,

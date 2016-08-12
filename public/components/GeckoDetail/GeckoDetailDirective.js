@@ -10,22 +10,15 @@ angular.module('geckoTracker')
                 // $scope.geckos = [];
                 $scope.isLoaded = false; // use to trigger loading spinner
                 $log.debug("GeckoDetail directive's controller instantiated");
-
-console.log($scope.geckoDetail);
-console.log("orginal birthdate: " + $scope.geckoDetail.birthdate);
-
-
-                /*geckoService.getGeckoDetails($scope.geckoId).then(function (gecko) {
-                    $scope.gecko = gecko;
-
-                    $scope.$apply();
-                });*/
-
+ $scope.geckos = [];
+                console.log($scope.geckoDetail);
+                                $scope.parentModal = {
+                    shown: false
+                };
 
                 $scope.resetForm = function () {
                     $scope.editform = angular.copy($scope.geckoDetail);
-                    console.log("edit form copied");
-                    console.log($scope.editform.name);
+                    $scope.edit.$setPristine();
                 };
 
                 $scope.submitEditForm = function () {
@@ -37,6 +30,8 @@ console.log("orginal birthdate: " + $scope.geckoDetail.birthdate);
                         if ($scope.editform.hasOwnProperty(property)) {
                             if (property !== "_id" && $scope.editform[property] === $scope.geckoDetail[property]) {
                                 delete $scope.editform[property];
+                            } else {
+                                $scope.geckoDetail[property] = $scope.editform[property];
                             }
                         }
                     }
@@ -51,7 +46,7 @@ console.log("orginal birthdate: " + $scope.geckoDetail.birthdate);
                         console.log("Uh oh. Error occured, gecko not updated. Please try again.");
                         console.log(response);
                     });
-                    $scope.editGeckoForm.$setPristine();
+
                     $scope.showEditMode = false;
                     $scope.resetForm();
                 };
@@ -60,7 +55,7 @@ console.log("orginal birthdate: " + $scope.geckoDetail.birthdate);
                     console.log(attribute);
                     console.log("original value: " + $scope.geckoDetail[attribute]);
                     $scope.editform[attribute] = $scope.geckoDetail[attribute];
-                    //   $scope.editGeckoForm.attribute.$setPrinstine();
+                    $scope.edit[attribute].$setPristine();
                 };
 
                 $scope.triggerEditMode = function () {
@@ -70,15 +65,44 @@ console.log("orginal birthdate: " + $scope.geckoDetail.birthdate);
                         $scope.resetForm();
                         $scope.showEditMode = true;
                     }
-                    console.log("copy birthdate:" + $scope.editform.birthdate);
+                    console.log("copy birthdate: " + $scope.editform.birthdate);
                 };
 
                 $scope.deleteGecko = function (id, name) {
                     geckoService.removeGecko(id).then(function () {
-
                         $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
                     });
                 };
+
+                  $scope.showParentModal = function (gender) {
+                    console.log("show parent modal triggered.");
+                    geckoService.getGeckos().then(function (geckos) {
+                        $scope.geckos = geckos;
+                        $scope.$apply();
+                });
+                    $scope.genderFilter = gender;
+                    $scope.parentModal.shown = true;
+                };
+
+                $scope.setParent = function (gender, gecko) {
+                    if (gender === "female") {
+                        console.log("Mother => " + gecko._id);
+                        $scope.editform.mother = {
+                            _id: gecko._id,
+                            name: gecko.name,
+                            userId: gecko.userID
+                        };
+                    } else {
+                        console.log("Father => " + gecko._id);
+                        $scope.editform.father = {
+                            _id: gecko._id,
+                            name: gecko.name,
+                            userId: gecko.userID
+                        };
+                    }
+                    $scope.parentModal.shown = false;
+                };
+
             }
         };
     });
