@@ -1,18 +1,19 @@
 <!-- CONTAINER FOR GECKO DETAILED INFORMATION -->
-<div class='gecko-detail'>
-    <div class="gecko-detail-card grid">
+<div class='gecko-detail' ng-if="geckoDetail.name">
+    <div class="gecko-detail-card">
         <form name="editGeckoForm" id="editform">
-            <div class='table-top'>
+            <div class='table-top grid'>
                 <div class="title col-2-3">
                     <img class="thumbnail" src="http://natgeo.petsmart.com/content/img/leopard-gecko/leopard-gecko-fun-facts.jpg">
 
                     <span ng-hide="showEditMode" class="bold">{{geckoDetail.name}}</span>
-                    <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.name">
+                    <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.name" name="name">
+                    <span ng-show="editGeckoForm.name.$dirty"><i class='fa fa-undo link green' ng-click="undo('name')" title="Undo change"></i></span>
 
                     <span ng-hide="showEditMode">
-                    <i class='fa fa-mars male' ng-if="gecko.sex == 'male'" title="male"></i>
-                    <i class='fa fa-venus female' ng-if="gecko.sex == 'female'" title="female"></i>
-                    <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'" title="gender unknown"></i>
+                    <i class='fa fa-mars male' ng-if="geckoDetail.sex == 'male'" title="male"></i>
+                    <i class='fa fa-venus female' ng-if="geckoDetail.sex == 'female'" title="female"></i>
+                    <i class='fa fa-question unknown' ng-if="geckoDetail.sex == 'unknown'" title="gender unknown"></i>
                     </span>
                     <select ng-model="editform.sex" ng-show="showEditMode" class="inline">
                         <option value="male">Male</option>
@@ -22,70 +23,95 @@
 
 
                     <span class="table-header"> ID:</span>
-                    <span ng-class="{placeholder: !geckoDetail.userId}" ng-hide="showEditMode">
+                    <span ng-class="{placeholder: !geckoDetail.userId}" ng-hide="showEditMode" name="userId">
                          {{geckoDetail.userId || "(no ID entered)"}}</span>
-                    <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.userId">
+                    <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.userId" name="userId">
+                    <span ng-show="editGeckoForm.userId.$dirty"><i class='fa fa-undo link green' ng-click="undo('userId')" title="Undo change"></i></span>
 
                 </div>
                 <div class="right col-1-3">
                     <a href="/"><i class='fa fa-compress'></i></a>
-                    <i class='fa fa-edit link' ng-click="showEditMode=!showEditMode" title="Enter edit mode"></i>
+                    <i class='fa fa-edit link' ng-click="triggerEditMode()" title="Enter edit mode"></i>
                     <i class='fa fa-trash link' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)" title="Delete this gecko"></i>
                 </div>
             </div>
             <div class="grid">
                 <div class="row">
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Morph</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.morph}">{{geckoDetail.morph || "(no morph entered)"}}</span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.morph}">{{geckoDetail.morph || "(no morph entered)"}}</span>
                         <input ng-show="showEditMode" type="text" ng-model="editform.morph" name="morph" class="inline">
-                        <span ng-show="editGeckoForm.morph.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-show="editGeckoForm.morph.$dirty"><i class='fa fa-undo link green' ng-click="undo('morph')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Location</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.location}">{{geckoDetail.location || "(no Location entered)"}}</span>
-                        <input ng-show="showEditMode" type="text" ng-model="editform.location" class="inline">
-                        <span ng-show="editGeckoForm.location.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.location}">{{geckoDetail.location || "(no Location entered)"}}</span>
+                        <input ng-show="showEditMode" type="text" ng-model="editform.location" class="inline" name="location">
+                        <span ng-show="editGeckoForm.location.$dirty"><i class='fa fa-undo link green' ng-click="undo('location')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Status</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.status}">{{geckoDetail.status || "(no status entered)"}}</span>
-                        <select ng-show="showEditMode" ng-model="editform.status" class="inline">
-                            <option value="unknown" selected>Unknown</option>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.status}">{{geckoDetail.status || "(no status entered)"}}</span>
+                        <select ng-show="showEditMode" ng-model="editform.status" class="inline" name="status">
+                            <option value="unknown">Unknown</option>
                             <option value="normal">Normal</option>
                             <option value="gravid">Gravid</option>
                             <option value="sold">Sold</option>
                             <option value="dead">Dead</option>
                         </select>
-                        <span ng-show="editGeckoForm.status.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-show="editGeckoForm.status.$dirty"><i class='fa fa-undo link green' ng-click="undo('status')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
+                    <div class="col-1-5">
+                        <label>Stage</label>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.stage}">{{geckoDetail.stage || "(not entered)"}}</span>
+                        <select ng-show="showEditMode" ng-model="editform.stage" class="inline" name="stage">
+                            <option value="unknown">Unknown</option>
+                            <option value="adult">Adult</option>
+                            <option value="hatchling">Hatchling</option>
+                            <option value="egg">Egg</option>
+                        </select>
+                        <span ng-show="editGeckoForm.stage.$dirty"><i class='fa fa-undo link green' ng-click="undo('stage')" title="Undo change"></i></span>
+                    </div>
+
+                    <div class="col-1-5">
                         <label>Weight</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.currWeight}">{{geckoDetail.currWeight || "(no weight entered)"}}</span>
-                        <span ng-show="showEditMode" class="hightlight">Use Event Table to modify weight</span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.currWeight}">{{geckoDetail.currWeight || "(no weight entered)"}}</span>
+                        <span ng-show="showEditMode" class="highlight small">Use Event Table to modify weight</span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Birthdate</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.birthdate}">{{geckoDetail.birthdate | date:'mediumDate' || "(no date entered)"}}</span>
-                        <input ng-show="showEditMode" type="date" ng-model="editform.birthdate">
-                        <span ng-show="editGeckoForm.birthdate.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.birthdate}">{{geckoDetail.birthdate || "(no date entered)" | date:'mediumDate'}}</span>
+                        <input ng-show="showEditMode" type="date" ng-model="editform.birthdate" name="birthdate">
+                        <span ng-show="editGeckoForm.birthdate.$dirty"><i class='fa fa-undo link green' ng-click="undo('birthdate')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Purchased</label>
-                        <span ng-hide="showEditMode"  ng-class="{placeholder: !geckoDetail.purchaseDate}">{{geckoDetail.purchaseDate | date:'mediumDate' || "(no date entered)"}}</span>
-                        <input type="date" placeholder="date of purchase" ng-model="editform.purchaseDate">
-                        <span ng-show="editGeckoForm.purchaseDate.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.purchaseDate}">{{geckoDetail.purchaseDate || "(no date entered)" | date:'mediumDate' }}</span>
+                        <input ng-show="showEditMode" type="date" ng-model="editform.purchaseDate" name="purchaseDate">
+                        <span ng-show="editGeckoForm.purchaseDate.$dirty"><i class='fa fa-undo link green' ng-click="undo('purchaseDate')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
+                    <div class="col-1-5">
                         <label>Mother</label>
-                         <span ng-hide="showEditMode">{{geckoDetail.mother.name || "(parent not entered)"}}</span>
-                        <input ng-show="showEditMode" type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
-                        <span ng-show="editGeckoForm.mother.$dirty"><i class='fa fa-undo link green' ng-click="undo(morph)" title="Undo change"></i></span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.mother}">{{geckoDetail.mother.name || "(parent not entered)"}}</span>
+                        <input ng-show="showEditMode" type="text" ng-model="editform.mother.name" readonly ng-click="showParentModal('female')" name="mother">
+                        <span ng-show="editGeckoForm.mother.$dirty"><i class='fa fa-undo link green' ng-click="undo('mother')" title="Undo change"></i></span>
                     </div>
-                    <div class="col-1-4">
-                   <span ng-hide="showEditMode">{{geckoDetail.mother.userId || "(no ID entered)"}}</span> Father: <span ng-hide="showEditMode">{{geckoDetail.father.name || "(parent entered)"}}</span> : <span ng-hide="showEditMode">{{geckoDetail.father.userId || "(no ID entered)"}}</span>
+                    <div class="col-1-5">
+                        <label>Father</label>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.father}">{{geckoDetail.father.name || "(parent not entered)"}}</span>
+                        <input ng-show="showEditMode" type="text" ng-model="editform.father.name" readonly ng-click="showParentModal('!female')" name="father">
+                        <span ng-show="editGeckoForm.father.$dirty"><i class='fa fa-undo link green' ng-click="undo('father')" title="Undo change"></i></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-2">
+                        <label>Notes</label>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.notes}">{{geckoDetail.notes || "(blank)"}}</span>
+                        <input ng-show="showEditMode" type="text" ng-model="editform.notes" name="notes">
+                        <span ng-show="editGeckoForm.notes.$dirty"><i class='fa fa-undo link green' ng-click="undo('notes')" title="Undo change"></i></span>
+
                     </div>
                 </div>
 
@@ -93,6 +119,7 @@
             <div class="row center" ng-show="showEditMode">
                 <button ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
                     SAVE CHANGES</button>
+                <button ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>
                 <button ng-click="showEditMode=false" class="button--secondary"><i class='fa fa-times'></i>CANCEL</button>
             </div>
     </div>

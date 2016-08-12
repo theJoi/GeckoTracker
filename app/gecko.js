@@ -34,10 +34,7 @@ var geckoSchema = new Schema({
         type    :String,  // Name of gecko
         required: true
     },
-    userId      : {
-        type    : String, // External ID number
-        required: true
-    },
+    userId      : String, // External ID number
     stage       : String, // {egg, hatchling, or adult}
     status      : String, // Options are {normal/gravid/egg/sold/dead}
     sex         : String, // Female/ Male/ Unknown

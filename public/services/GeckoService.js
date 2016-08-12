@@ -134,7 +134,7 @@ angular.module('geckoTracker')
 
                     $http({
                         method: 'PUT',
-                        url: "/api/geckos/" + properties._id,
+                        url: "/api/geckos/" + properties._id + "/edit",
                         data: properties
                     }).then(function success(response) {
                         if (response.data.error) {
