@@ -217,7 +217,7 @@ angular.module('geckoTracker')
                 return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'PUT',
-                        url: "/api/events/" + eventId,
+                        url: "/api/events/" + eventId + "/edit",
                         data: properties
                     }).then(function success(response) {
                         if (response.data.error) {

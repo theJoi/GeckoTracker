@@ -25,14 +25,14 @@
         </tr>
         <tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
 			<td>
-				<i class="material-icons" ng-if='!event.selected' ng-click='event.selected = true'>check_box_outline_blank</i>
-				<i class="material-icons selected" ng-if='event.selected' ng-click='event.selected = false'>check_box</i>
+				<i class="material-icons" ng-if='!isEventSelected(event)' ng-click='selectEvent(event)'>check_box_outline_blank</i>
+				<i class="material-icons selected" ng-if='isEventSelected(event)' ng-click='unselectEvent(event)'>check_box</i>
 			</td>
             <td>{{event.date | date: 'fullDate'}}</td>
             <td>{{event.type | prettyEventType}}</td>
             <td>
-				<span ng-if="event.type == 'weighed'"><span class='info-label'>Weight</span> {{event.info.weight}}</span>
-				<span ng-if="event.type == 'laidClutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
+				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}</span>
+				<span ng-if="event.type == 'clutched'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
             <td>{{event.notes}}</td>
         </tr>
@@ -40,6 +40,8 @@
 			<td colspan=5 class='empty-indicator'>No events match your filter</td>
 		</tr>
     </table>
+
+	<button style='margin: 10px;' ng-if='selectedEventsCount() == 1' ng-click='deleteSelectedEvent()'>Delete</button>
 
 	<div class='add-gecko-event-form'>
 		<div class='field'>
@@ -49,18 +51,21 @@
 		<div class='field'>
 			<label>Type</label>
 			<select ng-model='options.type'>
-				<option value='hatched'>Hatched</option>
-				<option value='laidClutch'>Laid Clutch</option>
-				<option value='weighed'>Weighed</option>
+				<option value='laid'>Laid</option>
+				<option value='hatch'>Hatched</option>
+				<option value='purchase'>Purchased</option>
+				<option value='death'>Died</option>
+				<option value='clutched'>Laid Clutch</option>
+				<option value='weight'>Weighed</option>
 				<option value='shed'>Shed</option>
 				<option value='note'>Note</option>
 			</select>
 		</div>
-		<div class='field' ng-if='options.type == "weighed"'>
+		<div class='field' ng-if='options.type == "weight"'>
 			<label>Weight</label>
 			<input type='number' ng-model='options.info.weight' min=1 placeholder=50></input>
 		</div>
-		<div class='field' ng-if='options.type == "laidClutch"'>
+		<div class='field' ng-if='options.type == "clutched"'>
 			<label>Eggs</label>
 			<input type='number' ng-model='options.info.eggs' placeholder=2></input>
 		</div>
@@ -68,7 +73,10 @@
 			<label>Note</label>
 			<input type='text' class='note' ng-model='options.notes' placeholder="Enter a note..."/>
 		</div>
-		<div class='field'>
+		<div class='field' ng-if='selectedEventsCount() == 1'>
+			<button ng-click='updateSelectedEvent()'>Update Event</button>
+		</div>
+		<div class='field' ng-if='selectedEventsCount() != 1'>
 			<button ng-click='addEvent()'>Add Event</button>
 		</div>
 	</div>

@@ -51,10 +51,14 @@ angular.module('geckoTracker')
                         if (foo[i].trim() === '')
                             continue;
                         switch (foo[i]) {
+						case 'laid':
+						case 'hatch':
+						case 'purchase':
+						case 'death':
                         case 'note':
                         case 'shed':
-                        case 'weighed':
-                        case 'laidclutch':
+                        case 'weight':
+                        case 'clutched':
                             if (value.type.toLowerCase() != foo[i]) return false;
                             break;
                         default:
@@ -85,18 +89,88 @@ angular.module('geckoTracker')
 
                     geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function () {
                         toastr.success("Event added");
-                        $scope.options.notes = '';
-                        $scope.options.info = {};
-                        $scope.options.date = new Date();
+						resetAddEventOptions();
                         reloadEvents();
                     });
                 };
+				
+				function resetAddEventOptions() {
+					$scope.options.notes = '';
+					$scope.options.info = {};
+					$scope.options.date = new Date();
+				}
+				
+				$scope.selectedEvents = {};
+				
+				$scope.isEventSelected = function(event) {
+					return event._id in $scope.selectedEvents;
+				}
+				
+				$scope.selectEvent = function(event) {
+					console.log("selectEvent", event);
+					if(!$scope.isEventSelected(event)) {
+						$scope.selectedEvents[event._id] = event;
+					}
+					if($scope.selectedEventsCount() == 1) {
+						setOptionsFromEvent(event);
+					} else {
+						resetAddEventOptions();
+					}
+				}
+				
+				function setOptionsFromEvent(event) {
+					$scope.options.date = new Date(event.date);
+					$scope.options.type = event.type;
+					$scope.options.notes = event.notes;
+					switch(event.type) {
+						case 'weight':
+							$scope.options.info = { weight: event.info.weight };
+							break;
+						case 'clutched':
+							$scope.options.info = { eggs: event.info.eggs };
+					}
+				}
+				
+				$scope.unselectEvent = function(event) {
+					if(!$scope.isEventSelected(event))
+						return;
+					delete $scope.selectedEvents[event._id];
+
+					if($scope.selectedEventsCount() == 1) {
+						var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
+						setOptionsFromEvent(event);
+					} else {
+						resetAddEventOptions();
+					}
+				}
+				
+				$scope.selectedEventsCount = function() {
+					return Object.keys($scope.selectedEvents).length;
+				}
+				
+				$scope.deleteSelectedEvent = function() {
+					var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
+					geckoService.deleteGeckoEvent(event._id).then(function() {
+						$scope.unselectEvent(event);
+                        toastr.success("Event deleted");
+						reloadEvents();
+					});
+				}
+				
+				$scope.updateSelectedEvent = function() {
+					var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
+					geckoService.updateGeckoEvent(event._id, $scope.options).then(function() {
+						$scope.unselectEvent(event);
+                        toastr.success("Event updated");
+						reloadEvents();
+					});
+				}
             }
         };
     })
     .filter('prettyEventType', function () {
         return function (val) {
-            if (val == 'laidClutch') return "Laid clutch";
+            if (val == 'clutched') return "Laid clutch";
             return val[0].toUpperCase() + val.substring(1);
         };
     });
