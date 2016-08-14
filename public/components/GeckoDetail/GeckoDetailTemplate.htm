@@ -31,9 +31,11 @@
 
                 </div>
                 <div class="right col-1-3">
-                    <a href="/"><i class='fa fa-compress'></i></a>
-                    <i class='fa fa-edit link' ng-click="triggerEditMode()" title="Enter edit mode"></i>
-                    <i class='fa fa-trash link' ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)" title="Delete this gecko"></i>
+
+
+                    <i class="material-icons link" ng-click="triggerEditMode()" title="Enter edit mode">mode_edit</i>
+                    <i class="material-icons link" ng-click="deleteGecko(geckoDetail._id,geckoDetail.name)" title="Delete this gecko">delete</i>
+                    <a href="/"><i class="material-icons">close</i></a>
                 </div>
             </div>
             <div class="grid">
