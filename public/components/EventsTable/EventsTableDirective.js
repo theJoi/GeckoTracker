@@ -58,7 +58,7 @@ angular.module('geckoTracker')
                         case 'note':
                         case 'shed':
                         case 'weight':
-                        case 'clutched':
+                        case 'clutch':
                             if (value.type.toLowerCase() != foo[i]) return false;
                             break;
                         default:
@@ -126,7 +126,7 @@ angular.module('geckoTracker')
 						case 'weight':
 							$scope.options.info = { weight: event.info.weight };
 							break;
-						case 'clutched':
+						case 'clutch':
 							$scope.options.info = { eggs: event.info.eggs };
 					}
 				}
@@ -170,7 +170,7 @@ angular.module('geckoTracker')
     })
     .filter('prettyEventType', function () {
         return function (val) {
-            if (val == 'clutched') return "Laid clutch";
+            if (val == 'clutch') return "Laid clutch";
             return val[0].toUpperCase() + val.substring(1);
         };
     });
