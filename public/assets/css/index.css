@@ -2694,3 +2694,58 @@ input .inline {
   margin-bottom: 20px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+.gecko-metrics {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  background: #404040;
+  color: #00c000;
+  font-family: 'Roboto', sans-serif;
+}
+.gecko-metrics .metric {
+  margin-right: 30px;
+}
+.gecko-metrics .metric.metric-total .units {
+  color: #e6bab8;
+}
+.gecko-metrics .metric.metric-total .value {
+  color: #db4844;
+}
+.gecko-metrics .metric.metric-male .units {
+  color: #c7c9cf;
+}
+.gecko-metrics .metric.metric-male .value {
+  color: #6c78ab;
+}
+.gecko-metrics .metric.metric-female .units {
+  color: #ecd5e0;
+}
+.gecko-metrics .metric.metric-female .value {
+  color: #d76b9e;
+}
+.gecko-metrics .metric.metric-eggs .units {
+  color: #ebebd0;
+}
+.gecko-metrics .metric.metric-eggs .value {
+  color: #d9d863;
+}
+.gecko-metrics .units {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 24px;
+  padding-top: 4px;
+  padding-left: 4px;
+  text-transform: capitalize;
+  font-weight: medium;
+}
+.gecko-metrics .units .subunits {
+  line-height: 16px;
+  font-size: 16px;
+}
+.gecko-metrics .value {
+  display: inline;
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: bold;
+  vertical-align: top;
+}
