@@ -20,8 +20,10 @@ exports.init = function (db, callback) {
         db = "mongodb://localhost/geckotracker";
     }
     mongoose.connect(db);
-    mongoose.connection.on('error', function(err) { callback(err); });
-    mongoose.connection.once('open', function() {
+    mongoose.connection.on('error', function (err) {
+        callback(err);
+    });
+    mongoose.connection.once('open', function () {
         console.log("Database initilized.");
         callback(null);
     });
@@ -30,54 +32,49 @@ exports.init = function (db, callback) {
 
 // SCHEMAS  ============++++===============================================
 var geckoSchema = new Schema({
-    name        : {
-        type    :String,  // Name of gecko
+    name: {
+        type: String, // Name of gecko
         required: true
     },
-    userId      : String, // External ID number
-    stage       : String, // {egg, hatchling, or adult}
-    status      : String, // Options are {normal/gravid/egg/sold/dead}
-    sex         : String, // Female/ Male/ Unknown
-    morph       : String, // Gecko's morph type
-    location    : String, // Current location of gecko
+    userId: String, // External ID number
+    stage: String, // {egg, hatchling, or adult}
+    status: String, // Options are {normal/gravid/egg/sold/dead}
+    sex: String, // Female/ Male/ Unknown
+    morph: String, // Gecko's morph type
+    location: String, // Current location of gecko
     purchaseDate: Date,
-    birthdate   : Date,
-    mother      :
-    {
-        _id     : Schema.Types.ObjectId,
-        userId  : String,
-        name    : String
+    birthdate: Date,
+    mother: {
+        _id: Schema.Types.ObjectId,
+        userId: String,
+        name: String
     },
-    father      :
-    {
-        _id     : Schema.Types.ObjectId,
-        userId  : String,
-        name    : String
+    father: {
+        _id: Schema.Types.ObjectId,
+        userId: String,
+        name: String
     },
-    currWeight  : Number,
-    notes       : String
-    });
+    currWeight: Number,
+    notes: String
+});
 
 var eventSchema = new Schema({
-    geckoId    :
-    {
-        type    :Schema.Types.ObjectId,
+    geckoId: {
+        type: Schema.Types.ObjectId,
         required: true
     },
-    type        :
-    {
-        type    :String,
+    type: {
+        type: String,
         required: true
     },
-    date        :
-    {
-        type    :Date,
+    date: {
+        type: Date,
         required: true,
         default: Date.now
     },
-    info        : Schema.Types.Mixed,
-    warning     : Date,
-    notes       : String
+    info: Schema.Types.Mixed,
+    warning: Date,
+    notes: String
 });
 
 // MONGOOSE MODELS  =============================================================
@@ -100,7 +97,7 @@ exports.getGeckos = function (callback) {
 };
 
 // GetGecko function: Returns gecko by ID
-exports.getGecko = function (id ,callback) {
+exports.getGecko = function (id, callback) {
     Gecko.findById(id, function (err, gecko) {
         if (err) {
             callback(err, null);
@@ -131,8 +128,8 @@ exports.addGecko = function (gData, callback) {
 
 // removeGecko function: Removes gecko by id from database
 exports.removeGecko = function (id, callback) {
-    Gecko.findByIdAndRemove(id, function(err, removedGecko) {
-        if (err){
+    Gecko.findByIdAndRemove(id, function (err, removedGecko) {
+        if (err) {
             //console.log("Error occured. Unable to delete gecko:");
             //console.log(err);
             callback(err);
@@ -143,11 +140,14 @@ exports.removeGecko = function (id, callback) {
     });
 };
 
-exports.updateGecko = function(id, props, callback) {
+exports.updateGecko = function (id, props, callback) {
     // FIXME [x]: set options for findByIdAndUpdate
-    var options = {new: true, runValidators: true};
-    Gecko.findByIdAndUpdate(id, props, options, function(err, updatedGecko){
-        if(err){
+    var options = {
+        new: true,
+        runValidators: true
+    };
+    Gecko.findByIdAndUpdate(id, props, options, function (err, updatedGecko) {
+        if (err) {
             // FIXME [x] commented console logs, it's muddying up the test outpu
             console.log("Error occured. Unable to update gecko:");
             console.log(err);
@@ -159,8 +159,8 @@ exports.updateGecko = function(id, props, callback) {
 };
 
 // dropCollection function: Removes all geckos from collection
-exports.dropCollection = function(callback){
-    Gecko.remove({}, function(err) {
+exports.dropCollection = function (callback) {
+    Gecko.remove({}, function (err) {
         console.log('Collection removed.');
         callback(err);
     });
@@ -191,9 +191,11 @@ exports.getAllEvents = function (callback) {
 };
 
 // getEvents function: Return events for particular gecko by ID
-exports.getEvents = function(id ,callback) {
+exports.getEvents = function (id, callback) {
     // FIXME [x] Changed to geckoId indead of event _id
-    Event.find({geckoId: id}, function (err, events) {
+    Event.find({
+        geckoId: id
+    }, function (err, events) {
         if (err) {
             console.log("Unable to retrieve events from database:");
             console.log(err);
@@ -205,14 +207,17 @@ exports.getEvents = function(id ,callback) {
 
 // removeEvent function: Delete event by its id
 exports.removeEvent = function (id, callback) {
-    Event.findByIdAndRemove(id, function(err, removedEvent) {
-        if (err){
+    Event.findByIdAndRemove(id, function (err, removedEvent) {
+        if (err) {
             // FIXME
             // Please remove/comment these out
             console.log("Error occured. Unable to delete event:");
             console.log(err);
             callback(err);
             return;
+        }
+        if (removedEvent.type === 'weight') {
+
         }
         callback(null, removedEvent._id);
     });
@@ -222,7 +227,7 @@ exports.removeEvent = function (id, callback) {
 exports.addEvent = function (eventData, callback) {
     // FIXME [x] If no 'date' property is defined in eventData, you should create one set to the current date ( new Date() ) and set it.
     var event;
-    if(eventData.date === ""){
+    if (eventData.date === "") {
         eventData.date = new Date();
     }
     try {
@@ -238,16 +243,22 @@ exports.addEvent = function (eventData, callback) {
             callback(err);
             return;
         }
+        if(newEvent.type === 'weight'){
+            exports.setCurrWeight();
+        }
         callback(err, newEvent);
     });
 };
 
 // FIXME [x] created updateEvent
-exports.updateEvent = function(id, props, callback) {
+exports.updateEvent = function (id, props, callback) {
     // FIXME [x]: set options for findByIdAndUpdate
-    var options = {new: true, runValidators: true};
-    Event.findByIdAndUpdate(id, props, options, function(err, updatedEvent){
-        if(err){
+    var options = {
+        new: true,
+        runValidators: true
+    };
+    Event.findByIdAndUpdate(id, props, options, function (err, updatedEvent) {
+        if (err) {
             callback(err, null);
             return;
         }
@@ -255,18 +266,53 @@ exports.updateEvent = function(id, props, callback) {
     });
 };
 
+// Set Current Weight: gets most recent weight from event table
+exports.setCurrWeight = function (id, callback) {
+    Event.find({
+        geckoID: id,
+        type: 'weight'
+    }).sort({
+        date: -1
+    }).limit(1, function (err, event) {
+        if (err) {
+            console.log(err);
+            callback(err, null);
+            return;
+        }
+        console.log("event from getCurrWeight " + event);
+        Gecko.findById(id, function (err, gecko) {
+            if (err) {
+                console.log("unable to update current weight.");
+            }
+            if (gecko.currWeight !== event.info.weight) {
+                gecko.currWeight = event.info.weight;
+            }
+        });
+    });
+};
+
 // OTHER FUNCTIONS  =============================================================
 
-// Get Netrics Function: retrieves gecko statistics
-exports.getMetrics = function(callback) {
-	var metrics = {};
-	Gecko.count({sex: 'male'}, function(err, males) {
-		Gecko.count({sex: 'female'}, function(err, females) {
-			Gecko.count({stage: 'egg'}, function(err, eggs) {
-				var metrics = {males: males, females: females, eggs: eggs};
-				console.log(metrics);
-				callback(null, metrics);
-			})
-		});
-	});
+// Get Metrics Function: retrieves gecko statistics
+exports.getMetrics = function (callback) {
+    var metrics = {};
+    Gecko.count({
+        sex: 'male'
+    }, function (err, males) {
+        Gecko.count({
+            sex: 'female'
+        }, function (err, females) {
+            Gecko.count({
+                stage: 'egg'
+            }, function (err, eggs) {
+                var metrics = {
+                    males: males,
+                    females: females,
+                    eggs: eggs
+                };
+                console.log(metrics);
+                callback(null, metrics);
+            });
+        });
+    });
 };
