@@ -183,6 +183,17 @@ app.get('/timeline', function(request, response) {
     // TOTO complete timeline route
 });
 
+// METRICS
+app.get('/api/metrics', function(request, response) {
+    geckos.getMetrics(function(err, result) {
+        if(err) {
+            response.json({error: err});
+            return;
+        }
+        response.json(result);
+    });
+});
+
 // ROUTE TO NODE MODULES
 app.get('/node_modules/*', function(request, response) {
     //console.log(request.path);
