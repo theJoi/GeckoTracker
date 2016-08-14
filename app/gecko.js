@@ -135,7 +135,7 @@ exports.removeGecko = function (id, callback) {
             callback(err);
             return;
         }
-        //console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
+        console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
         callback(null, removedGecko._id);
     });
 };
