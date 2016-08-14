@@ -1,4 +1,187 @@
 .events-table {
+    width: 1200px;
+    margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+    background: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    padding: 0;
+
+    .title {
+        padding: 16px;
+        font-size: 20px;
+    }
+
+	.filter {
+		padding: 16px;
+		padding-top: 0;
+		display: flex;
+
+		i { color: rgba(0, 0, 0, 0.541176); }
+		i.search { padding-left: 0; }
+		i.close { padding-right: 0; cursor: pointer; }
+
+		input[type=text] {
+			flex-grow: 1;
+			border: 0;
+			font-family: Roboto, sans-serif;
+		}
+	}
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+
+        th {
+            text-align: left;
+            color: #909090;
+            font-size: 12px;
+			line-height: 14px;
+            border-bottom: solid 1px #e7e7e7;
+            height: 36px;
+            padding-left: 16px;
+            background: transparent;
+			&.sortable {
+				cursor: pointer;
+			}
+			i {
+				font-size: 16px;
+				line-height: 14px;
+				vertical-align: middle;
+				position: relative;
+				top: -1px;
+				color: #d0d0d0;
+			}
+        }
+        td {
+            height: 36px;
+            border-bottom: solid 1px #e7e7e7;
+            font-size: 14px;
+            padding-left: 16px;
+			.info-label {
+				color: #808080;
+			}
+
+			&.empty-indicator {
+				text-align: center;
+				color: #c0c0c0;
+			}
+
+			i {
+				font-size: 16px;
+				color: #808080;
+				cursor: pointer;
+				&.selected {
+					color: #00c000;
+				}
+			}
+        }
+        tr {
+        }
+        tr:hover td {
+            background: #f0f0f0;
+        }
+
+        th:nth-child(1) { width: 40px; }
+        th:nth-child(2) { width: 240px; }
+        th:nth-child(3) { width: 100px; }
+        th:nth-child(4) { width: 200px; }
+    }
+
+    .add-gecko-event-form {
+        padding: 16px;
+        display: flex;
+
+        select {
+            height: 26px;
+            border: 0;
+            outline: none;
+            padding-bottom: 1px;
+            &:hover {
+                padding-bottom: 0;
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                padding-bottom: 0;
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        button {
+            padding: 8px 10px;
+            margin-top: 12px;
+            background: #00c000;
+            font-weight: bold;
+            color: white;
+            border: 0;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+            cursor: pointer;
+            &:hover {
+                background: #00d000;
+            }
+        }
+
+        //input[type='text'] {
+        //    border: 0;
+        //    border-bottom: solid 1px #00c000;
+        //}
+
+        input[type=number] {
+            width: 50px;
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        input[type=date] {
+            padding: 2px;
+            font-family: Arial;
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        input[type=text] {
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        .note {
+            width: 100%;
+        }
+
+        .field {
+            label {
+                display: block;
+            }
+            font-size: 12px;
+            margin: 10px;
+        }
+
+    }
+}
+
+/* events table before merge
+
+.events-table {
     .card;
     padding: 0;
 
@@ -113,3 +296,4 @@
 
     }
 }
+*/

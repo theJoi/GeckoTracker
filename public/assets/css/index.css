@@ -2485,30 +2485,63 @@ input .inline {
   clip: auto;
 }
 .events-table {
+  width: 1200px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: white;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: #fdfdfd;
-  border-radius: 2px;
   padding: 0;
-}
-.events-table .title {
-  font-size: 20px;
 }
 .events-table .title {
   padding: 16px;
   font-size: 20px;
 }
+.events-table .filter {
+  padding: 16px;
+  padding-top: 0;
+  display: flex;
+}
+.events-table .filter i {
+  color: rgba(0, 0, 0, 0.541176);
+}
+.events-table .filter i.search {
+  padding-left: 0;
+}
+.events-table .filter i.close {
+  padding-right: 0;
+  cursor: pointer;
+}
+.events-table .filter input[type=text] {
+  flex-grow: 1;
+  border: 0;
+  font-family: Roboto, sans-serif;
+}
 .events-table table {
   table-layout: fixed;
+  width: 100%;
   border-collapse: collapse;
 }
 .events-table table th {
   text-align: left;
   color: #909090;
-  font-size: 14px;
-  border-bottom: solid 1px #bdbdbd;
+  font-size: 12px;
+  line-height: 14px;
+  border-bottom: solid 1px #e7e7e7;
   height: 36px;
   padding-left: 16px;
   background: transparent;
+}
+.events-table table th.sortable {
+  cursor: pointer;
+}
+.events-table table th i {
+  font-size: 16px;
+  line-height: 14px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  color: #d0d0d0;
 }
 .events-table table td {
   height: 36px;
@@ -2516,26 +2549,58 @@ input .inline {
   font-size: 14px;
   padding-left: 16px;
 }
+.events-table table td .info-label {
+  color: #808080;
+}
+.events-table table td.empty-indicator {
+  text-align: center;
+  color: #c0c0c0;
+}
+.events-table table td i {
+  font-size: 16px;
+  color: #808080;
+  cursor: pointer;
+}
+.events-table table td i.selected {
+  color: #00c000;
+}
 .events-table table tr:hover td {
   background: #f0f0f0;
 }
 .events-table table th:nth-child(1) {
-  width: 180px;
+  width: 40px;
 }
 .events-table table th:nth-child(2) {
-  width: 100px;
+  width: 240px;
 }
 .events-table table th:nth-child(3) {
+  width: 100px;
+}
+.events-table table th:nth-child(4) {
   width: 200px;
 }
 .events-table .add-gecko-event-form {
   padding: 16px;
   display: flex;
 }
+.events-table .add-gecko-event-form select {
+  height: 26px;
+  border: 0;
+  outline: none;
+  padding-bottom: 1px;
+}
+.events-table .add-gecko-event-form select:hover {
+  padding-bottom: 0;
+  border-bottom: solid 2px #c0ffc0;
+}
+.events-table .add-gecko-event-form select:focus {
+  padding-bottom: 0;
+  border-bottom: solid 2px #00c000;
+}
 .events-table .add-gecko-event-form button {
   padding: 8px 10px;
   margin-top: 12px;
-  background: #536dfe;
+  background: #00c000;
   font-weight: bold;
   color: white;
   border: 0;
@@ -2544,7 +2609,7 @@ input .inline {
   cursor: pointer;
 }
 .events-table .add-gecko-event-form button:hover {
-  background: #536dfe;
+  background: #00d000;
 }
 .events-table .add-gecko-event-form input[type=number] {
   width: 50px;
@@ -2589,6 +2654,124 @@ input .inline {
 .events-table .add-gecko-event-form .field label {
   display: block;
 }
+/* events table before merge
+
+.events-table {
+    .card;
+    padding: 0;
+
+    .title {
+        padding: 16px;
+        font-size: 20px;
+    }
+
+    table {
+        table-layout: fixed;
+        border-collapse: collapse;
+
+        th {
+            text-align: left;
+            color: #909090;
+            font-size: 14px;
+            border-bottom: solid 1px @dividerColor;
+            height: 36px;
+            padding-left: 16px;
+            background: transparent;
+        }
+        td {
+            height: 36px;
+            border-bottom: solid 1px #e7e7e7;
+            font-size: 14px;
+            padding-left: 16px;
+        }
+        tr {
+        }
+        tr:hover td {
+            background: #f0f0f0;
+        }
+
+        th:nth-child(1) { width: 180px; }
+        th:nth-child(2) { width: 100px; }
+        th:nth-child(3) { width: 200px; }
+    }
+
+    .add-gecko-event-form {
+        padding: 16px;
+        display: flex;
+
+
+
+        button {
+            padding: 8px 10px;
+            margin-top: 12px;
+            background: @accentColor;
+            font-weight: bold;
+            color: white;
+            border: 0;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+            cursor: pointer;
+            &:hover {
+                background: @accentColor;
+            }
+        }
+
+        //input[type='text'] {
+        //    border: 0;
+        //    border-bottom: solid 1px #00c000;
+        //}
+
+        input[type=number] {
+            width: 50px;
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        input[type=date] {
+            padding: 2px;
+            font-family: Arial;
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        input[type=text] {
+            border: 0;
+            outline: none;
+            &:hover {
+                border-bottom: solid 2px lighten(#00c000, 50%);
+            }
+            &:focus {
+                border-bottom: solid 2px #00c000;
+            }
+        }
+
+        .note {
+            width: 100%;
+        }
+
+        .field {
+            label {
+                display: block;
+            }
+            font-size: 12px;
+            margin: 10px;
+        }
+
+    }
+}
+*/
 /* For gender symbols, used on gecko list and gecko detail */
 .female {
   color: #981d1a;
