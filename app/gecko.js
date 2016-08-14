@@ -254,3 +254,19 @@ exports.updateEvent = function(id, props, callback) {
         callback(null, updatedEvent);
     });
 };
+
+// OTHER FUNCTIONS  =============================================================
+
+// Get Netrics Function: retrieves gecko statistics
+exports.getMetrics = function(callback) {
+	var metrics = {};
+	Gecko.count({sex: 'male'}, function(err, males) {
+		Gecko.count({sex: 'female'}, function(err, females) {
+			Gecko.count({stage: 'egg'}, function(err, eggs) {
+				var metrics = {males: males, females: females, eggs: eggs};
+				console.log(metrics);
+				callback(null, metrics);
+			})
+		});
+	});
+};
