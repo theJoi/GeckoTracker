@@ -1,19 +1,44 @@
 <div class='events-table material-card'>
-    <!-- FIXME: Fix event table layout -->
 	<div class='title'>Events</div>
+
+	<div class='filter'>
+		<i class="material-icons search">search</i>
+		<input type='text' placeholder="Search" ng-model="filter.search"></input>
+		<i class="material-icons close" ng-click="filter.search = ''">close</i>
+	</div>
+
     <table>
         <tr>
-            <th>Date</th>
-            <th>Event</th>
-            <th>Info</th>
-			<th>Notes</th>
+			<th><i class="material-icons">check_box_outline_blank</i></th>
+            <th class='sortable' ng-click="setSort('date')">
+				Date
+				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
+				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
+			</th>
+            <th class='sortable' ng-click="setSort('type')">Event</th>
+            <th>Details</th>
+			<th class='sortable' ng-click="setSort('notes')">
+				Notes
+				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
+				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
+			</th>
         </tr>
-        <tr ng-repeat='event in events'>
+        <tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
+			<td>
+				<i class="material-icons" ng-if='!event.selected' ng-click='event.selected = true'>check_box_outline_blank</i>
+				<i class="material-icons selected" ng-if='event.selected' ng-click='event.selected = false'>check_box</i>
+			</td>
             <td>{{event.date | date: 'fullDate'}}</td>
-            <td>{{event.type}}</td>
-            <td>{{event.info}}</td>
+            <td>{{event.type | prettyEventType}}</td>
+            <td>
+				<span ng-if="event.type == 'weighed'"><span class='info-label'>Weight</span> {{event.info.weight}}</span>
+				<span ng-if="event.type == 'laidClutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
+			</td>
             <td>{{event.notes}}</td>
         </tr>
+		<tr ng-if='filtered.length == 0'>
+			<td colspan=5 class='empty-indicator'>No events match your filter</td>
+		</tr>
     </table>
 
 	<div class='add-gecko-event-form'>
