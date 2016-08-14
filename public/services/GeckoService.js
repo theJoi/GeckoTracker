@@ -229,6 +229,21 @@ angular.module('geckoTracker')
                         reject("Failed to contact server");
                     });
                 });
+            },
+
+            getMetrics: function () {
+                return new Promise(function (fulfill, reject) {
+                    $http({
+                        method: 'GET',
+                        url: '/api/metrics'
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+                        fulfill(response.data);
+                    }, function error(response) {
+                        reject("Failed to get gecko metrics from server");
+                    });
+                });
             }
         };
     });
