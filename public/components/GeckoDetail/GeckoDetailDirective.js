@@ -6,13 +6,13 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoDetail/GeckoDetailTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService) {
+            controller: function ($scope, $http, $log, geckoService, $location) {
                 // $scope.geckos = [];
                 $scope.isLoaded = false; // use to trigger loading spinner
                 $log.debug("GeckoDetail directive's controller instantiated");
- $scope.geckos = [];
+                $scope.geckos = [];
                 console.log($scope.geckoDetail);
-                                $scope.parentModal = {
+                $scope.parentModal = {
                     shown: false
                 };
 
@@ -42,6 +42,7 @@ angular.module('geckoTracker')
                         $scope.showEditMode = false;
                         $scope.$apply();
                     }, function error(response) {
+                        //TODO: Change this to toastr message
                         $scope.validationMsg = "Uh oh. Error occured, gecko not updated. Please try again.";
                         console.log("Uh oh. Error occured, gecko not updated. Please try again.");
                         console.log(response);
@@ -69,17 +70,23 @@ angular.module('geckoTracker')
                 };
 
                 $scope.deleteGecko = function (id, name) {
-                    geckoService.removeGecko(id).then(function () {
+                    if (window.confirm("Are you sure you want to delete the gecko named " + name + "?")) {
+                        geckoService.removeGecko(id).then(function () {
                         $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
                     });
+                    $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
+
+                        $location.path('/');
+                    }
+
                 };
 
-                  $scope.showParentModal = function (gender) {
+                $scope.showParentModal = function (gender) {
                     console.log("show parent modal triggered.");
                     geckoService.getGeckos().then(function (geckos) {
                         $scope.geckos = geckos;
                         $scope.$apply();
-                });
+                    });
                     $scope.genderFilter = gender;
                     $scope.parentModal.shown = true;
                 };
