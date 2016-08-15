@@ -169,6 +169,12 @@ angular.module('geckoTracker')
         };
     })
     .filter('prettyEventType', function () {
+		var mapping = {
+			'clutch': 'Laid clutch',
+			'weight': 'Weight',
+			'laid': 'Laid',
+			'copulation': 'Copulation'
+		};
         return function (val) {
             if (val == 'clutch') return "Laid clutch";
             return val[0].toUpperCase() + val.substring(1);
