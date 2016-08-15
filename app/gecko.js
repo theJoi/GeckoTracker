@@ -217,7 +217,7 @@ exports.removeEvent = function (id, callback) {
             return;
         }
         if (removedEvent.type === 'weight') {
-
+            exports.setCurrWeight(removedEvent.geckoId, null);
         }
         callback(null, removedEvent._id);
     });
@@ -243,8 +243,8 @@ exports.addEvent = function (eventData, callback) {
             callback(err);
             return;
         }
-        if(newEvent.type === 'weight'){
-            exports.setCurrWeight();
+        if (newEvent.type === 'weight') {
+            exports.setCurrWeight(newEvent.geckoId, null);
         }
         callback(err, newEvent);
     });
@@ -262,34 +262,38 @@ exports.updateEvent = function (id, props, callback) {
             callback(err, null);
             return;
         }
+        if (updatedEvent.type === 'weight') {
+            exports.setCurrWeight(updatedEvent.geckoId, null);
+        }
         callback(null, updatedEvent);
     });
 };
 
 // Set Current Weight: gets most recent weight from event table
 exports.setCurrWeight = function (id, callback) {
-    Event.find({
-        geckoID: id,
+    console.log("setCurrWeight called. id " + id);
+    // models.user.findOne({}).sort({date_register: -1}).exec(callback);
+    Event.findOne({
+        geckoId: id,
         type: 'weight'
     }).sort({
         date: -1
-    }).limit(1, function (err, event) {
+    }).exec(function (err, event) {
         if (err) {
             console.log(err);
             callback(err, null);
             return;
         }
         console.log("event from getCurrWeight " + event);
-        Gecko.findById(id, function (err, gecko) {
-            if (err) {
-                console.log("unable to update current weight.");
+        Gecko.findByIdAndUpdate(id, {
+            $set: {
+                currWeight: event.info.weight
             }
-            if (gecko.currWeight !== event.info.weight) {
-                gecko.currWeight = event.info.weight;
-            }
-        });
+        }, function (err) {});
+
     });
 };
+
 
 // OTHER FUNCTIONS  =============================================================
 
