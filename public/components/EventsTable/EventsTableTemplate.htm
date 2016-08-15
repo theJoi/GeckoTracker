@@ -32,7 +32,7 @@
             <td>{{event.type | prettyEventType}}</td>
             <td>
 				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}</span>
-				<span ng-if="event.type == 'clutched'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
+				<span ng-if="event.type == 'clutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
             <td>{{event.notes}}</td>
         </tr>
@@ -55,7 +55,7 @@
 				<option value='hatch'>Hatched</option>
 				<option value='purchase'>Purchased</option>
 				<option value='death'>Died</option>
-				<option value='clutched'>Laid Clutch</option>
+				<option value='clutch'>Laid Clutch</option>
 				<option value='weight'>Weighed</option>
 				<option value='shed'>Shed</option>
 				<option value='note'>Note</option>
@@ -65,7 +65,7 @@
 			<label>Weight</label>
 			<input type='number' ng-model='options.info.weight' min=1 placeholder=50></input>
 		</div>
-		<div class='field' ng-if='options.type == "clutched"'>
+		<div class='field' ng-if='options.type == "clutch"'>
 			<label>Eggs</label>
 			<input type='number' ng-model='options.info.eggs' placeholder=2></input>
 		</div>
