@@ -62,7 +62,7 @@ angular.module('geckoTracker')
                             if (value.type.toLowerCase() != foo[i]) return false;
                             break;
                         default:
-                            if (value.notes.toLowerCase().indexOf(foo[i]) == -1)
+                            if (value.notes && value.notes.toLowerCase().indexOf(foo[i]) == -1)
                                 return false;
                         }
                     }
@@ -127,7 +127,11 @@ angular.module('geckoTracker')
 							$scope.options.info = { weight: event.info.weight };
 							break;
 						case 'clutch':
-							$scope.options.info = { eggs: event.info.eggs };
+							if(event.info && event.info.eggs)
+								$scope.options.info = { eggs: event.info.eggs };
+							else
+								$scope.options.info = { eggs: null };
+							break;
 					}
 				}
 				
@@ -177,6 +181,7 @@ angular.module('geckoTracker')
 		};
         return function (val) {
             if (val == 'clutch') return "Laid clutch";
+			if (val == 'hatch') return "Hatched";
             return val[0].toUpperCase() + val.substring(1);
         };
     });

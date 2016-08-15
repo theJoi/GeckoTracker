@@ -31,7 +31,7 @@
             <td>{{event.date | date: 'fullDate'}}</td>
             <td>{{event.type | prettyEventType}}</td>
             <td>
-				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}</span>
+				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}g</span>
 				<span ng-if="event.type == 'clutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
             <td>{{event.notes}}</td>
