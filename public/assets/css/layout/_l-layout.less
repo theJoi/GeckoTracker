@@ -10,14 +10,36 @@
     z-index: 2;
     border-right: 1px solid @dividerColor;
     border-bottom: 1px solid @dividerColor;
+    min-width: 200px;
 }
-.gecko-detail-card, .events-table{
-    width: 1200px;
-    margin: 30px auto;
-}
+
 
 .add-gecko-form {
     margin-bottom: 50px;
     padding-bottom: 25px;
 }
 
+.dashboard-main-container{
+    display:flex;
+    flex-direction: column;
+}
+
+.detail-main-container{
+   // display:flex;
+    //flex-direction: row;
+}
+.gecko-detail-card, .events-table{
+     border-right: 1px solid @dividerColor;
+    border-bottom: 1px solid @dividerColor;
+    flex: 1 1 50%;
+}
+
+.gecko-detail-card{
+    flex: 5 5 50%;
+}
+
+.graphs {
+    background: white;
+    border-bottom: 1px solid @dividerColor;
+    height: 302px;
+}

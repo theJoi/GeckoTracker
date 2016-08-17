@@ -1,13 +1,11 @@
 <!-- CONTAINER FOR GECKO INFORMATION -->
 <div>
     <div class='status-bar'>
-                <div class="col-1-2 left">{{statusMsg}}</div>
-        <div class="col-1-2 right">
-            <a href="/">GO BACK
-            </a>
-        </div>
+        <a href="/"><i class="material-icons">home</i>GO BACK</a>
     </div>
-<gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
-    
-    <events-table gecko-id="geckoDetail._id"></events-table>
+    <div class="detail-main-container">
+        <gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
+        <events-table gecko-id="geckoDetail._id"></events-table>
+        <div class="graphs">Graphs will be here</div>
+    </div>
 </div>

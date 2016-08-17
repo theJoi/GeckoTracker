@@ -1,6 +1,6 @@
 <!-- ADD GECKO FORM -->
 <!-- KENNY: This should be moved into a directive. -->
-<div ng-show='showForm' class="add-gecko-form">
+<div ng-show='showForm' class="add-gecko-form modal">
 
     <form name="addGeckoForm" id="form">
         <div class="table-top">Add Gecko Form
@@ -79,18 +79,13 @@
                     <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
                 </div>
                 <div class="col-1-4">
-                    <button ng-click="showParentModal('female')" class="button--secondary">Pick mother</button>
-                </div>
-                <div class="col-1-4">
                     <label>Father</label>
                     <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
-                </div>
-                <div class="col-1-4">
-                    <button ng-click="showParentModal('!female')" class="button--secondary">Pick father</button>
                 </div>
             </div>
             <div class="row center">
                 <button ng-click="submitForm()">Add Gecko</button>
+                <button ng-click="showForm=false" class="button--secondary">Cancel</button>
             </div>
     </form>
     <div class="form-feedback">
