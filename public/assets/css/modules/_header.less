@@ -1,4 +1,8 @@
-
+.header, .status-bar{
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
 .header {
     background: @darkPrimaryColor;
     color: @textColorLight;
@@ -8,13 +12,8 @@
 
 .status-bar {
     background: @primaryColor;
-
-    width: 100%;
-    border-bottom: solid 1px @dividerColor;
     color: @textColorLight;
-    padding: 5px 20px;
-    height: 25px;
-    line-height: 1em;
-    margin-bottom: 20px;
+    height: 35px;
+    line-height: 35px;
     .material-shadow;
 }

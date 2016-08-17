@@ -1,4 +1,17 @@
-.gecko-detail-card, .events-table, .gecko-card, .add-gecko-form {
+.flex-container {
+    display: flex;
+
+}
+
+.side-bar {
+    .flex-container;
+    flex-direction: column;
+    background: @superLightPrimary;
+    z-index: 2;
+    border-right: 1px solid @dividerColor;
+    border-bottom: 1px solid @dividerColor;
+}
+.gecko-detail-card, .events-table{
     width: 1200px;
     margin: 30px auto;
 }

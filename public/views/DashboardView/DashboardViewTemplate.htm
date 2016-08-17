@@ -3,14 +3,16 @@
     <div class="status-bar grid">
         <div class="col-1-2 left">{{statusMsg}}</div>
         <div class="col-1-2 right">
-            <a href="" ng-click="showForm = !showForm">
-                <span ng-if=!showForm>ADD NEW GECKO</span>
-                <span ng-if=showForm>GO BACK</span>
-            </a>
+
         </div>
     </div>
+    <div class="flex-container">
+        <div class="side-bar">
 <gecko-metrics></gecko-metrics>
+            <div class="notifications">This is where notifications will be</div>
+        </div>
   <add-gecko-form></add-gecko-form>
 <gecko-table></gecko-table>
+        </div>
 <!--<egg-table></egg-table> -->
 </div>

@@ -2,7 +2,11 @@
 <div class="gecko-card">
     <table>
         <div class="table-top">
+            <i class="material-icons">search</i>
              <input type="text" class="search-box inline" placeholder="Search List of Geckos" ng-model="searchTerm">
+                        <a href="" ng-click="showForm = !showForm" class="add-gecko-button">
+             <i class="material-icons">add_circle_outline</i>
+            </a>
         </div>
         <thead>
             <tr class="link--nohover">
@@ -43,7 +47,7 @@
                 <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
                 <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
             </td>
-            <td><a href="/geckos/{{gecko._id}}"><strong>{{gecko.name}}</strong></td>
+            <td><a href="/geckos/{{gecko._id}}">{{gecko.name}}</td>
             <td>{{gecko.userId}}</a></td>
             <td>{{gecko.stage}}</td>
             <td>{{gecko.morph}}</td>
