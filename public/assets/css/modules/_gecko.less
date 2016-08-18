@@ -48,24 +48,52 @@ margin-left: 15px;
     background: white;
 
 }
-.add-gecko-button {
+.fixed-action-buttons {
     position: absolute;
     right: 5px;
+    top: 5px;
 }
 .gecko-detail-card .table-header {
     //width: 75px;
     color: @textColorGray;
 }
 
-.thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.detail-thumbnail {
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
     vertical-align: middle;
-    margin-bottom: 5px;
+    margin: 5px 10px 10px 5px;
+    float:left;
     &:hover {
         border: solid 3px @primaryColor;
     }
+}
+
+.detail-name,.detail-gender,.detail-id{
+    display:inline-block;
+}
+
+.detail-name{
+    		font-size: 48px;
+		line-height: 48px;
+}
+
+.detail-gender,.detail-id{
+    		font-size: 24px;
+		line-height: 24px;
+}
+
+.detail-item {
+    flex: 1 1 100px;
+}
+
+.detail-item-2 {
+    flex: 2 0 200px;
+}
+
+.detail-item-4 {
+    flex: 4 0 200px;
 }
 
 /* Add New Gecko Form */
@@ -90,6 +118,11 @@ margin-left: 15px;
     border-top: solid 1px @dividerColor;
 }
 
-.green {
-    color: @primaryColor;
+
+
+.gecko-detail-container{
+    display: flex;
+    border-top: 1px solid @lightPrimaryColor;
+    flex-wrap: wrap;
+     align-content: stretch;
 }

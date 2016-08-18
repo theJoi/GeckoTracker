@@ -1,4 +1,4 @@
-<div class='events-table col-1-2'>
+<div class='events-table'>
 	<div class='title'>Events</div>
 
 	<div class='filter'>
@@ -7,7 +7,7 @@
 		<i class="material-icons close" ng-click="filter.search = ''">close</i>
 	</div>
 
-    <table>
+    <table class="table-scroll">
         <tr>
 			<th><i class="material-icons">check_box_outline_blank</i></th>
             <th class='sortable' ng-click="setSort('date')">
@@ -23,6 +23,7 @@
 				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
         </tr>
+
         <tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
 			<td>
 				<i class="material-icons" ng-if='!isEventSelected(event)' ng-click='selectEvent(event)'>check_box_outline_blank</i>
@@ -36,6 +37,7 @@
 			</td>
             <td>{{event.notes}}</td>
         </tr>
+
 		<tr ng-if='filtered.length == 0'>
 			<td colspan=5 class='empty-indicator'>No events match your filter</td>
 		</tr>

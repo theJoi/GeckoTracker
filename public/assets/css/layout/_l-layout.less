@@ -1,6 +1,5 @@
 .flex-container {
     display: flex;
-
 }
 
 .side-bar {
@@ -13,7 +12,6 @@
     min-width: 200px;
 }
 
-
 .add-gecko-form {
     margin-bottom: 50px;
     padding-bottom: 25px;
@@ -25,21 +23,23 @@
 }
 
 .detail-main-container{
-   // display:flex;
-    //flex-direction: row;
+    display: flex;
+    align-items: stretch;
+    height: 200px;
 }
-.gecko-detail-card, .events-table{
-     border-right: 1px solid @dividerColor;
+.gecko-detail-card {
     border-bottom: 1px solid @dividerColor;
-    flex: 1 1 50%;
 }
 
-.gecko-detail-card{
-    flex: 5 5 50%;
-}
-
-.graphs {
+.flex-events, .graphs {
     background: white;
     border-bottom: 1px solid @dividerColor;
-    height: 302px;
+    border-right: 1px solid @dividerColor;
+    flex: 1 1 300px;
+    height: 450px;
+}
+
+.collaspe-gecko-detail {
+    height: 50px;
+    overflow: hidden;
 }

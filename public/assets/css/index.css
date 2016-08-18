@@ -120,6 +120,9 @@ tr {
 @textColorGray:      #757575;
 @dividerColor:       #bdbdbd;
 */
+.green {
+  color: #8bc34a;
+}
 /* Elements related to material design and cards */
 /* Used for cards and buttons */
 .material-shadow {
@@ -147,6 +150,27 @@ tr {
 /* Elements related to tables */
 .table-top {
   min-height: 50px;
+  position: relative;
+}
+.table-scroll thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-scroll tbody {
+  max-height: 150px;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-scroll tr {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.table-scroll td {
+  height: 50px;
 }
 /* Input Stuff */
 /*Secondary button */
@@ -550,7 +574,7 @@ label {
   position: fixed;
   width: 50%;
   height: 75%;
-  top: 400px;
+  top: 420px;
   left: 50%;
   margin: -25% 0 0 -25%;
   overflow-y: scroll;
@@ -566,6 +590,7 @@ label {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 8;
 }
 .modal:before {
   width: 100%;
@@ -574,6 +599,7 @@ label {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 8;
 }
 /* alignment */
 .right {
@@ -690,19 +716,25 @@ label {
   display: flex;
   flex-direction: column;
 }
-.gecko-detail-card,
-.events-table {
-  border-right: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
-  flex: 1 1 50%;
+.detail-main-container {
+  display: flex;
+  align-items: stretch;
+  height: 200px;
 }
 .gecko-detail-card {
-  flex: 5 5 50%;
+  border-bottom: 1px solid #bdbdbd;
 }
+.flex-events,
 .graphs {
   background: white;
   border-bottom: 1px solid #bdbdbd;
-  height: 302px;
+  border-right: 1px solid #bdbdbd;
+  flex: 1 1 300px;
+  height: 450px;
+}
+.collaspe-gecko-detail {
+  height: 50px;
+  overflow: hidden;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3215,22 +3247,47 @@ label {
   padding: 10px;
   background: white;
 }
-.add-gecko-button {
+.fixed-action-buttons {
   position: absolute;
   right: 5px;
+  top: 5px;
 }
 .gecko-detail-card .table-header {
   color: #757575;
 }
-.thumbnail {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.detail-thumbnail {
+  width: 150px;
+  height: 150px;
+  border-radius: 5%;
   vertical-align: middle;
-  margin-bottom: 5px;
+  margin: 5px 10px 10px 5px;
+  float: left;
 }
-.thumbnail:hover {
+.detail-thumbnail:hover {
   border: solid 3px #8bc34a;
+}
+.detail-name,
+.detail-gender,
+.detail-id {
+  display: inline-block;
+}
+.detail-name {
+  font-size: 48px;
+  line-height: 48px;
+}
+.detail-gender,
+.detail-id {
+  font-size: 24px;
+  line-height: 24px;
+}
+.detail-item {
+  flex: 1 1 100px;
+}
+.detail-item-2 {
+  flex: 2 0 200px;
+}
+.detail-item-4 {
+  flex: 4 0 200px;
 }
 /* Add New Gecko Form */
 .add-gecko-form label,
@@ -3256,13 +3313,16 @@ label {
   color: #536dfe;
   border-top: solid 1px #bdbdbd;
 }
-.green {
-  color: #8bc34a;
+.gecko-detail-container {
+  display: flex;
+  border-top: 1px solid #dcedc8;
+  flex-wrap: wrap;
+  align-content: stretch;
 }
 .header,
 .status-bar {
   width: 100%;
-  z-index: 10;
+  z-index: 3;
   position: relative;
 }
 .header {

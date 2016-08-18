@@ -34,9 +34,35 @@
 .table-top {
 
     min-height: 50px;
+    position: relative;
+
 
 }
 
+
+.table-scroll thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tbody {
+    max-height: 150px;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table-scroll td {
+    height: 50px; // needed in order to keep rows from collapsing
+}
 
 /* Input Stuff */
 
