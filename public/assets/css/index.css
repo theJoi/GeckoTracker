@@ -50,7 +50,7 @@ button:hover,
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 body {
-  background: url("../img/subtle_dots.png"), white;
+  background: white;
   background-repeat: repeat;
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -3216,7 +3216,6 @@ label {
   line-height: 14px;
   background: white;
   padding-top: 15px;
-  border-bottom: 1px solid #bdbdbd;
   height: 78vh;
 }
 .gecko-card tr {
@@ -3326,9 +3325,7 @@ label {
 }
 .gecko-metrics {
   background: white;
-  border-bottom: 1px solid #bdbdbd;
   display: flex;
-  justify-content: left;
   padding: 15px;
   color: #00c000;
   font-family: 'Roboto', sans-serif;
