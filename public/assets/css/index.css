@@ -578,11 +578,10 @@ label {
   border-radius: 2px;
   position: fixed;
   width: 50%;
-  height: 75%;
   top: 420px;
   left: 50%;
   margin: -25% 0 0 -25%;
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: 10;
 }
 .modal .title {
@@ -712,10 +711,6 @@ label {
   border-right: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
   min-width: 200px;
-}
-.add-gecko-form {
-  margin-bottom: 50px;
-  padding-bottom: 25px;
 }
 .dashboard-main-container {
   display: flex;

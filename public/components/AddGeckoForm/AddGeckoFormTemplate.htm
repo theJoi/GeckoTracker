@@ -53,9 +53,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-1-2">
-                    <label>Notes</label>
-                    <input type="textarea" rows="1" cols="50" ng-model="form.notes">
+                <div class="col-1-4">
+                    <label>Mother</label>
+                    <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
+                </div>
+                <div class="col-1-4">
+                    <label>Father</label>
+                    <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
                 </div>
                 <div class="col-1-4">
                     <label>Current Weight</label>
@@ -74,18 +78,15 @@
             </div>
             <!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
             <div class="row">
-                <div class="col-1-4">
-                    <label>Mother</label>
-                    <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
+                <div class="col-2-3">
+                    <label>Notes</label>
+                    <input type="textarea" rows="1" cols="50" ng-model="form.notes">
                 </div>
-                <div class="col-1-4">
-                    <label>Father</label>
-                    <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
+
+                <div class="col-1-3">
+                    <button ng-click="submitForm()">Add Gecko</button>
+                    <button ng-click="showForm=false" class="button--secondary">Cancel</button>
                 </div>
-            </div>
-            <div class="row center">
-                <button ng-click="submitForm()">Add Gecko</button>
-                <button ng-click="showForm=false" class="button--secondary">Cancel</button>
             </div>
     </form>
     <div class="form-feedback">
@@ -94,7 +95,7 @@
     </div>
 
     <!-- PARENT PICKER MODAL -->
-     <!-- TODO: add ability to close modal by clicking outside of it -->
+    <!-- TODO: add ability to close modal by clicking outside of it -->
     <div ng-show='parentModal.shown' class="black-out">
         <div ng-show='parentModal.shown' class='modal'>
             <table>
