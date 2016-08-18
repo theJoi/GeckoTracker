@@ -650,9 +650,10 @@ label {
   clear: both;
 }
 .row {
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   width: 100%;
   clear: both;
+  display: inline-block;
 }
 /* Float all column classes */
 [class*="col-"] {
@@ -3289,7 +3290,8 @@ label {
 }
 .form-feedback {
   color: #536dfe;
-  border-top: solid 1px #bdbdbd;
+  padding: 20px;
+  font-size: 12px;
 }
 .gecko-detail-container {
   display: flex;
