@@ -187,6 +187,11 @@ tr {
 input .inline {
   background: pink;
 }
+.fixed-action-buttons {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
 .valign-wrapper {
   display: flex;
   align-items: center;
@@ -3246,11 +3251,6 @@ label {
 .gecko-detail-card {
   padding: 10px;
   background: white;
-}
-.fixed-action-buttons {
-  position: absolute;
-  right: 5px;
-  top: 5px;
 }
 .gecko-detail-card .table-header {
   color: #757575;
