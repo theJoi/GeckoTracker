@@ -3223,6 +3223,12 @@ label {
 .gecko-card tr:not(.link--nohover):hover {
   background: #dcedc8;
 }
+.gecko-card th:nth-of-type(1) {
+  width: 50px;
+}
+.gecko-card th:nth-of-type(5) {
+  width: 300px;
+}
 /* Search box on Gecko List */
 .search-box {
   margin-left: 15px;
