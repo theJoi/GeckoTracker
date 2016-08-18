@@ -3217,6 +3217,7 @@ label {
   background: white;
   padding-top: 15px;
   border-bottom: 1px solid #bdbdbd;
+  height: 78vh;
 }
 .gecko-card tr {
   border-bottom: solid 1px #f0f0f0;
@@ -3327,7 +3328,7 @@ label {
   background: white;
   border-bottom: 1px solid #bdbdbd;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   padding: 15px;
   color: #00c000;
   font-family: 'Roboto', sans-serif;
