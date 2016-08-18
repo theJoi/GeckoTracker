@@ -578,9 +578,8 @@ label {
   border-radius: 2px;
   position: fixed;
   width: 50%;
-  top: 420px;
-  left: 50%;
-  margin: -25% 0 0 -25%;
+  top: 25%;
+  left: 25%;
   overflow-y: auto;
   z-index: 10;
 }
@@ -588,15 +587,6 @@ label {
   font-size: 20px;
 }
 .black-out {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 8;
-}
-.modal:before {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.75);
