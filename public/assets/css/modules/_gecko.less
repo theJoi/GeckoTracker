@@ -23,39 +23,40 @@
 }
 
 .gecko-card tr {
-     border-bottom: solid 1px @evenRowColor;
+    border-bottom: solid 1px @evenRowColor;
 }
 
 .gecko-card tr:not(.link--nohover):hover {
     background: @lightPrimaryColor;
 }
 
-.gecko-card th:nth-of-type(1){
+.gecko-card th:nth-of-type(1) {
     width: 50px;
 }
 
-.gecko-card th:nth-of-type(5){
+.gecko-card th:nth-of-type(5) {
     width: 300px;
 }
 
+
 /* Search box on Gecko List */
+
 .search-box {
-
-
-margin-left: 15px;
+    margin-left: 15px;
     margin-right: 30px;
     background: white;
     width: 50%;
     padding: 5px;
-   // width: unset;
+    // width: unset;
 }
 
+
 /* Gecko Detail */
+
 .gecko-detail-card {
     padding: 10px 0 0 10px;
     background: white;
     margin-bottom: -12px;
-
 }
 
 .gecko-detail-card .table-header {
@@ -69,6 +70,7 @@ margin-left: 15px;
     top: -10px;
     right: -10px;
 }
+
 .detail-thumbnail {
     width: 24vw;
     height: 20vw;
@@ -78,19 +80,15 @@ margin-left: 15px;
     }
 }
 
-
-.detail-name,.detail-gender,.detail-id{
-    display:inline-block;
+.detail-name {
+    font-size: 48px;
+    line-height: 48px;
 }
 
-.detail-name{
-    		font-size: 48px;
-		line-height: 48px;
-}
-
-.detail-gender,.detail-id{
-    		font-size: 24px;
-		line-height: 24px;
+.detail-gender,
+.detail-id {
+    font-size: 24px;
+    line-height: 24px;
 }
 
 .detail-item {
@@ -105,15 +103,18 @@ margin-left: 15px;
     flex: 4 0 200px;
 }
 
+
 /* Add New Gecko Form */
-.add-gecko-form label, .gecko-detail-card label {
+
+.add-gecko-form label,
+.gecko-detail-card label {
     color: @textColorGray;
     .bold;
     font-size: 14px;
 }
 
-#form input, #form select {
-
+#form input,
+#form select {
     line-height: 20px;
 }
 
@@ -127,9 +128,21 @@ margin-left: 15px;
     border-top: solid 1px @dividerColor;
 }
 
-.gecko-detail-container{
+.gecko-detail-container {
     display: flex;
     border-top: 1px solid @lightPrimaryColor;
     flex-wrap: wrap;
-     align-content: stretch;
+    align-content: stretch;
+}
+
+.collaspe-gecko-detail {
+    height: 55px;
+    background: @white2;
+
+    .detail-name,
+    .detail-gender,
+    .detail-id {
+        font-size: 14px;
+        line-height: 14px;
+    }
 }

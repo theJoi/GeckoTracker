@@ -709,14 +709,10 @@ label {
 .gecko-detail-card {
   border-bottom: 1px solid #bdbdbd;
 }
-.collaspe-gecko-detail {
-  height: 50px;
-  overflow: hidden;
-}
 .graphs {
   height: 200px;
   border: 1px solid #bdbdbd;
-  background: #fafafa;
+  background: #eeeeee;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3253,11 +3249,6 @@ label {
 .detail-thumbnail:hover {
   border: solid 3px #8bc34a;
 }
-.detail-name,
-.detail-gender,
-.detail-id {
-  display: inline-block;
-}
 .detail-name {
   font-size: 48px;
   line-height: 48px;
@@ -3305,6 +3296,16 @@ label {
   border-top: 1px solid #dcedc8;
   flex-wrap: wrap;
   align-content: stretch;
+}
+.collaspe-gecko-detail {
+  height: 55px;
+  background: #fafafa;
+}
+.collaspe-gecko-detail .detail-name,
+.collaspe-gecko-detail .detail-gender,
+.collaspe-gecko-detail .detail-id {
+  font-size: 14px;
+  line-height: 14px;
 }
 .header,
 .status-bar {
