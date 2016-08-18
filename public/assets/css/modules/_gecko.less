@@ -52,8 +52,9 @@ margin-left: 15px;
 
 /* Gecko Detail */
 .gecko-detail-card {
-    padding: 10px;
+    padding: 10px 0 0 10px;
     background: white;
+    margin-bottom: -12px;
 
 }
 
@@ -62,17 +63,21 @@ margin-left: 15px;
     color: @textColorGray;
 }
 
+.detail-thumbnail-container {
+    float: right;
+    position: relative;
+    top: -10px;
+    right: -10px;
+}
 .detail-thumbnail {
-    width: 150px;
-    height: 150px;
-    border-radius: 5%;
-    vertical-align: middle;
-    margin: 5px 10px 10px 5px;
-    float:left;
+    width: 24vw;
+    height: 20vw;
+    border: 1px solid @dividerColor;
     &:hover {
         border: solid 3px @primaryColor;
     }
 }
+
 
 .detail-name,.detail-gender,.detail-id{
     display:inline-block;

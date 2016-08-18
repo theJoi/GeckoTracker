@@ -650,7 +650,8 @@ label {
   clear: both;
 }
 .row {
-  padding-bottom: 60px;
+  padding-bottom: 20px;
+  width: 100%;
   clear: both;
 }
 /* Float all column classes */
@@ -713,8 +714,9 @@ label {
   overflow: hidden;
 }
 .graphs {
-  background: #bdbdbd;
   height: 200px;
+  border: 1px solid #bdbdbd;
+  background: #fafafa;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3230,19 +3232,23 @@ label {
 }
 /* Gecko Detail */
 .gecko-detail-card {
-  padding: 10px;
+  padding: 10px 0 0 10px;
   background: white;
+  margin-bottom: -12px;
 }
 .gecko-detail-card .table-header {
   color: #757575;
 }
+.detail-thumbnail-container {
+  float: right;
+  position: relative;
+  top: -10px;
+  right: -10px;
+}
 .detail-thumbnail {
-  width: 150px;
-  height: 150px;
-  border-radius: 5%;
-  vertical-align: middle;
-  margin: 5px 10px 10px 5px;
-  float: left;
+  width: 24vw;
+  height: 20vw;
+  border: 1px solid #bdbdbd;
 }
 .detail-thumbnail:hover {
   border: solid 3px #8bc34a;
