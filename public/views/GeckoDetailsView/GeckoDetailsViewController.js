@@ -13,6 +13,8 @@ angular.module('geckoTracker').controller('GeckoDetailsViewController', function
         $scope.geckoDetail = details;
         $scope.$apply();
     });
+	
+	$scope.testShowPicker = true;
 /*
     $http({
         method: 'GET',

@@ -86,6 +86,8 @@ angular.module('geckoTracker')
 
                 $scope.addEvent = function () {
                     console.log("id", $scope, $scope.geckoId);
+										$scope.testShowIt = true;
+										return;
 
                     geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function () {
                         toastr.success("Event added");

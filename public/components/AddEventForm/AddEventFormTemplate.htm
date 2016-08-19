@@ -1,3 +1,43 @@
-<div>
-    fdsafdsafa
+<!-- TODO: add ability to close modal by clicking outside of it -->
+<div class='add-event-form' ng-if='true || show'>
+<div ng-show='true || parentModal.shown' class="modal-black-out">
+	<div ng-show='true || parentModal.shown' class='modal_'>
+		<div class="add-event-title">Create an Event</div>
+
+		<div class='add-event-fields'>
+			<div class='field big'>
+				<div class='label'>Date</div>
+				<input type='date' ng-model='form.date'></input>
+				<div class='field-alerts'>Required</div>
+			</div>
+			<div class='field big'>
+				<div class='label'>Event Type</div>
+				<select ng-model='form.type' placeholder='Event Type'>
+					<option value="" disabled selected>Event Type</option>
+					<option value="clutch">Laid Clutch</option>
+					<option value="weigh">Weight</option>
+					<option value="shed">Shed</option>
+					<option value="hatch">Hatched</option>
+					<option value="laid">Laid</option>
+				</select>
+				<div class='field-alerts'></div>
+			</div>
+			<div class='field'>
+				<div class='label'>Weight</div>
+				<input type='number' ng-model='form.weight' placeholder='Weight'></input>
+				<div class='field-alerts'></div>
+			</div>
+			<div class='field huge'>
+				<div class='label'>Notes</div>
+				<input type='text' ng-model='form.notes'></input>
+				<div class='field-alerts'>Optional</div>
+			</div>
+		</div>
+		
+		<!-- Action buttons -->
+		<div class='add-event-action-buttons'>
+			<button ng-click="cancelForm()">Close</button>
+		</div>
+	</div>
+</div>
 </div>

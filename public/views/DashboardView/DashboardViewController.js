@@ -11,4 +11,8 @@
 */
 angular.module('geckoTracker').controller('DashboardViewController', function ($scope, $http, ngDialog, toastr, geckoService) {
     // KENNY: This might still be used for view-related UI things in the future, so we don't want to delete it.
+		$scope.testShowPicker = true;
+		$scope.testGeckoSelected = function(g) {
+			console.log("GECKO SELECTED!", g);
+		}
 });
