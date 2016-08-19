@@ -32,40 +32,57 @@
                          }
                          console.log($scope.x_dates);
                          console.log($scope.y_weights);
+
+                         var now = Date.now();
+                         var year = now - 31536000000;
+
+                         var trace1 = {
+                             x: $scope.x_dates,
+                             y: $scope.y_weights,
+                             mode: 'lines+markers',
+                             type: 'scatter',
+                             line: {
+                                 color: "rgb(44, 160, 44)"
+                             }
+
+
+                         };
+
+                         var data = [trace1];
+                         var layout = {
+                             title: "Gecko Weight Chart",
+                             font: {
+                                 family: "Roboto, sans-serif"
+                             },
+                             yaxis: {
+                                 title: "Weight",
+                                 autorange: true,
+                                 showline:true,
+                                 linecolor:"#DCEDC8"
+                             },
+                             xaxis: {
+                                 type: "date",
+                                 title: "Date",
+                                 tickformat: "%m/%d/%y",
+                                 showline:true,
+                                 linecolor:"#DCEDC8",
+                                 tickangle:-50,
+                                 nticks:12,
+                                 range: [year, now] /* range from today to one year */
+                             }
+                         };
+
+                         Plotly.newPlot(weightGraph, data, layout, {
+
+                         });
+                         console.log("chart displayed");
                      });
 
 
                  };
 
                  $scope.populateChart();
-                 var now = Date.now();
-                 var year = now - 31536000000;
 
-                 var trace1 = {
-                     x: $scope.x_dates,
-                     y: $scope.y_weights,
-                     mode: 'lines+markers',
-                     type: 'scatter'
-                 };
-
-                 var data = [trace1];
-                 var layout = {
-                     title: "Gecko Weight Chart",
-                     yaxis: {
-                         title: "Weight",
-                         range: [0,100]
-                     },
-                     xaxis: {
-                         type: "date",
-                         title: "Date",
-                         tickformat: "%m/%d/%y",
-                         range: [year, now] /* range from today to one year */
-                     }
-                 };
-
-                 Plotly.newPlot(weightGraph, data, layout, {
-                     displayModeBar: true
-                 });
 
 
              }
