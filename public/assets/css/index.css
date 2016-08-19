@@ -711,9 +711,13 @@ label {
   border-bottom: 1px solid #bdbdbd;
 }
 .graphs {
-  height: 200px;
+  min-height: 200px;
   border: 1px solid #bdbdbd;
   background: #eeeeee;
+}
+#weight,
+#other {
+  width: 50%;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
