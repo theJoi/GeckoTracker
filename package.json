@@ -13,10 +13,11 @@
   },
   "scripts": {
     "start": "node index.js",
-    "less": "lessc ./public/assets/css/styles.less ./public/assets/css/styles.css",
+    "less": "lessc ./public/assets/css/index.less ./public/assets/css/index.css",
     "watch": "npm-watch",
     "test": "mocha",
-    "jshint": "jshint *.js"
+    "jshint": "jshint *.js",
+		"reset-db": "node app/tools/import-database.js"
   },
   "files": [
     "gecko.js"
