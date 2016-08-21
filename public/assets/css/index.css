@@ -3496,6 +3496,9 @@ label {
   color: #e0e0e0;
   display: flex;
 }
+.photo-gallery .lightbox-date-and-number .date .age {
+  color: #a0a0a0;
+}
 .photo-gallery .lightbox-date-and-number .number {
   text-align: right;
   color: #909090;
