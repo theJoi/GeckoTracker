@@ -3385,3 +3385,122 @@ label {
   font-weight: bold;
   vertical-align: top;
 }
+.photo-gallery {
+  background: white;
+  width: 400px;
+}
+.photo-gallery .primary-photo {
+  width: 100%;
+}
+.photo-gallery .thumbnail-photo {
+  width: 100px;
+  cursor: pointer;
+  padding: 2px;
+}
+.photo-gallery .thumbnail-photo:hover {
+  padding: 0;
+  border: solid 2px #00e000;
+}
+.photo-gallery .lightbox-background {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photo-gallery .close-icon {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  color: white;
+  cursor: pointer;
+}
+.photo-gallery .lightbox {
+  max-height: 100vw;
+  max-width: 100vh;
+}
+.photo-gallery .lightbox .photo-wrapper {
+  position: relative;
+}
+.photo-gallery .selected-photo {
+  max-width: 100%;
+  max-height: 100%;
+}
+.photo-gallery .photo-wrapper:hover .rotate-icon {
+  display: block;
+}
+.photo-gallery .rotate-icon {
+  color: white;
+  font-size: 60px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  display: none;
+}
+.photo-gallery .rotate-icon.left {
+  left: 0;
+}
+.photo-gallery .rotate-icon.right {
+  right: 0;
+}
+.photo-gallery .lightbox-thumbnail {
+  width: 60px;
+}
+.photo-gallery .lightbox-caption-wrapper {
+  display: flex;
+}
+.photo-gallery .lightbox-caption-wrapper input {
+  border: 0;
+  padding: 0;
+}
+.photo-gallery .lightbox-caption-wrapper input:hover {
+  border: 0;
+  padding: 0;
+}
+.photo-gallery .lightbox-caption-wrapper .edit-icon {
+  cursor: pointer;
+  color: #808080;
+}
+.photo-gallery .lightbox-caption-wrapper .edit-icon:hover {
+  color: #e0e0e0;
+}
+.photo-gallery .lightbox-caption-wrapper .caption {
+  background: transparent;
+  color: white;
+  font-family: Roboto;
+  border: 0;
+  flex-grow: 1;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 100%;
+  resize: none;
+  outline: none;
+}
+.photo-gallery .lightbox-caption-wrapper .caption:hover {
+  border-bottom: solid 1px #00e000;
+}
+.photo-gallery .lightbox-caption-wrapper .caption:focus {
+  padding-bottom: 0;
+  border-bottom: solid 1px #00e000;
+}
+.photo-gallery .lightbox-caption-wrapper .caption.empty {
+  color: #909090;
+  font-style: italic;
+}
+.photo-gallery .lightbox-date-and-number {
+  color: #e0e0e0;
+  display: flex;
+}
+.photo-gallery .lightbox-date-and-number .number {
+  text-align: right;
+  color: #909090;
+  flex-grow: 1;
+}
+.photo-gallery .action-buttons {
+  text-align: right;
+}

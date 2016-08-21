@@ -14,6 +14,7 @@
 // CONNECTION EVENTS  =====================================================
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var exif = require('exif');
 
 exports.init = function (db, callback) {
     if (!db) {
@@ -55,7 +56,8 @@ var geckoSchema = new Schema({
         name: String
     },
     currWeight: Number,
-    notes: String
+    notes: String,
+	primaryPhoto: Schema.Types.Mixed
 });
 
 var eventSchema = new Schema({
@@ -77,10 +79,23 @@ var eventSchema = new Schema({
     notes: String
 });
 
+var photoSchema = new Schema({
+	geckoId: {
+        type: Schema.Types.ObjectId,
+        required: true
+	},
+	path: String,
+	name: String,
+	mimetype: String,
+	uploaded: Date,
+	taken: Date,
+	caption: String
+});
+
 // MONGOOSE MODELS  =============================================================
 var Gecko = mongoose.model("Gecko", geckoSchema);
 var Event = mongoose.model("Event", eventSchema);
-
+var Photo = mongoose.model("Photo", photoSchema);
 
 // GECKO FUNCTIONS  =============================================================
 
@@ -293,6 +308,129 @@ exports.setCurrWeight = function (id, callback) {
 
     });
 };
+
+// PHOTO FUNCTIONS  =============================================================
+exports.savePhoto = function(geckoId, properties, cb) {
+	var photo = new Photo({
+		geckoId: geckoId,
+		name: properties.name,
+		path: 'photos/' + properties.name,
+		mimetype: properties.mimetype,
+		uploaded: new Date(),
+		taken: new Date(),
+		caption: null
+	});
+	console.log("dirname", __dirname);
+	new exif.ExifImage({image: __dirname + '/../public/photos/' + properties.name}, function(err, exifData) {
+		if(err) {
+			console.log(err);
+			cb(err, null);
+			return;
+		}
+		console.log("EXIF! ", JSON.stringify(exifData));
+		if(exifData.image && exifData.image.ModifyDate) {
+			var d = exifData.image.ModifyDate.replace(' ', ':').split(':');
+			d = d[1] + "-" + d[2] + "-" + d[0] + " " + d[3] + ':' + d[4] + ':' + d[5];
+			console.log('d', d);
+			photo.taken = new Date(d);
+			console.log(photo.taken);
+		}
+		photo.save(function (err, newPhoto) {
+			if (err) {
+				console.log(err);
+				cb(err, null);
+				return;
+			}
+			cb(null, newPhoto);
+		});
+	});
+};
+
+exports.getGeckoPhotos = function(id, cb) {
+	Photo.find({
+		geckoId: id
+	}, function (err, photos) {
+		if (err) {
+			console.log("Unable to retrieve photos from database:");
+			console.log(err);
+			return callback(err);
+		}
+		return cb(null, photos);
+	});
+};
+
+//exports.getGeckoPrimaryPhoto = function(id, cb) {
+//	Photo.findOne({geckoId: id, primary: true}, function(err, photo) {
+//		// TODO If there are no photos, or none are marked primary, we need to return the "empty" photo
+//		if(err) {
+//			console.log(err);
+//			cb(err);
+//			return;
+//		}
+//		cb(null, photo);
+//	});
+//};
+
+exports.setPrimaryGeckoPhoto = function(geckoId, photoId, cb) {
+	// Find the photo to verify it "belongs" to the gecko for the given ID
+	Photo.findById(photoId, function(err, photo) {
+		if(err) {
+			console.log(err);
+			cb(err);
+			return;
+		}
+		// The provided gecko's id must match the photo's geckoId
+		if(photo.geckoId != geckoId) {
+			console.log("Tried to set primary photo for wrong gecko");
+			cb("Bad gecko");
+			return;
+		}
+		// Update the gecko document to reference this photo
+		var options = {
+			new: true,
+			runValidators: true
+		};
+		Gecko.findByIdAndUpdate(geckoId, {
+			primaryPhoto: {
+				id: photoId,
+				path: photo.path
+			}
+		}, function(err, gecko) {
+			if(err) {
+				console.log(err);
+				cb(err);
+				return;
+			}
+			cb(null, gecko);
+		})
+	});
+}
+
+exports.updateGeckoPhoto = function(id, properties, cb) {
+    var options = {
+        new: true,
+        runValidators: true
+    };
+	console.log("TEEEEEEEEEEEEEEEEEST", cb);
+	// TODO If 'primary' property is updated to true, we need to remove it from the current primary photo, if any
+    Photo.findByIdAndUpdate(id, properties, options, function (err, updatedPhoto) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        cb(null, updatedPhoto); 
+    });
+};
+
+exports.deleteGeckoPhoto = function(photoId, cb) {
+	Photo.findByIdAndRemove(photoId, function(err, removedPhoto) {
+		if(err) {
+			cb(err);
+			return;
+		}
+		cb(null);
+	});
+}
 
 
 // OTHER FUNCTIONS  =============================================================
