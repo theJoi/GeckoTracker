@@ -232,7 +232,7 @@ exports.removeEvent = function (id, callback) {
             return;
         }
         if (removedEvent.type === 'weight') {
-            exports.setCurrWeight(removedEvent.geckoId, null);
+            updateCurrentWeight(removedEvent.geckoId, null);
         }
         callback(null, removedEvent._id);
     });
@@ -259,7 +259,7 @@ exports.addEvent = function (eventData, callback) {
             return;
         }
         if (newEvent.type === 'weight') {
-            exports.setCurrWeight(newEvent.geckoId, null);
+            updateCurrentWeight(newEvent.geckoId, null);
         }
         callback(err, newEvent);
     });
@@ -278,17 +278,18 @@ exports.updateEvent = function (id, props, callback) {
             return;
         }
         if (updatedEvent.type === 'weight') {
-            exports.setCurrWeight(updatedEvent.geckoId, null);
+            updateCurrentWeight(updatedEvent.geckoId, null);
         }
         callback(null, updatedEvent);
     });
 };
 
-// Set Current Weight: gets most recent weight from event table
-exports.setCurrWeight = function (id, callback) {
-    console.log("setCurrWeight called. id " + id);
+// Update Current Weight: gets most recent weight from event table
+function updateCurrentWeight(id, callback) {
+    console.log("updateCurrentWeight called (id=" + id + ")");
     // models.user.findOne({}).sort({date_register: -1}).exec(callback);
-    Event.findOne({
+
+	Event.findOne({
         geckoId: id,
         type: 'weight'
     }).sort({
@@ -299,13 +300,12 @@ exports.setCurrWeight = function (id, callback) {
             callback(err, null);
             return;
         }
-        console.log("event from getCurrWeight " + event);
+        console.log("Event from getCurrWeight " + event);
         Gecko.findByIdAndUpdate(id, {
             $set: {
                 currWeight: event.info.weight
             }
         }, function (err) {});
-
     });
 };
 

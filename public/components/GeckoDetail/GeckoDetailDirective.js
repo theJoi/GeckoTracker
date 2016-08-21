@@ -6,7 +6,7 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoDetail/GeckoDetailTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService, $location) {
+            controller: function ($scope, $http, $log, geckoService, $location, toastr) {
                 // $scope.geckos = [];
                 $scope.isLoaded = false; // use to trigger loading spinner
                 $log.debug("GeckoDetail directive's controller instantiated");
@@ -30,12 +30,13 @@ angular.module('geckoTracker')
                         if ($scope.editform.hasOwnProperty(property)) {
                             if (property !== "_id" && $scope.editform[property] === $scope.geckoDetail[property]) {
                                 delete $scope.editform[property];
+								console.log("Deleting " + property + " from update");
                             } else {
                                 $scope.geckoDetail[property] = $scope.editform[property];
                             }
                         }
                     }
-                    console.log($scope.editform);
+                    console.log("Updating...", $scope.editform);
                     geckoService.updateGecko($scope.editform).then(function success(response) {
                         $scope.validationMsg = "The gecko named '" + $scope.editform.name + "' has successfully been updated.";
                         console.log("The gecko named '" + $scope.editform.name + "' has successfully been updated.");
@@ -46,6 +47,7 @@ angular.module('geckoTracker')
                         $scope.validationMsg = "Uh oh. Error occured, gecko not updated. Please try again.";
                         console.log("Uh oh. Error occured, gecko not updated. Please try again.");
                         console.log(response);
+						toastr.error("Error updating gecko details");
                     });
 
                     $scope.showEditMode = false;

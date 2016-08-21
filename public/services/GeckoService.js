@@ -159,10 +159,11 @@ angular.module('geckoTracker')
                     }
 
                     var _id = properties._id;
+					delete properties._id;
 
                     $http({
                         method: 'PUT',
-                        url: "/api/geckos/" + properties._id + "/edit",
+                        url: "/api/geckos/" + _id + "/edit",
                         data: properties
                     }).then(function success(response) {
                         if (response.data.error) {
