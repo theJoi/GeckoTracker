@@ -2990,11 +2990,22 @@ label {
 }
 .add-event-form .field .label {
   font-size: 12px;
+  height: 14px;
+  overflow: hidden;
   color: #808080;
 }
 .add-event-form .field-alerts {
   height: 40px;
   font-size: 12px;
+  color: #a0a0a0;
+}
+.add-event-form .field-select:hover {
+  border-bottom: solid 1px blue;
+}
+.add-event-form .field-select:focus {
+  border-bottom: solid 1px blue;
+}
+.add-event-form .field-select.ng-pristine {
   color: #808080;
 }
 .add-event-form .add-event-action-buttons {
@@ -3005,6 +3016,7 @@ label {
 }
 .events-table {
   background: white;
+  padding: 0;
 }
 .events-table .title {
   padding: 16px;
@@ -3080,17 +3092,36 @@ label {
 .events-table table tr:hover td {
   background: #f0f0f0;
 }
-.events-table table th:nth-child(1) {
+.events-table table th.column-select {
   width: 40px;
 }
-.events-table table th:nth-child(2) {
+.events-table table th.column-date {
   width: 240px;
 }
-.events-table table th:nth-child(3) {
+.events-table table th.column-type {
   width: 100px;
 }
-.events-table table th:nth-child(4) {
+.events-table table th.column-details {
   width: 200px;
+}
+.events-table table th.column-actions {
+  width: 100px;
+  text-align: right;
+}
+.events-table table td.column-actions {
+  text-align: right;
+}
+.events-table table .action-icon {
+  margin: 0;
+  padding: 0;
+}
+.events-table table .action-icon {
+  font-size: 20px;
+  color: #e0e0e0;
+  cursor: pointer;
+}
+.events-table table .action-icon:hover {
+  color: #404040;
 }
 .events-table .add-gecko-event-form {
   padding: 16px;

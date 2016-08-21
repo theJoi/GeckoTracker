@@ -11,31 +11,30 @@
 */
 
 angular.module('geckoTracker')
-    .directive('eventsTable', function (ngDialog, toastr) {
-        return {
-            restrict: 'E',
-            scope: {
-                'geckoId': '=',
-            },
-            templateUrl: "components/EventsTable/EventsTableTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService) {
-                console.log("id", $scope, $scope.geckoId);
+.directive('eventsTable', function (ngDialog, toastr) {
+	return {
+		restrict: 'E',
+		scope: {
+			'geckoId': '=',
+		},
+		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
+		controller: function ($scope, $http, $log, geckoService) {
+			console.log("id", $scope, $scope.geckoId);
+			$scope.events = [];
+			$scope.options = {
+				date: new Date(),
+				type: 'note',
+				info: {},
+				notes: ''
+			};
+			$scope.filter = {
+				search: '',
+				sortProperty: 'date',
+				sortDirection: '-'
+			};
+			$scope.isLoaded = false; // use to trigger loading spinner
 
-                $scope.events = [];
-                $scope.options = {
-                    date: new Date(),
-                    type: 'note',
-                    info: {},
-                    notes: ''
-                };
-                $scope.filter = {
-                    search: '',
-                    sortProperty: 'date',
-                    sortDirection: '-'
-                };
-                $scope.isLoaded = false; // use to trigger loading spinner
-
-                $log.debug("EventsTable directive's controller instantiated");
+			$log.debug("EventsTable directive's controller instantiated");
 
                 $scope.setSort = function (property) {
                     if ($scope.filter.sortProperty == property){
@@ -84,17 +83,18 @@ angular.module('geckoTracker')
                 });
 
 
-                $scope.addEvent = function () {
-                    console.log("id", $scope, $scope.geckoId);
-										$scope.testShowIt = true;
-										return;
+				$scope.addEvent = function () {
+					console.log("id", $scope, $scope.geckoId);
+					$scope.eventToEdit = undefined;
+					$scope.showAddEventForm = true;
+					return;
 
-                    geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function () {
-                        toastr.success("Event added");
-						resetAddEventOptions();
-                        reloadEvents();
-                    });
-                };
+//					geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function () {
+//								toastr.success("Event added");
+//		resetAddEventOptions();
+//								reloadEvents();
+//						});
+				};
 				
 				function resetAddEventOptions() {
 					$scope.options.notes = '';
@@ -167,23 +167,28 @@ angular.module('geckoTracker')
 					var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
 					geckoService.updateGeckoEvent(event._id, $scope.options).then(function() {
 						$scope.unselectEvent(event);
-                        toastr.success("Event updated");
+						toastr.success("Event updated");
 						reloadEvents();
 					});
 				}
-            }
-        };
-    })
-    .filter('prettyEventType', function () {
+				
+				$scope.editEvent = function(event) {
+					$scope.eventToEdit = event;
+					$scope.showAddEventForm = true;
+				};
+			}
+		};
+	})
+	.filter('prettyEventType', function () {
 		var mapping = {
 			'clutch': 'Laid clutch',
 			'weight': 'Weight',
 			'laid': 'Laid',
 			'copulation': 'Copulation'
 		};
-        return function (val) {
-            if (val == 'clutch') return "Laid clutch";
+			return function (val) {
+			if (val == 'clutch') return "Laid clutch";
 			if (val == 'hatch') return "Hatched";
-            return val[0].toUpperCase() + val.substring(1);
-        };
-    });
+			return val[0].toUpperCase() + val.substring(1);
+		};
+	});
