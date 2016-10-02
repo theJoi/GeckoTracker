@@ -1,100 +1,99 @@
 <!-- ADD GECKO FORM -->
 <!-- KENNY: This should be moved into a directive. -->
-<div ng-show='showForm' class="add-gecko-form modal">
-
-    <form name="addGeckoForm" id="form">
-        <div class="table-top">Add Gecko Form
-            <p class="highlight small">* required</p>
+<div ng-show='showForm'>
+    <div class="black-out">
+        <div class="modal add-gecko-form">
+            <form name="addGeckoForm" id="form">
+                <div class="table-top">Add Gecko Form
+                    <p class="highlight small">* required</p>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-1-4">
+                            <label>Name of Gecko<span class="highlight">*</span></label>
+                            <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
+                        </div>
+                        <div class="col-1-4">
+                            <label>ID<span class="highlight">*</span></label>
+                            <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Morph Type</label>
+                            <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Sex</label>
+                            <select ng-model="form.sex">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unknown" selected>Unknown</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
+                            <label>Location</label>
+                            <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Date of Birth</label>
+                            <input type="date" placeholder="birthdate" ng-model="form.birthdate">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Date of Purchase</label>
+                            <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Stage</label>
+                            <select ng-model="form.stage">
+                                <option value="unknown" selected>Unknown</option>
+                                <option value="adult">Adult</option>
+                                <option value="hatchling">Hatchling</option>
+                                <option value="egg">Egg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
+                            <label>Mother</label>
+                            <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Father</label>
+                            <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Current Weight</label>
+                            <input type="number" placeholder="Weight in grams" ng-model="form.currWeight">
+                        </div>
+                        <div class="col-1-4">
+                            <label>Status</label>
+                            <select ng-model="form.status">
+                                <option value="unknown" selected>Unknown</option>
+                                <option value="normal">Normal</option>
+                                <option value="gravid">Gravid</option>
+                                <option value="sold">Sold</option>
+                                <option value="dead">Dead</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
+                    <div class="row">
+                        <label>Notes</label>
+                        <input type="textarea" rows="1" cols="50" ng-model="form.notes">
+                    </div>
+                    <div class="row right">
+                        <button ng-click="submitForm()">Add Gecko</button>
+                        <button ng-click="showForm=false" class="button--secondary">Cancel</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="grid">
-            <div class="row">
-                <div class="col-1-4">
-                    <label>Name of Gecko<span class="highlight">*</span></label>
-                    <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
-                </div>
-                <div class="col-1-4">
-                    <label>ID<span class="highlight">*</span></label>
-                    <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
-                </div>
-                <div class="col-1-4">
-                    <label>Morph Type</label>
-                    <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
-                </div>
-                <div class="col-1-4">
-                    <label>Sex</label>
-                    <select ng-model="form.sex">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="unknown" selected>Unknown</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1-4">
-                    <label>Location</label>
-                    <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
-                </div>
-                <div class="col-1-4">
-                    <label>Date of Birth</label>
-                    <input type="date" placeholder="birthdate" ng-model="form.birthdate">
-                </div>
-                <div class="col-1-4">
-                    <label>Date of Purchase</label>
-                    <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
-                </div>
-                <div class="col-1-4">
-                    <label>Stage</label>
-                    <select ng-model="form.stage">
-                        <option value="unknown" selected>Unknown</option>
-                        <option value="adult">Adult</option>
-                        <option value="hatchling">Hatchling</option>
-                        <option value="egg">Egg</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1-2">
-                    <label>Notes</label>
-                    <input type="textarea" rows="1" cols="50" ng-model="form.notes">
-                </div>
-                <div class="col-1-4">
-                    <label>Current Weight</label>
-                    <input type="number" placeholder="Weight in grams" ng-model="form.currWeight">
-                </div>
-                <div class="col-1-4">
-                    <label>Status</label>
-                    <select ng-model="form.status">
-                        <option value="unknown" selected>Unknown</option>
-                        <option value="normal">Normal</option>
-                        <option value="gravid">Gravid</option>
-                        <option value="sold">Sold</option>
-                        <option value="dead">Dead</option>
-                    </select>
-                </div>
-            </div>
-            <!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
-            <div class="row">
-                <div class="col-1-4">
-                    <label>Mother</label>
-                    <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
-                </div>
-                <div class="col-1-4">
-                    <label>Father</label>
-                    <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
-                </div>
-            </div>
-            <div class="row center">
-                <button ng-click="submitForm()">Add Gecko</button>
-                <button ng-click="showForm=false" class="button--secondary">Cancel</button>
-            </div>
-    </form>
-    <div class="form-feedback">
-        <p>{{validationMsg}}</p>
     </div>
-    </div>
+</div>
 
     <!-- PARENT PICKER MODAL -->
-     <!-- TODO: add ability to close modal by clicking outside of it -->
+    <!-- TODO: add ability to close modal by clicking outside of it -->
     <div ng-show='parentModal.shown' class="black-out">
         <div ng-show='parentModal.shown' class='modal'>
             <table>

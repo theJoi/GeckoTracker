@@ -28,7 +28,7 @@
 				<img class='lightbox-thumbnail' ng-repeat="photo in photos" src='{{photo.path}}' ng-click="showLightbox(photo)"></img>
 			</div>
 			<div class='lightbox-date-and-number'>
-				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}}</div><br>
+				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}} <span class='age'>{{getAgeWhenTaken(selectedPhoto)}} old</span></div>
 				<div class='number'>Image {{selectedPhotoNumber}} of {{photos.length}}</div>
 			</div>
 			<div class='lightbox-caption-wrapper'>

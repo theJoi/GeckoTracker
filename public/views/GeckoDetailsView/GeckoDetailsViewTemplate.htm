@@ -1,11 +1,15 @@
 <!-- CONTAINER FOR GECKO INFORMATION -->
-<div>
-    <div class='status-bar'>
-        <a href="/"><i class="material-icons">home</i>GO BACK</a>
-    </div>
-    <div class="detail-main-container">
-        <gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
-        <events-table gecko-id="geckoDetail._id"></events-table>
-        <div class="graphs">Graphs will be here</div>
-    </div>
+<div class='gecko-detail-view'>
+	<div class='status-bar'>
+		<a href="/"><i class="material-icons">home</i></a>
+	</div>
+
+	<div class='flex-container'>
+		<gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
+		<photo-gallery style='width: 400px;'></photo-gallery>
+	</div>
+	<div class="graphs">
+		<weight-chart gecko-id="geckoId"></weight-chart>
+	</div>
+	<events-table gecko-id="geckoDetail._id"></events-table>
 </div>

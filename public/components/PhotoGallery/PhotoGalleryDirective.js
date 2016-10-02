@@ -79,6 +79,13 @@ angular.module('geckoTracker')
 					console.log("Progress", evt);
 				});
 			}
+			
+			$scope.getAgeWhenTaken = function(photo) {
+				var taken = moment(photo.taken);
+				console.warn($scope.geckoDetail);
+				var birth = moment($scope.geckoDetail.birthdate);
+				return moment.duration(taken.diff(birth)).humanize();
+			}
 			/*
             geckoService.getMetrics().then(function(metrics) {
                 $scope.metrics = metrics;
@@ -86,5 +93,16 @@ angular.module('geckoTracker')
             });
 			*/
 		}
+	};
+})
+
+.filter('geckoAge', function () {
+	return function (val) {
+		if(typeof(val) == 'string') {
+			return moment(val).toNow(true);
+		} else if(typeof(val) == 'object' && val.getDate) {
+			return moment(val).toNow(true);
+		}
+		return val;
 	};
 });

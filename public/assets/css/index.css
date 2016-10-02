@@ -49,7 +49,7 @@ button:hover,
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 body {
-  background: url("../img/subtle_dots.png"), white;
+  background: white;
   background-repeat: repeat;
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -103,7 +103,6 @@ thead {
   color: #757575;
   font-size: 14px;
   font-weight: 700;
-  background: #fafafa;
 }
 tr {
   height: 50px;
@@ -119,6 +118,9 @@ tr {
 @textColorGray:      #757575;
 @dividerColor:       #bdbdbd;
 */
+.green {
+  color: #8BC34A;
+}
 /* Elements related to material design and cards */
 /* Used for cards and buttons */
 .material-shadow {
@@ -146,6 +148,27 @@ tr {
 /* Elements related to tables */
 .table-top {
   min-height: 50px;
+  position: relative;
+}
+.table-scroll thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-scroll tbody {
+  max-height: 150px;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-scroll tr {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.table-scroll td {
+  height: 50px;
 }
 /* Input Stuff */
 /*Secondary button */
@@ -161,6 +184,11 @@ tr {
 }
 input .inline {
   background: pink;
+}
+.fixed-action-buttons {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 .valign-wrapper {
   display: flex;
@@ -548,11 +576,9 @@ label {
   border-radius: 2px;
   position: fixed;
   width: 50%;
-  height: 75%;
-  top: 400px;
-  left: 50%;
-  margin: -25% 0 0 -25%;
-  overflow-y: scroll;
+  top: 25%;
+  left: 25%;
+  overflow-y: auto;
   z-index: 10;
 }
 .modal .title {
@@ -632,8 +658,10 @@ label {
   clear: both;
 }
 .row {
-  padding-bottom: 60px;
+  margin-bottom: 20px;
+  width: 100%;
   clear: both;
+  display: inline-block;
 }
 /* Float all column classes */
 [class*="col-"] {
@@ -683,10 +711,6 @@ label {
   border-bottom: 1px solid #BDBDBD;
   min-width: 200px;
 }
-.add-gecko-form {
-  margin-bottom: 50px;
-  padding-bottom: 25px;
-}
 .dashboard-main-container {
   display: flex;
   flex-direction: column;
@@ -698,12 +722,16 @@ label {
   flex: 1 1 50%;
 }
 .gecko-detail-card {
-  flex: 5 5 50%;
+  border-bottom: 1px solid #BDBDBD;
 }
 .graphs {
-  background: white;
-  border-bottom: 1px solid #BDBDBD;
-  height: 302px;
+  min-height: 200px;
+  border: 1px solid #BDBDBD;
+  background: #eeeeee;
+}
+#weight,
+#other {
+  width: 50%;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3331,13 +3359,19 @@ label {
   line-height: 14px;
   background: white;
   padding-top: 15px;
-  border-bottom: 1px solid #BDBDBD;
+  height: 78vh;
 }
 .gecko-card tr {
   border-bottom: solid 1px #f0f0f0;
 }
 .gecko-card tr:not(.link--nohover):hover {
   background: #DCEDC8;
+}
+.gecko-card th:nth-of-type(1) {
+  width: 50px;
+}
+.gecko-card th:nth-of-type(5) {
+  width: 300px;
 }
 /* Search box on Gecko List */
 .search-box {
@@ -3349,25 +3383,47 @@ label {
 }
 /* Gecko Detail */
 .gecko-detail-card {
-  padding: 10px;
+  padding: 10px 0 0 10px;
   background: white;
-}
-.add-gecko-button {
-  position: absolute;
-  right: 5px;
+  margin-bottom: -12px;
 }
 .gecko-detail-card .table-header {
   color: #757575;
 }
-.thumbnail {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-bottom: 5px;
+.detail-thumbnail-container {
+  float: right;
+  position: relative;
+  top: -10px;
+  right: -10px;
+}
+.detail-thumbnail {
+  width: 24vw;
+  height: 20vw;
+  border: 1px solid #BDBDBD;
+}
+.detail-thumbnail:hover {
+  border: solid 3px #8BC34A;
+}
+.detail-name {
+  font-size: 48px;
+  line-height: 48px;
+}
+.detail-gender,
+.detail-id {
+  font-size: 24px;
+  line-height: 24px;
+}
+.detail-item {
+  flex: 1 1 100px;
 }
 .thumbnail:hover {
   border: solid 3px #8BC34A;
+}
+.detail-item-2 {
+  flex: 2 0 200px;
+}
+.detail-item-4 {
+  flex: 4 0 200px;
 }
 /* Add New Gecko Form */
 .add-gecko-form label,
@@ -3474,7 +3530,7 @@ label {
 .header,
 .status-bar {
   width: 100%;
-  z-index: 10;
+  z-index: 3;
   position: relative;
 }
 .header {
@@ -3494,7 +3550,6 @@ label {
   background: white;
   border-bottom: 1px solid #BDBDBD;
   display: flex;
-  justify-content: center;
   padding: 15px;
   color: #00c000;
   font-family: 'Roboto', sans-serif;
@@ -3545,4 +3600,126 @@ label {
   line-height: 48px;
   font-weight: bold;
   vertical-align: top;
+}
+.photo-gallery {
+  background: white;
+  width: 400px;
+}
+.photo-gallery .primary-photo {
+  width: 100%;
+}
+.photo-gallery .thumbnail-photo {
+  width: 100px;
+  cursor: pointer;
+  padding: 2px;
+}
+.photo-gallery .thumbnail-photo:hover {
+  padding: 0;
+  border: solid 2px #00e000;
+}
+.photo-gallery .lightbox-background {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photo-gallery .close-icon {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  color: white;
+  cursor: pointer;
+}
+.photo-gallery .lightbox {
+  max-height: 100vw;
+  max-width: 100vh;
+}
+.photo-gallery .lightbox .photo-wrapper {
+  position: relative;
+}
+.photo-gallery .selected-photo {
+  max-width: 100%;
+  max-height: 100%;
+}
+.photo-gallery .photo-wrapper:hover .rotate-icon {
+  display: block;
+}
+.photo-gallery .rotate-icon {
+  color: white;
+  font-size: 60px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  display: none;
+}
+.photo-gallery .rotate-icon.left {
+  left: 0;
+}
+.photo-gallery .rotate-icon.right {
+  right: 0;
+}
+.photo-gallery .lightbox-thumbnail {
+  width: 60px;
+}
+.photo-gallery .lightbox-caption-wrapper {
+  display: flex;
+}
+.photo-gallery .lightbox-caption-wrapper input {
+  border: 0;
+  padding: 0;
+}
+.photo-gallery .lightbox-caption-wrapper input:hover {
+  border: 0;
+  padding: 0;
+}
+.photo-gallery .lightbox-caption-wrapper .edit-icon {
+  cursor: pointer;
+  color: #808080;
+}
+.photo-gallery .lightbox-caption-wrapper .edit-icon:hover {
+  color: #e0e0e0;
+}
+.photo-gallery .lightbox-caption-wrapper .caption {
+  background: transparent;
+  color: white;
+  font-family: Roboto;
+  border: 0;
+  flex-grow: 1;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 100%;
+  resize: none;
+  outline: none;
+}
+.photo-gallery .lightbox-caption-wrapper .caption:hover {
+  border-bottom: solid 1px #00e000;
+}
+.photo-gallery .lightbox-caption-wrapper .caption:focus {
+  padding-bottom: 0;
+  border-bottom: solid 1px #00e000;
+}
+.photo-gallery .lightbox-caption-wrapper .caption.empty {
+  color: #909090;
+  font-style: italic;
+}
+.photo-gallery .lightbox-date-and-number {
+  color: #e0e0e0;
+  display: flex;
+}
+.photo-gallery .lightbox-date-and-number .date .age {
+  color: #a0a0a0;
+}
+.photo-gallery .lightbox-date-and-number .number {
+  text-align: right;
+  color: #909090;
+  flex-grow: 1;
+}
+.photo-gallery .action-buttons {
+  text-align: right;
 }
