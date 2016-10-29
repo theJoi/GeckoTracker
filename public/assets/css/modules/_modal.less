@@ -3,6 +3,7 @@
 	border-radius: 5px;
 	width: 700px;
 	z-index: 20;
+	.depth-1;
 
 	animation: anim-modal-drop 0.2s 1;
 }
@@ -42,3 +43,60 @@
 		background-color: rgba(0,0,0,0.5);
 	}
 }
+
+.modal_ .title {
+	font-size: 20px;
+	padding: 12px;
+	line-height: 26px;
+	background: @primaryColor;
+	overflow: hidden;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	.icon {
+		//font-size: 24px;
+		margin-right: 5px;
+	}
+	
+	.text {
+		
+	}
+}
+
+
+.modal_ .content {
+	padding: 20px;
+}
+
+.modal_ .button-box {
+	
+}
+
+// TODO We need to create global flat button classes
+.modal_ .flat-button {
+	font-family: Roboto;
+	color: @primary-color;
+	box-shadow: none;
+	background: transparent;
+	padding: 10px 20px;
+	cursor: pointer;
+	margin: 8px;
+	border-radius: 2px;
+	font-weight: normal;
+	font-size: 14px;
+	
+	&:focus {
+		background: #f0f0f0;
+	}
+	
+	&:active {
+		background: #f7f7f7;			
+	}
+}
+
+
+

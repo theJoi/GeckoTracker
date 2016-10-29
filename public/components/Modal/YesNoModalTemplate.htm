@@ -1,8 +1,10 @@
 <div class='yes-no-modal' modal>
-	<div class='title'>{{title}}</div>
-	<div class='message'>{{message}}</div>
+	<div class='title'><i class="icon material-icons">{{icon}}</i> <span class='text'>{{title}}</span></div>
+	<div class='content'>
+		<div class='message'>{{message}}</div>
+	</div>
 	<div class='buttons e_button-box right'>
-		<div class='yes-button e_button'>Yes</div>
-		<div class='no-button e_button'>No</div>
+		<button class='yes-button flat-button' ng-click='yes()'>Yes</button>
+		<button class='no-button flat-button' ng-click='close()'>No</button>
 	</div>
 </div>

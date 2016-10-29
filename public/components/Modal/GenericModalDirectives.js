@@ -3,15 +3,26 @@
 
 angular.module('geckoTracker')
 
-.controller('YesNoDialogController', function($scope, $log, title, message, close) {
+.controller('YesNoModalController', function($scope, $log, title, icon, message, close) {
 	$scope.title = title;
 	$scope.message = message;
+	$scope.icon = icon;
 	
 	$scope.close = function() {
 		close(false);
 	}
 	
 	$scope.yes = function() {
-		close(yes);
+		close(true);
 	}
 })
+
+.controller('AlertModalController', function($scope, $log, title, icon, message, close) {
+	$scope.title = title;
+	$scope.message = message;
+	$scope.icon = icon;
+	
+	$scope.close = function() {
+		close();
+	}
+});

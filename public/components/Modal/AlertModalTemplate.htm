@@ -1,8 +1,9 @@
 <div class='alert-modal' modal>
-	<div class='title'>{{title}}</div>
-	<i>{{icon}}</i>
-	<div class='message'>{{message}}</div>
+	<div class='title'><i class="icon material-icons">{{icon}}</i> <span class='text'>{{title}}</span></div>
+	<div class='content'>
+		<div class='message'>{{message}}</div>
+	</div>
 	<div class='buttons e_button-box right'>
-		<div class='ok-button e_button'>OK</div>
+		<button class='ok-button flat-button' ng-click="close()">OK</button>
 	</div>
 </div>

@@ -11,7 +11,11 @@ angular.module('geckoTracker').config(['$routeProvider', '$locationProvider', fu
         .when('/geckos/:id', {
             templateUrl: 'views/GeckoDetailsView/GeckoDetailsViewTemplate.htm',
             controller: 'GeckoDetailsViewController'
-        });
+        })
+		.when('/demos', {
+			templateUrl: 'views/DemosView/DemosViewTemplate.htm',
+			controller: 'DemosViewController'
+		});
 
     $locationProvider.html5Mode(true);
 
