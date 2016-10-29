@@ -1,10 +1,39 @@
-.gecko-detail-card, .events-table, .gecko-card, .add-gecko-form {
-    width: 1200px;
-    margin: 30px auto;
+.flex-container {
+    display: flex;
 }
 
-.add-gecko-form {
-    margin-bottom: 50px;
-    padding-bottom: 25px;
+.side-bar {
+    .flex-container;
+    flex-direction: column;
+	background: transparent;
+    z-index: 2;
+    //border-right: 1px solid @dividerColor;
+    //border-bottom: 1px solid @dividerColor;
+    min-width: 200px;
+	padding: 10px;
+	color: #a0a0a0;
 }
 
+
+.dashboard-main-container{
+    display:flex;
+    flex-direction: column;
+}
+
+
+.gecko-detail-card {
+    border-bottom: 1px solid @dividerColor;
+}
+
+
+.graphs {
+
+    min-height: 200px;
+        border: 1px solid @dividerColor;
+    background: @white3;
+
+}
+
+#weight, #other {
+    width: 50%;
+}

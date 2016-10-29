@@ -32,11 +32,37 @@
 /* Elements related to tables */
 
 .table-top {
-    .font-size-title;
+
     min-height: 50px;
-    border-bottom: 1px solid @dividerColor;
+    position: relative;
+
+
 }
 
+
+.table-scroll thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tbody {
+    max-height: 150px;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table-scroll td {
+    height: 50px; // needed in order to keep rows from collapsing
+}
 
 /* Input Stuff */
 
@@ -55,5 +81,11 @@
 
 input .inline {
     background: pink;
+}
+
+.fixed-action-buttons {
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 

@@ -1,11 +1,8 @@
 .events-table {
-    width: 1200px;
-    margin: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
+
     background: white;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-    padding: 0;
+	padding: 0;
+
 
     .title {
         padding: 16px;
@@ -83,10 +80,26 @@
             background: #f0f0f0;
         }
 
-        th:nth-child(1) { width: 40px; }
-        th:nth-child(2) { width: 240px; }
-        th:nth-child(3) { width: 100px; }
-        th:nth-child(4) { width: 200px; }
+        th.column-select { width: 40px; }
+        th.column-date { width: 240px; }
+        th.column-type { width: 100px; }
+        th.column-details { width: 200px; }
+				th.column-actions { width: 100px; text-align: right; }
+				td.column-actions { text-align: right; }
+			
+			.action-icon {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.action-icon {
+				font-size: 20px;
+				color: #e0e0e0;
+				cursor: pointer;
+				&:hover {
+					color: #404040;
+				}
+			}
     }
 
     .add-gecko-event-form {

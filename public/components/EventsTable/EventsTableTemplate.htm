@@ -1,4 +1,4 @@
-<div class='events-table material-card'>
+<div class='events-table'>
 	<div class='title'>Events</div>
 
 	<div class='filter'>
@@ -7,39 +7,46 @@
 		<i class="material-icons close" ng-click="filter.search = ''">close</i>
 	</div>
 
-    <table>
-        <tr>
-			<th><i class="material-icons">check_box_outline_blank</i></th>
-            <th class='sortable' ng-click="setSort('date')">
+	<table>
+		<!-- Table Header -->
+		<tr>
+			<!--<th class='column-select'><i class="material-icons">check_box_outline_blank</i></th>-->
+			<th class='column-date sortable' ng-click="setSort('date')">
 				Date
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
-            <th class='sortable' ng-click="setSort('type')">Event</th>
-            <th>Details</th>
-			<th class='sortable' ng-click="setSort('notes')">
+			<th class='column-type sortable' ng-click="setSort('type')">Event</th>
+			<th class='column-details'>Details</th>
+			<th class='column-notes sortable' ng-click="setSort('notes')">
 				Notes
 				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
 				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
-        </tr>
-        <tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
-			<td>
+			<th class='column-actions'></th>
+		</tr>
+		<!-- Table Rows -->
+		<tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
+			<!--<td>
 				<i class="material-icons" ng-if='!isEventSelected(event)' ng-click='selectEvent(event)'>check_box_outline_blank</i>
 				<i class="material-icons selected" ng-if='isEventSelected(event)' ng-click='unselectEvent(event)'>check_box</i>
-			</td>
-            <td>{{event.date | date: 'fullDate'}}</td>
-            <td>{{event.type | prettyEventType}}</td>
-            <td>
+			</td>-->
+			<td>{{event.date | date: 'fullDate'}}</td>
+			<td>{{event.type | prettyEventType}}</td>
+			<td>
 				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}g</span>
 				<span ng-if="event.type == 'clutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
-            <td>{{event.notes}}</td>
-        </tr>
-		<tr ng-if='filtered.length == 0'>
-			<td colspan=5 class='empty-indicator'>No events match your filter</td>
-		</tr>
-    </table>
+			<td>{{event.notes}}</td>
+			<td class='column-actions'>
+				<i class='action-icon edit-icon material-icons' ng-click='editEvent(event)'>edit</i>
+				<i class='action-icon delete-icon material-icons'>delete_forever</i>
+			</td>
+	</tr>
+	<tr ng-if='filtered.length == 0'>
+		<td colspan=5 class='empty-indicator'>No events match your filter</td>
+	</tr>
+	</table>
 
 	<button style='margin: 10px;' ng-if='selectedEventsCount() == 1' ng-click='deleteSelectedEvent()'>Delete</button>
 
@@ -56,6 +63,7 @@
 				<option value='purchase'>Purchased</option>
 				<option value='death'>Died</option>
 				<option value='clutch'>Laid Clutch</option>
+				<option value='copulate'>Copulation</option>
 				<option value='weight'>Weighed</option>
 				<option value='shed'>Shed</option>
 				<option value='note'>Note</option>
@@ -80,4 +88,6 @@
 			<button ng-click='addEvent()'>Add Event</button>
 		</div>
 	</div>
+
+	<add-event-form show='showAddEventForm' gecko-id="{{geckoId}}" event="eventToEdit"></add-event-form>
 </div>

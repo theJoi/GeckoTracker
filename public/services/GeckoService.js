@@ -2,7 +2,7 @@
 /* globals angular, Promise, response */
 
 angular.module('geckoTracker')
-    .factory('geckoService', function ($http, $log) {
+    .factory('geckoService', function ($http, $log, $q) {
         // We store our list of geckos here so that we can refer to it from the functions
         // in the object we return. Because of function scope, those functions can always
         // reference it.
@@ -15,6 +15,7 @@ angular.module('geckoTracker')
         function fetchGeckos() {
             // Save this promise so that we can check it later in getGeckos
             fetchPromise = new Promise(function (fulfill, reject) {
+				console.log("Fetching geckos...")
                 $http({
                     method: 'GET',
                     url: '/api/geckos'
@@ -45,11 +46,28 @@ angular.module('geckoTracker')
             });
             return fetchPromise;
         }
-
-        return {
-            // Get the list of geckos from the service
-            // Returns a promise
-            getGeckos: function () {
+	
+		function updateGeckoProperties(props) {
+			getGeckos().then(function(geckos) {
+			console.log("UPDATE GECKO PROPERTIES", geckos, fetchPromise);
+			for(var i=0;i < geckos.length;i++) {
+				var gecko = geckos[i];
+				console.log(gecko, props._id);
+				if(gecko._id == props._id) {
+					console.debug("Found gecko to update");
+					for(var prop in props) {
+						console.debug("Updating property " + prop);
+						if(gecko.hasOwnProperty(prop) && prop.charAt(0) != '_') {
+							gecko[prop] = props[prop];
+						}
+					}
+				}
+			}
+			})
+			$rootScope.$apply();
+		}
+	
+		function getGeckos() {
                 // Since we're returning a promise (something that has a ".then()" method), we can just return the
                 // promise that we create in fetchGeckos. If fetchGeckos() has already been called, we
                 // saved that promise and return it here. If not, we need to call fetchGeckos() and return it.
@@ -57,7 +75,12 @@ angular.module('geckoTracker')
                     return fetchGeckos();
                 else
                     return fetchPromise;
-            },
+		}
+
+        return {
+            // Get the list of geckos from the service
+            // Returns a promise
+            getGeckos: getGeckos,
 
             // Fetch the list of geckos from the service
             // NOTE: Only the service itself (this thing) probably needs to call this directly (through getGeckos).
@@ -136,10 +159,11 @@ angular.module('geckoTracker')
                     }
 
                     var _id = properties._id;
+					delete properties._id;
 
                     $http({
                         method: 'PUT',
-                        url: "/api/geckos/" + properties._id + "/edit",
+                        url: "/api/geckos/" + _id + "/edit",
                         data: properties
                     }).then(function success(response) {
                         if (response.data.error) {
@@ -244,6 +268,92 @@ angular.module('geckoTracker')
                         reject("Failed to get gecko metrics from server");
                     });
                 });
-            }
-        };
+            },
+			
+			getGeckoPhotos: function(id) {
+                return new Promise(function (fulfill, reject) {
+                    $http({
+                        method: 'GET',
+                        url: '/api/geckos/' + id + '/photos'
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+                        fulfill(response.data);
+                    }, function error(response) {
+                        reject("Failed to get gecko photos from server");
+                    });
+                });
+			},
+
+			updateGeckoPhoto: function(id, properties) {
+                return new Promise(function (fulfill, reject) {
+                    $http({
+                        method: 'PUT',
+                        url: '/api/photos/' + id,
+						data: properties
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+                        fulfill(response.data);
+                    }, function error(response) {
+                        reject("Failed to update photo");
+                    });
+                });
+			},
+
+			deleteGeckoPhoto: function(id) {
+                return new Promise(function (fulfill, reject) {
+                    $http({
+                        method: 'DELETE',
+                        url: '/api/photos/' + id
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+                        fulfill(response.data);
+                    }, function error(response) {
+                        reject("Failed to delete photo");
+                    });
+                });
+			},
+			
+			
+			setPrimaryPhoto: function(geckoId, photoId) {
+				return $q(function (fulfill, reject) {
+                    $http({
+                        method: 'PUT',
+                        url: '/api/geckos/' + geckoId + '/setPrimaryPhoto',
+						data: {
+							photoId: photoId
+						}
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+						var updatedGecko = response.data;
+						updateGeckoProperties(updatedGecko);
+                        fulfill(updatedGecko);
+                    }, function error(response) {
+                        reject("Failed to delete photo");
+                    });
+				});
+			},
+			
+			setPhotoCaption: function(photoId, caption) {
+				return $q(function(fulfill, reject) {
+                    $http({
+                        method: 'PUT',
+                        url: '/api/photos/' + photoId,
+						data: {
+							caption: caption
+						}
+                    }).then(function success(response) {
+                        if (response.data.error)
+                            return reject(response.data.error);
+                        fulfill(caption);
+                    }, function error(response) {
+                        reject("Failed to delete photo");
+                    });
+				});
+			}
+
+		};
     });

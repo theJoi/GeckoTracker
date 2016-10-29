@@ -2,3 +2,5 @@
 /.bashrc
 /.profile
 /node_modules/
+/public/photos/*.jpg
+/npm-debug.log

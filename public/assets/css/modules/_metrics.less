@@ -1,11 +1,10 @@
 .gecko-metrics {
 	@metrics-total-color: ;
 	@metrics-male-color: #6c78ab;
-
+    background: white;
 	display: flex;
-	justify-content: center;
 	padding: 15px;
-	background: #404040;
+
 	color: #00c000;
 	font-family: 'Roboto', sans-serif;
 
@@ -13,20 +12,20 @@
 		margin-right: 30px;
 
 		&.metric-total {
-			.units { color: lighten(desaturate(#db4844, 20%), 25%); }
-			.value { color: #db4844; }
+			.units { color: lighten(desaturate(@darkPrimaryColor, 20%), 25%); }
+			.value { color: @darkPrimaryColor; }
 		}
 		&.metric-male {
-			.units { color: lighten(desaturate(#6c78ab, 20%), 25%); }
-			.value { color: #6c78ab; }
+			.units { color: lighten(desaturate(@blue, 20%), 25%); }
+			.value { color: @blue; }
 		}
 		&.metric-female {
-			.units { color: lighten(desaturate(#d76b9e, 20%), 25%); }
-			.value { color: #d76b9e; }
+			.units { color: lighten(desaturate(@pink, 20%), 25%); }
+			.value { color: @pink; }
 		}
 		&.metric-eggs {
-			.units { color: lighten(desaturate(#d9d863, 20%), 25%); }
-			.value { color: #d9d863; }
+			.units { color: lighten(desaturate(@textColorGray, 20%), 25%); }
+			.value { color: @textColorGray; }
 		}
 	}
 
