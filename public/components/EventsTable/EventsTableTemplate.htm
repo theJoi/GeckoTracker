@@ -50,43 +50,8 @@
 
 	<button style='margin: 10px;' ng-if='selectedEventsCount() == 1' ng-click='deleteSelectedEvent()'>Delete</button>
 
-	<div class='add-gecko-event-form'>
-		<div class='field'>
-			<label>Date</label>
-			<input type='date' ng-model='options.date'></input>
-		</div>
-		<div class='field'>
-			<label>Type</label>
-			<select ng-model='options.type'>
-				<option value='laid'>Laid</option>
-				<option value='hatch'>Hatched</option>
-				<option value='purchase'>Purchased</option>
-				<option value='death'>Died</option>
-				<option value='clutch'>Laid Clutch</option>
-				<option value='copulate'>Copulation</option>
-				<option value='weight'>Weighed</option>
-				<option value='shed'>Shed</option>
-				<option value='note'>Note</option>
-			</select>
-		</div>
-		<div class='field' ng-if='options.type == "weight"'>
-			<label>Weight</label>
-			<input type='number' ng-model='options.info.weight' min=1 placeholder=50></input>
-		</div>
-		<div class='field' ng-if='options.type == "clutch"'>
-			<label>Eggs</label>
-			<input type='number' ng-model='options.info.eggs' placeholder=2></input>
-		</div>
-		<div class='field' style='flex-shrink: 0; flex-grow: 1;'>
-			<label>Note</label>
-			<input type='text' class='note' ng-model='options.notes' placeholder="Enter a note..."/>
-		</div>
-		<div class='field' ng-if='selectedEventsCount() == 1'>
-			<button ng-click='updateSelectedEvent()'>Update Event</button>
-		</div>
-		<div class='field' ng-if='selectedEventsCount() != 1'>
-			<button ng-click='addEvent()'>Add Event</button>
-		</div>
+	<div class='footer'>
+		<button style="margin: 0;" ng-click='addEvent()'>Add Event</button>
 	</div>
 
 	<add-event-form show='showAddEventForm' gecko-id="{{geckoId}}" event="eventToEdit"></add-event-form>
