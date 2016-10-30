@@ -3219,6 +3219,10 @@ label {
 .events-table .add-gecko-event-form .field label {
   display: block;
 }
+.events-table .footer {
+  padding: 16px;
+  text-align: right;
+}
 /* events table before merge
 
 .events-table {
