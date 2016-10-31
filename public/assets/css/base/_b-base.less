@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -27,14 +26,17 @@ i {
     padding: 5px;
 }
 
+// Used for label, select, and input elements
+.full-width {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
 label,
 select,
 input {
-    &:not(.inline) {
-        display: block;
-        float: left;
-        width: 100%;
-    }
+    &:not(.inline) {}
 }
 
 select,
