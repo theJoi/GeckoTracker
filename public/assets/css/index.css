@@ -38,29 +38,24 @@ body {
 i {
   padding: 5px;
 }
-.full-width {
-  display: block;
-  float: left;
-  width: 100%;
-}
+/*
 select,
 input {
-  border: 0;
-  outline: none;
-  border-bottom: dotted 1px #f0f0f0;
-  font-family: "Roboto", sans-serif;
-  background: #fdfdfd;
-  line-height: 20px;
+    border: 0;
+    outline: none;
+    border-bottom: dotted 1px @evenRowColor;
+    font-family: "Roboto", sans-serif;
+    background: @background;
+    line-height: 20px;
+    &:not(.input--readonly):hover {
+        border-bottom: solid 2px @lightPrimaryColor !important;
+    }
+    &:focus {
+        border-bottom: solid 2px @accentColor !important;
+        background: @textColorLight;
+    }
 }
-select:not(.input--readonly):hover,
-input:not(.input--readonly):hover {
-  border-bottom: solid 2px #dcedc8 !important;
-}
-select:focus,
-input:focus {
-  border-bottom: solid 2px #536dfe !important;
-  background: #ffffff;
-}
+*/
 .input--readonly:hover,
 .input--readonly:focus {
   border-bottom: dotted 1px #f0f0f0;
