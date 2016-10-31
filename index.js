@@ -14,7 +14,8 @@ var express     = require("express");
 var geckos      = require("./app/gecko.js");
 var bodyParser  = require("body-parser");
 var app         = express();
-
+var multer		= require("multer");
+var crypto		= require('crypto');
 
 // CONFIGURATION  =========================================================
 app.set('port', 5000);
@@ -23,6 +24,22 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+// MULTER CONFIGURATION ===================================================
+var storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, 'public/photos');
+	},
+	filename: function(req, file, cb) {
+		var ext = ".jpg";
+		if(file.mimetype == 'image/jpeg')
+			ext = ".jpg";
+		crypto.pseudoRandomBytes(16, function(err, raw) {
+			console.log("GENERATING FILENAME", err, raw.toString('hex') + ext);
+			cb(err, err ? undefined : raw.toString('hex') + ext);
+		});
+	}
+})
+var upload = multer({ storage: storage });
 
 // GECKOS ROUTES ==========================================================
 
@@ -175,6 +192,88 @@ app.delete('/api/events/:id', function(request, response) {
      });
 });
 
+// PHOTO ROUTES =================================================
+app.post('/api/geckos/:id/photos', upload.single('file'), function(request, response) {
+	var geckoId = request.params.id;
+	if(!request.file) {
+		response.json("foo");
+		return;
+	}
+	console.log("Uploaded photo for gecko " + geckoId);
+	console.log(JSON.stringify(request.file));
+	console.log("originalname", request.file.originalname);
+	console.log("name", request.file.filename);
+	console.log("encoding", request.file.encoding);
+	console.log("mimetype", request.file.mimetype);
+	console.log("path", request.file.path);
+	console.log("size", request.file.size);
+	geckos.savePhoto(geckoId, {
+		name: request.file.filename,
+		originalName: request.file.originalname,
+		mimetype: request.file.mimetype
+	}, function(err, photo) {
+		response.json(photo);
+	});
+});
+
+app.get('/api/geckos/:id/photos', function(request, response) {
+	var geckoId = request.params.id;
+	geckos.getGeckoPhotos(geckoId, function(err, photos) {
+		if(err) {
+            console.log(err);
+            response.json({error: err});
+            return;
+        }
+		response.json(photos);
+	});
+});
+
+app.put('/api/photos/:id', function(request, response) {
+	var id = request.params.id;
+	var properties = request.body;
+	geckos.updateGeckoPhoto(id, properties, function(err, updatedPhoto) {
+		if(err) {
+			response.json({error: err});
+			return;
+		}
+		response.json(updatedPhoto);
+	});
+});
+
+app.delete('/api/photos/:id', function(request, response) {
+	var id = request.params.id;
+	geckos.deleteGeckoPhoto(id, request.body, function(err) {
+		if(err) {
+			response.json({error: err});
+			return;
+		}
+		response.json("{result: 'success'}");
+	});
+});
+
+app.post('/api/photos/:id/caption', function(request, response) {
+	var photoId = request.params.id;
+	var caption = request.body.caption;
+	geckos.setPhotoCaption(photoId, caption, function(err) {
+		if(err) {
+			response.json({error: err});
+			return;
+		}
+		response.json("{result: 'success'}");
+	});
+});
+
+app.put('/api/geckos/:id/setPrimaryPhoto', function(request, response) {
+	var geckoId = request.params.id;
+	var photoId = request.body.photoId;
+	geckos.setPrimaryGeckoPhoto(geckoId, photoId, function(err, gecko) {
+		if(err) {
+			response.json({error: err});
+			return;
+		}
+		response.json(gecko);
+	});
+});
 
 // OTHER ROUTES =================================================
 

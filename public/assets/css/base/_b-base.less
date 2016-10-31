@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -16,27 +17,8 @@ a:hover:not(.link--nohover),
     color: @accentColor;
 }
 
-button, .button-primary {
-    padding: 8px 10px;
-    margin-top: 12px;
-    background: @accentColor;
-    font-weight: bold;
-    color: @textColorLight;
-    border: 0;
-    .material-shadow;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.5s;
-    .round-corner;
-    &:hover {
-        background: lighten(@accentColor, 10%);
-        .material-shadow--hover;
-    }
-}
-
 body {
-    background: url("../img/subtle_dots.png"), white;
-    background-repeat: repeat;
+    background: white;
     font-family: "Roboto", sans-serif;
     margin: 0;
 }
@@ -91,8 +73,13 @@ th {
     text-align: left;
 }
 
-th {
+th,
+thead {
     color: @textColorGray;
     .font-size-default;
     .bold;
+}
+
+tr {
+    height: 50px;
 }

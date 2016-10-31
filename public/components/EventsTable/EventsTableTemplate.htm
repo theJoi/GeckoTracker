@@ -1,4 +1,4 @@
-<div class='events-table material-card'>
+<div class='events-table'>
 	<div class='title'>Events</div>
 
 	<div class='filter'>
@@ -7,77 +7,52 @@
 		<i class="material-icons close" ng-click="filter.search = ''">close</i>
 	</div>
 
-    <table>
-        <tr>
-			<th><i class="material-icons">check_box_outline_blank</i></th>
-            <th class='sortable' ng-click="setSort('date')">
+	<table>
+		<!-- Table Header -->
+		<tr>
+			<!--<th class='column-select'><i class="material-icons">check_box_outline_blank</i></th>-->
+			<th class='column-date sortable' ng-click="setSort('date')">
 				Date
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
-            <th class='sortable' ng-click="setSort('type')">Event</th>
-            <th>Details</th>
-			<th class='sortable' ng-click="setSort('notes')">
+			<th class='column-type sortable' ng-click="setSort('type')">Event</th>
+			<th class='column-details'>Details</th>
+			<th class='column-notes sortable' ng-click="setSort('notes')">
 				Notes
 				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
 				<i ng-if="filter.sortProperty == 'notes' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
-        </tr>
-        <tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
-			<td>
+			<th class='column-actions'></th>
+		</tr>
+		<!-- Table Rows -->
+		<tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
+			<!--<td>
 				<i class="material-icons" ng-if='!isEventSelected(event)' ng-click='selectEvent(event)'>check_box_outline_blank</i>
 				<i class="material-icons selected" ng-if='isEventSelected(event)' ng-click='unselectEvent(event)'>check_box</i>
-			</td>
-            <td>{{event.date | date: 'fullDate'}}</td>
-            <td>{{event.type | prettyEventType}}</td>
-            <td>
+			</td>-->
+			<td>{{event.date | date: 'fullDate'}}</td>
+			<td>{{event.type | prettyEventType}}</td>
+			<td>
 				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}g</span>
 				<span ng-if="event.type == 'clutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
-            <td>{{event.notes}}</td>
-        </tr>
-		<tr ng-if='filtered.length == 0'>
-			<td colspan=5 class='empty-indicator'>No events match your filter</td>
-		</tr>
-    </table>
+			<td>{{event.notes}}</td>
+			<td class='column-actions'>
+				<i class='action-icon edit-icon material-icons' ng-click='editEvent(event)'>edit</i>
+				<i class='action-icon delete-icon material-icons'>delete_forever</i>
+			</td>
+	</tr>
+	<tr ng-if='filtered.length == 0'>
+		<td colspan=5 class='empty-indicator'>No events match your filter</td>
+	</tr>
+	</table>
 
 	<button style='margin: 10px;' ng-if='selectedEventsCount() == 1' ng-click='deleteSelectedEvent()'>Delete</button>
 
-	<div class='add-gecko-event-form'>
-		<div class='field'>
-			<label>Date</label>
-			<input type='date' ng-model='options.date'></input>
-		</div>
-		<div class='field'>
-			<label>Type</label>
-			<select ng-model='options.type'>
-				<option value='laid'>Laid</option>
-				<option value='hatch'>Hatched</option>
-				<option value='purchase'>Purchased</option>
-				<option value='death'>Died</option>
-				<option value='clutch'>Laid Clutch</option>
-				<option value='weight'>Weighed</option>
-				<option value='shed'>Shed</option>
-				<option value='note'>Note</option>
-			</select>
-		</div>
-		<div class='field' ng-if='options.type == "weight"'>
-			<label>Weight</label>
-			<input type='number' ng-model='options.info.weight' min=1 placeholder=50></input>
-		</div>
-		<div class='field' ng-if='options.type == "clutch"'>
-			<label>Eggs</label>
-			<input type='number' ng-model='options.info.eggs' placeholder=2></input>
-		</div>
-		<div class='field' style='flex-shrink: 0; flex-grow: 1;'>
-			<label>Note</label>
-			<input type='text' class='note' ng-model='options.notes' placeholder="Enter a note..."/>
-		</div>
-		<div class='field' ng-if='selectedEventsCount() == 1'>
-			<button ng-click='updateSelectedEvent()'>Update Event</button>
-		</div>
-		<div class='field' ng-if='selectedEventsCount() != 1'>
-			<button ng-click='addEvent()'>Add Event</button>
-		</div>
+	<div class='footer'>
+		<button style="margin: 0;" ng-click='addEvent()'>Add Event</button>
 	</div>
+
+	<add-event-form show='showAddEventForm' gecko-id="{{geckoId}}" event="eventToEdit"></add-event-form>
 </div>

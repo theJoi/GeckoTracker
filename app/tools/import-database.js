@@ -25,12 +25,12 @@ for(var x in entries) {
 			sex: entry.sex == 'Male' ? 'male' : 'female',
 			morph: entry.morphGenetics,
 			stage: 'adult',
-			birthDate: entry.born,
+			birthdate: new Date(entry.born),
 			status: 'normal'
 		};
 		//geckoList.append(currentGecko);
 		geckoList[gecko.userId] = gecko;
-		console.log(entry.name);
+		console.log(gecko);
 	}
 }
 
@@ -46,7 +46,7 @@ for(var x in entries) {
 
 	if(entry.name) geckoId = entry.id + "";
 	var event = {
-		date: date,
+		date: new Date(date),
 		geckoId: geckoId
 	};
 	if(notes)
@@ -56,6 +56,7 @@ for(var x in entries) {
 		case 'Weighed':
 			event.type = 'weight';
 			event.info = { weight: weight };
+			geckoList[geckoId].currWeight = weight;
 			break;
 		case 'Shed':
 			event.type = 'shed';
@@ -68,6 +69,7 @@ for(var x in entries) {
 			break;
 		case 'Acquired':
 			event.type = 'purchase';
+			geckoList[geckoId].purchaseDate = new Date(date);
 			break;
 		case 'Hatched':
 			event.type = 'hatch';
@@ -82,6 +84,7 @@ for(var x in entries) {
 			break;
 	}
 	
+  	console.log(event);
 	eventList.push(event);
 }
 
@@ -123,7 +126,6 @@ geckos.init(null, function() {
 		});
 	});
 });
-console.log("HERE");
 
 // Empty collection first then run function to add geckos
 //geckos.init(null, function () {

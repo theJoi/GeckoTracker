@@ -1,38 +1,43 @@
 {
-  "name": "gecko-tracker",
-  "version": "0.0.1",
-  "main": "index.js",
-  "private": true,
-  "watch": {
-    "less": {
-      "patterns": [
+    "name": "gecko-tracker",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "watch": {
+        "less": {
+            "patterns": [
         "public/assets/css"
       ],
-      "extensions": "less"
-    }
-  },
-  "scripts": {
-    "start": "node index.js",
-    "less": "lessc ./public/assets/css/styles.less ./public/assets/css/styles.css",
-    "watch": "npm-watch",
-    "test": "mocha",
-    "jshint": "jshint *.js"
-  },
-  "files": [
+            "extensions": "less"
+        }
+    },
+    "scripts": {
+        "start": "node index.js",
+        "less": "lessc ./public/assets/css/index.less ./public/assets/css/index.css",
+        "watch": "npm-watch",
+        "test": "mocha",
+        "jshint": "jshint *.js",
+        "reset-db": "node app/tools/import-database.js"
+    },
+    "files": [
     "gecko.js"
   ],
-  "dependencies": {
-    "angular": "^1.5.7",
-    "angular-animate": "^1.5.7",
-    "angular-route": "^1.5.7",
-    "angular-toastr": "node_modules/angular-toastr",
-    "body-parser": "^1.15.1",
-    "chai": ">=3.5",
-    "express": ">1.0",
-    "moment": "^2.14.1",
-    "mongoose": "^4.5.0",
-    "ng-dialog": "^0.6.2",
-    "npm-watch": ">=0.0"
-  },
-  "devDependencies": {}
+    "dependencies": {
+        "angular": "^1.5.7",
+        "angular-animate": "^1.5.7",
+        "angular-modal-service": "^0.10.1",
+        "angular-route": "^1.5.7",
+        "body-parser": "^1.15.1",
+        "chai": ">=3.5",
+        "exif": "^0.6.0",
+        "express": ">1.0",
+        "moment": "^2.14.1",
+        "mongoose": "^4.5.0",
+        "multer": "^1.2.0",
+        "ng-dialog": "^0.6.2",
+        "ng-file-upload": "^12.0.4",
+        "ng-flow": "^2.1.4",
+        "npm-watch": ">=0.0"
+    },
+    "devDependencies": {}
 }

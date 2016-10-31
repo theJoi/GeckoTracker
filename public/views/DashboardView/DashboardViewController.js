@@ -9,6 +9,6 @@
 | Created June 2016 by Joi W.
 |__________________________________________________________________________
 */
-angular.module('geckoTracker').controller('DashboardViewController', function ($scope, $http, ngDialog, toastr, geckoService) {
-    // KENNY: This might still be used for view-related UI things in the future, so we don't want to delete it.
-});
+angular.module('geckoTracker').controller('DashboardViewController', function ($scope, $http, ngDialog, toastr, geckoService, ModalService) {
+})
+

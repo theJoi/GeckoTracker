@@ -6,7 +6,7 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/AddGeckoForm/AddGeckoFormTemplate.htm",
-            controller: function ($scope, geckoService) {
+            controller: function ($scope, geckoService, ModalService) {
                 $scope.validationMsg = "Name and ID are required. If you don't have an ID please enter the name of the gecko for both fields.";
                 /* Initial form values */
                 $scope.form = {
@@ -48,11 +48,39 @@ angular.module('geckoTracker')
 
                 $scope.showParentModal = function (gender) {
                     console.log("show parent modal triggered.");
-                    $scope.genderFilter = gender;
-                    $scope.parentModal.shown = true;
+                    //$scope.genderFilter = gender;
+                    //$scope.parentModal.shown = true;
+					
+					ModalService.showModal({
+						templateUrl: "components/GeckoPicker/GeckoPickerTemplate.htm",
+						controller: "GeckoPickerController",
+						inputs: {
+							gender: gender
+						}
+					}).then(function(modal) {
+						console.log(modal.element);
+						modal.close.then(function(gecko) {
+							if(gecko != null) {
+								if(gender == 'female')
+									$scope.form.mother = {
+										_id: gecko._id,
+										name: gecko.name,
+										userId: gecko.userId
+									};
+								else
+									$scope.form.father = {
+										_id: gecko._id,
+										name: gecko.name,
+										userId: gecko.userId
+									};
+							}
+						});
+					});
                 };
 
                 $scope.setParent = function (gender, gecko) {
+					
+					/*
                     if (gender === "female") {
                         console.log("Mother => " + gecko._id);
                         $scope.form.mother = {
@@ -67,7 +95,7 @@ angular.module('geckoTracker')
                             name: gecko.name,
                             userId: gecko.userID
                         };
-                    }
+                    }*/
                     $scope.parentModal.shown = false;
                 };
             }
