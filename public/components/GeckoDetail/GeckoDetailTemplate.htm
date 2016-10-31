@@ -127,10 +127,10 @@
                 </div>
                 <div class="row">
                     <div class="right" ng-show="showEditMode">
-                        <button ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
+                        <button class="button--raised" ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
                             SAVE CHANGES</button>
-                        <button ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>
-                        <button ng-click="showEditMode=false" class="button--secondary"><i class='fa fa-times'></i>CANCEL</button>
+                        <button class="button--raised" ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>
+                        <button class="button--raised" ng-click="showEditMode=false" class="button--secondary"><i class='fa fa-times'></i>CANCEL</button>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
         <table>
             <div class="table-top grid">
                 <input type="text" class="search-box inline" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
-                <button ng-click="parentModal.shown=false">Close</button>
+                <button class="button--raised" ng-click="parentModal.shown=false">Close</button>
             </div>
             <thead>
                 <tr class="link--nohover">

@@ -171,7 +171,6 @@ input .inline {
   right: 5px;
   top: 5px;
 }
-button,
 .button--raised {
   padding: 8px 10px;
   margin-top: 12px;
@@ -185,7 +184,6 @@ button,
   transition: all 0.5s;
   border-radius: 2px;
 }
-button:hover,
 .button--raised:hover {
   background: #8698fe;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
