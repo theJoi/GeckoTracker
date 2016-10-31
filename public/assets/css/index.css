@@ -172,7 +172,7 @@ input .inline {
   top: 5px;
 }
 button,
-.button-primary {
+.button--raised {
   padding: 8px 10px;
   margin-top: 12px;
   background: #536dfe;
@@ -186,7 +186,7 @@ button,
   border-radius: 2px;
 }
 button:hover,
-.button-primary:hover {
+.button--raised:hover {
   background: #8698fe;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
