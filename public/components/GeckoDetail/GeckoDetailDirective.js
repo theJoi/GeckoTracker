@@ -6,7 +6,7 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoDetail/GeckoDetailTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService, $location, toastr) {
+            controller: function ($scope, $http, $log, geckoService, $location, $timeout, toastr, ModalService) {
                 // $scope.geckos = [];
                 $scope.isLoaded = false; // use to trigger loading spinner
                 $log.debug("GeckoDetail directive's controller instantiated");
@@ -71,16 +71,28 @@ angular.module('geckoTracker')
                     console.log("copy birthdate: " + $scope.editform.birthdate);
                 };
 
-                $scope.deleteGecko = function (id, name) {
-                    if (window.confirm("Are you sure you want to delete the gecko named " + name + "?")) {
-                        geckoService.removeGecko(id).then(function () {
-                        $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
+                $scope.deleteGecko = function (gecko) {
+                    ModalService.showModal({
+                        templateUrl: "components/Modal/YesNoModalTemplate.htm",
+                        controller: "YesNoModalController",
+                        inputs: {
+                            title: "Are You Sure?",
+                            icon: "delete_forever",
+                            message: "Gecko " + gecko.name + " (#" + gecko.userId + ") will be permanently deleted."
+                        }
+                    }).then(function(modal) {
+                        modal.close.then(function(result) {
+                            if(result) {
+                                geckoService.removeGecko(gecko._id).then(function () {
+                                    $scope.statusMsg = "The gecko named '" + gecko.name + "' has successfully been deleted.";
+                                    $timeout(function() {
+                                        $location.path('/');
+                                    }, 0);
+                                    toastr.success(gecko.name + " was successfully deleted!");
+                                });
+                            }
+                        });
                     });
-                    $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
-
-                        $location.path('/');
-                    }
-
                 };
 
                 $scope.showParentModal = function (gender) {
