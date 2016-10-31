@@ -83,8 +83,8 @@
                         <input type="textarea" rows="1" cols="50" ng-model="form.notes">
                     </div>
                     <div class="row right">
-                        <button ng-click="submitForm()">Add Gecko</button>
-                        <button ng-click="showForm=false" class="button--secondary">Cancel</button>
+                        <button class="button--raised" ng-click="submitForm()">Add Gecko</button>
+                        <button class="button--raised" ng-click="showForm=false" class="button--secondary">Cancel</button>
                     </div>
                 </div>
             </form>
@@ -92,56 +92,56 @@
     </div>
 </div>
 
-    <!-- PARENT PICKER MODAL -->
-    <!-- TODO: add ability to close modal by clicking outside of it -->
-    <div ng-show='parentModal.shown' class="black-out">
-        <div ng-show='parentModal.shown' class='modal'>
-            <table>
-                <div class="table-top">
-                    <input type="text" class="search-box" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
-                    <button ng-click="parentModal.shown=false">Close</button>
-                </div>
-                <thead>
-                    <tr class="link--nohover">
-                        <th>
-                            <a href="#" ng-click="sortType = 'sex'; sortReverse = !sortReverse">
+<!-- PARENT PICKER MODAL -->
+<!-- TODO: add ability to close modal by clicking outside of it -->
+<div ng-show='parentModal.shown' class="black-out">
+    <div ng-show='parentModal.shown' class='modal'>
+        <table>
+            <div class="table-top">
+                <input type="text" class="search-box" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
+                <button class="button--raised" ng-click="parentModal.shown=false">Close</button>
+            </div>
+            <thead>
+                <tr class="link--nohover">
+                    <th>
+                        <a href="#" ng-click="sortType = 'sex'; sortReverse = !sortReverse">
                     Sex
                     <span ng-show="sortType == 'sex' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'sex' && sortReverse" class="fa fa-caret-up"></span>
                 </a>
-                        </th>
-                        <th>
-                            <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
                         Name
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>                 </a>
-                        </th>
-                        <th>
-                            <a href="#" ng-click="sortType = 'userId'; sortReverse = !sortReverse">
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'userId'; sortReverse = !sortReverse">
                         ID
                         <span ng-show="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
-                        <th>
-                            <a href="#" ng-click="sortType = 'stage'; sortReverse = !sortReverse">
+                    <th>
+                        <a href="#" ng-click="sortType = 'stage'; sortReverse = !sortReverse">
                         Stage <span ng-show="sortType == 'stage' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'stage' && sortReverse" class="fa fa-caret-up"></span>                 </a> </th>
 
-                    </tr>
-                </thead>
-                <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:'adult' | filter:'!unknown' | filter:genderFilter | filter:parentSearchTerm" class="gecko-card-table">
-
-                    <td>
-                        <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
-                        <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
-                        <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
-                    </td>
-                    <td><a href="#" ng-click="setParent(genderFilter,gecko)"><strong>{{gecko.name}}</strong></td>
-                    <td>{{gecko.userId}}</a></td>
-                    <td>{{gecko.stage}}</td>
-                    </a>
                 </tr>
-            </table>
+            </thead>
+            <tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:'adult' | filter:'!unknown' | filter:genderFilter | filter:parentSearchTerm" class="gecko-card-table">
 
-        </div>
+                <td>
+                    <i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>
+                    <i class='fa fa-venus female' ng-if="gecko.sex == 'female'"></i>
+                    <i class='fa fa-question unknown' ng-if="gecko.sex == 'unknown'"></i>
+                </td>
+                <td><a href="#" ng-click="setParent(genderFilter,gecko)"><strong>{{gecko.name}}</strong></td>
+                    <td>{{gecko.userId}}</a></td>
+                <td>{{gecko.stage}}</td>
+                </a>
+            </tr>
+        </table>
+
     </div>
+</div>
 </div>
