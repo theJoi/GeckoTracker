@@ -6,7 +6,7 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoTable/GeckoTableTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService) {
+            controller: function ($scope, $http, $log, geckoService, ModalService) {
                 $scope.geckos = [];
                 $scope.isLoaded = false;    // use to trigger loading spinner
 
@@ -16,18 +16,29 @@ angular.module('geckoTracker')
                 $scope.sortType = 'name';   // set the default sort type
                 $scope.sortReverse = false; // set the default sort order
                 $scope.searchTerm = '';     // set the default search/filter term
-console.log($scope.searchTerm);
-                geckoService.getGeckos().then(function (geckos) {
+
+				geckoService.getGeckos().then(function (geckos) {
                     $scope.geckos = geckos;
                     $scope.$apply();
                 });
 
-                $scope.confirmDelete = function (id, name) {
-                    if (window.confirm("Are you sure you want to delete the gecko named " + name + "?")) {
-                        $scope.deleteGecko(id, name);
-                    }
+                $scope.confirmDelete = function (gecko) {
+                    ModalService.showModal({
+                        templateUrl: "components/Modal/YesNoModalTemplate.htm",
+                        controller: "YesNoModalController",
+                        inputs: {
+                            title: "Are You Sure?",
+                            icon: "delete_forever",
+                            message: "Gecko " + gecko.name + " (#" + gecko.userId + ") will be permanently deleted."
+                        }
+                    }).then(function(modal) {
+                        modal.close.then(function(result) {
+                            if(result)
+                                $scope.deleteGecko(gecko._id, gecko.name);
+                        });
+                    });
                 };
-                // TODO[X] Modify deleteGecko to utilize service
+                
                 $scope.deleteGecko = function (id, name) {
                     geckoService.removeGecko(id).then(function () {
                         // Find index of gecko to delete
