@@ -3,15 +3,15 @@
     <table>
         <div class="table-top">
             <i class="material-icons">search</i>
-             <input type="text" class="search-box inline" placeholder="Search List of Geckos" ng-model="searchTerm">
+            <input type="text" class="search-box inline" placeholder="Search List of Geckos" ng-model="searchTerm">
 
 
-        <div class="button--fab">
-                    <a href="" ng-click="showForm = !showForm" class="add-gecko-button">
-             <i class="material-icons" title="add new gecko">add_circle_outline</i>
-            </a>
+            <div class="button--fab">
+                <a href="" ng-click="showForm = !showForm" class="add-gecko-button">
+                    <i class="material-icons" title="add new gecko">add_circle_outline</i>
+                </a>
+            </div>
         </div>
-             </div>
         <thead>
             <tr class="link--nohover">
                 <th>
@@ -53,10 +53,10 @@
             </td>
             <td><a href="/geckos/{{gecko._id}}">{{gecko.name}}</td>
             <td>{{gecko.userId}}</a></td>
-            <td>{{gecko.stage}}</td>
-            <td>{{gecko.morph}}</td>
+            <td>{{gecko.stage | capitalize }}</td>
+            <td>{{gecko.morph | capitalize }}</td>
             <td>{{gecko.location}}</td>
-            <td>{{gecko.status}}</td>
+            <td>{{gecko.status | capitalize }}</td>
             <td>{{gecko.currWeight}}</td>
             </a>
             <td class="right"><i class='fa fa-trash link' ng-click="confirmDelete(gecko)"></i></td>

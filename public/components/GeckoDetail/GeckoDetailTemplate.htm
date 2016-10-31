@@ -44,14 +44,14 @@
                 <div class="row">
                     <div class="col-1-3">
                         <label>Morph</label>
-                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.morph}">{{geckoDetail.morph || "(no morph entered)"}}</span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.morph}">{{geckoDetail.morph || "(no morph entered)" | capitalize }}</span>
                         <input ng-show="showEditMode" type="text" ng-model="editform.morph" name="morph" class="inline">
                         <span ng-show="edit.morph.$dirty"><i class='fa fa-undo link green' ng-click="undo('morph')" title="Undo change"></i></span>
                     </div>
 
                     <div class="col-1-6">
                         <label>Stage</label>
-                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.stage}">{{geckoDetail.stage || "(not entered)"}}</span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.stage}">{{geckoDetail.stage || "(not entered)" | capitalize }}</span>
                         <select ng-show="showEditMode" ng-model="editform.stage" class="inline" name="stage">
                             <option value="unknown">Unknown</option>
                             <option value="adult">Adult</option>
@@ -85,7 +85,7 @@
 
                     <div class="col-1-6">
                         <label>Status</label>
-                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.status}">{{geckoDetail.status || "(no status entered)"}}</span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.status}">{{geckoDetail.status || "(no status entered)" | capitalize }}</span>
                         <select ng-show="showEditMode" ng-model="editform.status" class="inline" name="status">
                             <option value="unknown">Unknown</option>
                             <option value="normal">Normal</option>
