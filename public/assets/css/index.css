@@ -153,7 +153,7 @@ tr {
 }
 /* Input Stuff */
 /*Secondary button */
-.button--secondary {
+.button--flat {
   background: #8bc34a;
   font-weight: normal;
 }
