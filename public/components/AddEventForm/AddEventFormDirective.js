@@ -20,19 +20,22 @@ angular.module('geckoTracker')
 			$scope.$watch("show", function() {
 				// Modal was shown
 				if($scope.show) {
-					$log.debug("AddEventForm show triggered");
-					if(!$scope.event)
+					$log.debug("AddEventForm show triggered", $scope.event);
+					if(!$scope.event) {
+						$scope.isEdit = false;
 						$scope.form = {
 							date: new Date(),
 							info: {}
 						};
-					else
+					} else {
+						$scope.isEdit = true;
 						$scope.form = {
 							date: new Date($scope.event.date),
 							type: $scope.event.type,
 							notes: $scope.event.notes,
 							info: $scope.event.info
 						};
+					}
 				}
 			});
 
@@ -47,6 +50,18 @@ angular.module('geckoTracker')
 					toastr.error("Failed to add event");
 				});
 			};
+			
+			$scope.editEvent = function () {
+				console.log($scope.event._id);
+				geckoService.updateGeckoEvent($scope.event._id, $scope.form).then(function() {
+					$scope.show = false;
+					toastr.success("Event updated");
+				}, function error(err) {
+					console.log(err);
+					toastr.error("Failed to edit event (" + err + ")");
+				});
+			};
+			
 			$scope.cancelForm = function() {
 				$scope.show = false;
 			}

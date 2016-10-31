@@ -25,12 +25,9 @@
 			</th>
 			<th class='column-actions'></th>
 		</tr>
+
 		<!-- Table Rows -->
 		<tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
-			<!--<td>
-				<i class="material-icons" ng-if='!isEventSelected(event)' ng-click='selectEvent(event)'>check_box_outline_blank</i>
-				<i class="material-icons selected" ng-if='isEventSelected(event)' ng-click='unselectEvent(event)'>check_box</i>
-			</td>-->
 			<td>{{event.date | date: 'fullDate'}}</td>
 			<td>{{event.type | prettyEventType}}</td>
 			<td>
