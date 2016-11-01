@@ -2,7 +2,7 @@
 /* globals angular, Promise, response */
 
 angular.module('geckoTracker')
-    .factory('geckoService', function ($http, $log, $q) {
+    .factory('geckoService', function ($http, $log, $q, $rootScope) {
         // We store our list of geckos here so that we can refer to it from the functions
         // in the object we return. Because of function scope, those functions can always
         // reference it.
@@ -54,9 +54,9 @@ angular.module('geckoTracker')
 				var gecko = geckos[i];
 				console.log(gecko, props._id);
 				if(gecko._id == props._id) {
-					console.debug("Found gecko to update");
+					//console.debug("Found gecko to update");
 					for(var prop in props) {
-						console.debug("Updating property " + prop);
+						//console.debug("Updating property " + prop);
 						if(gecko.hasOwnProperty(prop) && prop.charAt(0) != '_') {
 							gecko[prop] = props[prop];
 						}
@@ -64,7 +64,7 @@ angular.module('geckoTracker')
 				}
 			}
 			})
-			$rootScope.$apply();
+			//$rootScope.$apply();
 		}
 	
 		function getGeckos() {
