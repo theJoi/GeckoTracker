@@ -325,25 +325,38 @@ exports.savePhoto = function(geckoId, properties, cb) {
 	
 	new exif.ExifImage({image: __dirname + '/../public/photos/' + properties.name}, function(err, exifData) {
 		if(err) {
-			console.log(err);
-			cb(err, null);
-			return;
-		}
-
-		if(exifData.image && exifData.image.ModifyDate) {
+			// This will get hit any time the uploaded photo isn't a JPG or doesn't have EXIF data.
+			//console.log(err);
+			//cb(err, null);
+			//return;
+		} else if(exifData.image && exifData.image.ModifyDate) {
 			var d = exifData.image.ModifyDate.replace(' ', ':').split(':');
 			d = d[1] + "-" + d[2] + "-" + d[0] + " " + d[3] + ':' + d[4] + ':' + d[5];
-			console.log('d', d);
 			photo.taken = new Date(d);
-			console.log(photo.taken);
 		}
-		photo.save(function (err, newPhoto) {
-			if (err) {
-				console.log(err);
-				cb(err, null);
-				return;
-			}
-			cb(null, newPhoto);
+		
+		var query = Photo.where({geckoId: geckoId}).count(function(err, count) {
+			Photo.find({
+				geckoId: geckoId
+			}, function (err, photos) {
+				photo.save(function (err, newPhoto) {
+					if (err) {
+						console.log(err);
+						cb(err, null);
+						return;
+					}
+
+					if(count == 0) {
+						exports.setPrimaryGeckoPhoto(geckoId, newPhoto.id, function(err) {
+							if(err)
+								console.log(err);
+							cb(null, newPhoto);
+						});
+					} else {
+						cb(null, newPhoto);
+					}
+				});
+			});
 		});
 	});
 };
