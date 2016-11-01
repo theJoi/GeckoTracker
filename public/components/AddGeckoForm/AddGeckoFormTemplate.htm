@@ -11,15 +11,15 @@
                     <div class="row">
                         <div class="col-1-4">
                             <label>Name of Gecko<span class="highlight">*</span></label>
-                            <input type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
+                            <input class="field" type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
                         </div>
                         <div class="col-1-4">
                             <label>ID<span class="highlight">*</span></label>
-                            <input type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
+                            <input class="field" type="text" placeholder="ex. 16M24 or Tammy" ng-model="form.userId">
                         </div>
                         <div class="col-1-4">
                             <label>Morph Type</label>
-                            <input type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
+                            <input class="field" type="text" placeholder="ex. Lavender Jungle Bandit" ng-model="form.morph">
                         </div>
                         <div class="col-1-4">
                             <label>Sex</label>
@@ -33,15 +33,15 @@
                     <div class="row">
                         <div class="col-1-4">
                             <label>Location</label>
-                            <input type="text" placeholder="ex. Bin 2A" ng-model="form.location">
+                            <input class="field" type="text" placeholder="ex. Bin 2A" ng-model="form.location">
                         </div>
                         <div class="col-1-4">
                             <label>Date of Birth</label>
-                            <input type="date" placeholder="birthdate" ng-model="form.birthdate">
+                            <input class="field" type="date" placeholder="birthdate" ng-model="form.birthdate">
                         </div>
                         <div class="col-1-4">
                             <label>Date of Purchase</label>
-                            <input type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
+                            <input class="field" type="date" placeholder="date of purchase" ng-model="form.purchaseDate">
                         </div>
                         <div class="col-1-4">
                             <label>Stage</label>
@@ -56,15 +56,15 @@
                     <div class="row">
                         <div class="col-1-4">
                             <label>Mother</label>
-                            <input type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
+                            <input class="field" type="text" placeholder="not selected yet" ng-model="form.mother.name" readonly ng-click="showParentModal('female')">
                         </div>
                         <div class="col-1-4">
                             <label>Father</label>
-                            <input type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
+                            <input class="field" type="text" placeholder="search by name of id" ng-model="form.father.name" readonly ng-click="showParentModal('!female')">
                         </div>
                         <div class="col-1-4">
                             <label>Current Weight</label>
-                            <input type="number" placeholder="Weight in grams" ng-model="form.currWeight">
+                            <input class="field" type="number" placeholder="Weight in grams" ng-model="form.currWeight">
                         </div>
                         <div class="col-1-4">
                             <label>Status</label>
@@ -80,7 +80,7 @@
                     <!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
                     <div class="row">
                         <label>Notes</label>
-                        <input type="textarea" rows="1" cols="50" ng-model="form.notes">
+                        <input class="field" type="textarea" rows="1" cols="50" ng-model="form.notes">
                     </div>
                     <div class="row right">
                         <button class="button--raised" ng-click="submitForm()">Add Gecko</button>
@@ -98,7 +98,7 @@
     <div ng-show='parentModal.shown' class='modal'>
         <table>
             <div class="table-top">
-                <input type="text" class="search-box" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
+                <input type="text" class="search-box field" placeholder="Search List of Geckos" ng-model="parentSearchTerm">
                 <button class="button--raised" ng-click="parentModal.shown=false">Close</button>
             </div>
             <thead>
