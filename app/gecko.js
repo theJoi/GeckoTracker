@@ -320,14 +320,16 @@ exports.savePhoto = function(geckoId, properties, cb) {
 		taken: new Date(),
 		caption: null
 	});
-	console.log("dirname", __dirname);
+
+	console.log("savePhoto", "name", properties.name, "mimetype", properties.mimetype);
+	
 	new exif.ExifImage({image: __dirname + '/../public/photos/' + properties.name}, function(err, exifData) {
 		if(err) {
 			console.log(err);
 			cb(err, null);
 			return;
 		}
-		console.log("EXIF! ", JSON.stringify(exifData));
+
 		if(exifData.image && exifData.image.ModifyDate) {
 			var d = exifData.image.ModifyDate.replace(' ', ':').split(':');
 			d = d[1] + "-" + d[2] + "-" + d[0] + " " + d[3] + ':' + d[4] + ':' + d[5];
