@@ -2,6 +2,8 @@
 /* globals angular */
 
 angular.module('geckoTracker').controller('DemosViewController', function($scope, $http, $routeParams, geckoService, ModalService) {
+	$scope.form = {};
+	
 	$scope.showAlertModal = function() {
 		ModalService.showModal({
 			templateUrl: "components/Modal/AlertModalTemplate.htm",
