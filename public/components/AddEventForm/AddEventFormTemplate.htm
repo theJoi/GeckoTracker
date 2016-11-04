@@ -45,7 +45,8 @@
 		
 		<!-- Action buttons -->
 		<div class='add-event-action-buttons'>
-			<button class='button--flat' ng-click="addEvent()">Add</button>
+			<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
+			<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
 			<button class='button--flat' ng-click="cancelForm()">Close</button>
 		</div>
 	</div>

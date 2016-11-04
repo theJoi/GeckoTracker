@@ -81,6 +81,11 @@ angular.module('geckoTracker')
                     if ($scope.geckoId)
                         reloadEvents();
                 });
+			
+				$scope.$watch("showAddEventForm", function() {
+					if(!$scope.showAddEventForm)
+						reloadEvents();
+				});
 
 
 				$scope.addEvent = function () {
