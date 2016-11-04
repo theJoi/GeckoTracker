@@ -34,6 +34,36 @@ angular.module('geckoTracker')
 	};
 })
 
+.directive('formFieldSelect', function () {
+	return {
+		restrict: 'E',
+		scope: {
+			label: "@",
+			placeholder: "@?",
+			value: "=",
+			options: "="
+		},
+		templateUrl: "components/FormFields/SelectFieldTemplate.htm",
+		controller: function ($scope, $log) {
+			if(!$scope.placeholder)
+				$scope.placeholder = $scope.label;
+			
+			$scope.getSelectedText = function() {
+				return $scope.value ? $scope.value : $scope.placeholder;
+			}
+			
+			$scope.select = function(value) {
+				$scope.value = value;
+				$scope.showDropdown = false;
+			}
+			
+			$scope.hideDropdown = function() {
+				$scope.showDropdown = false;
+			}
+		}
+	};
+})
+
 .directive('formFieldDate', function () {
 	return {
 		restrict: 'E',
@@ -51,7 +81,10 @@ angular.module('geckoTracker')
 			$scope.year = moment().year();
 			$scope.today = moment().startOf('day');
 			
-			$scope.firstDay = moment().startOf('month');
+			if($scope.value)
+				$scope.firstDay = $scope.value.startOf('month');
+			else
+				$scope.firstDay = moment().startOf('month');
 			
 			$scope.enteredText = "fdsa";
 			
@@ -65,7 +98,7 @@ angular.module('geckoTracker')
 			}
 			
 			$scope.setSelected = function(date) {
-				$scope.selected = date;
+				$scope.value = date;
 				$scope.showCalendar = false;
 			}
 			
@@ -73,13 +106,13 @@ angular.module('geckoTracker')
 				$scope.showCalendar = false;
 			}
 			$scope.getSelectedText = function() {
-				if($scope.selected)
-					return $scope.selected.format("dddd, MMMM Do, YYYY");
+				if($scope.value)
+					return $scope.value.format("dddd, MMMM Do, YYYY");
 				else
 					return $scope.placeholder;
 			}
 			
-			window.calendar_selected = $scope.selected;
+			window.calendar_selected = $scope.value;
 			
 			function buildCalendarArray() {
 				var a = [];
@@ -111,4 +144,10 @@ angular.module('geckoTracker')
 			$scope.calendar = buildCalendarArray();
 		}
 	};
-});
+})
+
+.filter('capitalize', function() {
+	return function(input) {
+		return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+	}
+})

@@ -1,0 +1,18 @@
+<div class='form-field form-field-select'>
+	<div class='form-field-label'>
+		<span ng-class='{visible: value}'>{{label}}</span>
+	</div>
+	<div class='input calendar-input' ng-class='{placeholder: !value, raise: showDropdown}' ng-click='showDropdown = !showDropdown'>
+		{{getSelectedText()}}
+		<i class='material-icons icon' style='float: right' ng-show='!showDropdown || true'>
+			{{showDropdown ? "arrow_drop_up" : "arrow_drop_down"}}
+		</i>
+	</div>
+	<div class='form-field-message'>{{message}}</div>
+	
+	<div class='cover' ng-if='showDropdown' ng-click='hideDropdown()'></div>
+	
+	<div class='form-field-select-dropdown' ng-show='showDropdown'>
+		<div ng-repeat='option in options' ng-click='select(option)'>{{option}}</div>
+	</div>
+</div>

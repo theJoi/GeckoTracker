@@ -1,11 +1,11 @@
 <div class='form-field form-field-date'>
 	<div class='form-field-label'>
-		<span ng-class='{visible: selected}'>{{label}}</span>
+		<span ng-class='{visible: value}'>{{label}}</span>
 	</div>
 <!--	<input type='text' placeholder="{{placeholder}}" ng-model="enteredText"></input>-->
-	<div class='input calendar-input' ng-class='{placeholder: !selected, raise: showCalendar}'>
+	<div class='input calendar-input' ng-class='{placeholder: !value, raise: showCalendar}' ng-click='showCalendar = !showCalendar'>
 		{{getSelectedText()}}
-		<i class='material-icons icon' style='float: right' ng-show='!showCalendar || true' ng-click='showCalendar = !showCalendar'>
+		<i class='material-icons icon' style='float: right' ng-show='!showCalendar || true'>
 			{{showCalendar ? "arrow_drop_up" : "arrow_drop_down"}}
 		</i>
 	</div>
@@ -31,7 +31,7 @@
 			</tr>
 			<tr class='calendar-week' ng-repeat='week in calendar'>
 				<td ng-repeat='day in week'
-					ng-class="{isMonth: day.isMonth, isSelected: day.date.isSame(selected), isToday: day.date.isSame(today)}"
+					ng-class="{isMonth: day.isMonth, isSelected: day.date.isSame(value), isToday: day.date.isSame(today)}"
 					ng-click="setSelected(day.date)">
 					{{day.dayOfMonth}}
 				</td>
