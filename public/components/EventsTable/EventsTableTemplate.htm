@@ -37,18 +37,16 @@
 			<td>{{event.notes}}</td>
 			<td class='column-actions'>
 				<i class='action-icon edit-icon material-icons' ng-click='editEvent(event)'>edit</i>
-				<i class='action-icon delete-icon material-icons'>delete_forever</i>
+				<i class='action-icon delete-icon material-icons' ng-click='deleteEvent(event)'>delete_forever</i>
 			</td>
-	</tr>
-	<tr ng-if='filtered.length == 0'>
-		<td colspan=5 class='empty-indicator'>No events match your filter</td>
-	</tr>
+		</tr>
+		<tr ng-if='filtered.length == 0'>
+			<td colspan=5 class='empty-indicator'>No events match your filter</td>
+		</tr>
 	</table>
 
-	<button style='margin: 10px;' ng-if='selectedEventsCount() == 1' ng-click='deleteSelectedEvent()'>Delete</button>
-
 	<div class='footer'>
-		<button style="margin: 0;" ng-click='addEvent()'>Add Event</button>
+		<button class="button--raised" style="margin: 0;" ng-click='addEvent()'>Add Event</button>
 	</div>
 
 	<add-event-form show='showAddEventForm' gecko-id="{{geckoId}}" event="eventToEdit"></add-event-form>

@@ -18,7 +18,7 @@ angular.module('geckoTracker')
 			'geckoId': '=',
 		},
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
-		controller: function ($scope, $http, $log, geckoService) {
+		controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
 			console.log("id", $scope, $scope.geckoId);
 			$scope.events = [];
 			$scope.options = {
@@ -142,6 +142,7 @@ angular.module('geckoTracker')
 					}
 				}
 				
+                /*
 				$scope.unselectEvent = function(event) {
 					if(!$scope.isEventSelected(event))
 						return;
@@ -176,11 +177,33 @@ angular.module('geckoTracker')
 						reloadEvents();
 					});
 				}
+                */
 				
 				$scope.editEvent = function(event) {
 					$scope.eventToEdit = event;
 					$scope.showAddEventForm = true;
 				};
+            
+                $scope.deleteEvent = function(event) {
+                    ModalService.showModal({
+                        templateUrl: "components/Modal/YesNoModalTemplate.htm",
+                        controller: "YesNoModalController",
+                        inputs: {
+                            title: "Are You Sure?",
+                            icon: "delete_forever",
+                            message: "The event will be gone forever."
+                        }
+                    }).then(function(modal) {
+                        modal.close.then(function(result) {
+                            if(result) {
+                                geckoService.deleteGeckoEvent(event._id).then(function() {
+                                    reloadEvents();
+                                    toastr.success("Event deleted!");
+                                });
+                            }
+                        });
+                    });
+                }
 			}
 		};
 	})

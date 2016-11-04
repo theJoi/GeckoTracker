@@ -6,7 +6,7 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoTable/GeckoTableTemplate.htm",
-            controller: function ($scope, $http, $log, geckoService, ModalService) {
+            controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
                 $scope.geckos = [];
                 $scope.isLoaded = false;    // use to trigger loading spinner
 
@@ -48,9 +48,16 @@ angular.module('geckoTracker')
                                 break;
                             }
                         }
-                        $scope.statusMsg = "The gecko named '" + name + "' has successfully been deleted.";
+						toastr.success(name + " has been deleted.", "Success");
                     });
                 };
+				
+				$scope.showAddGeckoModal = function() {
+					ModalService.showModal({
+						templateUrl: "components/AddGeckoForm/AddGeckoFormTemplate.htm",
+						controller: "AddGeckoFormController",
+					});
+				}
             }
         };
     });

@@ -13,6 +13,9 @@ angular.module('geckoTracker')
 				console.log("Loaded photos");
 				$scope.photos = photos;
 				
+				console.log("PHOTOS", $scope.photos);
+				console.log("PRIMARY PHOTO", $scope.geckoDetail.primaryPhoto);
+				
 				$scope.$apply();
 			});
 			
@@ -42,7 +45,15 @@ angular.module('geckoTracker')
 			
 			$scope.setPrimaryPhoto = function(photo) {
 				geckoService.setPrimaryPhoto($scope.geckoId, photo._id).then(function success() {
-					console.log("Successfully set primary photo");
+					for(var i=0;i < $scope.photos.length;i++) {
+						if($scope.photos[i]._id == photo._id) {
+							$scope.geckoDetail.primaryPhoto = {
+								id: photo._id,
+								path: photo.path
+							};
+							$scope.$apply();
+						}
+					}
 				}, function error() {
 					console.error("Failed to set primary photo");
 				});
@@ -72,6 +83,12 @@ angular.module('geckoTracker')
 					fileFormDataName: 'photo'
 				}).then(function success(response) {
 					console.log("Success", response.data);
+					if($scope.photos.length == 0) {
+						$scope.geckoDetail.primaryPhoto = {
+							id: response.data._id,
+							path: response.data.path
+						};
+					}
 					$scope.photos.push(response.data);
 				}, function error(response) {
 					console.log("Error");

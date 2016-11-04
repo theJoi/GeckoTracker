@@ -1,11 +1,18 @@
 <div class='photo-gallery'>
-	<img class='primary-photo' src='{{geckoDetail.primaryPhoto.path}}'></img>
+
+	<!-- Primary photo -->
+	<img class='primary-photo' src='{{geckoDetail.primaryPhoto.path}}' ng-if='geckoDetail.primaryPhoto'></img>
+	<img class='primary-photo' src='photos/default.png' ng-if='!geckoDetail.primaryPhoto'></img>
+	
+	<!-- Thumbnails -->
 	<div class='thumbnails'>
-		<img class='thumbnail-photo' ng-repeat='photo in photos' src='{{photo.path}}' ng-click='showLightbox(photo)'></img>
+		<img class='thumbnail-photo' ng-repeat='photo in photos' src='{{photo.path}}' ng-click='showLightbox(photo)' ng-if='photo._id != geckoDetail.primaryPhoto.id'>{{photo.path}}</img>
 	</div>
 	<form>
 		<button type='file' ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Upload File</button>
 	</form>
+
+
 
 	<div class='lightbox-background' ng-if='selectedPhoto'>
 		<i class="close-icon material-icons" ng-click='hideLightbox()'>close</i>

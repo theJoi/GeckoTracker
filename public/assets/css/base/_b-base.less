@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -27,18 +26,10 @@ i {
     padding: 5px;
 }
 
-label,
-select,
-input {
-    &:not(.inline) {
-        display: block;
-        float: left;
-        width: 100%;
-    }
-}
 
-select,
-input {
+/* Used for select and input elements */
+
+.field {
     border: 0;
     outline: none;
     border-bottom: dotted 1px @evenRowColor;
