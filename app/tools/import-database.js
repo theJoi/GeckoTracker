@@ -25,7 +25,7 @@ for(var x in entries) {
 			sex: entry.sex == 'Male' ? 'male' : 'female',
 			morph: entry.morphGenetics,
 			stage: 'adult',
-			birthdate: new Date(entry.born),
+			hatchDate: new Date(entry.born),
 			status: 'normal'
 		};
 		//geckoList.append(currentGecko);

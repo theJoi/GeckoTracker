@@ -95,8 +95,8 @@ angular.module('geckoTracker')
                             if (response.data.error)
                                 reject(response.data.error);
                             else {
-                                if (response.data.birthdate)
-                                    response.data.birthdate = new Date(response.data.birthdate);
+                                if (response.data.hatchDate)
+                                    response.data.hatchDate = new Date(response.data.hatchDate);
                                 if (response.data.purchaseDate)
                                     response.data.purchaseDate = new Date(response.data.purchaseDate);
                                 fulfill(response.data);

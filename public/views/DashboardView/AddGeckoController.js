@@ -21,7 +21,7 @@ angular.module('geckoTracker').controller('AddGeckoController', function ($scope
         sex: "unknown",
         morph: "",
         purchaseDate: "",
-        birthdate: "",
+        hatchDate: "",
         location: "",
         currWeight: "",
         mother: "",

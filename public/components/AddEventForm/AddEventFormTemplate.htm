@@ -18,7 +18,7 @@
 				<select class='field-select' ng-model='form.type' placeholder='Event Type'>
 					<option value="" disabled selected ng-if='!form.type'>Event Type</option>
 					<option value="clutch">Laid Clutch</option>
-					<option value="weigh">Weight</option>
+					<option value="weight">Weight</option>
 					<option value="shed">Shed</option>
 					<option value="hatch">Hatched</option>
 					<option value="laid">Laid</option>
@@ -26,7 +26,7 @@
 				</select>
 				<div class='field-alerts'></div>
 			</div>
-			<div class='field' ng-show="form.type == 'weigh'">
+			<div class='field' ng-show="form.type == 'weight'">
 				<div class='label'><span ng-if='form.info.weight'>Weight</span></div>
 				<input type='number' ng-model='form.info.weight' placeholder='Weight'></input>
 				<div class='field-alerts'></div>
