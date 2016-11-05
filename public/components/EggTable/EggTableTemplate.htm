@@ -1,24 +1,24 @@
-<div class='egg-table '>
-    <table class='material-table'>
+<div class='egg-table'>
+	<div class='title'>Eggs</div>
+    <table class='data-table alternating-rows'>
         <tr>
-            <th>ID</th>
-            <th>Date Laid</th>
-            <th>Mother</th>
-            <th>Father</th>
-            <th>Morph</th>
-            <th>Location</th>
-            <th>Expected to Hatch</th>
-            <th>Sex (Incubated)</th>
+            <th class='column-id'>ID</th>
+            <th class='column-laid'>Date Laid</th>
+            <th class='column-hatching'>Expected to Hatch</th>
+            <th class='column-mother' ng-if="!gecko || gecko.sex == 'male'">Mother</th>
+            <th class='column-father' ng-if="!gecko || gecko.sex == 'female'">Father</th>
+            <th class='column-location'>Location</th>
+            <th class='column-sex'>Sex (Incubated)</th>
         </tr>
-        <tr ng-repeat='gecko in geckos'>
-            <td>{{gecko.userId}}AA</td>
-            <td>{{gecko.dateLaid}}</td>
-            <td>{{gecko.motherName}}</td>
-            <td>{{gecko.fatherName}}</td>
-            <td>{{gecko.morph}}</td>
-            <td>{{gecko.location}}</td>
-            <td>{{estimateExpectedHatchDate(gecko)}}</td>
-            <td>{{gecko.sex}}</td>
+        <tr ng-repeat="egg in geckos | filter:{stage: 'egg'}">
+            <td class='column-id'>{{egg.userId}}</td>
+            <td class='column-laid'>{{egg.laidDate | date: 'fullDate'}}</td>
+            <td class='column-hatching'>{{estimateExpectedHatchDate(egg) | date:'fullDate'}}</td>
+            <td class='column-mother' ng-if="!gecko || gecko.sex == 'male'"><a href='/geckos/{{egg.mother._id}}'>{{egg.mother.name}}</a></td>
+			<td class='column-father' ng-if="!gecko || gecko.sex == 'female'"><a href='/geckos/{{egg.father._id}}'>{{egg.father.name}}</a></td>
+            <td class='column-location'>{{egg.location}}</td>
+            <td class='column-sex'>{{egg.sex | capitalize}}</td>
         </tr>
     </table>
+	<div style='height: 50px'></div>
 </div>
