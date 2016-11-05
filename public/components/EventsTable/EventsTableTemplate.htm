@@ -2,8 +2,7 @@
 	<div class='title'>Events</div>
 
 	<search-box value='filter.search'></search-box>
-	
-	<table>
+	<table class='data-table alternating-rows'>
 		<!-- Table Header -->
 		<tr>
 			<!--<th class='column-select'><i class="material-icons">check_box_outline_blank</i></th>-->
@@ -12,7 +11,11 @@
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
 				<i ng-if="filter.sortProperty == 'date' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
 			</th>
-			<th class='column-type sortable' ng-click="setSort('type')">Event</th>
+			<th class='column-type sortable' ng-click="setSort('type')">
+				Event
+				<i ng-if="filter.sortProperty == 'type' && filter.sortDirection == '-'" class='material-icons'>arrow_upward</i>
+				<i ng-if="filter.sortProperty == 'type' && filter.sortDirection == '+'" class='material-icons'>arrow_downward</i>
+			</th>
 			<th class='column-details'>Details</th>
 			<th class='column-notes sortable' ng-click="setSort('notes')">
 				Notes
@@ -31,7 +34,7 @@
 				<span ng-if="event.type == 'clutch'"><spanspan class='info-label'>Eggs</span> {{event.info.eggs}}</span>
 			</td>
 			<td>{{event.notes}}</td>
-			<td class='column-actions'>
+			<td class='action-icons'>
 				<i class='action-icon edit-icon material-icons' ng-click='editEvent(event)'>edit</i>
 				<i class='action-icon delete-icon material-icons' ng-click='deleteEvent(event)'>delete_forever</i>
 			</td>

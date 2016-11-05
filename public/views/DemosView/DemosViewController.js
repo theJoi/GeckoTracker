@@ -2,6 +2,20 @@
 /* globals angular */
 
 angular.module('geckoTracker').controller('DemosViewController', function($scope, $http, $routeParams, geckoService, ModalService) {
+	$scope.form = {
+		text: "Something",
+		number: 123,
+		select: "Red",
+		date: moment().add(-3, "M")
+	};
+	$scope.form.options = [
+		"Red",
+		"Green",
+		"Blue",
+		"White",
+		"Black"
+	];
+	
 	$scope.showAlertModal = function() {
 		ModalService.showModal({
 			templateUrl: "components/Modal/AlertModalTemplate.htm",
