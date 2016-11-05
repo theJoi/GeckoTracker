@@ -20,7 +20,7 @@ angular.module('geckoTracker')
             $scope.estimateExpectedHatchDate = function(gecko) {
                 var d = moment(gecko.dateLaid);
                 d.add('days', 35);
-                return d.toString();
+                return d.toDate();
             }
 		}
 	};
