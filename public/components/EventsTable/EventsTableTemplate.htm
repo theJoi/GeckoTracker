@@ -1,12 +1,7 @@
 <div class='events-table'>
 	<div class='title'>Events</div>
 
-	<div class='filter'>
-		<i class="material-icons search">search</i>
-		<input type='text' placeholder="Search" ng-model="filter.search"></input>
-		<i class="material-icons close" ng-click="filter.search = ''">close</i>
-	</div>
-
+	<search-box value='filter.search'></search-box>
 	<table class='data-table alternating-rows'>
 		<!-- Table Header -->
 		<tr>
