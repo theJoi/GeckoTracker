@@ -1,0 +1,88 @@
+// The data-table style can only be applied to a table
+table.data-table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse;
+	
+    tr {
+		height: auto;
+
+		&:hover td {
+            background: #f0f0f0;
+        }
+	}
+
+	th {
+		text-align: left;
+		color: #909090;
+		font-size: 12px;
+		line-height: 14px;
+		border-bottom: solid 1px #e7e7e7;
+		height: 36px;
+		padding: 5px 0 5px 16px;
+		background: transparent;
+		
+		// Special styles for 
+		&.sortable {
+			cursor: pointer;
+			-webkit-user-select: none;
+		}
+		
+		// This styles the column sort icon (probably needs to be given an explicit style)
+		i {
+			font-size: 14px;
+			line-height: 14px;
+			position: relative;
+			padding-top: 0;
+			top: 2px;
+			color: #d0d0d0;
+		}
+	}
+	
+	td {
+		height: 36px;
+		border-bottom: solid 1px #e7e7e7;
+		font-size: 14px;
+		padding: 5px 0 5px 16px;
+
+		.info-label {
+			color: #808080;
+		}
+
+		&.empty-indicator {
+			text-align: center;
+			color: #c0c0c0;
+		}
+		
+		&:last-child {
+			padding-right: 16px;
+		}
+	}
+	
+	&.big-rows {
+		td {
+			height: 20px;
+			padding: 10px 0 10px 16px;
+		}
+	}
+	
+	&.alternating-rows {
+		tr:nth-child(even) {
+			background: #fdfdfd;
+		}
+	}
+	
+	td.action-icons {
+		text-align: right;
+		.action-icon {
+			font-size: 20px;
+			color: #e0e0e0;
+			cursor: pointer;
+			margin: 0;
+			padding: 0;
+			&:hover {
+				color: #404040;
+			}
+		}
+	}
+}
