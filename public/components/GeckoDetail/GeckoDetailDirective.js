@@ -68,7 +68,7 @@ angular.module('geckoTracker')
                         $scope.resetForm();
                         $scope.showEditMode = true;
                     }
-                    console.log("copy birthdate: " + $scope.editform.birthdate);
+                    console.log("copy birthdate: " + $scope.editform.hatchDate);
                 };
 
                 $scope.deleteGecko = function (gecko) {

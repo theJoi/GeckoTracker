@@ -11,7 +11,7 @@ angular.module('geckoTracker')
 		sex: "unknown",
 		morph: "",
 		purchaseDate: "",
-		birthdate: "",
+		hatchDate: "",
 		location: "",
 		currWeight: "",
 		mother: "",
