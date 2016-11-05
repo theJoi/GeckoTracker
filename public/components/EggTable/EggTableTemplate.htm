@@ -1,24 +1,25 @@
-<div class='egg-table '>
-    <table class='material-table'>
+<div class='egg-table'>
+	<div class='title'>Eggs</div>
+	{{gecko}}
+    <table class='data-table alternating-rows'>
         <tr>
             <th>ID</th>
             <th>Date Laid</th>
-            <th>Mother</th>
-            <th>Father</th>
-            <th>Morph</th>
+            <th ng-if="gecko && gecko.sex == 'male'">Mother</th>
+            <th ng-if="gecko && gecko.sex == 'female'">Father</th>
             <th>Location</th>
             <th>Expected to Hatch</th>
             <th>Sex (Incubated)</th>
         </tr>
-        <tr ng-repeat='gecko in geckos'>
-            <td>{{gecko.userId}}AA</td>
-            <td>{{gecko.dateLaid}}</td>
-            <td>{{gecko.motherName}}</td>
-            <td>{{gecko.fatherName}}</td>
-            <td>{{gecko.morph}}</td>
-            <td>{{gecko.location}}</td>
-            <td>{{estimateExpectedHatchDate(gecko)}}</td>
-            <td>{{gecko.sex}}</td>
+        <tr ng-repeat="egg in geckos | filter:{stage: 'egg'}">
+            <td>{{egg.userId}}</td>
+            <td>{{egg}}</td>
+            <td ng-if="gecko && gecko.sex == 'male'">{{egg.motherName}}</td>
+            <td ng-if="gecko && gecko.sex == 'female'">{{egg.father.name}}</td>
+            <td>{{egg.location}}</td>
+            <td>{{estimateExpectedHatchDate(egg) | date:'fullDate'}}</td>
+            <td>{{egg.sex | capitalize}}</td>
         </tr>
     </table>
+	<div style='height: 50px'></div>
 </div>

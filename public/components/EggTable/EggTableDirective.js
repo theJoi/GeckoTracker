@@ -3,14 +3,13 @@ angular.module('geckoTracker')
 	return {
 		restrict: 'E',
         scope: {
-            id: '@geckoId'
+            gecko: '=?'
         },
 		templateUrl: "components/EggTable/EggTableTemplate.htm",
 		controller: function($scope, $http, $log, geckoService) {
-			$scope.geckos = [];
-			$scope.isLoaded = false; // use to trigger loading spinner
-
 			$log.debug("EggTable directive's controller instantiated");
+
+			$scope.geckos = [];
 			
 			geckoService.getGeckos().then(function(geckos) {
                 $log.debug("EggTable - received geckos list", geckos);
