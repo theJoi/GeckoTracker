@@ -44,7 +44,8 @@ var geckoSchema = new Schema({
     morph: String, // Gecko's morph type
     location: String, // Current location of gecko
     purchaseDate: Date,
-    birthdate: Date,
+    hatchDate: Date,
+	laidDate: Date,
     mother: {
         _id: Schema.Types.ObjectId,
         userId: String,
@@ -231,8 +232,8 @@ exports.removeEvent = function (id, callback) {
             callback(err);
             return;
         }
-        if (removedEvent.type === 'weight') {
-            updateCurrentWeight(removedEvent.geckoId, null);
+        if (removedEvent.type === 'weight' || removedEvent.type == 'laid') {
+            updateCachedGeckoFields(removedEvent.geckoId, null);
         }
         callback(null, removedEvent._id);
     });
@@ -258,8 +259,8 @@ exports.addEvent = function (eventData, callback) {
             callback(err);
             return;
         }
-        if (newEvent.type === 'weight') {
-            updateCurrentWeight(newEvent.geckoId, null);
+        if (newEvent.type == 'weight' || newEvent.type == 'laid') {
+            updateCachedGeckoFields(newEvent.geckoId, null);
         }
         callback(err, newEvent);
     });
@@ -277,14 +278,19 @@ exports.updateEvent = function (id, props, callback) {
             callback(err, null);
             return;
         }
-        if (updatedEvent.type === 'weight') {
-            updateCurrentWeight(updatedEvent.geckoId, null);
+        if (updatedEvent.type === 'weight' || newEvent.type == 'laid') {
+            updateCachedGeckoFields(updatedEvent.geckoId, null);
         }
         callback(null, updatedEvent);
     });
 };
 
 // Update Current Weight: gets most recent weight from event table
+function updateCachedGeckoFields(id, callback) {
+	updateCurrentWeight(id, null);
+	updateLaidDate(id, null);
+}
+
 function updateCurrentWeight(id, callback) {
     console.log("updateCurrentWeight called (id=" + id + ")");
     // models.user.findOne({}).sort({date_register: -1}).exec(callback);
@@ -297,9 +303,14 @@ function updateCurrentWeight(id, callback) {
     }).exec(function (err, event) {
         if (err) {
             console.log(err);
-            callback(err, null);
+            if(callback) callback(err, null);
             return;
         }
+		if(!event) {
+			console.log("updateLaidDate:no weight event found");
+			if(callback) callback(null);
+			return;
+		}
         console.log("Event from getCurrWeight " + event);
         Gecko.findByIdAndUpdate(id, {
             $set: {
@@ -308,6 +319,35 @@ function updateCurrentWeight(id, callback) {
         }, function (err) {});
     });
 };
+
+function updateLaidDate(id, callback) {
+	console.log("updateLaidDate", id, callback);
+	Event.findOne({
+        geckoId: id,
+        type: 'laid'
+    }).sort({
+        date: -1
+    }).exec(function (err, event) {
+		console.log("updateLaidDate exec", err, event);
+        if (err) {
+            console.log(err);
+            if(callback) callback(err, null);
+            return;
+        }
+		if(!event) {
+			console.log("updateLaidDate:no laiddate found");
+			if(callback) callback(null);
+			return;
+		}
+        Gecko.findByIdAndUpdate(id, {
+            $set: {
+                laidDate: event.date
+            }
+        }, function (err) {
+			console.log("updateLaidDate gecko update", err);
+		});
+    });
+}
 
 // PHOTO FUNCTIONS  =============================================================
 exports.savePhoto = function(geckoId, properties, cb) {

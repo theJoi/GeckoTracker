@@ -63,9 +63,9 @@
 
                     <div class="col-1-4">
                         <label>Birthdate</label>
-                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.birthdate}">{{geckoDetail.birthdate || "(no date entered)" | date:'mediumDate'}}</span>
-                        <input ng-show="showEditMode" type="date" ng-model="editform.birthdate" name="birthdate" class="inline">
-                        <span ng-show="edit.birthdate.$dirty"><i class='fa fa-undo link green' ng-click="undo('birthdate')" title="Undo change"></i></span>
+                        <span ng-hide="showEditMode" ng-class="{placeholder: !geckoDetail.hatchDate}">{{geckoDetail.hatchDate || "(no date entered)" | date:'mediumDate'}}</span>
+                        <input ng-show="showEditMode" type="date" ng-model="editform.hatchDate" name="hatchDate" class="inline">
+                        <span ng-show="edit.hatchDate.$dirty"><i class='fa fa-undo link green' ng-click="undo('hatchDate')" title="Undo change"></i></span>
                     </div>
 
                     <div class="col-1-4">

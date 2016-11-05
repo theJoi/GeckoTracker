@@ -100,7 +100,7 @@ angular.module('geckoTracker')
 			$scope.getAgeWhenTaken = function(photo) {
 				var taken = moment(photo.taken);
 				console.warn($scope.geckoDetail);
-				var birth = moment($scope.geckoDetail.birthdate);
+				var birth = moment($scope.geckoDetail.hatchDate);
 				return moment.duration(taken.diff(birth)).humanize();
 			}
 			/*

@@ -88,7 +88,7 @@ function addTestGeckos(callback) {
 		sex: 'male',
 		status: 'egg',
 		morph: 'Lavender Jungle Bandit',
-		birthdate: 'unknown',
+		hatchDate: 'unknown',
 		location: "incubator #1",
 		dateLaid: new Date("12/15/2015")
     }, {
@@ -96,7 +96,7 @@ function addTestGeckos(callback) {
 		sex: 'female',
 		status: 'normal',
 		morph: 'unknown',
-		birthdate: new Date('6/21/2016'),
+		hatchDate: new Date('6/21/2016'),
 		location: "incubator #2",
 		dateLaid: new Date("12/15/2015")
     }];
