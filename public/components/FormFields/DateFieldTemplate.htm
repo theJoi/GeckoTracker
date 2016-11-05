@@ -1,0 +1,41 @@
+<div class='form-field form-field-date'>
+	<div class='form-field-label'>
+		<span ng-class='{visible: value}'>{{label}}</span>
+	</div>
+<!--	<input type='text' placeholder="{{placeholder}}" ng-model="enteredText"></input>-->
+	<div class='input calendar-input' ng-class='{placeholder: !value, raise: showCalendar}' ng-click='showCalendar = !showCalendar'>
+		{{getSelectedText()}}
+		<i class='material-icons icon' style='float: right' ng-show='!showCalendar || true'>
+			{{showCalendar ? "arrow_drop_up" : "arrow_drop_down"}}
+		</i>
+	</div>
+	<div class='form-field-message'>{{message}}</div>
+	
+	<div class='cover' ng-if='showCalendar' ng-click='hideCalendar()'></div>
+	
+	<div class='form-field-calendar' ng-show='showCalendar'>
+		<div class='calendar-header'>
+			<i class='icon material-icons' ng-click='bumpMonthDown()'>chevron_left</i>
+			<div class='month'>{{firstDay.format("MMMM YYYY")}}</div>
+			<i class='icon material-icons' ng-click='bumpMonthUp()'>chevron_right</i>
+		</div>
+		<table>
+			<tr class='calendar-week'>
+				<th>Sun</th>
+				<th>Mon</th>
+				<th>Tue</th>
+				<th>Wed</th>
+				<th>Thu</th>
+				<th>Fri</th>
+				<th>Sat</th>
+			</tr>
+			<tr class='calendar-week' ng-repeat='week in calendar'>
+				<td ng-repeat='day in week'
+					ng-class="{isMonth: day.isMonth, isSelected: day.date.isSame(value), isToday: day.date.isSame(today)}"
+					ng-click="setSelected(day.date)">
+					{{day.dayOfMonth}}
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
