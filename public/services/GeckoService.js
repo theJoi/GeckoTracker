@@ -13,9 +13,10 @@ angular.module('geckoTracker')
 
         // Actually fetch the list of geckos from the server
         function fetchGeckos() {
+			console.log("GeckoService.fetchGeckos");
             // Save this promise so that we can check it later in getGeckos
             fetchPromise = new Promise(function (fulfill, reject) {
-				console.log("Fetching geckos...")
+				console.log("GeckoService.fetchGeckos fetching...")
                 $http({
                     method: 'GET',
                     url: '/api/geckos'
@@ -23,10 +24,12 @@ angular.module('geckoTracker')
                     // We've got a response
                     // Check it for an error
                     if (response.data.error) {
+						console.error("GeckoService.fetchGeckos problem fetching");
                         $log.error("Server side error! " + response.data.error);
                         // If there was an error, we want to reject() the promise
                         reject(response.data.error);
                     } else {
+						console.debug("GeckoService.fetchGeckos fetched");
                         // Tricky way to empty an array. We want to empty the array without replacing it,
                         // since controllers will have a reference to the array OBJECT. If we replace it,
                         // their scopes won't detect that it changed.
@@ -46,6 +49,18 @@ angular.module('geckoTracker')
             });
             return fetchPromise;
         }
+
+		function getGecko(id, cb) {
+			getGeckos().then(function(geckos) {
+				for(var i=0;i < geckos.length;i++) {
+					if(geckos[i]._id == id) {
+						cb(geckos[i]);
+						return;
+					}
+				}
+				cb(null);
+			});
+		}
 	
 		function updateGeckoProperties(props) {
 			getGeckos().then(function(geckos) {
@@ -67,17 +82,23 @@ angular.module('geckoTracker')
 			//$rootScope.$apply();
 		}
 	
+		var _notificationsPromise = null;
+	
 		function getGeckos() {
                 // Since we're returning a promise (something that has a ".then()" method), we can just return the
                 // promise that we create in fetchGeckos. If fetchGeckos() has already been called, we
                 // saved that promise and return it here. If not, we need to call fetchGeckos() and return it.
-                if (!fetchPromise)
+				console.log("GeckoService.getGeckos");
+                if (!fetchPromise) {
+					console.log("GeckoService.getGeckos creating promise");
                     return fetchGeckos();
-                else
+				} else {
+					console.log("GeckoService.getGeckos returning promise");
                     return fetchPromise;
+				}
 		}
 
-        return {
+        var exports = {
             // Get the list of geckos from the service
             // Returns a promise
             getGeckos: getGeckos,
@@ -185,19 +206,50 @@ angular.module('geckoTracker')
             },
 
             getGeckoEvents: function (geckoId) {
+				console.log("GeckoService.getGeckoEvents", geckoId);
                 return new Promise(function (fulfill, reject) {
-                    $http({
-                        method: 'GET',
-                        url: "/api/geckos/" + geckoId + "/events"
-                    }).then(function success(response) {
-                        if (response.data.error) {
-                            reject(response.data.error);
-                        } else {
-                            fulfill(response.data);
-                        }
-                    }, function error(response) {
-                        reject("Failed to contact server");
-                    });
+					// First, get the gecko
+					getGecko(geckoId, function(gecko) {
+						// Reject if no gecko was found
+						if(!gecko) {
+							console.log("GeckoService.getGeckoEvents", geckoId, "gecko missing");
+							reject("Gecko not found");
+							return;
+						}
+						
+						// If we've already fetched, there should be a promise, so return it
+						if(gecko._eventsPromise) {
+							console.debug("GeckoService.getGeckoEvents", geckoId, "promise exists");
+							gecko._eventsPromise.then(function(response) {
+								if(response.data.error)
+									reject(response.data);
+								else {
+									console.debug("GeckoService.getGeckoEvents", geckoId, "fulfill from cache");
+									fulfill(response.data);
+								}
+							});
+							return;
+						}
+						
+						// Otherwise, we need a new Promise
+						console.debug("GeckoService.getGeckoEvents", geckoId, "fetching events");
+						gecko._eventsPromise =
+						$http({
+							method: 'GET',
+							url: "/api/geckos/" + geckoId + "/events"
+						});
+						
+						gecko._eventsPromise.then(function(response) {
+							if (response.data.error) {
+								console.error("GeckoService.getGeckoEvents", geckoId, "error fetching events");
+								reject(response.data.error);
+							} else {
+								console.debug("GeckoService.getGeckoEvents", geckoId, "fetched", response.data.length, "events");
+								console.debug("GeckoService.getGeckoEvents", geckoId, "fulfill from fetch");
+								fulfill(response.data);
+							}
+						});
+					});
                 });
             },
 
@@ -212,7 +264,11 @@ angular.module('geckoTracker')
                         if (response.data.error) {
                             reject(response.data.error);
                         } else {
-                            fulfill(response.data);
+							exports.getGeckoEvents(geckoId).then(function(events) {
+								console.log("createGeckoEvent adding", response.data)
+								events.push(response.data);
+								fulfill(response.data);
+							});
                         }
                     }, function error(response) {
                         reject("Failed to contact server");
@@ -229,7 +285,14 @@ angular.module('geckoTracker')
                         if (response.data.error) {
                             reject(response.data.error);
                         } else {
-                            fulfill(response.data);
+							console.log("########################", response.data);
+							var geckoId = response.data.geckoId;
+							exports.getGeckoEvents(geckoId).then(function(events) {
+								for(var i=0;i < events.length;i++)
+									if(events[i]._id == eventId)
+										events.splice(i, 1);
+								fulfill(response.data);
+							});
                         }
                     }, function error(response) {
                         reject("Failed to contact server");
@@ -353,7 +416,75 @@ angular.module('geckoTracker')
                         reject("Failed to delete photo");
                     });
 				});
+			},
+			
+			getNotifications: function() {
+				if(_notificationsPromise) return _notificationsPromise;
+				_notificationsPromise = $http({
+					method: 'GET',
+					url: '/api/notifications'
+				}).then(function success(response) {
+					return response.data;
+				});
+				return _notificationsPromise;
+			},
+			
+			createNotification: function(props) {
+				var notification = null;
+				return $http({
+					method: 'POST',
+					url: '/api/notifications',
+					data: props
+				}).then(function(response) {
+					if(response.data.error)
+						throw "Error creating notification: " + response.data.error;
+					notification = response.data;
+					return exports.getNotifications();
+				}).then(function(notifications) {
+					notifications.push(notification);
+				});
+			},
+			
+			deleteNotification: function(id) {
+				var notification = null;
+				return $http({
+					method: 'DELETE',
+					url: '/api/notifications/' + id,
+				}).then(function(response) {
+					if(response.data.error)
+						throw "Error deleting notification: " + response.data.error;
+					notification = response.data;
+					return exports.getNotifications();
+				}).then(function(notifications) {
+					for(var i=0;i < notifications.length;i++)
+						if(notifications[i]._id == notification._id) {
+							console.debug("deleteNotification", "DELETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIING");
+							notifications.splice(i, 1);
+							return;
+						}
+					console.error("deleteNotification", "Couldn't find notification!", notification._id);
+				});
+			},
+			
+			updateNotification: function(id, props) {
+				var notification = null;
+				return $http({
+					method: 'PUT',
+					url: '/api/notifications/' + id,
+					data: props
+				}).then(function(response) {
+					if(response.data.error)
+						throw "Error updating notification: " + response.data.error;
+					notification = response.data;
+					return exports.getNotifications();
+				}).then(function(notifications) {
+					for(var i=0;i < notifications.length;i++)
+						if(notifications[i]._id == notification.id) {
+							notifications.splice(i, 1, notification);
+							return;
+						}
+				});
 			}
-
 		};
+		return exports;
     });

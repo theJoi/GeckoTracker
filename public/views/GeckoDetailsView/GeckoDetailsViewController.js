@@ -6,8 +6,7 @@ angular.module('geckoTracker').controller('GeckoDetailsViewController', function
     $scope.statusMsg = "Say hi to...";
     $scope.geckoDetail = {};
     $scope.geckoId = $routeParams.id;
-    console.log("id: " + $scope.geckoId);
-
+    console.log("GeckoDetailsView controller instantiated with id=" + $scope.geckoId);
 
     geckoService.getGeckoDetails($scope.geckoId).then(function(details) {
         $scope.geckoDetail = details;

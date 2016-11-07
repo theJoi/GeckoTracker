@@ -158,7 +158,7 @@ app.post('/api/geckos/:id/events', function(request, response) {
             response.json({'error': 'Problem creating event'});
             return;
         }
-        response.json({'geckoDetail':result});
+        response.json(result);
 	});
 });
 
@@ -188,7 +188,7 @@ app.delete('/api/events/:id', function(request, response) {
             response.json({error: err});
             return;
         }
-        response.json({_id: result});
+        response.json(result);
      });
 });
 
@@ -274,6 +274,51 @@ app.put('/api/geckos/:id/setPrimaryPhoto', function(request, response) {
 		response.json(gecko);
 	});
 });
+
+// NOTIFICATIONS ROUTES =========================================
+app.get('/api/notifications', function(request, response) {
+	geckos.getNotifications(function(err, notifications) {
+		if(err) {
+			response.sendStatus(500);
+			response.json({error: err});
+		}
+		response.json(notifications);
+	});
+});
+
+app.post('/api/notifications', function(request, response) {
+	geckos.createNotification(request.body, function(err, notification) {
+		if(err) {
+			response.sendStatus(500);
+			response.json({error: err});
+			return;
+		}
+		response.json(notification);
+	})
+});
+
+app.delete('/api/notifications/:id', function(request, response) {
+	geckos.deleteNotification(request.params.id, function(err, notification) {
+		if(err) {
+			response.sendStatus(500);
+			response.json({error: err});
+			return;
+		}
+		response.json(notification);
+	})
+});
+
+app.put('/api/notifications/:id', function(request, response) {
+	geckos.updateNotification(request.params.id, request.body, function(err, notification) {
+		if(err) {
+			response.sendStatus(500);
+			response.json({error: err});
+			return;
+		}
+		response.json(notification);
+	})
+});
+
 
 // OTHER ROUTES =================================================
 
