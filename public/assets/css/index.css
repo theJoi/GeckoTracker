@@ -31,7 +31,7 @@ a:hover:not(.link--nohover),
   color: #536dfe;
 }
 body {
-  background: white;
+  background: black;
   font-family: "Roboto", sans-serif;
   margin: 0;
 }
@@ -754,11 +754,12 @@ table.data-table td.action-icons .action-icon:hover {
 .flex-container {
   display: flex;
 }
-#SIDE-BAR {
+#MAIN-CONTAINER {
   display: flex;
-  flex-direction: column;
-  background: transparent;
-  z-index: 2;
+  align-items: stretch;
+}
+#SIDE-BAR {
+  background: #212121;
   min-width: 200px;
   padding: 10px;
   color: #a0a0a0;
@@ -3443,11 +3444,12 @@ table.data-table td.action-icons .action-icon:hover {
 }
 .gecko-metrics {
   display: flex;
-  padding: 15px;
+  padding: 10px;
   justify-content: center;
 }
 .gecko-metrics .metric {
   padding: 0 25px;
+  font-weight: bold;
 }
 .gecko-metrics .metric.metric-total {
   color: #ffffff;
@@ -3467,8 +3469,6 @@ table.data-table td.action-icons .action-icon:hover {
   line-height: 24px;
   padding-top: 4px;
   padding-left: 4px;
-  text-transform: capitalize;
-  font-weight: medium;
 }
 .gecko-metrics .units .subunits {
   line-height: 16px;
