@@ -758,22 +758,31 @@ table.data-table td.action-icons .action-icon:hover {
   display: flex;
   align-items: stretch;
 }
+/* Left-side container that starts after the header & status bar and extends to bottoms of page
+Used for notifications in dashboard view and details and photo gallery in gecko detail view */
 #SIDE-BAR {
   background: #212121;
   min-width: 200px;
+  width: 33%;
   padding: 10px;
   color: #a0a0a0;
 }
+/* Container that holds the gecko table within MAIN-CONTAINER */
+/* May not ne necessary*/
 .dashboard-main-container {
   display: flex;
   flex-direction: column;
 }
-.graphs {
-  min-height: 200px;
+/* Container right of side-bar on gecko detail view that holds the events table and weight chart */
+#CHARTS {
+  width: 67%;
+  display: flex;
+  flex-direction: column;
 }
-#weight,
-#other {
-  width: 50%;
+events-table,
+weight-chart,
+egg-table gecko {
+  width: 100%;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3231,6 +3240,46 @@ table.data-table td.action-icons .action-icon:hover {
 .egg-table .column-sex {
   width: 140px;
 }
+/* Gecko Detail */
+.gecko-detail-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+.collaspe-gecko-detail {
+  height: 55px;
+  background: #fafafa;
+}
+.collaspe-gecko-detail .detail-name,
+.collaspe-gecko-detail .detail-gender,
+.collaspe-gecko-detail .detail-id {
+  font-size: 14px;
+  line-height: 14px;
+}
+.gecko-detail-card {
+  padding: 10px 0 0 10px;
+}
+.gecko-detail-card {
+  color: #424242;
+}
+.detail-name {
+  font-size: 48px;
+  line-height: 48px;
+}
+.detail-gender,
+.detail-id {
+  font-size: 24px;
+  line-height: 24px;
+}
+.detail-item {
+  flex: 1 1 100px;
+}
+.detail-item-2 {
+  flex: 2 0 200px;
+}
+.detail-item-4 {
+  flex: 4 0 200px;
+}
 /* For gender symbols, used on gecko list and gecko detail */
 .female {
   color: #ad1457;
@@ -3268,46 +3317,6 @@ table.data-table td.action-icons .action-icon:hover {
   width: 50%;
   padding: 5px;
 }
-/* Gecko Detail */
-.gecko-detail-card {
-  padding: 10px 0 0 10px;
-  background: white;
-}
-.gecko-detail-card .table-header {
-  color: #424242;
-}
-.detail-thumbnail-container {
-  float: right;
-  position: relative;
-  top: -10px;
-  right: -10px;
-}
-.detail-thumbnail {
-  width: 24vw;
-  height: 20vw;
-  border: 1px solid #bdbdbd;
-}
-.detail-thumbnail:hover {
-  border: solid 3px #8ac24a;
-}
-.detail-name {
-  font-size: 48px;
-  line-height: 48px;
-}
-.detail-gender,
-.detail-id {
-  font-size: 24px;
-  line-height: 24px;
-}
-.detail-item {
-  flex: 1 1 100px;
-}
-.detail-item-2 {
-  flex: 2 0 200px;
-}
-.detail-item-4 {
-  flex: 4 0 200px;
-}
 /* Add New Gecko Form */
 .add-gecko-form label,
 .gecko-detail-card label {
@@ -3332,21 +3341,6 @@ table.data-table td.action-icons .action-icon:hover {
   color: #536dfe;
   padding: 20px;
   font-size: 12px;
-}
-.gecko-detail-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-}
-.collaspe-gecko-detail {
-  height: 55px;
-  background: #fafafa;
-}
-.collaspe-gecko-detail .detail-name,
-.collaspe-gecko-detail .detail-gender,
-.collaspe-gecko-detail .detail-id {
-  font-size: 14px;
-  line-height: 14px;
 }
 .gecko-picker .modal-black-out {
   width: 100%;
