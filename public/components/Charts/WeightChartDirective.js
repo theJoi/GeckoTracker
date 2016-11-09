@@ -17,7 +17,7 @@
                  $scope.y_weights = [];
 
 
-                 var weightGraph = document.getElementById('weight');
+                 var weightGraph = document.getElementById('weight-chart');
 
                  $scope.populateChart = function () {
                      console.log("populating chart...");
@@ -57,17 +57,17 @@
                              yaxis: {
                                  title: "Weight",
                                  autorange: true,
-                                 showline:true,
-                                 linecolor:"#DCEDC8"
+                                 showline: true,
+                                 linecolor: "#DCEDC8"
                              },
                              xaxis: {
                                  type: "date",
                                  title: "Date",
                                  tickformat: "%m/%d/%y",
-                                 showline:true,
-                                 linecolor:"#DCEDC8",
-                                 tickangle:-50,
-                                 nticks:12,
+                                 showline: true,
+                                 linecolor: "#DCEDC8",
+                                 tickangle: -50,
+                                 nticks: 12,
                                  range: [year, now] /* range from today to one year */
                              }
                          };
