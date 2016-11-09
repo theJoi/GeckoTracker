@@ -72,7 +72,7 @@ th {
 }
 th,
 thead {
-  color: #757575;
+  color: #424242;
   font-size: 14px;
   font-weight: 700;
 }
@@ -91,7 +91,7 @@ tr {
 @dividerColor:       #bdbdbd;
 */
 .green {
-  color: #8bc34a;
+  color: #8ac24a;
 }
 /* Elements related to material design and cards */
 /* Used for cards and buttons */
@@ -145,7 +145,7 @@ tr {
 /* Input Stuff */
 /*Secondary button */
 .button--flat {
-  background: #8bc34a;
+  background: #8ac24a;
   font-weight: normal;
 }
 .link:hover {
@@ -613,7 +613,7 @@ label {
   font-weight: 700;
 }
 .highlight {
-  color: #8bc34a;
+  color: #8ac24a;
 }
 .small {
   font-size: 10px;
@@ -754,7 +754,7 @@ table.data-table td.action-icons .action-icon:hover {
 .flex-container {
   display: flex;
 }
-.side-bar {
+#SIDE-BAR {
   display: flex;
   flex-direction: column;
   background: transparent;
@@ -3015,7 +3015,7 @@ table.data-table td.action-icons .action-icon:hover {
 .add-event-form .add-event-title {
   font-size: 20px;
   padding: 16px;
-  background: #8bc34a;
+  background: #8ac24a;
   overflow: hidden;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -3232,13 +3232,13 @@ table.data-table td.action-icons .action-icon:hover {
 }
 /* For gender symbols, used on gecko list and gecko detail */
 .female {
-  color: #981d1a;
+  color: #ad1457;
 }
 .male {
-  color: #10595c;
+  color: #283593;
 }
 .unknown {
-  color: #757575;
+  color: #424242;
 }
 /* Gecko Card (List) */
 .gecko-card {
@@ -3273,7 +3273,7 @@ table.data-table td.action-icons .action-icon:hover {
   background: white;
 }
 .gecko-detail-card .table-header {
-  color: #757575;
+  color: #424242;
 }
 .detail-thumbnail-container {
   float: right;
@@ -3287,7 +3287,7 @@ table.data-table td.action-icons .action-icon:hover {
   border: 1px solid #bdbdbd;
 }
 .detail-thumbnail:hover {
-  border: solid 3px #8bc34a;
+  border: solid 3px #8ac24a;
 }
 .detail-name {
   font-size: 48px;
@@ -3310,7 +3310,7 @@ table.data-table td.action-icons .action-icon:hover {
 /* Add New Gecko Form */
 .add-gecko-form label,
 .gecko-detail-card label {
-  color: #757575;
+  color: #424242;
   font-weight: 700;
   font-size: 14px;
 }
@@ -3422,58 +3422,44 @@ table.data-table td.action-icons .action-icon:hover {
 .gecko-picker .picker-action-buttons button {
   margin: 10px;
 }
-.header,
-.status-bar {
+#HEADER,
+#STATUS-BAR {
   width: 100%;
   z-index: 3;
   position: relative;
 }
-.header {
+#HEADER {
   background: #689f38;
   color: #ffffff;
   padding: 5px 10px;
-  font-size: 1.5em;
+  font-size: 2em;
 }
-.status-bar {
-  background: #8bc34a;
+#HEADER .fa {
+  float: right;
+}
+#STATUS-BAR {
+  background: #8ac24a;
   color: #ffffff;
-  height: 25px;
-  line-height: 35px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .gecko-metrics {
-  background: white;
   display: flex;
   padding: 15px;
-  color: #00c000;
-  font-family: 'Roboto', sans-serif;
+  justify-content: center;
 }
 .gecko-metrics .metric {
-  margin-right: 30px;
+  padding: 0 25px;
 }
-.gecko-metrics .metric.metric-total .units {
-  color: #aac394;
+.gecko-metrics .metric.metric-total {
+  color: #ffffff;
 }
-.gecko-metrics .metric.metric-total .value {
-  color: #689f38;
+.gecko-metrics .metric.metric-male {
+  color: #283593;
 }
-.gecko-metrics .metric.metric-male .units {
-  color: #3aacb1;
+.gecko-metrics .metric.metric-female {
+  color: #ad1457;
 }
-.gecko-metrics .metric.metric-male .value {
-  color: #10595c;
-}
-.gecko-metrics .metric.metric-female .units {
-  color: #cd6765;
-}
-.gecko-metrics .metric.metric-female .value {
-  color: #981d1a;
-}
-.gecko-metrics .metric.metric-eggs .units {
-  color: #b5b5b5;
-}
-.gecko-metrics .metric.metric-eggs .value {
-  color: #757575;
+.gecko-metrics .metric.metric-eggs {
+  color: #424242;
 }
 .gecko-metrics .units {
   display: inline-block;
@@ -3660,7 +3646,7 @@ table.data-table td.action-icons .action-icon:hover {
   font-size: 20px;
   padding: 12px;
   line-height: 26px;
-  background: #8bc34a;
+  background: #8ac24a;
   overflow: hidden;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
