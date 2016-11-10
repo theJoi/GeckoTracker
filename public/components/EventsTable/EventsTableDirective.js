@@ -19,7 +19,8 @@ angular.module('geckoTracker')
 		},
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
-			console.log("id", $scope, $scope.geckoId);
+			$log.debug("EventsTable directive's controller instantiated", $scope.geckoId);
+
 			$scope.events = [];
 			$scope.options = {
 				date: new Date(),
@@ -32,191 +33,156 @@ angular.module('geckoTracker')
 				sortProperty: 'date',
 				sortDirection: '-'
 			};
-			$scope.isLoaded = false; // use to trigger loading spinner
+			//$scope.isLoaded = false; // use to trigger loading spinner
 
-			$log.debug("EventsTable directive's controller instantiated");
+			$scope.setSort = function (property) {
+				if ($scope.filter.sortProperty == property){
+					$scope.filter.sortDirection = $scope.filter.sortDirection == '+' ? '-' : '+';
+				}
+				$scope.filter.sortProperty = property;
+			};
 
-                $scope.setSort = function (property) {
-                    if ($scope.filter.sortProperty == property){
-                        $scope.filter.sortDirection = $scope.filter.sortDirection == '+' ? '-' : '+';
-                    }
-                    $scope.filter.sortProperty = property;
-                };
+			$scope.filterEvents = function (value, index, array) {
+				var foo = $scope.filter.search.toLowerCase();
+				foo = foo.split(',');
+				for (var i = 0; i < foo.length; i++) {
+					if (foo[i].trim() === '')
+						continue;
+					switch (foo[i]) {
+					case 'laid':
+					case 'hatch':
+					case 'purchase':
+					case 'death':
+					case 'note':
+					case 'shed':
+					case 'weight':
+					case 'clutch':
+						if (value.type.toLowerCase() != foo[i]) return false;
+						break;
+					default:
+						if (value.notes && value.notes.toLowerCase().indexOf(foo[i]) == -1)
+							return false;
+					}
+				}
+				return true;
+				//				return value.type == 'note';
+			};
 
-                $scope.filterEvents = function (value, index, array) {
-                    var foo = $scope.filter.search.toLowerCase();
-                    foo = foo.split(',');
-                    for (var i = 0; i < foo.length; i++) {
-                        if (foo[i].trim() === '')
-                            continue;
-                        switch (foo[i]) {
-						case 'laid':
-						case 'hatch':
-						case 'purchase':
-						case 'death':
-                        case 'note':
-                        case 'shed':
-                        case 'weight':
-                        case 'clutch':
-                            if (value.type.toLowerCase() != foo[i]) return false;
-                            break;
-                        default:
-                            if (value.notes && value.notes.toLowerCase().indexOf(foo[i]) == -1)
-                                return false;
-                        }
-                    }
-                    return true;
-                    //				return value.type == 'note';
-                };
-
-                function reloadEvents() {
-                    geckoService.getGeckoEvents($scope.geckoId).then(function (events) {
-                        $scope.events = events;
-                        console.log("EVENTS", events);
-                        $scope.$apply();
-                    });
-                }
-                $scope.$watch("geckoId", function () {
-                    console.log("geckoID changed", $scope.geckoId);
-                    if ($scope.geckoId)
-                        reloadEvents();
-                });
-			
-				$scope.$watch("showAddEventForm", function() {
-					if(!$scope.showAddEventForm)
-						reloadEvents();
+			function reloadEvents() {
+				geckoService.getGeckoEvents($scope.geckoId).then(function (events) {
+					$scope.events = events;
+					console.log("EVENTS", events);
+					$scope.$apply();
 				});
-
-
-				$scope.addEvent = function () {
-					console.log("id", $scope, $scope.geckoId);
-					$scope.eventToEdit = undefined;
-					$scope.showAddEventForm = true;
-					return;
-
-//					geckoService.createGeckoEvent($scope.geckoId, $scope.options).then(function () {
-//								toastr.success("Event added");
-//		resetAddEventOptions();
-//								reloadEvents();
-//						});
-				};
-				
-				function resetAddEventOptions() {
-					$scope.options.notes = '';
-					$scope.options.info = {};
-					$scope.options.date = new Date();
-				}
-				
-				$scope.selectedEvents = {};
-				
-				$scope.isEventSelected = function(event) {
-					return event._id in $scope.selectedEvents;
-				}
-				
-				$scope.selectEvent = function(event) {
-					console.log("selectEvent", event);
-					if(!$scope.isEventSelected(event)) {
-						$scope.selectedEvents[event._id] = event;
-					}
-					if($scope.selectedEventsCount() == 1) {
-						setOptionsFromEvent(event);
-					} else {
-						resetAddEventOptions();
-					}
-				}
-				
-				function setOptionsFromEvent(event) {
-					$scope.options.date = new Date(event.date);
-					$scope.options.type = event.type;
-					$scope.options.notes = event.notes;
-					switch(event.type) {
-						case 'weight':
-							$scope.options.info = { weight: event.info.weight };
-							break;
-						case 'clutch':
-							if(event.info && event.info.eggs)
-								$scope.options.info = { eggs: event.info.eggs };
-							else
-								$scope.options.info = { eggs: null };
-							break;
-					}
-				}
-				
-                /*
-				$scope.unselectEvent = function(event) {
-					if(!$scope.isEventSelected(event))
-						return;
-					delete $scope.selectedEvents[event._id];
-
-					if($scope.selectedEventsCount() == 1) {
-						var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
-						setOptionsFromEvent(event);
-					} else {
-						resetAddEventOptions();
-					}
-				}
-				
-				$scope.selectedEventsCount = function() {
-					return Object.keys($scope.selectedEvents).length;
-				}
-				
-				$scope.deleteSelectedEvent = function() {
-					var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
-					geckoService.deleteGeckoEvent(event._id).then(function() {
-						$scope.unselectEvent(event);
-                        toastr.success("Event deleted");
-						reloadEvents();
-					});
-				}
-				
-				$scope.updateSelectedEvent = function() {
-					var event = $scope.selectedEvents[Object.keys($scope.selectedEvents)[0]];
-					geckoService.updateGeckoEvent(event._id, $scope.options).then(function() {
-						$scope.unselectEvent(event);
-						toastr.success("Event updated");
-						reloadEvents();
-					});
-				}
-                */
-				
-				$scope.editEvent = function(event) {
-					$scope.eventToEdit = event;
-					$scope.showAddEventForm = true;
-				};
-            
-                $scope.deleteEvent = function(event) {
-                    ModalService.showModal({
-                        templateUrl: "components/Modal/YesNoModalTemplate.htm",
-                        controller: "YesNoModalController",
-                        inputs: {
-                            title: "Are You Sure?",
-                            icon: "delete_forever",
-                            message: "The event will be gone forever."
-                        }
-                    }).then(function(modal) {
-                        modal.close.then(function(result) {
-                            if(result) {
-                                geckoService.deleteGeckoEvent(event._id).then(function() {
-                                    reloadEvents();
-                                    toastr.success("Event deleted!");
-                                });
-                            }
-                        });
-                    });
-                }
 			}
-		};
-	})
-	.filter('prettyEventType', function () {
-		var mapping = {
-			'clutch': 'Laid clutch',
-			'weight': 'Weight',
-			'laid': 'Laid',
-			'copulation': 'Copulation'
-		};
-			return function (val) {
-			if (val == 'clutch') return "Laid clutch";
-			if (val == 'hatch') return "Hatched";
-			return val[0].toUpperCase() + val.substring(1);
-		};
-	});
+			$scope.$watch("geckoId", function () {
+				console.log("geckoID changed", $scope.geckoId);
+				if ($scope.geckoId)
+					reloadEvents();
+			});
+
+			$scope.$watch("showAddEventForm", function() {
+				if(!$scope.showAddEventForm)
+					reloadEvents();
+			});
+
+
+			$scope.addEvent = function () {
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: null,
+						geckoId: $scope.geckoId
+					}
+				});
+			};
+
+			function resetAddEventOptions() {
+				$scope.options.notes = '';
+				$scope.options.info = {};
+				$scope.options.date = new Date();
+			}
+
+			$scope.selectedEvents = {};
+
+			$scope.isEventSelected = function(event) {
+				return event._id in $scope.selectedEvents;
+			}
+
+			$scope.selectEvent = function(event) {
+				console.log("selectEvent", event);
+				if(!$scope.isEventSelected(event)) {
+					$scope.selectedEvents[event._id] = event;
+				}
+				if($scope.selectedEventsCount() == 1) {
+					setOptionsFromEvent(event);
+				} else {
+					resetAddEventOptions();
+				}
+			}
+
+			function setOptionsFromEvent(event) {
+				$scope.options.date = new Date(event.date);
+				$scope.options.type = event.type;
+				$scope.options.notes = event.notes;
+				switch(event.type) {
+					case 'weight':
+						$scope.options.info = { weight: event.info.weight };
+						break;
+					case 'clutch':
+						if(event.info && event.info.eggs)
+							$scope.options.info = { eggs: event.info.eggs };
+						else
+							$scope.options.info = { eggs: null };
+						break;
+				}
+			}
+
+			$scope.editEvent = function(event) {
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: event,
+						geckoId: $scope.geckoId
+					}
+				});
+			};
+
+			$scope.deleteEvent = function(event) {
+				ModalService.showModal({
+					templateUrl: "components/Modal/YesNoModalTemplate.htm",
+					controller: "YesNoModalController",
+					inputs: {
+						title: "Are You Sure?",
+						icon: "delete_forever",
+						message: "The event will be gone forever."
+					}
+				}).then(function(modal) {
+					modal.close.then(function(result) {
+						if(result) {
+							geckoService.deleteGeckoEvent(event._id).then(function() {
+								reloadEvents();
+								toastr.success("Event deleted!");
+							});
+						}
+					});
+				});
+			}
+		}
+	};
+})
+.filter('prettyEventType', function () {
+	var mapping = {
+		'clutch': 'Laid clutch',
+		'weight': 'Weight',
+		'laid': 'Laid',
+		'copulation': 'Copulation'
+	};
+		return function (val) {
+		if (val == 'clutch') return "Laid clutch";
+		if (val == 'hatch') return "Hatched";
+		return val[0].toUpperCase() + val.substring(1);
+	};
+});
