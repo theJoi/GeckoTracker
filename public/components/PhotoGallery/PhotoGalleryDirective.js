@@ -16,8 +16,20 @@ angular.module('geckoTracker')
 				console.log("PHOTOS", $scope.photos);
 				console.log("PRIMARY PHOTO", $scope.geckoDetail.primaryPhoto);
 				
+				$scope.curPhoto = 0;
+				
 				$scope.$apply();
 			});
+			
+			$scope.bumpCurrentPhoto = function(n) {
+				$scope.curPhoto += n;
+				if($scope.curPhoto < 0) $scope.curPhoto = $scope.photos.length - 1;
+				$scope.curPhoto = $scope.curPhoto % $scope.photos.length;
+			}
+			
+			$scope.setCurrentPhoto = function(n) {
+				$scope.curPhoto = n;
+			}
 			
 			$scope.showLightbox = function(photo) {
 				$scope.options = { caption: photo.caption };
