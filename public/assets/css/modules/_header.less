@@ -1,20 +1,22 @@
-.header, .status-bar{
+#HEADER,
+#STATUS-BAR {
     width: 100%;
     z-index: 3;
     position: relative;
 }
-.header {
+
+#HEADER,
+{
     background: @darkPrimaryColor;
     color: @textColorLight;
     padding: 5px 10px;
-    font-size: 1.5em;
-
+    font-size: 2em;
+    & .fa {
+        float: right;
+    }
 }
 
-.status-bar {
+#STATUS-BAR {
     background: @primaryColor;
     color: @textColorLight;
-    height: 25px;
-    line-height: 35px;
-    .material-shadow;
 }

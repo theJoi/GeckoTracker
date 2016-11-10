@@ -1,18 +1,34 @@
 <!-- CONTAINER FOR GECKO INFORMATION -->
 <div class='gecko-detail-view'>
-	<div class='status-bar'>
-		<a href="/"><i class="material-icons">home</i></a>
-	</div>
+    <div id="STATUS-BAR">
 
-	<div class='flex-container'>
-		<gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
-		<photo-gallery style='width: 400px;'></photo-gallery>
-	</div>
+        <span class='detail-name'>
+        {{geckoDetail.name}}
+        </span>
+        <span class='detail-gender'>
 
-	<div class="graphs">
-		<weight-chart gecko-id="geckoId"></weight-chart>
-	</div>
-	<notifications-settings></notifications-settings>
-	<events-table gecko-id="geckoId"></events-table>
-	<egg-table gecko="geckoDetail"></egg-table>
+                    <i class='fa fa-mars male' ng-if="geckoDetail.sex == 'male'" title="male"></i>
+                    <i class='fa fa-venus female' ng-if="geckoDetail.sex == 'female'" title="female"></i>
+                    <i class='fa fa-question unknown' ng-if="geckoDetail.sex == 'unknown'" title="gender unknown"></i>
+            </span>
+
+        <span class='detail-id'>
+
+                         {{geckoDetail.userId || "(no ID entered)"}}
+
+                </span>
+        <a href="/" class="statusbar-button">BACK TO LIST</a>
+    </div>
+
+    <div id="MAIN-CONTAINER">
+        <div id="SIDE-BAR">
+            <gecko-detail gecko-id="geckoDetail._id"></gecko-detail>
+            <photo-gallery style='width: 400px;'></photo-gallery>
+        </div>
+        <div id="CHARTS">
+            <events-table gecko-id="geckoId"></events-table>
+            <weight-chart gecko-id="geckoId"></weight-chart>
+            <egg-table gecko="geckoDetail"></egg-table>
+        </div>
+    </div>
 </div>

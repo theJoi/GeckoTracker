@@ -1,17 +1,14 @@
 <div>
     <!-- HEADER STATUS BAR -->
-    <div class="status-bar grid">
-        <div class="col-1-2 left">{{statusMsg}}</div>
-        <div class="col-1-2 right">
-
-        </div>
+    <div id="STATUS-BAR">
+        <gecko-metrics></gecko-metrics>
     </div>
-    <div class="flex-container">
-        <div class="side-bar">
+    <div id="MAIN-CONTAINER">
+        <div id="SIDE-BAR">
             <div class="notifications">This is where notifications will be</div>
         </div>
         <div class="dashboard-main-container">
-            <gecko-metrics></gecko-metrics>
+
             <gecko-table></gecko-table>
         </div>
     </div>
