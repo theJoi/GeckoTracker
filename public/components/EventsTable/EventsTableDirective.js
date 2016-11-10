@@ -22,12 +22,6 @@ angular.module('geckoTracker')
 			$log.debug("EventsTable directive's controller instantiated", $scope.geckoId);
 
 			$scope.events = [];
-			$scope.options = {
-				date: new Date(),
-				type: 'note',
-				info: {},
-				notes: ''
-			};
 			$scope.filter = {
 				search: '',
 				sortProperty: 'date',
@@ -81,12 +75,6 @@ angular.module('geckoTracker')
 					reloadEvents();
 			});
 
-			$scope.$watch("showAddEventForm", function() {
-				if(!$scope.showAddEventForm)
-					reloadEvents();
-			});
-
-
 			$scope.addEvent = function () {
 				ModalService.showModal({
 					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
@@ -97,47 +85,6 @@ angular.module('geckoTracker')
 					}
 				});
 			};
-
-			function resetAddEventOptions() {
-				$scope.options.notes = '';
-				$scope.options.info = {};
-				$scope.options.date = new Date();
-			}
-
-			$scope.selectedEvents = {};
-
-			$scope.isEventSelected = function(event) {
-				return event._id in $scope.selectedEvents;
-			}
-
-			$scope.selectEvent = function(event) {
-				console.log("selectEvent", event);
-				if(!$scope.isEventSelected(event)) {
-					$scope.selectedEvents[event._id] = event;
-				}
-				if($scope.selectedEventsCount() == 1) {
-					setOptionsFromEvent(event);
-				} else {
-					resetAddEventOptions();
-				}
-			}
-
-			function setOptionsFromEvent(event) {
-				$scope.options.date = new Date(event.date);
-				$scope.options.type = event.type;
-				$scope.options.notes = event.notes;
-				switch(event.type) {
-					case 'weight':
-						$scope.options.info = { weight: event.info.weight };
-						break;
-					case 'clutch':
-						if(event.info && event.info.eggs)
-							$scope.options.info = { eggs: event.info.eggs };
-						else
-							$scope.options.info = { eggs: null };
-						break;
-				}
-			}
 
 			$scope.editEvent = function(event) {
 				ModalService.showModal({

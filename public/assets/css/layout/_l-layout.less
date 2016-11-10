@@ -2,36 +2,50 @@
     display: flex;
 }
 
-.side-bar {
-    .flex-container;
-    flex-direction: column;
-	background: transparent;
-    z-index: 2;
-    //border-right: 1px solid @dividerColor;
-    //border-bottom: 1px solid @dividerColor;
+// HEADER //
+.header {}
+
+// LAYOUT FOR DASHBOARD VIEW //
+#MAIN-CONTAINER {
+    display: flex;
+    align-items: stretch;
+}
+
+
+/* Left-side container that starts after the header & status bar and extends to bottoms of page
+Used for notifications in dashboard view and details and photo gallery in gecko detail view */
+
+#SIDE-BAR {
+    background: @textColorDark;
     min-width: 200px;
-	padding: 10px;
-	color: #a0a0a0;
+    width: 33%;
+    padding: 10px;
+    color: #a0a0a0;
 }
 
 
-.dashboard-main-container{
-    display:flex;
+/* Container that holds the gecko table within MAIN-CONTAINER */
+
+
+/* May not ne necessary*/
+
+.dashboard-main-container {
+    display: flex;
     flex-direction: column;
 }
 
+// LAYOUT FOR GECKO DETAIL //
 
-.gecko-detail-card {
-    //border-bottom: 1px solid @dividerColor;
+/* Container right of side-bar on gecko detail view that holds the events table and weight chart */
+
+#CHARTS {
+    width: 67%;
+    display: flex;
+    flex-direction: column;
 }
 
-
-.graphs {
-    min-height: 200px;
-    //border: 1px solid @dividerColor;
-    //background: @white3;
-}
-
-#weight, #other {
-    width: 50%;
+events-table,
+weight-chart,
+egg-table gecko {
+    width: 100%;
 }
