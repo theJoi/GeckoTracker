@@ -242,7 +242,7 @@ app.put('/api/photos/:id', function(request, response) {
 
 app.delete('/api/photos/:id', function(request, response) {
 	var id = request.params.id;
-	geckos.deleteGeckoPhoto(id, request.body, function(err) {
+	geckos.deleteGeckoPhoto(id, function(err) {
 		if(err) {
 			response.json({error: err});
 			return;

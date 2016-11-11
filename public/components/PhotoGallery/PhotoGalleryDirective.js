@@ -6,15 +6,15 @@ angular.module('geckoTracker')
 	return {
 		restrict: 'E',
 		templateUrl: "components/PhotoGallery/PhotoGalleryTemplate.htm",
-		controller: function($scope, $http, $log, geckoService, Upload) {
-			console.log("GeckoPhotos directive controller instantiated");
+		controller: function($scope, $http, $log, geckoService, Upload, ModalService, toastr) {
+			$log.log("GeckoPhotos directive controller instantiated");
 			
 			geckoService.getGeckoPhotos($scope.geckoId).then(function success(photos) {
-				console.log("Loaded photos");
+				$log.log("Loaded photos");
 				$scope.photos = photos;
 				
-				console.log("PHOTOS", $scope.photos);
-				console.log("PRIMARY PHOTO", $scope.geckoDetail.primaryPhoto);
+				$log.log("PHOTOS", $scope.photos);
+				$log.log("PRIMARY PHOTO", $scope.geckoDetail.primaryPhoto);
 				
 				$scope.curPhoto = 0;
 				
@@ -42,6 +42,35 @@ angular.module('geckoTracker')
 				$scope.selectedPhoto = undefined;
 			}
 			
+			$scope.deletePhoto = function(photo) {
+				ModalService.showModal({
+					templateUrl: "components/Modal/YesNoModalTemplate.htm",
+					controller: "YesNoModalController",
+					inputs: {
+						title: "Are You Sure?",
+						icon: "delete_forever",
+						message: "This will permanently delete the photo."
+					}
+				}).then(function(modal) {
+					return modal.close;
+				}).then(function(yesOrNo) {
+					$log.debug("YES OR NO IS", yesOrNo);
+					if(!yesOrNo)
+						return false;
+					$log.log(photo);
+					return geckoService.deleteGeckoPhoto(photo._id);
+				}).then(function(result) {
+					$log.debug("ABORT IS", result);
+					if(!result)
+						return;
+					for(var i=0;i < $scope.photos.length;i++) {
+						if($scope.photos[i]._id == photo._id)
+							$scope.photos.splice(i, 1);
+					}
+					toastr.success("Photo deleted.", "Success");
+				});
+			}
+
 			$scope.rotatePhoto = function(dir) {
 				var index = $scope.photos.indexOf($scope.selectedPhoto);
 				if(dir && dir < 0) {
@@ -50,7 +79,7 @@ angular.module('geckoTracker')
 				}
 				else
 					index = (index + 1) % $scope.photos.length;
-				console.log(index);
+				$log.log(index);
 				$scope.selectedPhotoNumber = index + 1;
 				$scope.selectedPhoto = $scope.photos[index];
 			}
@@ -67,34 +96,34 @@ angular.module('geckoTracker')
 						}
 					}
 				}, function error() {
-					console.error("Failed to set primary photo");
+					$log.error("Failed to set primary photo");
 				});
 			}
 			
 			$scope.setCaption = function() {
-				console.log('setCaption');
+				$log.log('setCaption');
 				geckoService.setPhotoCaption($scope.selectedPhoto._id, $scope.options.caption).then(
 					function success(caption) {
-						console.log("Set caption worked");
+						$log.log("Set caption worked");
 						$scope.selectedPhoto.caption = caption;
 					},
 					function error(err) {
-						console.error("Set caption error");
+						$log.error("Set caption error");
 					});
 			}
 			
 			$scope.uploadFiles = function(file, errFiles) {
 				if(!file)
 					return;
-				console.log('uploadFiles', file);
-				console.log(Upload);
+				$log.log('uploadFiles', file);
+				$log.log(Upload);
 				Upload.upload({
 					url: 'api/geckos/' + $scope.geckoDetail._id + '/photos',
 					method: 'POST',
 					file: file,
 					fileFormDataName: 'photo'
 				}).then(function success(response) {
-					console.log("Success", response.data);
+					$log.log("Success", response.data);
 					if($scope.photos.length == 0) {
 						$scope.geckoDetail.primaryPhoto = {
 							id: response.data._id,
@@ -103,15 +132,15 @@ angular.module('geckoTracker')
 					}
 					$scope.photos.push(response.data);
 				}, function error(response) {
-					console.log("Error");
+					$log.log("Error");
 				}, function progress(evt) {
-					console.log("Progress", evt);
+					$log.log("Progress", evt);
 				});
 			}
 			
 			$scope.getAgeWhenTaken = function(photo) {
 				var taken = moment(photo.taken);
-				console.warn($scope.geckoDetail);
+				$log.warn($scope.geckoDetail);
 				var birth = moment($scope.geckoDetail.hatchDate);
 				return moment.duration(taken.diff(birth)).humanize();
 			}

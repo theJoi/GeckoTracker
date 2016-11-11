@@ -2,14 +2,17 @@
 
 	<!-- Primary photo -->
 	<div class='photo-action-bar'>
-		<i class='material-icons' ng-click='showLightbox(photos[curPhoto])' title='Zoom in'>zoom_in</i>
-		<form>
+		<form class='float-left'>
 			<button type='file' ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">
 				<i class='material-icons' title='Upload or take a photo'>add_a_photo</i>
 			</button>
 		</form>
-		<i class='material-icons' ng-click='bumpCurrentPhoto(-1)' title='Rotate photo backward'>chevron_left</i>
-		<i class='material-icons' ng-click='bumpCurrentPhoto(1)' title='Rotate photo forward'>chevron_right</i>
+        <i class='material-icons float-left' ng-click='deletePhoto(photos[curPhoto])' title='Delete photo'>delete</i>
+        <i class='material-icons float-left' ng-click='setPrimaryPhoto(curPhoto)' title='Make primary photo'>favorite</i>
+        
+		<i class='material-icons' ng-click='showLightbox(photos[curPhoto])' title='Zoom in'>zoom_in</i>
+		<i class='material-icons' ng-click='bumpCurrentPhoto(-1)' title='Previous photo'>chevron_left</i>
+		<i class='material-icons' ng-click='bumpCurrentPhoto(1)' title='Next photo'>chevron_right</i>
 	</div>
 	<div class='primary-photo' ng-click='showLightbox(photos[curPhoto])'>
 		<img src='{{photos[curPhoto].path}}'></img>

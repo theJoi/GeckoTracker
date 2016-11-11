@@ -302,6 +302,9 @@ angular.module('geckoTracker')
 			},
 
 			deleteGeckoPhoto: function(id) {
+				if(!id)
+					throw "id (" + id + ") is not valid";
+				
                 return new Promise(function (fulfill, reject) {
                     $http({
                         method: 'DELETE',
