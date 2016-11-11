@@ -4,12 +4,14 @@ angular.module('geckoTracker')
 		restrict: 'E',
 		templateUrl: "components/NotificationsSettings/NotificationsSettingsTemplate.htm",
 		controller: function($scope, $http, $log, toastr, geckoService, ModalService) {
+			$log = $log.getInstance("NotificationsSettings");
+			
 			$log.debug("NotificationSettings directive's controller instantiated");
 			
 			$scope.events = [];
 			geckoService.getGeckoEvents($scope.geckoId).then(function (events) {
 				$scope.events = events;
-				console.debug("NotificationsSettings events loaded", $scope.events);
+				$log.debug("NotificationsSettings events loaded", $scope.events);
 				$scope.$apply();
 			});
 			
@@ -19,7 +21,7 @@ angular.module('geckoTracker')
 			});
 			
 			function findMostRecentEventOfType(t) {
-				//console.log("findMostRecentEventOfType", $scope.events);
+				//$log.log("findMostRecentEventOfType", $scope.events);
 				var cur = null;
 				for(var i=0;i < $scope.events.length;i++) {
 					var evt = $scope.events[i];

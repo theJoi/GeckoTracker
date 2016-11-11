@@ -1,12 +1,13 @@
 /*jshint globals: true, undef: true, browser: true, node: true*/
 /* globals angular */
 
-angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, geckoService) {
+angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, $log, geckoService) {
+	$log = $log.getInstance('views.GeckoDetailsView');
 
     $scope.statusMsg = "Say hi to...";
     $scope.geckoDetail = {};
     $scope.geckoId = $routeParams.id;
-    console.log("GeckoDetailsView controller instantiated with id=" + $scope.geckoId);
+    $log.log("GeckoDetailsView controller instantiated with id=" + $scope.geckoId);
 
     geckoService.getGeckoDetails($scope.geckoId).then(function(details) {
         $scope.geckoDetail = details;
