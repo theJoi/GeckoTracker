@@ -64,6 +64,31 @@
 	}
 }
 
+.form-field .big-text {
+	border: 0;
+	background: transparent;
+	font-family: Roboto;
+	font-size: 16px;
+	width: 100%;
+	border-bottom: solid 1px #e0e0e0;
+	margin-bottom: 1px;
+	outline: none;
+	resize: none;
+	padding: 1px 0;
+	
+	&:focus {
+		margin-bottom: 0;
+		border-bottom: solid 2px @primary-color;
+	}
+	
+	&.hidden-div {
+		position: absolute;
+		visibility: hidden;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+	}
+}
+
 @keyframes anim-form-field-fade-in {
 	0% {
 		opacity: 0;
