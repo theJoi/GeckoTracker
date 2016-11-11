@@ -13,6 +13,6 @@
 	<div class='cover' ng-if='showDropdown' ng-click='hideDropdown()'></div>
 	
 	<div class='form-field-select-dropdown' ng-show='showDropdown'>
-		<div ng-repeat='option in options' ng-click='select(option)'>{{option}}</div>
+		<div ng-repeat='(key, value) in options' ng-click='select(key)'>{{value}}</div>
 	</div>
 </div>
