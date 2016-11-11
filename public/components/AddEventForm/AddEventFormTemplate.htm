@@ -9,11 +9,15 @@
 
 		<div class='add-event-fields'>
 			<div class='field big'>
+<!--
 				<div class='label'>Date</div>
 				<input type='date' class='field-date' ng-model='form.date'></input>
 				<div class='field-alerts'>Required</div>
+-->
+				<form-field-date label='Date' value='form.date'></form-field-date>
 			</div>
 			<div class='field big'>
+<!--
 				<div class='label'><span ng-if='form.type'>Event Type</span></div>
 				<select class='field-select' ng-model='form.type' placeholder='Event Type'>
 					<option value="" disabled selected ng-if='!form.type'>Event Type</option>
@@ -25,6 +29,8 @@
 					<option value="note">Note</option>
 				</select>
 				<div class='field-alerts'></div>
+-->
+				<form-field-select label='Event' options='form.typeOptions' value='form.type'></form-field-select>
 			</div>
 			<div class='field' ng-show="form.type == 'weight'">
 				<div class='label'><span ng-if='form.info.weight'>Weight</span></div>
