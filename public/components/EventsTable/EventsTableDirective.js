@@ -22,19 +22,12 @@ angular.module('geckoTracker')
 			$log.debug("EventsTable directive's controller instantiated with id=" + $scope.geckoId);
 
 			$scope.events = [];
-			$scope.options = {
-				date: new Date(),
-				type: 'note',
-				info: {},
-				notes: ''
-			};
 			$scope.filter = {
 				search: '',
 				sortProperty: 'date',
 				sortDirection: '-'
 			};
-			$scope.isLoaded = false; // use to trigger loading spinner
-
+			//$scope.isLoaded = false; // use to trigger loading spinner
 
 			$scope.setSort = function (property) {
 				if ($scope.filter.sortProperty == property){
@@ -69,21 +62,6 @@ angular.module('geckoTracker')
 				//				return value.type == 'note';
 			};
 
-			function reloadEvents() {}
-			
-			function reloadEvents2() {
-				$scope.$apply();
-			}
-			
-			if($scope.geckoId) {
-				geckoService.getGeckoEvents($scope.geckoId).then(function(events) {
-					console.debug("EventsTable got events", events);
-					$scope.events = events;
-					$scope.$apply();
-				});
-			}
-			
-			/*
 			function reloadEvents() {
 				geckoService.getGeckoEvents($scope.geckoId).then(function (events) {
 					$scope.events = events;
@@ -92,69 +70,31 @@ angular.module('geckoTracker')
 				});
 			}
 			$scope.$watch("geckoId", function () {
-				console.log("EventsTable id changed", $scope.geckoId);
+				console.log("geckoID changed", $scope.geckoId);
 				if ($scope.geckoId)
 					reloadEvents();
 			});
-			*/
-
-			$scope.$watch("showAddEventForm", function() {
-				if(!$scope.showAddEventForm)
-					reloadEvents();
-			});
-
 
 			$scope.addEvent = function () {
-				console.log("id", $scope, $scope.geckoId);
-				$scope.eventToEdit = undefined;
-				$scope.showAddEventForm = true;
-				return;
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: null,
+						geckoId: $scope.geckoId
+					}
+				});
 			};
 
-			function resetAddEventOptions() {
-				$scope.options.notes = '';
-				$scope.options.info = {};
-				$scope.options.date = new Date();
-			}
-
-			$scope.selectedEvents = {};
-
-			$scope.isEventSelected = function(event) {
-				return event._id in $scope.selectedEvents;
-			}
-
-			$scope.selectEvent = function(event) {
-				console.log("selectEvent", event);
-				if(!$scope.isEventSelected(event)) {
-					$scope.selectedEvents[event._id] = event;
-				}
-				if($scope.selectedEventsCount() == 1) {
-					setOptionsFromEvent(event);
-				} else {
-					resetAddEventOptions();
-				}
-			}
-				
-			function setOptionsFromEvent(event) {
-				$scope.options.date = new Date(event.date);
-				$scope.options.type = event.type;
-				$scope.options.notes = event.notes;
-				switch(event.type) {
-					case 'weight':
-						$scope.options.info = { weight: event.info.weight };
-						break;
-					case 'clutch':
-						if(event.info && event.info.eggs)
-							$scope.options.info = { eggs: event.info.eggs };
-						else
-							$scope.options.info = { eggs: null };
-						break;
-				}
-			}
-
 			$scope.editEvent = function(event) {
-				$scope.eventToEdit = event;
-				$scope.showAddEventForm = true;
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: event,
+						geckoId: $scope.geckoId
+					}
+				});
 			};
 
 			$scope.deleteEvent = function(event) {

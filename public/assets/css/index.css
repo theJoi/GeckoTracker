@@ -2985,52 +2985,7 @@ egg-table gecko {
   overflow: visible;
   clip: auto;
 }
-.add-event-form {
-  /*
-	.modal-black-out{
-		width: 100%;
-		height: 100%;
-		background: rgba(0,0,0,0.75);
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 10;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		
-		animation: pulse 0.5s 1;
-	}
-	
-	@keyframes pulse {
-		0% {
-			background-color: rgba(0,0,0,0);
-		}
-		100% {
-			background-color: rgba(0,0,0,0.75);
-		}
-	}
-	*/
-  /*
-	.modal_ {
-		background: white;
-		border-radius: 3px;
-		width: 700px;
-		z-index: 20;
-		
-		animation: drop 0.5s 1;
-	}
-	@keyframes drop {
-		0% {
-			margin-top: -1000px;
-		}
-		100% {
-			margin-top: 0;
-		}
-	}
-	*/
-}
-.add-event-form .add-event-title {
+.AddEventForm .add-event-title {
   font-size: 20px;
   padding: 16px;
   background: #8ac24a;
@@ -3039,75 +2994,75 @@ egg-table gecko {
   border-top-right-radius: 3px;
   color: white;
 }
-.add-event-form input,
-.add-event-form input:read-only,
-.add-event-form input:hover,
-.add-event-form select {
+.AddEventForm input,
+.AddEventForm input:read-only,
+.AddEventForm input:hover,
+.AddEventForm select {
   border: 0;
   display: block;
   border-bottom: solid 1px #e0e0e0;
 }
-.add-event-form .add-event-fields {
+.AddEventForm .add-event-fields {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 6px;
 }
-.add-event-form .field {
+.AddEventForm .field {
   padding: 10px;
   flex-grow: 0;
   flex-shrink: 0;
 }
-.add-event-form .field.huge {
+.AddEventForm .field.huge {
   width: 100%;
 }
-.add-event-form .field.big {
+.AddEventForm .field.big {
   width: 300px;
 }
-.add-event-form .field.small {
+.AddEventForm .field.small {
   width: 150px;
 }
-.add-event-form .field input,
-.add-event-form select {
+.AddEventForm .field input,
+.AddEventForm select {
   font-family: Roboto;
   font-size: 18px;
   padding: 0;
 }
-.add-event-form .field input:focus,
-.add-event-form select:focus {
+.AddEventForm .field input:focus,
+.AddEventForm select:focus {
   border-bottom: solid 1px pink;
 }
-.add-event-form .field select {
+.AddEventForm .field select {
   padding-top: 2px;
   padding-bottom: 1px;
 }
-.add-event-form .field select option {
+.AddEventForm .field select option {
   padding-left: 20px;
 }
-.add-event-form .field .label {
+.AddEventForm .field .label {
   font-size: 12px;
   height: 14px;
   overflow: hidden;
   color: #808080;
 }
-.add-event-form .field-alerts {
+.AddEventForm .field-alerts {
   height: 40px;
   font-size: 12px;
   color: #a0a0a0;
 }
-.add-event-form .field-select:hover {
+.AddEventForm .field-select:hover {
   border-bottom: solid 1px blue;
 }
-.add-event-form .field-select:focus {
+.AddEventForm .field-select:focus {
   border-bottom: solid 1px blue;
 }
-.add-event-form .field-select.ng-pristine {
+.AddEventForm .field-select.ng-pristine {
   color: #808080;
 }
-.add-event-form .add-event-action-buttons {
+.AddEventForm .add-event-action-buttons {
   text-align: right;
 }
-.add-event-form .add-event-action-buttons button {
+.AddEventForm .add-event-action-buttons button {
   margin: 10px;
 }
 .events-table {

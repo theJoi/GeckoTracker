@@ -292,7 +292,7 @@ exports.updateEvent = function (id, props, callback) {
             callback(err, null);
             return;
         }
-        if (updatedEvent.type === 'weight' || newEvent.type == 'laid') {
+        if (updatedEvent.type === 'weight' || updatedEvent.type == 'laid') {
             updateCachedGeckoFields(updatedEvent.geckoId, null);
         }
         callback(null, updatedEvent);
