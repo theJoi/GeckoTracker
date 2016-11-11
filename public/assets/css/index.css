@@ -3187,6 +3187,9 @@ egg-table gecko {
   padding: 16px;
   text-align: right;
 }
+.egg-table {
+  background-color: white;
+}
 .egg-table .title {
   padding: 16px;
   font-size: 20px;
@@ -3848,4 +3851,63 @@ egg-table gecko {
 .form-field-calendar .calendar-week td.isSelected {
   background: #00a000;
   color: white;
+}
+.AddNotificationForm .layout-trigger {
+  display: flex;
+}
+.AddNotificationForm .layout-trigger-type {
+  width: 250px;
+}
+.AddNotificationForm .layout-trigger-options {
+  display: flex;
+}
+.notifications-settings {
+  background-color: white;
+}
+.notifications-settings .title {
+  padding: 16px;
+  font-size: 20px;
+}
+.notifications-settings .title .title-icons {
+  float: right;
+}
+.notifications-settings .title .title-icons i {
+  cursor: pointer;
+  color: #808080;
+}
+.notifications-settings .title .title-icons i:hover {
+  color: #404040;
+}
+.notifications-settings .notification {
+  padding: 16px;
+  border-top: solid 1px #f0f0f0;
+}
+.notifications-settings .notification:last-child {
+  border-bottom: solid 1px #f0f0f0;
+}
+.notifications-settings .level-icon {
+  color: #808080;
+}
+.notifications-settings .enabled-icon {
+  color: #d0d0d0;
+  cursor: pointer;
+}
+.notifications-settings .enabled-icon.enabled {
+  color: #808080;
+}
+.notifications-settings .enabled-icon:hover {
+  color: #404040;
+}
+.notifications-settings .column-level {
+  width: 50px;
+  text-align: center;
+}
+.notifications-settings .column-enabled {
+  width: 80px;
+  text-align: center;
+}
+.notifications-settings .empty-table-warning td {
+  text-align: center;
+  color: #808080;
+  padding: 20px;
 }

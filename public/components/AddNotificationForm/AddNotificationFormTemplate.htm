@@ -1,0 +1,28 @@
+
+<div class='AddNotificationForm' modal>
+	<div class='title'><i class="icon material-icons">alarm_add</i> <span class='text'>Add Notification</span></div>
+	<div class='content'>
+		<div class='layout-trigger'>
+			<div class='layout-trigger-type'>
+				<form-field-select label='Trigger Type' options='triggerTypes' value='form.trigger'></form-field-select>
+			</div>
+			
+			<div style='flex-grow: 1' ng-if="form.trigger == 'Days From Event'">
+				<form-field-number label='Days' value='form.days'></form-field-number>
+			</div>
+			<div style='flex-grow: 1' ng-if="form.trigger == 'Days From Event'">
+				<form-field-select label='Event Type' options='eventTypes' value='form.event'></form-field-select>
+			</div>
+			
+			<div style='flex-grow: 1'>
+				<form-field-date label='Date' value='form.date' ng-if="form.trigger == 'On Date'"></form-field-date>
+			</div>
+		</div>
+		
+		<form-field-text value='form.message' label='Message'></form-field-input>
+	</div>
+	<div class='buttons e_button-box right'>
+		<button class='yes-button flat-button' ng-click='commit()'>Create</button>
+		<button class='no-button flat-button' ng-click='close()'>Cancel</button>
+	</div>
+</div>

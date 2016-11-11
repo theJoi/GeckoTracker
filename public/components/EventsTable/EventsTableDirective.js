@@ -19,7 +19,7 @@ angular.module('geckoTracker')
 		},
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
-			$log.debug("EventsTable directive's controller instantiated", $scope.geckoId);
+			$log.debug("EventsTable directive's controller instantiated with id=" + $scope.geckoId);
 
 			$scope.events = [];
 			$scope.filter = {
@@ -120,6 +120,7 @@ angular.module('geckoTracker')
 		}
 	};
 })
+
 .filter('prettyEventType', function () {
 	var mapping = {
 		'clutch': 'Laid clutch',

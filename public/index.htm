@@ -19,7 +19,7 @@
     <link href="/node_modules/angular-toastr/dist/angular-toastr.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<!-- JS -->
+    <!-- JS -->
     <script src="/node_modules/moment/moment.js"></script>
     <script src="/node_modules/angular/angular.min.js"></script>
     <script src="/node_modules/angular-route/angular-route.min.js"></script>
@@ -27,8 +27,8 @@
     <script src="/node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="/node_modules/ng-flow/dist/ng-flow-standalone.min.js"></script>
-	<script src="/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
-	<script src="/node_modules/angular-modal-service/dst/angular-modal-service.js"></script>
+    <script src="/node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script src="/node_modules/angular-modal-service/dst/angular-modal-service.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- ANGULAR CUSTOM -->
@@ -53,10 +53,12 @@
     <script src="components/Modal/GenericModalDirectives.js"></script>
     <script src="components/SearchBox/SearchBoxDirective.js"></script>
     <script src="components/FormFields/FormFieldDirectives.js"></script>
+    <script src="components/NotificationsSettings/NotificationsSettingsDirective.js"></script>
+    <script src="components/AddNotificationForm/AddNotificationFormController.js"></script>
 
 </head>
 
-<body >
+<body>
     <div id='HEADER'>
         Gecko<span class='bold'>Tracker</span>
         <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -66,5 +68,6 @@
 
     <!-- DYNAMIC ANGULAR CONTENT -->
     <div ng-view></div>
-  </body>
+</body>
+
 </html>
