@@ -19,7 +19,9 @@ angular.module('geckoTracker')
 		},
 		templateUrl: "components/EventsTable/EventsTableTemplate.htm",
 		controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
-			$log.debug("EventsTable directive's controller instantiated with id=" + $scope.geckoId);
+			var log = $log.getInstance("EventsTable");
+			
+			log.debug("EventsTable directive's controller instantiated with id=" + $scope.geckoId);
 
 			$scope.events = [];
 			$scope.filter = {
@@ -65,17 +67,18 @@ angular.module('geckoTracker')
 			function reloadEvents() {
 				geckoService.getGeckoEvents($scope.geckoId).then(function (events) {
 					$scope.events = events;
-					console.log("EVENTS", events);
+					log.debug("EVENTS", events);
 					$scope.$apply();
 				});
 			}
 			$scope.$watch("geckoId", function () {
-				console.log("geckoID changed", $scope.geckoId);
+				log.log("geckoID changed", $scope.geckoId);
 				if ($scope.geckoId)
 					reloadEvents();
 			});
 
 			$scope.addEvent = function () {
+				log.debug("addEvent");
 				ModalService.showModal({
 					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
 					controller: "AddEventFormController",
@@ -87,6 +90,7 @@ angular.module('geckoTracker')
 			};
 
 			$scope.editEvent = function(event) {
+				log.debug("editEvent");
 				ModalService.showModal({
 					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
 					controller: "AddEventFormController",
@@ -98,6 +102,7 @@ angular.module('geckoTracker')
 			};
 
 			$scope.deleteEvent = function(event) {
+				log.debug("deleteEvent");
 				ModalService.showModal({
 					templateUrl: "components/Modal/YesNoModalTemplate.htm",
 					controller: "YesNoModalController",
