@@ -6,6 +6,7 @@
 
             <span class='detail-name'>
                 <span ng-hide="showEditMode">{{geckoDetail.name}}</span>
+            <label ng-show="showEditMode">Name</label>
             <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.name" name="name">
             <span ng-show="edit.name.$dirty"><i class='fa fa-undo link green' ng-click="undo('name')" title="Undo change"></i></span>
             </span>
@@ -16,6 +17,7 @@
                     <i class='fa fa-venus female' ng-if="geckoDetail.sex == 'female'" title="female"></i>
                     <i class='fa fa-question unknown' ng-if="geckoDetail.sex == 'unknown'" title="gender unknown"></i>
                 </span>
+            <label ng-show="showEditMode">Sex</label>
             <select ng-model="editform.sex" ng-show="showEditMode" class="inline" name="sex">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -26,6 +28,7 @@
             <span class='detail-id'>
                     <span ng-class="{placeholder: !geckoDetail.userId}" ng-hide="showEditMode" name="userId">
                          {{geckoDetail.userId || "(no ID entered)"}}</span>
+            <label ng-show="showEditMode">User ID</label>
             <input ng-show="showEditMode" type="text" class="inline" ng-model="editform.userId" name="userId">
             <span ng-show="edit.userId.$dirty"><i class='fa fa-undo link green' ng-click="undo('userId')" title="Undo change"></i></span>
             </span>
@@ -120,20 +123,20 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="right" ng-show="showEditMode">
-                <button class="button--raised" ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
-                    SAVE CHANGES</button>
-                <button class="button--raised" ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>
-                <button class="button--raised" ng-click="showEditMode=false" class="button--secondary"><i class='fa fa-times'></i>CANCEL</button>
-            </div>
+        <div class="right" ng-show="showEditMode">
+            <button class="button--raised" ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
+                SAVE CHANGES</button>
+            <button class="button--raised" ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>
+            <button class="button--raised" ng-click="showEditMode=false" class="button--secondary"><i class='fa fa-times'></i>CANCEL</button>
         </div>
+    </form>
+
 </div>
-</div>
+
 <div class="detail-thumbnail-container col-1-4" style='display: none'>
     <img class="detail-thumbnail" src="http://natgeo.petsmart.com/content/img/leopard-gecko/leopard-gecko-fun-facts.jpg">
 </div>
-</form>
+
 </div>
 
 <!-- PARENT PICKER MODAL -->
