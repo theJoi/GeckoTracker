@@ -1,0 +1,57 @@
+<div class='notifications-settings'>
+	<div class='title'>
+		Notifications
+		<div class='title-icons'>
+			<i class='material-icons' ng-click='addNotification()'>alarm_add</i>
+		</div>
+	</div>
+	<div class='content'>
+		<table class='data-table'>
+			<tr>
+				<th class='column-level'>Level</th>
+				<th class='column-enabled'>Enabled?</th>
+				<th class='column-trigger'>Trigger</th>
+				<th class='column-next'>Next</th>
+				<th class='column-message'>Message</th>
+				<th class='column-actions'></th>
+			</tr>
+			<tr ng-repeat='notification in notifications | filter:{gecko: geckoId} as _notifications'>
+				<td class='column-level'>
+					<i class='material-icons level-icon'>{{notification.level | notificationIcon }}</i>
+				</td>
+				<td class='column-enabled'>
+					<i class='material-icons enabled-icon enabled'
+					   ng-if='notification.enabled'
+					   ng-click='setEnabled(notification, false)'>
+						alarm_on
+					</i>
+					<i class='material-icons enabled-icon'
+					   ng-if='!notification.enabled'
+					   ng-click='setEnabled(notification, true)'>
+						alarm_off
+					</i>
+				</td>
+
+				<td class='column-trigger' ng-if="notification.trigger == 'onDate'">
+					On {{notification.date | date:'fullDate'}}
+				</td>
+				<td class='column-trigger' ng-if="notification.trigger == 'fromEvent'">
+					{{notification.days}} days from last {{notification.event}} event
+				</td>
+
+				<td class='column-next'>
+					{{nextTrigger(notification) | humanizeDate}}
+				</td>
+				
+				<td class='column-message'>{{notification.message}}</td>
+				
+				<td class='column-message action-icons'>
+					<i class='material-icons action-icon' ng-click='deleteNotification(notification)'>delete</i>
+				</td>
+			</tr>
+			<tr class='empty-table-warning' ng-if='_notifications.length == 0'>
+				<td colspan=6>No notifications.</td>
+			</tr>
+		</table>
+	</div>
+</div>
