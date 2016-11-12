@@ -3219,7 +3219,7 @@ egg-table gecko {
 }
 .statusbar-name {
   font-size: calc(7.5vh);
-  line-height: 0.6em;
+  line-height: 5vh;
   font-weight: 900;
   color: #689f38;
   text-transform: uppercase;
@@ -3236,6 +3236,7 @@ egg-table gecko {
 }
 .gecko-detail label {
   color: #8ac24a;
+  font-size: 1rem;
 }
 .gecko-detail .button--fab {
   right: 5px;
@@ -3256,14 +3257,28 @@ egg-table gecko {
   font-size: 24px;
   line-height: 24px;
 }
+.detail--editmode label {
+  width: 25%;
+  text-align: left;
+}
+.detail--editmode select,
+.detail--editmode input {
+  width: 75%;
+}
 .detail-items {
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
 }
-.detail-item {
+.detail-items:not(.detail--editmode) .detail-item {
   flex: 1 1 50%;
+}
+.detail-items.detail--editmode .detail-item {
+  flex: 1 1 100%;
+}
+.detail-item {
   padding: 5px;
+  display: flex;
 }
 .detail-item-2 {
   flex: 2 0 200px;

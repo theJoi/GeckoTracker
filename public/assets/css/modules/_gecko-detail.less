@@ -8,7 +8,7 @@
 
 .statusbar-name {
     font-size: calc(5vh * 1.5);
-    line-height: 0.6em;
+    line-height: 5vh;
     font-weight: 900;
     color: #689f38;
     text-transform: uppercase;
@@ -27,6 +27,7 @@
     color: white;
     & label {
         color: @primaryColor;
+        font-size: 1rem;
     }
     & .button--fab {
         right: 5px;
@@ -52,15 +53,32 @@
     line-height: 24px;
 }
 
+.detail--editmode {
+    label {
+        width: 25%;
+        text-align: left;
+    }
+    select,
+    input {
+        width: 75%;
+    }
+}
+
 .detail-items {
     display: flex;
     flex-wrap: wrap;
     margin: 10px;
+    &:not(.detail--editmode) .detail-item {
+        flex: 1 1 50%;
+    }
+    &.detail--editmode .detail-item {
+        flex: 1 1 100%;
+    }
 }
 
 .detail-item {
-    flex: 1 1 50%;
     padding: 5px;
+    display: flex;
 }
 
 .detail-item-2 {
