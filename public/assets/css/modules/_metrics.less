@@ -1,41 +1,39 @@
+/* METRICS */
+
 .gecko-metrics {
-    @metrics-total-color: ;
-    @metrics-male-color: #6c78ab;
+    align-content: center;
+    align-items: center;
+    text-align: center;
     display: flex;
-    padding: 10px;
+    flex-wrap: wrap;
     justify-content: center;
-    .metric {
-        padding: 0 25px;
-        font-weight: bold;
-        &.metric-total {
-            color: @textColorLight;
-        }
-        &.metric-male {
-            color: @blue;
-        }
-        &.metric-female {
-            color: @pink;
-        }
-        &.metric-eggs {
-            color: @textColorGray;
-        }
-    }
-    .units {
-        display: inline-block;
+    color: white;
+    .metric,
+    .pie-metric {
+        flex: 1 1 100px;
+        display: flex;
+        margin: auto 20px;
+        flex-direction: column;
+        text-align: center;
+        margin: 10px auto;
         font-size: 24px;
-        line-height: 24px;
-        padding-top: 4px;
-        padding-left: 4px;
-        .subunits {
-            line-height: 16px;
-            font-size: 16px;
-        }
+    }
+    .pie-metric {
+        margin: -5px auto;
+        font-size: 16px;
     }
     .value {
-        display: inline;
-        font-size: 48px;
-        line-height: 48px;
-        font-weight: bold;
-        vertical-align: top;
+        font-size: 2em;
+        line-height: 1em;
+    }
+    .units {
+        line-height: 1em;
+    }
+    .pie {
+        margin: 30px auto;
+    }
+    #pie-gender,
+    #pie-age {
+        margin: 0 50px;
     }
 }
