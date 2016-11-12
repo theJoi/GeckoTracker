@@ -13,6 +13,7 @@ angular.module('geckoTracker', ['ngRoute','ngDialog','toastr','ngAnimate','ngFil
 	logEnhancerProvider.logLevels = {
 		//'EventsTable': logEnhancerProvider.LEVEL.DEBUG,
 		'GeckoService': logEnhancerProvider.LEVEL.DEBUG,
+		'LoadingScreen': logEnhancerProvider.LEVEL.DEBUG,
 		'*': logEnhancerProvider.LEVEL.ERROR
 	};
 })

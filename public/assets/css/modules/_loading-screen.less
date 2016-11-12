@@ -1,0 +1,47 @@
+.LoadingScreen {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: @white3;
+	z-index: 1000;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	.loading-text {
+		text-align: center;
+		
+		i {
+			display: block;
+			color: #808080;
+			font-size: 60px;
+			animation: LoadingScreen-pulse 1s infinite, LoadingScreen-rotate 1s infinite;
+		}
+		
+		font-family: Roboto;
+		font-size: 22px;
+		font-weight: bold;
+		color: #a0a0a0;
+	}
+	
+	&.ng-hide {
+		animation: LoadingScreen-fadeOut 0.5s 1;
+	}
+}
+
+@keyframes LoadingScreen-pulse {
+	0% { opacity: 1 }
+	50% { opacity: 0.25 }
+	100% { opacity: 1 }
+}
+
+@keyframes LoadingScreen-rotate {
+	0% { transform: rotate(0) }
+	100% { transform: rotate(360deg) }
+}
+
+@keyframes LoadingScreen-fadeOut {
+	0% { opacity: 1 }
+	100% { opacity: 0 }
+}

@@ -56,6 +56,7 @@
     <script src="components/FormFields/FormFieldDirectives.js"></script>
     <script src="components/NotificationsSettings/NotificationsSettingsDirective.js"></script>
     <script src="components/AddNotificationForm/AddNotificationFormController.js"></script>
+    <script src="components/LoadingScreen/LoadingScreenDirective.js"></script>
 
 </head>
 
@@ -65,10 +66,11 @@
         <i class="fa fa-info-circle" aria-hidden="true"></i>
         <i class="fa fa-github" aria-hidden="true"></i>
     </div>
-
+	
+	<loading-screen></loading-screen>
 
     <!-- DYNAMIC ANGULAR CONTENT -->
-    <div ng-view></div>
+    <div ng-view ng-if="appLoaded"></div>
 </body>
 
 </html>
