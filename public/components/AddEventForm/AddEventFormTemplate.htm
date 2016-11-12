@@ -1,11 +1,9 @@
 <!-- TODO: add ability to close modal by clicking outside of it -->
-<div class='add-event-form' ng-show='show'>
-<div ng-show='true || parentModal.shown' class="modal-black-out">
-	<div ng-show='true || parentModal.shown' class='modal_'>
-		<div class="add-event-title">
-			<span ng-if="event">Edit Event</span>
-			<span ng-if="!event">Create Event</span>
-		</div>
+<div class='AddEventForm' modal>
+	<div class="add-event-title">
+		<span ng-if="event">Edit Event</span>
+		<span ng-if="!event">Create Event</span>
+	</div>
 
 		<div class='add-event-fields'>
 			<div class='field big'>
@@ -48,13 +46,22 @@
 				<div class='field-alerts'>Optional</div>
 			</div>
 		</div>
-		
-		<!-- Action buttons -->
-		<div class='add-event-action-buttons'>
-			<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
-			<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
-			<button class='button--flat' ng-click="cancelForm()">Close</button>
+		<div class='field' ng-show="form.type == 'clutch'">
+			<div class='label'><span ng-if='form.info.eggs'>Eggs</span></div>
+			<input type='number' ng-model='form.info.eggs' placeholder='Eggs'></input>
+			<div class='field-alerts'></div>
+		</div>
+		<div class='field huge'>
+			<div class='label'><span ng-if='form.notes'>Notes</span></div>
+			<input type='text' ng-model='form.notes' placeholder="Notes"></input>
+			<div class='field-alerts'>Optional</div>
 		</div>
 	</div>
-</div>
+
+	<!-- Action buttons -->
+	<div class='add-event-action-buttons'>
+		<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
+		<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
+		<button class='button--flat' ng-click="close()">Close</button>
+	</div>
 </div>

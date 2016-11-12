@@ -1,0 +1,47 @@
+.notifications-settings {
+    .title {
+        padding: 16px;
+        font-size: 20px;
+		.title-icons {
+			float: right;
+			i {
+				cursor: pointer;
+				color: #808080;
+				&:hover { color: #404040 }
+			}
+		}
+    }
+	
+	.content {
+	}
+	
+	background-color: white;
+	
+	.notification {
+		padding: 16px;
+		border-top: solid 1px #f0f0f0;
+		&:last-child {
+			border-bottom: solid 1px #f0f0f0;
+		}
+	}
+	
+	.level-icon { color: #808080; }
+	.enabled-icon {
+		color: #d0d0d0;
+		&.enabled { color: #808080; }
+		cursor: pointer;
+		&:hover { color: #404040; }
+	}
+	
+	.column-level { width: 50px; text-align: center; }
+	.column-trigger {  }
+	.column-enabled { width: 80px; text-align: center; }
+	
+	.empty-table-warning {
+		td {
+			text-align: center;
+			color: #808080;
+			padding: 20px;
+		}
+	}
+}
