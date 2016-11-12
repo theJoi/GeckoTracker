@@ -9,18 +9,28 @@ angular.module('geckoTracker')
 	if(!event) {
 		$scope.isEdit = false;
 		$scope.form = {
-			date: new Date(),
+			date: moment(),
 			info: {}
 		};
 	} else {
 		$scope.isEdit = true;
 		$scope.form = {
-			date: new Date(event.date),
+			date: moment(event.date),
 			type: event.type,
 			notes: event.notes,
 			info: event.info
 		};
 	}
+	$scope.form.typeOptions = {
+		clutch: "Laid Clutch",
+		weight: "Weight"
+	}
+//					<option value="clutch">Laid Clutch</option>
+//					<option value="weight">Weight</option>
+//					<option value="shed">Shed</option>
+//					<option value="hatch">Hatched</option>
+//					<option value="laid">Laid</option>
+//					<option value="note">Note</option>
 	
 	$scope.close = close;
 	

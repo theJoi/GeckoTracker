@@ -3002,6 +3002,13 @@ egg-table gecko {
   display: block;
   border-bottom: solid 1px #e0e0e0;
 }
+.AddEventForm .display-flex {
+  display: flex;
+}
+.AddEventForm .flex-half {
+  flex-grow: 1;
+  width: 50%;
+}
 .AddEventForm .add-event-fields {
   display: flex;
   flex-wrap: wrap;
