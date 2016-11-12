@@ -80,11 +80,19 @@ angular.module('geckoTracker')
 			if(!$scope.placeholder)
 				$scope.placeholder = $scope.label;
 			
+			if(Array.isArray($scope.options)) {
+				var obj = {};
+				for(var i=0;i < $scope.options.length;i++)
+					obj[$scope.options[i]] = $scope.options[i];
+				$scope.options = obj;
+			}
+			
 			$scope.getSelectedText = function() {
-				return $scope.value ? $scope.value : $scope.placeholder;
+				return $scope.value ? $scope.options[$scope.value] : $scope.placeholder;
 			}
 			
 			$scope.select = function(value) {
+				console.log(value);
 				$scope.value = value;
 				$scope.showDropdown = false;
 			}
