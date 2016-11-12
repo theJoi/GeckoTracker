@@ -93,10 +93,23 @@ var photoSchema = new Schema({
 	caption: String
 });
 
+var notificationSchema = new Schema({
+	gecko: { type: Schema.Types.ObjectId },
+	created: Date,
+	trigger: String,
+	date: Date,
+	message: String,
+	enabled: Boolean,
+	lastTriggered: Date,
+	days: Number,
+	event: String
+});
+
 // MONGOOSE MODELS  =============================================================
 var Gecko = mongoose.model("Gecko", geckoSchema);
 var Event = mongoose.model("Event", eventSchema);
 var Photo = mongoose.model("Photo", photoSchema);
+var Notification = mongoose.model("Notification", notificationSchema);
 
 // GECKO FUNCTIONS  =============================================================
 
@@ -235,7 +248,7 @@ exports.removeEvent = function (id, callback) {
         if (removedEvent.type === 'weight' || removedEvent.type == 'laid') {
             updateCachedGeckoFields(removedEvent.geckoId, null);
         }
-        callback(null, removedEvent._id);
+        callback(null, removedEvent);
     });
 };
 
@@ -262,6 +275,7 @@ exports.addEvent = function (eventData, callback) {
         if (newEvent.type == 'weight' || newEvent.type == 'laid') {
             updateCachedGeckoFields(newEvent.geckoId, null);
         }
+		console.log("Hrmm...",JSON.stringify(newEvent));
         callback(err, newEvent);
     });
 };
@@ -278,7 +292,7 @@ exports.updateEvent = function (id, props, callback) {
             callback(err, null);
             return;
         }
-        if (updatedEvent.type === 'weight' || newEvent.type == 'laid') {
+        if (updatedEvent.type === 'weight' || updatedEvent.type == 'laid') {
             updateCachedGeckoFields(updatedEvent.geckoId, null);
         }
         callback(null, updatedEvent);
@@ -487,6 +501,49 @@ exports.deleteGeckoPhoto = function(photoId, cb) {
 	});
 }
 
+
+// NOTIFICATION FUNCTIONS =======================================================
+
+exports.getNotifications = function(cb) {
+	Notification.find({}, function(err, notifications) {
+		if(err) console.error("Error fetching notifications", err);
+		cb(err, notifications);
+	});
+}
+
+exports.createNotification = function(props, cb) {
+	var notification;
+	try {
+		notification = Notification(props);
+	} catch(err) {
+		console.error("Error creating notification", err);
+	}
+	notification.save(function(err, notification) {
+		if(err) console.error("Error creating notification", err);
+		cb(err, notification);
+	});
+}
+
+exports.deleteNotification = function(id, cb) {
+	Notification.findByIdAndRemove(id, function(err, notification) {
+		if(err) console.error("Error deleting notification", err);
+		cb(err, notification);
+	});
+}
+
+exports.updateNotification = function(id, props, cb) {
+    var options = {
+        new: true,
+        runValidators: true
+    };
+	
+	if(props._id) delete props._id;
+	
+    Notification.findByIdAndUpdate(id, props, options, function (err, notification) {
+		if(err) console.error("Error updating notification", err);
+		cb(err, notification);
+	});
+}
 
 // OTHER FUNCTIONS  =============================================================
 
