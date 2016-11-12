@@ -67,7 +67,7 @@
 .detail-items {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px;
+    margin: 20px 10px;
     &:not(.detail--editmode) .detail-item {
         flex: 1 1 50%;
     }
@@ -81,10 +81,11 @@
     display: flex;
 }
 
-.detail-item-2 {
-    flex: 2 0 200px;
-}
-
-.detail-item-4 {
-    flex: 4 0 200px;
+.detail-edit-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    & > * {
+        margin: 5px;
+    }
 }

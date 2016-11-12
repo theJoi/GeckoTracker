@@ -3268,7 +3268,7 @@ egg-table gecko {
 .detail-items {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px;
+  margin: 20px 10px;
 }
 .detail-items:not(.detail--editmode) .detail-item {
   flex: 1 1 50%;
@@ -3280,11 +3280,13 @@ egg-table gecko {
   padding: 5px;
   display: flex;
 }
-.detail-item-2 {
-  flex: 2 0 200px;
+.detail-edit-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
-.detail-item-4 {
-  flex: 4 0 200px;
+.detail-edit-buttons > * {
+  margin: 5px;
 }
 /* For gender symbols, used on gecko list and gecko detail */
 .female {
