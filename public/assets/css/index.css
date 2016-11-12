@@ -2985,7 +2985,52 @@ egg-table gecko {
   overflow: visible;
   clip: auto;
 }
-.AddEventForm .add-event-title {
+.add-event-form {
+  /*
+	.modal-black-out{
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.75);
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		animation: pulse 0.5s 1;
+	}
+	
+	@keyframes pulse {
+		0% {
+			background-color: rgba(0,0,0,0);
+		}
+		100% {
+			background-color: rgba(0,0,0,0.75);
+		}
+	}
+	*/
+  /*
+	.modal_ {
+		background: white;
+		border-radius: 3px;
+		width: 700px;
+		z-index: 20;
+		
+		animation: drop 0.5s 1;
+	}
+	@keyframes drop {
+		0% {
+			margin-top: -1000px;
+		}
+		100% {
+			margin-top: 0;
+		}
+	}
+	*/
+}
+.add-event-form .add-event-title {
   font-size: 20px;
   padding: 16px;
   background: #8ac24a;
@@ -2994,75 +3039,75 @@ egg-table gecko {
   border-top-right-radius: 3px;
   color: white;
 }
-.AddEventForm input,
-.AddEventForm input:read-only,
-.AddEventForm input:hover,
-.AddEventForm select {
+.add-event-form input,
+.add-event-form input:read-only,
+.add-event-form input:hover,
+.add-event-form select {
   border: 0;
   display: block;
   border-bottom: solid 1px #e0e0e0;
 }
-.AddEventForm .add-event-fields {
+.add-event-form .add-event-fields {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 6px;
 }
-.AddEventForm .field {
+.add-event-form .field {
   padding: 10px;
   flex-grow: 0;
   flex-shrink: 0;
 }
-.AddEventForm .field.huge {
+.add-event-form .field.huge {
   width: 100%;
 }
-.AddEventForm .field.big {
+.add-event-form .field.big {
   width: 300px;
 }
-.AddEventForm .field.small {
+.add-event-form .field.small {
   width: 150px;
 }
-.AddEventForm .field input,
-.AddEventForm select {
+.add-event-form .field input,
+.add-event-form select {
   font-family: Roboto;
   font-size: 18px;
   padding: 0;
 }
-.AddEventForm .field input:focus,
-.AddEventForm select:focus {
+.add-event-form .field input:focus,
+.add-event-form select:focus {
   border-bottom: solid 1px pink;
 }
-.AddEventForm .field select {
+.add-event-form .field select {
   padding-top: 2px;
   padding-bottom: 1px;
 }
-.AddEventForm .field select option {
+.add-event-form .field select option {
   padding-left: 20px;
 }
-.AddEventForm .field .label {
+.add-event-form .field .label {
   font-size: 12px;
   height: 14px;
   overflow: hidden;
   color: #808080;
 }
-.AddEventForm .field-alerts {
+.add-event-form .field-alerts {
   height: 40px;
   font-size: 12px;
   color: #a0a0a0;
 }
-.AddEventForm .field-select:hover {
+.add-event-form .field-select:hover {
   border-bottom: solid 1px blue;
 }
-.AddEventForm .field-select:focus {
+.add-event-form .field-select:focus {
   border-bottom: solid 1px blue;
 }
-.AddEventForm .field-select.ng-pristine {
+.add-event-form .field-select.ng-pristine {
   color: #808080;
 }
-.AddEventForm .add-event-action-buttons {
+.add-event-form .add-event-action-buttons {
   text-align: right;
 }
-.AddEventForm .add-event-action-buttons button {
+.add-event-form .add-event-action-buttons button {
   margin: 10px;
 }
 .events-table {
@@ -3186,9 +3231,6 @@ egg-table gecko {
 .events-table .footer {
   padding: 16px;
   text-align: right;
-}
-.egg-table {
-  background-color: white;
 }
 .egg-table .title {
   padding: 16px;
@@ -3695,6 +3737,7 @@ egg-table gecko {
   margin-bottom: 1px;
   font-family: Roboto;
   padding: 1px 4px;
+  padding: 1px;
 }
 .form-field input:focus,
 .form-field .input:focus {
@@ -3721,6 +3764,28 @@ egg-table gecko {
   width: 100%;
   height: 100%;
   z-index: 2000;
+}
+.form-field .big-text {
+  border: 0;
+  background: transparent;
+  font-family: Roboto;
+  font-size: 16px;
+  width: 100%;
+  border-bottom: solid 1px #e0e0e0;
+  margin-bottom: 1px;
+  outline: none;
+  resize: none;
+  padding: 1px 0;
+}
+.form-field .big-text:focus {
+  margin-bottom: 0;
+  border-bottom: solid 2px #00a000;
+}
+.form-field .big-text.hidden-div {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 @keyframes anim-form-field-fade-in {
   0% {
@@ -3851,63 +3916,4 @@ egg-table gecko {
 .form-field-calendar .calendar-week td.isSelected {
   background: #00a000;
   color: white;
-}
-.AddNotificationForm .layout-trigger {
-  display: flex;
-}
-.AddNotificationForm .layout-trigger-type {
-  width: 250px;
-}
-.AddNotificationForm .layout-trigger-options {
-  display: flex;
-}
-.notifications-settings {
-  background-color: white;
-}
-.notifications-settings .title {
-  padding: 16px;
-  font-size: 20px;
-}
-.notifications-settings .title .title-icons {
-  float: right;
-}
-.notifications-settings .title .title-icons i {
-  cursor: pointer;
-  color: #808080;
-}
-.notifications-settings .title .title-icons i:hover {
-  color: #404040;
-}
-.notifications-settings .notification {
-  padding: 16px;
-  border-top: solid 1px #f0f0f0;
-}
-.notifications-settings .notification:last-child {
-  border-bottom: solid 1px #f0f0f0;
-}
-.notifications-settings .level-icon {
-  color: #808080;
-}
-.notifications-settings .enabled-icon {
-  color: #d0d0d0;
-  cursor: pointer;
-}
-.notifications-settings .enabled-icon.enabled {
-  color: #808080;
-}
-.notifications-settings .enabled-icon:hover {
-  color: #404040;
-}
-.notifications-settings .column-level {
-  width: 50px;
-  text-align: center;
-}
-.notifications-settings .column-enabled {
-  width: 80px;
-  text-align: center;
-}
-.notifications-settings .empty-table-warning td {
-  text-align: center;
-  color: #808080;
-  padding: 20px;
 }
