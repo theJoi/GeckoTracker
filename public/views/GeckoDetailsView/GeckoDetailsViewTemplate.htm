@@ -2,21 +2,9 @@
 <div class='gecko-detail-view'>
     <div id="STATUS-BAR">
 
-        <span class='detail-name'>
+        <span class='statusbar-name'>
         {{geckoDetail.name}}
         </span>
-        <span class='detail-gender'>
-
-                    <i class='fa fa-mars male' ng-if="geckoDetail.sex == 'male'" title="male"></i>
-                    <i class='fa fa-venus female' ng-if="geckoDetail.sex == 'female'" title="female"></i>
-                    <i class='fa fa-question unknown' ng-if="geckoDetail.sex == 'unknown'" title="gender unknown"></i>
-            </span>
-
-        <span class='detail-id'>
-
-                         {{geckoDetail.userId || "(no ID entered)"}}
-
-                </span>
         <a href="/" class="statusbar-button">BACK TO LIST</a>
     </div>
 
@@ -28,7 +16,7 @@
         <div id="CHARTS">
             <events-table gecko-id="geckoId"></events-table>
             <weight-chart gecko-id="geckoId"></weight-chart>
-			<notifications-settings></notifications-settings>
+            <notifications-settings></notifications-settings>
             <egg-table gecko="geckoDetail"></egg-table>
         </div>
     </div>
