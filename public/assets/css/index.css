@@ -3218,7 +3218,7 @@ egg-table gecko {
   /* needs to match height of status-bar */
 }
 .statusbar-name {
-  font-size: calc(7.5vh);
+  font-size: calc(5vh * 1.4);
   line-height: 5vh;
   font-weight: 900;
   color: #689f38;
@@ -3237,6 +3237,11 @@ egg-table gecko {
 .gecko-detail label {
   color: #8ac24a;
   font-size: 1rem;
+}
+.gecko-detail label:after {
+  /* colon plus space */
+  content: ':\2003';
+  display: inline;
 }
 .gecko-detail .button--fab {
   right: 5px;

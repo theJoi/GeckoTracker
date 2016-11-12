@@ -7,7 +7,7 @@
 }
 
 .statusbar-name {
-    font-size: calc(5vh * 1.5);
+    font-size: ~"calc(5vh * 1.4)";
     line-height: 5vh;
     font-weight: 900;
     color: #689f38;
@@ -28,6 +28,11 @@
     & label {
         color: @primaryColor;
         font-size: 1rem;
+        &:after {
+            /* colon plus space */
+            content: ':\2003';
+            display: inline;
+        }
     }
     & .button--fab {
         right: 5px;
