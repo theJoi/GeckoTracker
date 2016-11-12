@@ -5,7 +5,7 @@ angular.module('geckoTracker').controller('DemosViewController', function($scope
 	$scope.form = {
 		text: "Something",
 		number: 123,
-		select: "Red",
+		select: "red",
 		date: moment().add(-3, "M")
 	};
 	$scope.form.options = [
@@ -15,6 +15,11 @@ angular.module('geckoTracker').controller('DemosViewController', function($scope
 		"White",
 		"Black"
 	];
+	$scope.form.options = {
+		'red': 'Red',
+		'green': 'Green',
+		'blue': 'Blue'
+	}
 	
 	$scope.showAlertModal = function() {
 		ModalService.showModal({

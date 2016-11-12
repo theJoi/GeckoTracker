@@ -18,6 +18,38 @@ angular.module('geckoTracker')
 	};
 })
 
+.directive('formFieldBigText', function () {
+	return {
+		restrict: 'E',
+		scope: {
+			label: "@",
+			placeholder: "@?",
+			value: "="
+		},
+		templateUrl: "components/FormFields/BigTextFieldTemplate.htm",
+		link: function(scope, element, attrs, controller, transcludeFn) {
+			var ta = element.find('textarea');
+			var hiddenDiv = element.children().children().eq(2)[0];
+			
+			function resize() {
+				if(hiddenDiv.offsetHeight+1 != ta[0].offsetHeight)
+					ta[0].style.height = hiddenDiv.offsetHeight+1;
+			}
+			resize();
+			
+			ta.on('keypress', function() { console.debug('keypress'); });
+			ta.on('change', function() { console.debug('change'); });
+			ta.on('input', function() {
+				resize();
+			});
+		},
+		controller: function ($scope, $log) {
+			if(!$scope.placeholder)
+				$scope.placeholder = $scope.label;
+		}
+	};
+})
+
 .directive('formFieldNumber', function () {
 	return {
 		restrict: 'E',
@@ -48,11 +80,19 @@ angular.module('geckoTracker')
 			if(!$scope.placeholder)
 				$scope.placeholder = $scope.label;
 			
+			if(Array.isArray($scope.options)) {
+				var obj = {};
+				for(var i=0;i < $scope.options.length;i++)
+					obj[$scope.options[i]] = $scope.options[i];
+				$scope.options = obj;
+			}
+			
 			$scope.getSelectedText = function() {
-				return $scope.value ? $scope.value : $scope.placeholder;
+				return $scope.value ? $scope.options[$scope.value] : $scope.placeholder;
 			}
 			
 			$scope.select = function(value) {
+				console.log(value);
 				$scope.value = value;
 				$scope.showDropdown = false;
 			}

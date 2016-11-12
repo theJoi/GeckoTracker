@@ -1,25 +1,47 @@
 <div class='gecko-metrics'>
-    <div class='metric metric-total'>
-        <div class='value'>{{metrics.males + metrics.females + metrics.eggs}}</div>
-        <div class='units'>Total
-            <div class='subunits'>geckos</div>
+    <div class="gecko-metrics">
+        <div class="metric">
+            <div class="value">{{metrics.males + metrics.females}}</div>
+            <div class="units">
+                Geckos
+            </div>
+        </div>
+        <div class="metric">
+            <div class="value">{{metrics.eggs}}</div>
+            <div class="units">
+                Eggs
+            </div>
+        </div>
+        <div class="pie">
+            <div class="pie-metric">
+                <div class="value">{{metrics.males}}</div>
+                <div class="units">
+                    Males
+
+                </div>
+            </div>
+            <div id="pie-gender"></div>
+            <div class="pie-metric green">
+                <div class="value">{{metrics.females}}</div>
+                <div class="units">
+                    Females
+                </div>
+            </div>
+        </div>
+        <!-- TODO: Set up metrics for adults and hatchlings -->
+        <div class="pie">
+            <div class="pie-metric">
+                <div class="value">?</div>
+                <div class="units">
+                    Adults
+                </div>
+            </div>
+            <div id="pie-age"></div>
+            <div class="pie-metric green">
+                <div class="value">?</div>
+                <div class="units">
+                    Hatchlings
+                </div>
+            </div>
         </div>
     </div>
-    <div class='metric metric-male'>
-        <div class='value'>{{metrics.males}}</div>
-        <div class='units'>Male
-            <div class='subunits'>geckos</div>
-        </div>
-    </div>
-    <div class='metric metric-female'>
-        <div class='value'>{{metrics.females}}</div>
-        <div class='units'>Female
-            <div class='subunits'>geckos</div>
-        </div>
-    </div>
-    <div class='metric metric-eggs'>
-        <div class='value'>{{metrics.eggs}}</div>
-        <div class='units'>Eggs
-            <div class='subunits'>incubating</div>
-        </div>
-    </div </div>
