@@ -118,10 +118,6 @@ tr {
   font-size: 20px;
 }
 /* Elements related to tables */
-.table-top {
-  min-height: 50px;
-  position: relative;
-}
 .table-scroll thead {
   display: table;
   width: 100%;
@@ -3231,26 +3227,25 @@ egg-table gecko {
   right: 5px;
 }
 /* Gecko Detail */
-.gecko-detail-container {
+.gecko-detail {
   display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
+  color: white;
 }
-.collaspe-gecko-detail {
-  height: 55px;
-  background: #fafafa;
+.gecko-detail form {
+  width: 100%;
 }
-.collaspe-gecko-detail .detail-name,
-.collaspe-gecko-detail .detail-gender,
-.collaspe-gecko-detail .detail-id {
-  font-size: 14px;
-  line-height: 14px;
+.gecko-detail label {
+  color: #8ac24a;
 }
-.gecko-detail-card {
-  padding: 10px 0 0 10px;
+.gecko-detail .button--fab {
+  right: 5px;
+  position: absolute;
 }
-.gecko-detail-card {
-  color: #424242;
+.detail-top {
+  min-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: center;
 }
 .detail-name {
   font-size: 48px;
@@ -3261,8 +3256,14 @@ egg-table gecko {
   font-size: 24px;
   line-height: 24px;
 }
+.detail-items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
 .detail-item {
-  flex: 1 1 100px;
+  flex: 1 1 50%;
+  padding: 5px;
 }
 .detail-item-2 {
   flex: 2 0 200px;

@@ -19,29 +19,26 @@
 
 /* Gecko Detail */
 
-.gecko-detail-container {
+.gecko-detail {
     display: flex;
-    flex-wrap: wrap;
-    align-content: stretch;
-}
-
-.collaspe-gecko-detail {
-    height: 55px;
-    background: @white2;
-    .detail-name,
-    .detail-gender,
-    .detail-id {
-        font-size: 14px;
-        line-height: 14px;
+    & form {
+        width: 100%;
+    }
+    color: white;
+    & label {
+        color: @primaryColor;
+    }
+    & .button--fab {
+        right: 5px;
+        position: absolute;
     }
 }
 
-.gecko-detail-card {
-    padding: 10px 0 0 10px;
-}
-
-.gecko-detail-card {
-    color: @textColorGray;
+.detail-top {
+    min-height: 50px;
+    position: relative;
+    width: 100%;
+    text-align: center;
 }
 
 .detail-name {
@@ -55,8 +52,15 @@
     line-height: 24px;
 }
 
+.detail-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
 .detail-item {
-    flex: 1 1 100px;
+    flex: 1 1 50%;
+    padding: 5px;
 }
 
 .detail-item-2 {
