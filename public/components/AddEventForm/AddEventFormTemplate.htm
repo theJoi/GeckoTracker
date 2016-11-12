@@ -50,29 +50,37 @@
 			</div>
 -->
 
+			{{form.type}}
+			<div class='display-flex' ng-show="form.type == 'clutch'">
+<!--			 ng-if="form.type == 'clutch'">-->
+				<form-field-number label='Eggs Laid' value='form.info.eggs'></form-field-number>
+<!--
+				<div class='field' ng-show="form.type == 'clutch'">
+					<div class='label'><span ng-if='form.info.eggs'>Eggs</span></div>
+					<input type='number' ng-model='form.info.eggs' placeholder='Eggs'></input>
+					<div class='field-alerts'></div>
+				</div>
+-->
+			</div>
+			
 			<div class='display-flex'>
 <!--
 				<div class='label'><span ng-if='form.notes'>Notes</span></div>
 				<input type='text' ng-model='form.notes' placeholder="Notes"></input>
 				<div class='field-alerts'>Optional</div>
 -->
-				<form-field-big-text label='Notes' value='form.notes'></form-field-select>
+				<div class='flex-full'>
+					<form-field-big-text label='Notes' value='form.notes'></form-field-select>
+				</div>
 			</div>
-
-
 		</div>
-		<div class='field' ng-show="form.type == 'clutch'">
-			<div class='label'><span ng-if='form.info.eggs'>Eggs</span></div>
-			<input type='number' ng-model='form.info.eggs' placeholder='Eggs'></input>
-			<div class='field-alerts'></div>
+		<!-- Action buttons -->
+		<div class='add-event-action-buttons'>
+			<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
+			<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
+			<button class='button--flat' ng-click="close()">Close</button>
 		</div>
 
 	</div>
 
-	<!-- Action buttons -->
-	<div class='add-event-action-buttons'>
-		<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
-		<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
-		<button class='button--flat' ng-click="close()">Close</button>
-	</div>
 </div>

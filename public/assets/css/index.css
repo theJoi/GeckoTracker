@@ -3009,6 +3009,10 @@ egg-table gecko {
   flex-grow: 1;
   width: 50%;
 }
+.AddEventForm .flex-full {
+  flex-grow: 1;
+  width: 100%;
+}
 .AddEventForm .add-event-fields {
   display: flex;
   flex-wrap: wrap;
@@ -3702,6 +3706,7 @@ egg-table gecko {
   margin-bottom: 1px;
   font-family: Roboto;
   padding: 1px 4px;
+  padding: 1px;
 }
 .form-field input:focus,
 .form-field .input:focus {
@@ -3728,6 +3733,28 @@ egg-table gecko {
   width: 100%;
   height: 100%;
   z-index: 2000;
+}
+.form-field .big-text {
+  border: 0;
+  background: transparent;
+  font-family: Roboto;
+  font-size: 16px;
+  width: 100%;
+  border-bottom: solid 1px #e0e0e0;
+  margin-bottom: 1px;
+  outline: none;
+  resize: none;
+  padding: 1px 0;
+}
+.form-field .big-text:focus {
+  margin-bottom: 0;
+  border-bottom: solid 2px #00a000;
+}
+.form-field .big-text.hidden-div {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 @keyframes anim-form-field-fade-in {
   0% {
