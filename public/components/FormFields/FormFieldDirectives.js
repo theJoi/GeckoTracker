@@ -29,50 +29,18 @@ angular.module('geckoTracker')
 		templateUrl: "components/FormFields/BigTextFieldTemplate.htm",
 		link: function(scope, element, attrs, controller, transcludeFn) {
 			var ta = element.find('textarea');
-			console.debug('ta', ta);
 			var hiddenDiv = element.children().children().eq(2)[0];
-			console.debug("!!!!", hiddenDiv);
+			
+			function resize() {
+				if(hiddenDiv.offsetHeight+1 != ta[0].offsetHeight)
+					ta[0].style.height = hiddenDiv.offsetHeight+1;
+			}
+			resize();
 			
 			ta.on('keypress', function() { console.debug('keypress'); });
 			ta.on('change', function() { console.debug('change'); });
 			ta.on('input', function() {
-				console.debug('input', ta, parseInt(ta.attr('rows')));
-				console.debug(ta.val().length, scope.value.length);
-				console.debug('clientHeight', hiddenDiv.clientHeight);
-				console.debug(hiddenDiv.offsetHeight);
-				
-				if(hiddenDiv.offsetHeight+1 != ta[0].offsetHeight)
-					ta[0].style.height = hiddenDiv.offsetHeight+1;
-				
-				return;
-				
-				for(x in hiddenDiv)
-					if(x.indexOf('eight') != -1)
-						console.debug(x, hiddenDiv[x]);
-				var rows = parseInt(ta.attr('rows'));
-				var tmp = scope.value.split('\n').length;
-				var last = tmp[tmp.length-1];
-				//console.debug(scope.value.length);
-				
-				if(tmp != rows)
-					ta.attr('rows', tmp);
-				return;
-				
-				var content = scope.value;
-				content = content.replace(/\n/g, '<br>');
-				
-				console.log('hidden', ta[0].clientHeight, hiddenDiv[0].clientHeight);
-				ta[0].style.height = hiddenDiv[0].clientHeight;
-				
-				
-//				var t = ta[0];
-//				for(x in t)
-//					if(x.indexOf('eight') != -1)
-//						console.debug(x, t[x]);
-//				if(t.scrollHeight > t.clientHeight)
-//					t.style.height = t.scrollHeight;
-//				else if(t.scrollHeight < t.clientHeight)
-//					t.style.height = t.clientHeight;
+				resize();
 			});
 		},
 		controller: function ($scope, $log) {

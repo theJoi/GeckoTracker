@@ -3737,6 +3737,7 @@ egg-table gecko {
   margin-bottom: 1px;
   font-family: Roboto;
   padding: 1px 4px;
+  padding: 1px;
 }
 .form-field input:focus,
 .form-field .input:focus {
