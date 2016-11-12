@@ -21,16 +21,16 @@ angular.module('geckoTracker')
 			info: event.info
 		};
 	}
+	
 	$scope.form.typeOptions = {
+		purchase: "Purchased",
+		laid: "Laid",
+		hatch: "Hatched",
 		clutch: "Laid Clutch",
-		weight: "Weight"
-	}
-//					<option value="clutch">Laid Clutch</option>
-//					<option value="weight">Weight</option>
-//					<option value="shed">Shed</option>
-//					<option value="hatch">Hatched</option>
-//					<option value="laid">Laid</option>
-//					<option value="note">Note</option>
+		weight: "Weight",
+		shed: "Shed",
+		note: "Note"
+	};
 	
 	$scope.close = close;
 	

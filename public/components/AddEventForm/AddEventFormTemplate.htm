@@ -5,82 +5,39 @@
 		<span ng-if="!event">Create Event</span>
 	</div>
 
-		<div class='content'>
-			<div class='display-flex'>
-<!--
-				<div class='label'>Date</div>
-				<input type='date' class='field-date' ng-model='form.date'></input>
-				<div class='field-alerts'>Required</div>
--->
-				<div class='flex-half'>
-				<form-field-date label='Date' value='form.date'></form-field-date>
-				</div>
-<!--
-				<div class='label'><span ng-if='form.type'>Event Type</span></div>
-				<select class='field-select' ng-model='form.type' placeholder='Event Type'>
-					<option value="" disabled selected ng-if='!form.type'>Event Type</option>
-					<option value="clutch">Laid Clutch</option>
-					<option value="weight">Weight</option>
-					<option value="shed">Shed</option>
-					<option value="hatch">Hatched</option>
-					<option value="laid">Laid</option>
-					<option value="note">Note</option>
-				</select>
-				<div class='field-alerts'></div>
--->
-				<div class='flex-half'>
-				<form-field-select label='Event' options='form.typeOptions' value='form.type'></form-field-select>
-				</div>
+	<div class='content'>
+		<!-- Date and Event fields -->
+		<div class='display-flex'>
+			<div class='flex-half'>
+			<form-field-date label='Date' value='form.date'></form-field-date>
 			</div>
-<!--
-			<div class='field' ng-show="form.type == 'weight'">
-				<div class='label'><span ng-if='form.info.weight'>Weight</span></div>
-				<input type='number' ng-model='form.info.weight' placeholder='Weight'></input>
-				<div class='field-alerts'></div>
-			</div>
-			<div class='field' ng-show="form.type == 'clutch'">
-				<div class='label'><span ng-if='form.info.eggs'>Eggs</span></div>
-				<input type='number' ng-model='form.info.eggs' placeholder='Eggs'></input>
-				<div class='field-alerts'></div>
-			</div>
-			<div class='field huge'>
-				<div class='label'><span ng-if='form.notes'>Notes</span></div>
-				<input type='text' ng-model='form.notes' placeholder="Notes"></input>
-				<div class='field-alerts'>Optional</div>
-			</div>
--->
-
-			{{form.type}}
-			<div class='display-flex' ng-show="form.type == 'clutch'">
-<!--			 ng-if="form.type == 'clutch'">-->
-				<form-field-number label='Eggs Laid' value='form.info.eggs'></form-field-number>
-<!--
-				<div class='field' ng-show="form.type == 'clutch'">
-					<div class='label'><span ng-if='form.info.eggs'>Eggs</span></div>
-					<input type='number' ng-model='form.info.eggs' placeholder='Eggs'></input>
-					<div class='field-alerts'></div>
-				</div>
--->
-			</div>
-			
-			<div class='display-flex'>
-<!--
-				<div class='label'><span ng-if='form.notes'>Notes</span></div>
-				<input type='text' ng-model='form.notes' placeholder="Notes"></input>
-				<div class='field-alerts'>Optional</div>
--->
-				<div class='flex-full'>
-					<form-field-big-text label='Notes' value='form.notes'></form-field-select>
-				</div>
+			<div class='flex-half'>
+			<form-field-select label='Event' options='form.typeOptions' value='form.type'></form-field-select>
 			</div>
 		</div>
-		<!-- Action buttons -->
-		<div class='add-event-action-buttons'>
-			<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
-			<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
-			<button class='button--flat' ng-click="close()">Close</button>
+
+		<!-- Clutched fields -->
+		<div class='display-flex' ng-show="form.type == 'clutch'">
+			<form-field-number label='Eggs Laid' value='form.info.eggs'></form-field-number>
 		</div>
 
+		<!-- Weight fields -->
+		<div class='display-flex' ng-show="form.type == 'weight'">
+			<form-field-number label='Weight (g)' value='form.info.weight'></form-field-number>
+		</div>
+
+		<!-- Notes field -->
+		<div class='display-flex'>
+			<div class='flex-full'>
+				<form-field-big-text label='Notes' value='form.notes'></form-field-select>
+			</div>
+		</div>
 	</div>
 
+	<!-- Action buttons -->
+	<div class='add-event-action-buttons'>
+		<button class='button--flat' ng-click="addEvent()" ng-if="!isEdit">Add</button>
+		<button class='button--flat' ng-click="editEvent()" ng-if="isEdit">Save</button>
+		<button class='button--flat' ng-click="close()">Close</button>
+	</div>
 </div>
