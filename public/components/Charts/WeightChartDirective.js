@@ -51,31 +51,35 @@
 
 					 var data = [trace1];
 					 var layout = {
-						 title: "Gecko Weight Chart",
+//						 title: "Gecko Weight Chart",
 						 font: {
 							 family: "Roboto, sans-serif"
 						 },
 						 yaxis: {
-							 title: "Weight",
+//							 title: "Weight",
 							 autorange: true,
 							 showline: true,
-							 linecolor: "#DCEDC8"
+							 linecolor: "#DCEDC8",
+							 ticksuffix: 'g'
 						 },
 						 xaxis: {
 							 type: "date",
-							 title: "Date",
+//							 title: "Date",
 							 tickformat: "%m/%d/%y",
 							 showline: true,
 							 linecolor: "#DCEDC8",
 							 tickangle: -50,
 							 nticks: 12,
 							 range: [year, now] /* range from today to one year */
+						 },
+						 margin: {
+							 l: 50,
+							 r: 20,
+							 t: 20
 						 }
 					 };
 
-					 Plotly.newPlot(weightGraph, data, layout, {
-
-					 });
+					 Plotly.newPlot(weightGraph, data, layout, {});
 					 $log.log("chart displayed");
 				 });
 
@@ -83,9 +87,6 @@
 			 };
 
 			 $scope.populateChart();
-
-
-
 		 }
 	 };
  });

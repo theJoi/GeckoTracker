@@ -4086,3 +4086,8 @@ egg-table gecko {
     opacity: 0;
   }
 }
+.WeightChart .title {
+  font-family: Roboto;
+  padding: 16px;
+  font-size: 20px;
+}
