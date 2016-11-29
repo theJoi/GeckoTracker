@@ -17,7 +17,7 @@
             </span>
 
             <span class='detail-id'>
-             <span ng-class="{placeholder: !geckoDetail.userId}" name="userId">
+            <span ng-class="{placeholder: !geckoDetail.userId}" name="userId">
                   {{geckoDetail.userId || "(no ID entered)"}}
             </span>
             </span>
@@ -30,6 +30,47 @@
         <!-- End of detail top -->
 
 
+		<div class="details dark-form-fields">
+			<div class="half-width">
+				<form-field-text label="ID" value="details.userId" modified="details.userId != gecko.userId"></form-field-text>
+			</div>
+			<div class="half-width">
+				<form-field-select label="Status" value="details.status" options="statuses"></form-field-select>
+			</div>
+			<div class="full-width">
+				<form-field-text label="Morph" value="details.morph" modified="details.morph != gecko.morph"></form-field-text>
+			</div>
+			<div class="half-width">
+				<form-field-select label="Sex" value="details.sex" options="sexes" modified="details.sex != gecko.sex"></form-field-select>
+			</div>
+			<div class="half-width">
+				<form-field-select label="Stage" value="details.stage" options="stages"  modified="details.stage != gecko.stage"></form-field-select>
+			</div>
+			<div class="third-width">
+				<form-field-callback label="Weight" value="{{details.weight + 'g'}}" callback="addWeight"></form-field-callback>
+			</div>
+			<div class="two-thirds-width">
+				<form-field-text label="Location" value="details.location"></form-field-text>
+			</div>
+			<div class="half-width">
+				<form-field-callback label="Mother" value="details.mother" calllback="pickMother"></form-field-callback>
+			</div>
+			<div class="half-width">
+				<form-field-callback label="Father" value="details.father" calllback="pickFather"></form-field-callback>
+			</div>
+			<div class="half-width">
+				<form-field-callback label="Hatched" value="{{details.hatched | date:'longDate'}}" callback="modifyHatched"></form-field-callback>
+			</div>
+			<div class="half-width">
+				<form-field-callback label="Purchased" value="{{details.purchased | date:'longDate'}}" callback="testIt"></form-field-callback>
+			</div>
+		</div>
+		
+		<div class="button-box">
+			<button class="button--flat" ng-if="isModified()" ng-click="save()">Save Changes</button>
+			<button class="button--flat" ng-if="isModified()" ng-click="resetDetails()">Reset</button>
+		</div>
+<!--
         <div class="detail-items" ng-class="{'detail--editmode': showEditMode}">
             <div class="detail-item" ng-show="showEditMode">
                 <label>Name</label>
@@ -136,7 +177,9 @@
 
             </div>
         </div>
-        <div class="detail-edit-buttons" ng-show="showEditMode">
+-->
+
+		<div class="detail-edit-buttons" ng-show="showEditMode">
             <button class="button--raised" ng-click="submitEditForm()"><i class='fa fa-download'></i></span>
                 SAVE CHANGES</button>
             <button class="button--raised" ng-click="resetForm()" class="button--secondary"><i class='fa fa-undo'></i>REVERT</button>

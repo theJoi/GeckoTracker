@@ -9,6 +9,151 @@ angular.module('geckoTracker')
 		controller: function ($scope, $http, $log, geckoService, $location, $timeout, toastr, ModalService) {
 			$log = $log.getInstance("GeckoDetail");
 			
+			var modifiableFields = ['userId', 'morph', 'status', 'sex', 'stage', 'location'];
+			$scope.details = {
+			};
+
+			//var gecko = geckoService.getGeckos;
+			geckoService.getGecko($scope.geckoId, function(gecko) {
+				$scope.gecko = gecko;
+				console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!", gecko);
+				$scope.details.userId = $scope.gecko.userId;
+				$scope.details.morph = $scope.gecko.morph;
+				$scope.details.sex = $scope.gecko.sex;
+				$scope.details.location = $scope.gecko.location;
+				$scope.details.status = $scope.gecko.status;
+				$scope.details.stage = $scope.gecko.stage;
+				$scope.details.weight = $scope.gecko.currWeight;
+				$scope.$watchGroup(["gecko"], function() {
+					console.log("GECKO CHANGED");
+					$scope.details.userId = $scope.gecko.userId;
+					$scope.details.morph = $scope.gecko.morph;
+					$scope.details.sex = $scope.gecko.sex;
+					$scope.details.location = $scope.gecko.location;
+					$scope.details.status = $scope.gecko.status;
+					$scope.details.stage = $scope.gecko.stage;
+				});
+			});
+			
+			
+			$scope.testIt = function() {
+				alert('here');
+			}
+			
+			$scope.stages = {
+				"hatchling": "Hatchling",
+				"adult": "Adult"
+			}
+			
+			$scope.statuses = {
+				"normal": "Normal"
+			}
+			
+			$scope.sexes = {
+				"male": "Male",
+				"female": "Female",
+				"unknown": "Unknown"
+			}
+			
+			
+			$scope.resetDetails = function() {
+				for(var i=0;i < modifiableFields.length;i++) {
+					var field = modifiableFields[i];
+					$scope.details[field] = $scope.gecko[field];
+				}
+				$scope.$apply();
+			}
+			
+			$scope.save = function() {
+				// Collect modified fields
+				var modified = {};
+				for(var i=0;i < modifiableFields.length;i++) {
+					var field = modifiableFields[i];
+					if($scope.details[field] != $scope.gecko[field]) {
+						modified[field] = $scope.details[field];
+					}
+				}
+				
+				modified._id = $scope.geckoId;
+				console.log("UPDATING", modified);
+				
+				geckoService.updateGecko(modified).then(function(){
+					console.log("MODIFIED!", $scope.gecko);
+					$scope.resetDetails();
+				})
+			}
+			
+			$scope.isModified = function() {
+				var fields = ['userId', 'morph', 'status', 'sex'];
+				for(var i=0;i < modifiableFields.length;i++) {
+					var field = modifiableFields[i];
+					if($scope.details[field] != $scope.gecko[field]) {
+						console.log("isModified", field, $scope.details[field], $scope.gecko[field]);
+						return true;
+					}
+				}
+				console.log("isModified", "nope");
+				return false;
+			}
+			
+			geckoService.getGeckoEvents($scope.geckoId).then(function(events) {
+				$scope.events = events;
+				
+				var lastWeight = null;
+				
+				for(var i=0;i < events.length;i++) {
+					if(events[i].type == 'hatch') {
+						$scope.details.hatched = events[i].date;
+						console.log(events[i]);
+/*					} else if(events[i].type == 'weight') {
+						if(lastWeight == null || lastWeight < events[i].date) {
+							lastWeight = events[i].date;
+							$scope.details.weight = events[i].info.weight;
+						}*/
+					}
+				}
+			});
+			
+			$scope.addWeight = function() {
+				// Create a new hatched event
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: "weight",
+						geckoId: $scope.geckoId
+					}
+				});
+			}
+			
+			$scope.modifyHatched = function() {
+				for(var i=0;i < $scope.events.length;i++) {
+					var event = $scope.events[i];
+					console.log(event.type);
+					if(event.type == 'hatch') {
+						// Create a new hatched event
+						ModalService.showModal({
+							templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+							controller: "AddEventFormController",
+							inputs: {
+								event: event,
+								geckoId: $scope.geckoId
+							}
+						});
+						return;
+					}
+				}
+				// Create a new hatched event
+				ModalService.showModal({
+					templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+					controller: "AddEventFormController",
+					inputs: {
+						event: "hatch",
+						geckoId: $scope.geckoId
+					}
+				});
+			}
+			
 			// $scope.geckos = [];
 			$scope.isLoaded = false; // use to trigger loading spinner
 			$log.debug("GeckoDetail directive's controller instantiated");

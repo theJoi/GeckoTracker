@@ -72,6 +72,17 @@
 .button--flat {
     background: @primaryColor;
     font-weight: normal;
+	border: 0;
+	background: transparent;
+	color: @primaryColor;
+	text-transform: uppercase;
+	padding: 5px;
+	border-radius: 3px;
+	outline: none;
+	&:hover {
+		background: @primaryColor;
+		color: white;
+	}
 }
 
 .link:hover {

@@ -104,6 +104,8 @@ angular.module('geckoTracker')
 		// Get the list of geckos from the service
 		// Returns a promise
 		getGeckos: getGeckos,
+		
+		getGecko: getGecko,
 
 		// Fetch the list of geckos from the service
 		// NOTE: Only the service itself (this thing) probably needs to call this directly (through getGeckos).
@@ -195,7 +197,8 @@ angular.module('geckoTracker')
 						// Find gecko object in list and update
 						for (var i = 0; i < geckos.length; i++) {
 							if (geckos[i]._id === _id) {
-								geckos.splice(i, 1, response.data);
+								//geckos.splice(i, 1, response.data);
+								updateGeckoProperties(response.data);
 								break;
 							}
 						}

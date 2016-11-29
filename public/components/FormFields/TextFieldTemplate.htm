@@ -2,6 +2,6 @@
 	<div class='form-field-label'>
 		<span ng-class='{visible: value}'>{{label}}</span>
 	</div>
-	<input type='text' placeholder='{{placeholder}}' ng-model='value'></input>
+	<input type='text' ng-class="{modified: modified}" placeholder='{{placeholder}}' ng-model='value'></input>
 	<div class='form-field-message'>{{message}}</div>
 </div>

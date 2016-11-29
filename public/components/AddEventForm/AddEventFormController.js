@@ -12,6 +12,13 @@ angular.module('geckoTracker')
 			date: moment(),
 			info: {}
 		};
+	} else if(typeof(event) == 'string') {
+		$scope.isEdit = false;
+		$scope.form = {
+			date: moment(),
+			info: {},
+			type: event
+		}
 	} else {
 		$scope.isEdit = true;
 		$scope.form = {
