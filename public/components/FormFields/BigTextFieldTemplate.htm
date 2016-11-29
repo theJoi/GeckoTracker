@@ -1,5 +1,5 @@
 <div class='form-field form-field-text'>
-	<div class='form-field-label'>
+	<div class='form-field-label' ng-show='label'>
 		<span ng-class='{visible: value}'>{{label}}</span>
 	</div>
 	<textarea class='big-text' placeholder='{{placeholder}}' ng-model='value' rows=2 ng-trim='false'>

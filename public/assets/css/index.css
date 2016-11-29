@@ -3833,7 +3833,6 @@ egg-table gecko {
   padding: 1px 0;
 }
 .form-field .big-text:focus {
-  margin-bottom: 0;
   border-bottom: solid 2px #00a000;
 }
 .form-field .big-text.hidden-div {
@@ -4090,4 +4089,17 @@ egg-table gecko {
   font-family: Roboto;
   padding: 16px;
   font-size: 20px;
+}
+.GeckoNotes {
+  padding: 16px;
+  padding-bottom: 0;
+}
+.GeckoNotes .title {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+.GeckoNotes .button-box {
+  text-align: right;
+  padding: 10px;
+  height: 45px;
 }

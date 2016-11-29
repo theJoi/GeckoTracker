@@ -1,7 +1,7 @@
 /*jshint globals: true, undef: true, browser: true, node: true*/
 /* globals angular */
 
-angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, $log, geckoService) {
+angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, $log, $location, $anchorScroll, geckoService) {
 	$log = $log.getInstance('views.GeckoDetailsView');
 
     $scope.statusMsg = "Say hi to...";
@@ -15,6 +15,13 @@ angular.module('geckoTracker').controller('GeckoDetailsViewController', function
     });
 	
 	$scope.testShowPicker = true;
+	
+	$scope.goTo = function(hash) {
+		var old = $location.hash();
+		$location.hash(hash);
+		$anchorScroll();
+		$location.hash(old);
+	}
 /*
     $http({
         method: 'GET',

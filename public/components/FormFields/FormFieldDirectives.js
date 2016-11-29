@@ -45,7 +45,7 @@ angular.module('geckoTracker')
 	return {
 		restrict: 'E',
 		scope: {
-			label: "@",
+			label: "@?",
 			placeholder: "@?",
 			value: "="
 		},
@@ -59,6 +59,9 @@ angular.module('geckoTracker')
 					ta[0].style.height = hiddenDiv.offsetHeight+1;
 			}
 			resize();
+			scope.$watch("value", function() {
+				resize();
+			});
 			
 			ta.on('keypress', function() { console.debug('keypress'); });
 			ta.on('change', function() { console.debug('change'); });
