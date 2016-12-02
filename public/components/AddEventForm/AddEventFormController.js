@@ -44,7 +44,7 @@ angular.module('geckoTracker')
 	$scope.addEvent = function () {
 		geckoService.createGeckoEvent(geckoId, $scope.form).then(function () {
 			close();
-			toastr.success("Event added");
+			toastr.success("Event added", {timeOut: 1000});
 			$scope.$apply();
 		}, function error(err) {
 			close();
@@ -56,7 +56,7 @@ angular.module('geckoTracker')
 	$scope.editEvent = function () {
 		geckoService.updateGeckoEvent(event._id, $scope.form).then(function() {
 			close();
-			toastr.success("Event updated");
+			toastr.success("Event updated", {timeOut: 1000});
 		}, function error(err) {
 			close();
 			console.error("AddEventFormController", err);

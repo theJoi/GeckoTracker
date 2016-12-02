@@ -24,6 +24,7 @@
 		border: 0;
 		color: black;
 		border-bottom: solid 1px #e0e0e0;
+		border-bottom: solid 1px rgba(0,0,0,0);
 		outline: none;
 		font-size: 16px;
 		margin-bottom: 1px;
@@ -77,13 +78,14 @@
 		color: white;
 		background: transparent;
 		border-color: #444;
+		border-color: rgba(0,0,0,0);
 	}
 	input, .input {
 		&.modified {
-			border-color: red;
+			border-color: @primary-color;
 		}
 		&:focus {
-			border-color: green;
+			border-color: @primary-color;
 		}
 	}
 	
@@ -265,4 +267,8 @@
 			}
 		}
 	}
+}
+
+.form-field-callback .input {
+	cursor: pointer;
 }

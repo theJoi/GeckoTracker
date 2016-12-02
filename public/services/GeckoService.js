@@ -257,6 +257,18 @@ angular.module('geckoTracker')
 				});
 			});
 		},
+		
+		getEvent: function(geckoId, eventType) {
+			return exports.getGeckoEvents(geckoId).then(function(events) {
+				if(events) {
+					for(var i=0;i < events.length;i++) {
+						if(events[i].type === eventType)
+							return events[i];
+					}
+				}
+				return null;
+			});
+		},
 
 		createGeckoEvent: function (geckoId, properties) {
 			$log.log("createGeckoEvent", geckoId, properties);
@@ -314,11 +326,18 @@ angular.module('geckoTracker')
 					url: "/api/events/" + eventId + "/edit",
 					data: properties
 				}).then(function success(response) {
-					if (response.data.error) {
-						reject(response.data.error);
-					} else {
-						fulfill(response.data);
-					}
+					if (response.data.error)
+						throw response.data.error;
+					
+					var event = response.data;
+					exports.getGeckoEvents(event.geckoId).then(function(events) {
+						for(var i=0;i < events.length;i++) {
+							if(events[i]._id === eventId) {
+								Object.assign(events[i], event);
+							}
+						}
+						fulfill(event);
+					});
 				}, function error(response) {
 					reject("Failed to contact server");
 				});

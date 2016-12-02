@@ -3,6 +3,7 @@ angular.module('geckoTracker')
 	return {
 		restrict: 'E',
 		templateUrl: "components/GeckoNotes/GeckoNotesTemplate.htm",
+		scope: true,
 		controller: function ($scope, $log, geckoService) {
 			geckoService.getGecko($scope.geckoId, function(gecko) {
 				$scope.gecko = gecko;
@@ -13,8 +14,8 @@ angular.module('geckoTracker')
 				geckoService.updateGecko({
 					_id: $scope.geckoId,
 					notes: $scope.notes
-				}).then(function() {
-					$scope.notes = $scope.gecko.notes;
+				}).then(function(gecko) {
+					$scope.notes = gecko.notes;
 					$scope.$apply();
 				});
 			}
