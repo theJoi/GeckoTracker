@@ -441,6 +441,7 @@ exports.getGeckoPhotos = function(id, cb) {
 //};
 
 exports.setPrimaryGeckoPhoto = function(geckoId, photoId, cb) {
+	console.log("photoId", photoId);
 	// Find the photo to verify it "belongs" to the gecko for the given ID
 	Photo.findById(photoId, function(err, photo) {
 		if(err) {
@@ -493,6 +494,7 @@ exports.updateGeckoPhoto = function(id, properties, cb) {
 
 exports.deleteGeckoPhoto = function(photoId, cb) {
 	console.log("deleteGeckoPhoto", photoId);
+	try {
 	Photo.findByIdAndRemove(photoId, function(err, removedPhoto) {
 		if(err) {
 			if(cb)
@@ -502,6 +504,9 @@ exports.deleteGeckoPhoto = function(photoId, cb) {
 		if(cb)
 			cb(null);
 	});
+	} catch(e) {
+		console.log("ERROR deleting gecko photo");
+	}
 }
 
 

@@ -8,13 +8,13 @@
 			</button>
 		</form>
         <i class='material-icons float-left' ng-click='deletePhoto(photos[curPhoto])' title='Delete photo'>delete</i>
-        <i class='material-icons float-left' ng-click='setPrimaryPhoto(curPhoto)' title='Make primary photo'>favorite</i>
+        <i class='material-icons float-left' ng-click='setPrimaryPhoto(photos[curPhoto])' title='Make primary photo'>favorite</i>
         
 		<i class='material-icons' ng-click='showLightbox(photos[curPhoto])' title='Zoom in'>zoom_in</i>
 		<i class='material-icons' ng-click='bumpCurrentPhoto(-1)' title='Previous photo'>chevron_left</i>
 		<i class='material-icons' ng-click='bumpCurrentPhoto(1)' title='Next photo'>chevron_right</i>
 	</div>
-	<div class='primary-photo' ng-click='showLightbox(photos[curPhoto])'>
+	<div class='primary-photo' ng-click='showLightbox(photos[curPhoto])' ng-if='photos.length > 0'>
 		<img src='{{photos[curPhoto].path}}'></img>
 	</div>
 
@@ -22,7 +22,7 @@
 		<div class='photo-date-and-caption'>
 			<div class='photo-date'>
 				{{photos[curPhoto].taken | date: 'fullDate'}}
-				<span class='photo-date-relative'>{{getAgeWhenTaken(photos[curPhoto])}} old</span>
+				<span class='photo-date-relative'>{{getAgeWhenTaken(photos[curPhoto])}}</span>
 			</div>
 			<div class='photo-caption'>
 				{{photos[curPhoto].caption}}
@@ -30,9 +30,11 @@
 		</div>
 	</div>
 
+<!--
 	<div class='primary-photo' ng-if='!geckoDetail.primaryPhoto'>
 		<img src='photos/default.png'></img>
 	</div>
+-->
 
 	<!-- Thumbnails -->
 	<div class='thumbnails'>
@@ -64,7 +66,7 @@
 				<img class='lightbox-thumbnail' ng-repeat="photo in photos" src='{{photo.path}}' ng-click="showLightbox(photo)"></img>
 			</div>
 			<div class='lightbox-date-and-number'>
-				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}} <span class='age'>{{getAgeWhenTaken(selectedPhoto)}} old</span></div>
+				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}} <span class='age'>{{getAgeWhenTaken(selectedPhoto)}}</span></div>
 				<div class='number'>Image {{selectedPhotoNumber}} of {{photos.length}}</div>
 			</div>
 			<div class='lightbox-caption-wrapper'>

@@ -58,6 +58,12 @@ angular.module('geckoTracker')
 						controller: "AddGeckoFormController",
 					});
 				}
+				
+				$scope.getAge = function(gecko) {
+					if(!gecko.hatchDate) return "";
+					var m = moment(gecko.hatchDate);
+					return m.fromNow(true);
+				}
             }
         };
     });

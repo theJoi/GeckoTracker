@@ -86,6 +86,7 @@ angular.module('geckoTracker')
 			}
 			
 			$scope.setPrimaryPhoto = function(photo) {
+				console.error("SET PRIMARY PHOTO", photo);
 				geckoService.setPrimaryPhoto($scope.geckoId, photo._id).then(function success() {
 					for(var i=0;i < $scope.photos.length;i++) {
 						if($scope.photos[i]._id == photo._id) {
@@ -93,7 +94,7 @@ angular.module('geckoTracker')
 								id: photo._id,
 								path: photo.path
 							};
-							$scope.$apply();
+//							$scope.$apply();
 						}
 					}
 				}, function error() {
@@ -140,6 +141,8 @@ angular.module('geckoTracker')
 			}
 			
 			$scope.getAgeWhenTaken = function(photo) {
+				if(photo === undefined || photo.taken == undefined)
+					return "";
 				var taken = moment(photo.taken);
 				$log.warn($scope.geckoDetail);
 				var birth = moment($scope.geckoDetail.hatchDate);
