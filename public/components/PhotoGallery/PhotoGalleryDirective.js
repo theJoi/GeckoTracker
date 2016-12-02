@@ -6,9 +6,8 @@ angular.module('geckoTracker')
 	return {
 		restrict: 'E',
 		templateUrl: "components/PhotoGallery/PhotoGalleryTemplate.htm",
-		controller: function($scope, $http, $log, geckoService, Upload) {
+		controller: function($scope, $http, $log, geckoService, Upload, ModalService, toastr) {
 			$log = $log.getInstance("PhotoGallery");
-			
 			$log.log("GeckoPhotos directive controller instantiated");
 			
 			geckoService.getGeckoPhotos($scope.geckoId).then(function success(photos) {
@@ -18,8 +17,20 @@ angular.module('geckoTracker')
 				$log.log("PHOTOS", $scope.photos);
 				$log.log("PRIMARY PHOTO", $scope.geckoDetail.primaryPhoto);
 				
+				$scope.curPhoto = 0;
+				
 				$scope.$apply();
 			});
+			
+			$scope.bumpCurrentPhoto = function(n) {
+				$scope.curPhoto += n;
+				if($scope.curPhoto < 0) $scope.curPhoto = $scope.photos.length - 1;
+				$scope.curPhoto = $scope.curPhoto % $scope.photos.length;
+			}
+			
+			$scope.setCurrentPhoto = function(n) {
+				$scope.curPhoto = n;
+			}
 			
 			$scope.showLightbox = function(photo) {
 				$scope.options = { caption: photo.caption };
@@ -32,6 +43,35 @@ angular.module('geckoTracker')
 				$scope.selectedPhoto = undefined;
 			}
 			
+			$scope.deletePhoto = function(photo) {
+				ModalService.showModal({
+					templateUrl: "components/Modal/YesNoModalTemplate.htm",
+					controller: "YesNoModalController",
+					inputs: {
+						title: "Are You Sure?",
+						icon: "delete_forever",
+						message: "This will permanently delete the photo."
+					}
+				}).then(function(modal) {
+					return modal.close;
+				}).then(function(yesOrNo) {
+					$log.debug("YES OR NO IS", yesOrNo);
+					if(!yesOrNo)
+						return false;
+					$log.log(photo);
+					return geckoService.deleteGeckoPhoto(photo._id);
+				}).then(function(result) {
+					$log.debug("ABORT IS", result);
+					if(!result)
+						return;
+					for(var i=0;i < $scope.photos.length;i++) {
+						if($scope.photos[i]._id == photo._id)
+							$scope.photos.splice(i, 1);
+					}
+					toastr.success("Photo deleted.", "Success");
+				});
+			}
+
 			$scope.rotatePhoto = function(dir) {
 				var index = $scope.photos.indexOf($scope.selectedPhoto);
 				if(dir && dir < 0) {

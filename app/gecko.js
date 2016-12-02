@@ -492,12 +492,15 @@ exports.updateGeckoPhoto = function(id, properties, cb) {
 };
 
 exports.deleteGeckoPhoto = function(photoId, cb) {
+	console.log("deleteGeckoPhoto", photoId);
 	Photo.findByIdAndRemove(photoId, function(err, removedPhoto) {
 		if(err) {
-			cb(err);
+			if(cb)
+				cb(err);
 			return;
 		}
-		cb(null);
+		if(cb)
+			cb(null);
 	});
 }
 
