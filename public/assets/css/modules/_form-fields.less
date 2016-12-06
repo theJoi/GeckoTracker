@@ -24,6 +24,7 @@
 		border: 0;
 		color: black;
 		border-bottom: solid 1px #e0e0e0;
+		border-bottom: solid 1px rgba(0,0,0,0);
 		outline: none;
 		font-size: 16px;
 		margin-bottom: 1px;
@@ -35,6 +36,11 @@
 		}
 		padding: 1px 4px;
 		padding: 1px;
+	}
+	input {
+		&.modified {
+			border-color: red;
+		}
 	}
 
 	input[type='date'] {
@@ -50,7 +56,7 @@
 	.form-field-message {
 		color: #fd2222;
 		font-size: 11px;
-		height: 28px;
+		//height: 28px;
 	}
 	
 	margin-bottom: 10px;
@@ -62,6 +68,29 @@
 		width: 100%;
 		height: 100%;
 		z-index: 2000;
+	}
+}
+
+.dark-form-fields .form-field {
+	.form-field-label {
+	}
+	input,.input {
+		color: white;
+		background: transparent;
+		border-color: #444;
+		border-color: rgba(0,0,0,0);
+	}
+	input, .input {
+		&.modified {
+			border-color: @primary-color;
+		}
+		&:focus {
+			border-color: @primary-color;
+		}
+	}
+	
+	.placeholder {
+		color: #a0a0a0;
 	}
 }
 
@@ -78,7 +107,7 @@
 	padding: 1px 0;
 	
 	&:focus {
-		margin-bottom: 0;
+		//margin-bottom: 0;
 		border-bottom: solid 2px @primary-color;
 	}
 	
@@ -143,6 +172,7 @@
 		padding: 1px 4px;
 		border: 0;
 		background: white;
+		color: black;
 		&:hover {
 			background: @primary-color;
 			color: white;
@@ -237,4 +267,8 @@
 			}
 		}
 	}
+}
+
+.form-field-callback .input {
+	cursor: pointer;
 }

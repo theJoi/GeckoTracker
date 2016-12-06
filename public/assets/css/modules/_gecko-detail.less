@@ -17,6 +17,7 @@
 }
 
 
+
 /* Gecko Detail */
 
 .gecko-detail {
@@ -38,18 +39,35 @@
         right: 5px;
         position: absolute;
     }
+	
+	.full-width { width: 100% }
+	.half-width { width: 50% }
+	.third-width { width: 33.3333% }
+	.two-thirds-width { width: 66.6666% }
+	
+	.details {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	
+	.button-box {
+		padding: 5px;
+		text-align: right;
+		height: 38px;
+	}
 }
 
 .detail-top {
     min-height: 50px;
     position: relative;
     width: 100%;
-    text-align: center;
+//    text-align: center;
+	text-align: left;
 }
 
 .detail-name {
-    font-size: 48px;
-    line-height: 48px;
+    font-size: 32px;
+    line-height: 32px;
 }
 
 .detail-gender,

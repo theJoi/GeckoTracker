@@ -5,7 +5,11 @@
         <span class='statusbar-name'>
         {{geckoDetail.name}}
         </span>
-        <a href="/" class="statusbar-button">BACK TO LIST</a>
+        <a href="/" class="statusbar-button"><i class='material-icons' style='padding: 0; font-size: 19px; position: relative; top: 4px;'>arrow_back</i> BACK TO DASHBOARD</a>
+		<span ng-click="goTo('events')">Events</span>
+		<span ng-click="goTo('weightHistory')">Weight History</span>
+		<span ng-click="goTo('eggs')">Eggs</span>
+		
     </div>
 
     <div id="MAIN-CONTAINER">
@@ -14,9 +18,13 @@
             <photo-gallery style='width: 400px;'></photo-gallery>
         </div>
         <div id="CHARTS">
+			<gecko-notes></gecko-notes>
+			<a id="events"></a>
             <events-table gecko-id="geckoId"></events-table>
+			<a id="weightHistory"></a>
             <weight-chart gecko-id="geckoId"></weight-chart>
             <notifications-settings></notifications-settings>
+			<a id="eggs"></a>
             <egg-table gecko="geckoDetail"></egg-table>
         </div>
     </div>

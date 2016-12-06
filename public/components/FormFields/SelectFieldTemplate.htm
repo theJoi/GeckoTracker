@@ -2,7 +2,7 @@
 	<div class='form-field-label'>
 		<span ng-class='{visible: value}'>{{label}}</span>
 	</div>
-	<div class='input calendar-input' ng-class='{placeholder: !value, raise: showDropdown}' ng-click='showDropdown = !showDropdown'>
+	<div class='input calendar-input' ng-class='{placeholder: !value, raise: showDropdown, modified: modified}' ng-click='showDropdown = !showDropdown'>
 		{{getSelectedText()}}
 		<i class='material-icons icon' style='float: right' ng-show='!showDropdown || true'>
 			{{showDropdown ? "arrow_drop_up" : "arrow_drop_down"}}

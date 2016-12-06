@@ -1,0 +1,8 @@
+<div class='form-field form-field-callback'>
+	<div class='form-field-label'>
+		<span ng-class='{visible: value}'>{{label}}</span>
+	</div>
+<!--	<input type='text' placeholder='{{placeholder}}' ng-model='value'></input>-->
+	<div class='input' ng-class='{placeholder: !value}' ng-click="callback()">{{getValueText()}}</div>
+	<div class='form-field-message'>{{message}}</div>
+</div>

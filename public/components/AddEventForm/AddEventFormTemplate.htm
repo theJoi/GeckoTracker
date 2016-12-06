@@ -1,8 +1,8 @@
 <!-- TODO: add ability to close modal by clicking outside of it -->
 <div class='AddEventForm' modal>
 	<div class="add-event-title">
-		<span ng-if="event">Edit Event</span>
-		<span ng-if="!event">Create Event</span>
+		<span ng-if="isEdit">Edit Event</span>
+		<span ng-if="!isEdit">Create Event</span>
 	</div>
 
 	<div class='content'>

@@ -8,7 +8,8 @@ angular.module('geckoTracker')
 		scope: {
 			label: "@",
 			placeholder: "@?",
-			value: "="
+			value: "=",
+			modified: "=?"
 		},
 		templateUrl: "components/FormFields/TextFieldTemplate.htm",
 		controller: function ($scope, $log) {
@@ -18,11 +19,33 @@ angular.module('geckoTracker')
 	};
 })
 
+.directive('formFieldCallback', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			label: '@',
+			placeholder: '@?',
+			value: '@',
+			callback: '='
+		},
+		templateUrl: "components/FormFields/CallbackFieldTemplate.htm",
+		controller: function($scope, $log) {
+			if(!$scope.placeholder)
+				$scope.placeholder = $scope.label;
+			
+			$scope.getValueText = function() {
+				if($scope.value) return $scope.value;
+				return $scope.placeholder;
+			}
+		}
+	}
+})
+
 .directive('formFieldBigText', function () {
 	return {
 		restrict: 'E',
 		scope: {
-			label: "@",
+			label: "@?",
 			placeholder: "@?",
 			value: "="
 		},
@@ -36,6 +59,9 @@ angular.module('geckoTracker')
 					ta[0].style.height = hiddenDiv.offsetHeight+1;
 			}
 			resize();
+			scope.$watch("value", function() {
+				resize();
+			});
 			
 			ta.on('keypress', function() { console.debug('keypress'); });
 			ta.on('change', function() { console.debug('change'); });
@@ -73,7 +99,8 @@ angular.module('geckoTracker')
 			label: "@",
 			placeholder: "@?",
 			value: "=",
-			options: "="
+			options: "=",
+			modified: "=?"
 		},
 		templateUrl: "components/FormFields/SelectFieldTemplate.htm",
 		controller: function ($scope, $log) {

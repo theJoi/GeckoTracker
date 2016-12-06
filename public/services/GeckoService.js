@@ -104,6 +104,8 @@ angular.module('geckoTracker')
 		// Get the list of geckos from the service
 		// Returns a promise
 		getGeckos: getGeckos,
+		
+		getGecko: getGecko,
 
 		// Fetch the list of geckos from the service
 		// NOTE: Only the service itself (this thing) probably needs to call this directly (through getGeckos).
@@ -195,7 +197,8 @@ angular.module('geckoTracker')
 						// Find gecko object in list and update
 						for (var i = 0; i < geckos.length; i++) {
 							if (geckos[i]._id === _id) {
-								geckos.splice(i, 1, response.data);
+								//geckos.splice(i, 1, response.data);
+								updateGeckoProperties(response.data);
 								break;
 							}
 						}
@@ -252,6 +255,18 @@ angular.module('geckoTracker')
 						}
 					});
 				});
+			});
+		},
+		
+		getEvent: function(geckoId, eventType) {
+			return exports.getGeckoEvents(geckoId).then(function(events) {
+				if(events) {
+					for(var i=0;i < events.length;i++) {
+						if(events[i].type === eventType)
+							return events[i];
+					}
+				}
+				return null;
 			});
 		},
 
@@ -311,11 +326,18 @@ angular.module('geckoTracker')
 					url: "/api/events/" + eventId + "/edit",
 					data: properties
 				}).then(function success(response) {
-					if (response.data.error) {
-						reject(response.data.error);
-					} else {
-						fulfill(response.data);
-					}
+					if (response.data.error)
+						throw response.data.error;
+					
+					var event = response.data;
+					exports.getGeckoEvents(event.geckoId).then(function(events) {
+						for(var i=0;i < events.length;i++) {
+							if(events[i]._id === eventId) {
+								Object.assign(events[i], event);
+							}
+						}
+						fulfill(event);
+					});
 				}, function error(response) {
 					reject("Failed to contact server");
 				});
