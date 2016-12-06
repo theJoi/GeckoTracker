@@ -10,7 +10,7 @@
             <th class='column-location'>Location</th>
             <th class='column-sex'>Sex (Incubated)</th>
         </tr>
-        <tr ng-repeat="egg in geckos | filter:{stage: 'egg'}">
+        <tr ng-repeat="egg in (filteredGeckos = (geckos | filter:{stage: 'egg'}))">
             <td class='column-id'>{{egg.userId}}</td>
             <td class='column-laid'>{{egg.laidDate | date: 'fullDate'}}</td>
             <td class='column-hatching'>{{estimateExpectedHatchDate(egg) | date:'fullDate'}}</td>
@@ -20,5 +20,6 @@
             <td class='column-sex'>{{egg.sex | capitalize}}</td>
         </tr>
     </table>
+	<div ng-if='filteredGeckos.length == 0'>None</div>
 	<div style='height: 50px'></div>
 </div>

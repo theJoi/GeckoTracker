@@ -1,7 +1,7 @@
 <!-- CONTAINER FOR LIST OF GECKOS -->
 <div class='GeckoTable'>
 <!--<div class="gecko-card">-->
-	<h1>Geckos</h1>
+	<h1>{{title}}</h1>
 	<table class='data-table alternating-rows'>
 		<div class="table-top">
 <!--
@@ -81,7 +81,7 @@
 			</tr>
 		</thead>
 		<!-- <a href="/geckos/{{gecko._id}}" class="link--card"> -->
-		<tr ng-repeat="gecko in geckos | orderBy:sortType:sortReverse | filter:searchTerm" class="gecko-card-table">
+		<tr ng-repeat="gecko in filterGeckos() | orderBy:sortType:sortReverse | filter:searchTerm" class="gecko-card-table">
 
 			<td>
 				<i class='fa fa-mars male' ng-if="gecko.sex == 'male'"></i>

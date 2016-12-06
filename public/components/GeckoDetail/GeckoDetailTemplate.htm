@@ -55,10 +55,12 @@
 				<form-field-text label="Location" value="details.location"></form-field-text>
 			</div>
 			<div class="half-width">
-				<form-field-callback label="Mother" value="details.mother" calllback="pickMother"></form-field-callback>
+<!--				<form-field-callback label="Mother" value="details.mother" calllback="pickMother"></form-field-callback>-->
+				<gecko-picker label="Mother" gender='female' value="details.mother"></gecko-picker>
 			</div>
 			<div class="half-width">
-				<form-field-callback label="Father" value="details.father" calllback="pickFather"></form-field-callback>
+				<gecko-picker label="Father" gender='female' value="details.father"></gecko-picker>
+<!--				<form-field-callback label="Father" value="details.father" calllback="pickFather"></form-field-callback>-->
 			</div>
 			<div class="half-width">
 				<form-field-callback label="Hatched" value="{{details.hatched | date:'longDate'}}" callback="modifyHatched"></form-field-callback>
