@@ -17,6 +17,24 @@ angular.module('geckoTracker')
 		mother: "",
 		father: ""
 	};
+	
+	$scope.options = {
+		sex: {
+			unknown: "Unknown",
+			male: "Male",
+			female: "Female"
+		},
+		stage: {
+			egg: "Egg",
+			hatchling: "Hatchling",
+			adult: "Adult"
+		},
+		status: {
+			normal: "Normal",
+			dead: "Dead",
+			sold: "Sold"
+		}
+	}
 
 	$scope.submitForm = function () {
 		geckoService.addGecko($scope.form).then(function success(response) {
