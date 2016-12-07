@@ -138,6 +138,9 @@ exports.getGecko = function (id, callback) {
 // addGecko function: Add new gecko to database
 exports.addGecko = function (gData, callback) {
     var gecko;
+	
+	console.log("addGecko", JSON.stringify(gData));
+	
     try {
         gecko = new Gecko(gData);
     } catch (e) {
@@ -151,6 +154,35 @@ exports.addGecko = function (gData, callback) {
             callback(err, null);
             return;
         }
+		
+		if(gData.purchaseDate) {
+			exports.addEvent({
+				geckoId: gecko._id,
+				type: 'purchase',
+				date: gData.purchaseDate,
+				notes: ''
+			}, function() {});
+		}
+							 
+		if(gData.hatchDate) {
+			exports.addEvent({
+				geckoId: gecko._id,
+				type: 'hatch',
+				date: gData.hatchDate,
+				notes: ''
+			}, function() {});
+		}
+		
+		if(gData.currWeight) {
+			exports.addEvent({
+				geckoId: gecko._id,
+				type: 'weight',
+				info: {weight: gData.currWeight},
+				date: new Date(),
+				notes: ''
+			}, function() {});
+		}
+		
         callback(err, gecko);
     });
 };
