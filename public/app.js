@@ -20,5 +20,11 @@ angular.module('geckoTracker', ['ngRoute','ngDialog','toastr','ngAnimate','ngFil
 
 .filter('prettyDate', function() {
 	
-});
+})
 
+.filter('dateHumanize', function() {
+	return function(d) {
+		var m = moment(d);
+		return m.from();
+	}
+})
