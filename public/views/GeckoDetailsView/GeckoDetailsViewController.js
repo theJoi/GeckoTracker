@@ -1,7 +1,7 @@
 /*jshint globals: true, undef: true, browser: true, node: true*/
 /* globals angular */
 
-angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, $log, $location, $anchorScroll, geckoService) {
+angular.module('geckoTracker').controller('GeckoDetailsViewController', function($scope, $http, $routeParams, $log, $location, $anchorScroll, geckoService, ModalService) {
 	$log = $log.getInstance('views.GeckoDetailsView');
 
     $scope.statusMsg = "Say hi to...";
@@ -21,6 +21,28 @@ angular.module('geckoTracker').controller('GeckoDetailsViewController', function
 		$location.hash(hash);
 		$anchorScroll();
 		$location.hash(old);
+	}
+	
+	$scope.addWeightEvent = function() {
+		ModalService.showModal({
+			templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+			controller: "AddEventFormController",
+			inputs: {
+				event: 'weight',
+				geckoId: $scope.geckoId
+			}
+		});
+	}
+	
+	$scope.addClutchedEvent = function() {
+		ModalService.showModal({
+			templateUrl: "components/AddEventForm/AddEventFormTemplate.htm",
+			controller: "AddEventFormController",
+			inputs: {
+				event: 'clutch',
+				geckoId: $scope.geckoId
+			}
+		});
 	}
 /*
     $http({
