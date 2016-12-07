@@ -27,7 +27,7 @@
 
 		<!-- Table Rows -->
 		<tr ng-repeat="event in events | filter:filterEvents | orderBy:filter.sortDirection + filter.sortProperty as filtered">
-			<td>{{event.date | date: 'fullDate'}}</td>
+			<td title="{{event.date | dateHumanize}}">{{event.date | date: 'longDate'}}</td>
 			<td>{{event.type | prettyEventType}}</td>
 			<td>
 				<span ng-if="event.type == 'weight'"><span class='info-label'>Weight</span> {{event.info.weight}}g</span>
