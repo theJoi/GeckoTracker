@@ -165,7 +165,13 @@ exports.removeGecko = function (id, callback) {
             return;
         }
         console.log("Gecko with id '" + removedGecko._id + "' was successfully removed from DB.");
-        callback(null, removedGecko._id);
+
+		// Delete all events and photos
+		Event.remove({geckoId: id}, function (err) {
+			Photo.remove({geckoId: id}, function(err) {
+				callback(null, removedGecko._id);
+			})
+		});
     });
 };
 
