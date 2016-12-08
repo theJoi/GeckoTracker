@@ -12,10 +12,12 @@
 			<i class='material-icons'>search</i>
 			<input type='text' class='search' placeholder='Search' ng-model='filtering.search'></input>
 		</div>
-		<div class='item' ng-class="{selected: value == gecko}" ng-repeat="gecko in geckos | filter:filtering.search | startFrom:filtering.curPage*pageSize | limitTo:pageSize as filtered" ng-click='selectGecko(gecko)'>
-			<i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
-			<i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
-			{{gecko.name}}
+		<div class='gecko-picker-list'>
+			<div class='item' ng-class="{selected: value == gecko}" ng-repeat="gecko in geckos | filter:filtering.search | startFrom:filtering.curPage*pageSize | limitTo:pageSize as filtered" ng-click='selectGecko(gecko)'>
+				<i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
+				<i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
+				{{gecko.name}}
+			</div>
 		</div>
 		<div class='pagination'>
 			<i class='material-icons page-nav' ng-click='filtering.curPage=filtering.curPage==0?0:filtering.curPage-1' ng-disabled='curPage == 0'>chevron_left</i>

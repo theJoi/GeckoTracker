@@ -13,6 +13,7 @@
 		padding: 0;
 		position: relative;
 		font-size: 16px;
+		margin-bottom: 10px;
 		
 		span.pristine {
 			color: #808080;
@@ -20,6 +21,7 @@
 		
 		&.picker-highlight {
 			border-bottom: solid 2px @primary-color;
+			margin-bottom: 8px;
 		}
 		
 		&:hover {
@@ -40,6 +42,10 @@
 //		z-index: 1000;
 	}
 	
+	.gecko-picker-list {
+		height: 39px * 5;
+	}
+	
 	.gecko-picker-dropdown {
 		z-index: 1100;
 		.depth-1;
@@ -48,7 +54,7 @@
 		color: black;
 		background: white;
 		position: absolute;
-		top: 60px;
+		top: 40px;
 		left: 0px;
 		border-radius: 3px 3px 0 0;
 		max-width: 400px;
@@ -103,6 +109,8 @@
 		}
 		.page-nav {
 			cursor: pointer;
+			user-select: none;
+			-webkit-user-select: none;
 		}
 	}
 }
