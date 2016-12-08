@@ -20,6 +20,5 @@
             <td class='column-sex'>{{egg.sex | capitalize}}</td>
         </tr>
     </table>
-	<div ng-if='filteredGeckos.length == 0'>None</div>
-	<div style='height: 50px'></div>
+	<div class='empty-table-body' ng-if='filteredGeckos.length == 0'>No eggs currently</div>
 </div>
