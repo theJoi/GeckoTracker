@@ -310,9 +310,9 @@ exports.addEvent = function (eventData, callback) {
             callback(err);
             return;
         }
-        if (newEvent.type == 'weight' || newEvent.type == 'laid') {
+//        if (newEvent.type == 'weight' || newEvent.type == 'laid') {
             updateCachedGeckoFields(newEvent.geckoId, null);
-        }
+//        }
 		console.log("Hrmm...",JSON.stringify(newEvent));
         callback(err, newEvent);
     });
@@ -330,9 +330,9 @@ exports.updateEvent = function (id, props, callback) {
             callback(err, null);
             return;
         }
-        if (updatedEvent.type === 'weight' || updatedEvent.type == 'laid') {
+//        if (updatedEvent.type === 'weight' || updatedEvent.type == 'laid' || updatedEvent.type == 'hatch') {
             updateCachedGeckoFields(updatedEvent.geckoId, null);
-        }
+//        }
         callback(null, updatedEvent);
     });
 };
@@ -341,6 +341,7 @@ exports.updateEvent = function (id, props, callback) {
 function updateCachedGeckoFields(id, callback) {
 	updateCurrentWeight(id, null);
 	updateLaidDate(id, null);
+	updateHatchedDate(id, null);
 }
 
 function updateCurrentWeight(id, callback) {
@@ -397,6 +398,35 @@ function updateLaidDate(id, callback) {
             }
         }, function (err) {
 			console.log("updateLaidDate gecko update", err);
+		});
+    });
+}
+
+function updateHatchedDate(id, callback) {
+	console.log("updateHatchedDate", id, callback);
+	Event.findOne({
+        geckoId: id,
+        type: 'hatch'
+    }).sort({
+        date: -1
+    }).exec(function (err, event) {
+		console.log("updateHatchedDate exec", err, event);
+        if (err) {
+            console.log(err);
+            if(callback) callback(err, null);
+            return;
+        }
+		if(!event) {
+			console.log("updateHatchedDate:no laiddate found");
+			if(callback) callback(null);
+			return;
+		}
+        Gecko.findByIdAndUpdate(id, {
+            $set: {
+                hatchDate: event.date
+            }
+        }, function (err) {
+			console.log("updateHatchedDate gecko update", err);
 		});
     });
 }
@@ -479,6 +509,7 @@ exports.getGeckoPhotos = function(id, cb) {
 //};
 
 exports.setPrimaryGeckoPhoto = function(geckoId, photoId, cb) {
+	console.log("photoId", photoId);
 	// Find the photo to verify it "belongs" to the gecko for the given ID
 	Photo.findById(photoId, function(err, photo) {
 		if(err) {
@@ -530,13 +561,20 @@ exports.updateGeckoPhoto = function(id, properties, cb) {
 };
 
 exports.deleteGeckoPhoto = function(photoId, cb) {
+	console.log("deleteGeckoPhoto", photoId);
+	try {
 	Photo.findByIdAndRemove(photoId, function(err, removedPhoto) {
 		if(err) {
-			cb(err);
+			if(cb)
+				cb(err);
 			return;
 		}
-		cb(null);
+		if(cb)
+			cb(null);
 	});
+	} catch(e) {
+		console.log("ERROR deleting gecko photo");
+	}
 }
 
 

@@ -1,19 +1,50 @@
-<div class='photo-gallery'>
+<div class='PhotoGallery'>
 
 	<!-- Primary photo -->
-	<img class='primary-photo' src='{{geckoDetail.primaryPhoto.path}}' ng-if='geckoDetail.primaryPhoto'></img>
-	<img class='primary-photo' src='photos/default.png' ng-if='!geckoDetail.primaryPhoto'></img>
-	
+	<div class='photo-action-bar'>
+		<form class='float-left'>
+			<button type='file' ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">
+				<i class='material-icons' title='Upload or take a photo'>add_a_photo</i>
+			</button>
+		</form>
+        <i class='material-icons float-left' ng-click='deletePhoto(photos[curPhoto])' title='Delete photo'>delete</i>
+        <i class='material-icons float-left' ng-click='setPrimaryPhoto(photos[curPhoto])' title='Make primary photo'>favorite</i>
+        
+		<i class='material-icons' ng-click='showLightbox(photos[curPhoto])' title='Zoom in'>zoom_in</i>
+		<i class='material-icons' ng-click='bumpCurrentPhoto(-1)' title='Previous photo'>chevron_left</i>
+		<i class='material-icons' ng-click='bumpCurrentPhoto(1)' title='Next photo'>chevron_right</i>
+	</div>
+	<div class='primary-photo' ng-click='showLightbox(photos[curPhoto])' ng-if='photos.length > 0'>
+		<img src='{{photos[curPhoto].path}}'></img>
+	</div>
+
+	<div class='photo-details-bar'>
+		<div class='photo-date-and-caption'>
+			<div class='photo-date'>
+				{{photos[curPhoto].taken | date: 'fullDate'}}
+				<span class='photo-date-relative'>{{getAgeWhenTaken(photos[curPhoto])}}</span>
+			</div>
+			<div class='photo-caption'>
+				{{photos[curPhoto].caption}}
+			</div>
+		</div>
+	</div>
+
+<!--
+	<div class='primary-photo' ng-if='!geckoDetail.primaryPhoto'>
+		<img src='photos/default.png'></img>
+	</div>
+-->
+
 	<!-- Thumbnails -->
 	<div class='thumbnails'>
-		<img class='thumbnail-photo' ng-repeat='photo in photos' src='{{photo.path}}' ng-click='showLightbox(photo)' ng-if='photo._id != geckoDetail.primaryPhoto.id'>{{photo.path}}</img>
+		<div class='thumbnail-photo' ng-class="{current: $index == curPhoto}" ng-repeat='photo in photos' ng-click='setCurrentPhoto($index)'>
+			<img src='{{photo.path}}'></img>
+		</img>
 	</div>
-	<form>
-		<button type='file' ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*">Upload File</button>
-	</form>
 
 
-
+	<!-- Lightbox -->
 	<div class='lightbox-background' ng-if='selectedPhoto'>
 		<i class="close-icon material-icons" ng-click='hideLightbox()'>close</i>
 
@@ -35,16 +66,18 @@
 				<img class='lightbox-thumbnail' ng-repeat="photo in photos" src='{{photo.path}}' ng-click="showLightbox(photo)"></img>
 			</div>
 			<div class='lightbox-date-and-number'>
-				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}} <span class='age'>{{getAgeWhenTaken(selectedPhoto)}} old</span></div>
+				<div class='date'>{{selectedPhoto.taken | date: 'fullDate'}} <span class='age'>{{getAgeWhenTaken(selectedPhoto)}}</span></div>
 				<div class='number'>Image {{selectedPhotoNumber}} of {{photos.length}}</div>
 			</div>
 			<div class='lightbox-caption-wrapper'>
 				<input type='text' class='caption' placeholder='Enter a caption...' ng-model='options.caption'></input>
 				<i ng-if='options.caption != selectedPhoto.caption' class='edit-icon material-icons' ng-click='setCaption()'>edit</i>
 			</div>
+<!--
 			<div class='action-buttons'>
 				<button class='set-primary-photo-button' ng-click='setPrimaryPhoto(selectedPhoto)'>Set as Primary Photo</button>
 			</div>
+-->
 		</div>
 
 	</div>

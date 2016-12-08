@@ -6,11 +6,20 @@ angular.module('geckoTracker')
         return {
             restrict: 'E',
             templateUrl: "components/GeckoTable/GeckoTableTemplate.htm",
+			scope: {
+				mother: "=?",
+				father: "=?",
+				title: "@?",
+				hideColumns: "=?"
+			},
             controller: function ($scope, $http, $log, geckoService, ModalService, toastr) {
                 $scope.geckos = [];
                 $scope.isLoaded = false;    // use to trigger loading spinner
 
                 $log.debug("GeckoTable directive's controller instantiated");
+				
+				if(!$scope.title)
+					$scope.title = "Geckos";
 
                 /* Variables used for search and filter */
                 $scope.sortType = 'name';   // set the default sort type
@@ -52,11 +61,26 @@ angular.module('geckoTracker')
                     });
                 };
 				
+				$scope.filterGeckos = function() {
+					return $scope.geckos.filter(function(gecko) {
+//						console.error(gecko.mother);
+						if($scope.mother && (!gecko.mother || gecko.mother._id != $scope.mother))
+							return false;
+						return true;
+					});
+				}
+				
 				$scope.showAddGeckoModal = function() {
 					ModalService.showModal({
 						templateUrl: "components/AddGeckoForm/AddGeckoFormTemplate.htm",
 						controller: "AddGeckoFormController",
 					});
+				}
+				
+				$scope.getAge = function(gecko) {
+					if(!gecko.hatchDate) return "";
+					var m = moment(gecko.hatchDate);
+					return m.fromNow(true);
 				}
             }
         };

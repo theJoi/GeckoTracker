@@ -11,12 +11,14 @@ angular.module('geckoTracker')
 			$log = $log.getInstance("GeckoDetail");
 			
 			var detailFields = ['userId', 'status', 'morph', 'sex', 'stage', 'weight', 'location', 'mother', 'father', 'hatched', 'purchased'];
-			var modifiableFields = ['userId', 'morph', 'status', 'sex', 'stage', 'location'];
+			var modifiableFields = ['userId', 'morph', 'status', 'sex', 'stage', 'location', 'mother', 'father'];
 			$scope.details = {};
 
 			//var gecko = geckoService.getGeckos;
 			geckoService.getGecko($scope.geckoId, function(gecko) {
 				$scope.gecko = gecko;
+				
+				console.debug("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", gecko);
 				
 				Object.assign($scope.details, $scope.gecko);
 				
@@ -83,6 +85,15 @@ angular.module('geckoTracker')
 						modified[field] = $scope.details[field];
 					}
 				}
+				
+				if(modified.mother) modified.mother = {
+					_id: modified.mother._id,
+					name: modified.mother.name
+				};
+				if(modified.father) modified.father = {
+					_id: modified.father._id,
+					name: modified.father.name
+				};
 				
 				modified._id = $scope.geckoId;
 				console.log("UPDATING", modified);

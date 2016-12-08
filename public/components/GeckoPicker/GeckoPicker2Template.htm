@@ -1,0 +1,30 @@
+<div class='gecko-picker'>
+	<div class='label'>
+		<span ng-show='value'>{{label}}</span>
+	</div>
+	
+	<div class='value' ng-click='showDropdown = !showDropdown' ng-class='{"has-value": value, "picker-highlight": showDropdown}'>
+		<span class='pristine' ng-if='!value'>{{placeholder}}</span>
+		<span class='' ng-if='value'>{{value.name}}</span>
+	</div>
+	<div class='gecko-picker-dropdown' ng-if='showDropdown'>
+		<div class='search'>
+			<i class='material-icons'>search</i>
+			<input type='text' class='search' placeholder='Search' ng-model='filtering.search'></input>
+		</div>
+		<div class='item' ng-class="{selected: value == gecko}" ng-repeat="gecko in geckos | filter:filtering.search | startFrom:filtering.curPage*pageSize | limitTo:pageSize as filtered" ng-click='selectGecko(gecko)'>
+			<i class='fa fa-venus' ng-if="gecko.sex == 'female'"></i>
+			<i class='fa fa-mars' ng-if="gecko.sex == 'male'"></i>
+			{{gecko.name}}
+		</div>
+		<div class='pagination'>
+			<i class='material-icons page-nav' ng-click='filtering.curPage=filtering.curPage==0?0:filtering.curPage-1' ng-disabled='curPage == 0'>chevron_left</i>
+			<div class='counts'>{{filtering.curPage*pageSize+1}} - {{filtering.curPage*pageSize+filtered.length}} of {{totalFilterCount()}}</div>
+			<i class='material-icons page-nav' ng-click='filtering.curPage=filtering.curPage+1'>chevron_right</i>
+		</div>
+		{{$scope.filtering.search}}
+	</div>
+	
+	<div class='page-cover' ng-click='coverClicked()' ng-if='showDropdown'></div>
+	
+</div>
