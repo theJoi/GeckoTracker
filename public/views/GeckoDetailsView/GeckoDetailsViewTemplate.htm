@@ -1,15 +1,18 @@
 <!-- CONTAINER FOR GECKO INFORMATION -->
 <div class='gecko-detail-view'>
     <div id="STATUS-BAR">
-
         <span class='statusbar-name'>
-        {{geckoDetail.name}}
+			{{geckoDetail.name}}
         </span>
         <a href="/" class="statusbar-button"><i class='material-icons' style='padding: 0; font-size: 19px; position: relative; top: 4px;'>arrow_back</i> BACK TO DASHBOARD</a>
-		<span ng-click="goTo('events')">Events</span>
-		<span ng-click="goTo('weightHistory')">Weight History</span>
-		<span ng-click="goTo('eggs')">Eggs</span>
-		
+		<span class='sub-navigation'>
+			<span ng-click="goTo('notes')">Notes</span>
+			<span ng-click="goTo('events')">Events</span>
+			<span ng-click="goTo('weightHistory')">Weight History</span>
+			<span ng-click="goTo('notifications')">Notifications</span>
+			<span ng-click="goTo('offspring')">Offspring</span>
+			<span ng-click="goTo('eggs')">Eggs</span>
+		</span>
     </div>
 
     <div id="MAIN-CONTAINER">
@@ -22,12 +25,15 @@
 				<button class='button--raised' ng-click='addWeightEvent()' style='margin-right: 10px;'>Weighed</button>
 				<button class='button--raised' ng-click='addClutchedEvent()'>Laid Clutch</button>
 			</div>
+			<a id="notes"></a>
 			<gecko-notes></gecko-notes>
 			<a id="events"></a>
             <events-table gecko-id="geckoId"></events-table>
 			<a id="weightHistory"></a>
             <weight-chart gecko-id="geckoId"></weight-chart>
+			<a id="notifications"></a>
             <notifications-settings></notifications-settings>
+			<a id="offspring"></a>
             <gecko-table mother="geckoId" title="Offspring"></gecko-table>
 			<a id="eggs"></a>
             <egg-table gecko="geckoDetail"></egg-table>
