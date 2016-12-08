@@ -5,8 +5,55 @@
 			<i class='material-icons icon'>add_circle</i>Add a New Gecko
 			<p class="highlight small">* required</p>
 		</div>
-		<div class="grid content">
+		<div class="grid content flex-container flex-wrap">
+			<div class='half-width'>
+				<form-field-text label="Name" value="form.name" />
+			</div>
+			<div class='half-width'>
+				<form-field-text label="ID" value="form.userId" />
+			</div>
+			<div class='full-width'>
+				<form-field-text label="Morph" value="form.morph" />
+			</div>
+			
+			<div class='third-width'>
+				<form-field-select label="Sex" value="form.sex" options="options.sex" />
+			</div>
+			<div class='third-width'>
+				<form-field-select label="Stage" value="form.stage" options="options.stage" />
+			</div>
+			<div class='third-width'>
+				<form-field-select label="Status" value="form.status" options="options.status" />
+			</div>
+
+			<div class='half-width'>
+				<form-field-date label="Date Hatched" value="form.hatchDate" />
+			</div>
+			<div class='half-width'>
+				<form-field-date label="Date Purchased" value="form.purchaseDate" />
+			</div>
+
+			<div class='half-width'>
+				<form-field-date label="Mother" value="form.hatchDate" />
+			</div>
+			<div class='half-width'>
+				<form-field-date label="Father" value="form.purchaseDate" />
+			</div>
+
+			<div class='two-third-width'>
+				<form-field-text label="Location" value="form.location" />
+			</div>
+			<div class='third-width'>
+				<form-field-number label="Current Weight (g)" value="form.currWeight" />
+			</div>
+
+			<div class='full-width'>
+				<form-field-big-text label="Notes" value="form.notes" />
+			</div>
+
+<!--
 			<div class="row">
+				
 				<div class="col-1-4">
 					<label>Name of Gecko<span class="highlight">*</span></label>
 					<input class="field" type="text" placeholder="ex. Tammy or Gecko #23" ng-model="form.name">
@@ -75,15 +122,18 @@
 					</select>
 				</div>
 			</div>
+-->
 			<!-- TODO: remove unnecessary parent picker buttons and but notes at bottom -->
+<!--
 			<div class="row">
 				<label>Notes</label>
 				<input class="field" type="textarea" rows="1" cols="50" ng-model="form.notes">
 			</div>
+-->
 		</div>
 		<div class="buttons e_button-box right">
-			<button class="button--raised" ng-click="submitForm()">Add</button>
-			<button class="button--raised" ng-click="close()">Cancel</button>
+			<button class="button--flat" ng-click="submitForm()">Add</button>
+			<button class="button--flat" ng-click="close()">Cancel</button>
 		</div>
 	</form>
 </div>

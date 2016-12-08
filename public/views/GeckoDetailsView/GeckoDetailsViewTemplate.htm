@@ -18,6 +18,10 @@
             <photo-gallery style='width: 400px;'></photo-gallery>
         </div>
         <div id="CHARTS">
+			<div class='flex-container align-right page-padding'>
+				<button class='button--raised' ng-click='addWeightEvent()' style='margin-right: 10px;'>Weighed</button>
+				<button class='button--raised' ng-click='addClutchedEvent()'>Laid Clutch</button>
+			</div>
 			<gecko-notes></gecko-notes>
 			<a id="events"></a>
             <events-table gecko-id="geckoId"></events-table>
