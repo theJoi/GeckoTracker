@@ -49,9 +49,7 @@
 					<i class='material-icons action-icon' ng-click='deleteNotification(notification)'>delete</i>
 				</td>
 			</tr>
-			<tr class='empty-table-warning' ng-if='_notifications.length == 0'>
-				<td colspan=6>No notifications.</td>
-			</tr>
 		</table>
+		<div class='empty-table-body' ng-if='_notifications.length == 0'>No notifications</div>
 	</div>
 </div>

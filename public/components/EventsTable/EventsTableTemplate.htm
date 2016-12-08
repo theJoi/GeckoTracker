@@ -39,10 +39,8 @@
 				<i class='action-icon delete-icon material-icons' ng-click='deleteEvent(event)'>delete_forever</i>
 			</td>
 		</tr>
-		<tr ng-if='filtered.length == 0'>
-			<td colspan=5 class='empty-indicator'>No events match your filter</td>
-		</tr>
 	</table>
+	<div class='empty-table-body' ng-if='filtered.length == 0'>No events matching the filter</div>
 
 	<div class='footer'>
 		<button class="button--raised" style="margin: 0;" ng-click='addEvent()'>Add Event</button>
